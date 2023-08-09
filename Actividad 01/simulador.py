@@ -1,11 +1,12 @@
 import random
 
-
-L = [1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1] # Son todas las posibles posiciones
+L = [1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+#L = [1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1] # Son todas las posibles posiciones
 # Se agregaron dos metros de la forma [24,1,[],False] y [24,-1,[],False]
-M = [[0, 1, [], True], [16, 1, [], False], [32, 1, [], False], [16, -1, [], False], [32, -1, [], False], [47, -1, [], True], [24,1,[],False], [24,-1,[],False]] # Cada sublista es un metro y sigue la estructura (posicion, si va a la derecha es 1 y a la izquierda es -1, , True si debe parar en la estacion False en otro caso)
+M = [[0, 1, [], True, 2], [16, 1, [], False, 3], [24,1,[],False, 2], [32, 1, [], False, 3], [16, -1, [], False, 3], [24,-1,[],False, 3], [32, -1, [], False, 3], [47, -1, [], True, 2]] # Cada sublista es un metro y sigue la estructura (posicion, si va a la derecha es 1 y a la izquierda es -1, , True si debe parar en la estacion False en otro caso, 2 si es linea roja o 3 si es linea verde)
 # Hay estaciones en las posiciones 0,7,14,20,27,33,38,47
-E = {i: [] for i in range(len(L)) if L[i] == 1} # Son las estaciones, calculadas al azar de todas las posiciones
+# Se cambia para que cuente todas las estaciones
+E = {i: [] for i in range(len(L)) if (L[i] != 0) } # Son las estaciones, calculadas al azar de todas las posiciones
 T = []
 for t in range(1, 961): # Se cambio de 601, es la cantidad de tiempo en minutos
 	for e in E: # Vamos viendo estacion a estación, se hace al azar todas las veces
@@ -15,7 +16,9 @@ for t in range(1, 961): # Se cambio de 601, es la cantidad de tiempo en minutos
 				d = random.choice(list(E.keys())) 
 			E[e].append((d,t)) # Se agrega la persona a la lista de la estación con el tiempo en 
 	for m in M: # Vamos viendo metro a metro
-		if m[-1]: # Primero se ve si es True o False, que implica si debe parar en la estación pasajeros o no 
+		print(f"Tren en la posicion {m[0]} es de color {m[4]}")
+		# Se cambia por que ahora el true y false no esta en la ultima posición
+		if m[-2]: # Primero se ve si es True o False, que implica si debe parar en la estación pasajeros o no 
 			for i in range(len(m[2])-1, -1, -1): # Se va viendo cada pasajero del metro para bajarse
 				if m[2][i][0] == m[0]: # Si el lugar de destino del pasajero es donde se encuentra
 					T.append(t-m[2][i][1]) # Se agrega el tiempo que se demoro en llegar
@@ -24,19 +27,27 @@ for t in range(1, 961): # Se cambio de 601, es la cantidad de tiempo en minutos
 			while i < len(E[m[0]]): # Se va viendo cada pasajero de la estación para subirse
 				if len(m[2])<250: # Se agrego una limitación de pasajeros
 					if ((E[m[0]][i][0] - m[0]) * m[1]) > 0: # Se verifica si le sirve la dirección
-						m[2].append(E[m[0]][i]) # Se agrega el pasajero a la lista
-						E[m[0]].pop(i) # Se elimina el pasajero de la espera
+						# Se agrega que verifique si el tren para en esa estación:
+						#print(f"El pasajero va a la posicion {E[m[0]][i][0]} con color {L[E[m[0]][i][0]]}" )
+						if (L[E[m[0]][i][0]] == m[4]) or (L[E[m[0]][i][0]] == 1):
+							#print("Si le sirve")
+							m[2].append(E[m[0]][i]) # Se agrega el pasajero a la lista
+							E[m[0]].pop(i) # Se elimina el pasajero de la espera
+						else:
+							i += 1
 					else:
 						i += 1
 				else:
 					i += 1
-			m[-1] = False # Necesariamente es False por que no hay 2 estaciones seguidas
+			print("SE VOLVIO False")
+			m[-2] = False # Necesariamente es False por que no hay 2 estaciones seguidas
 		else:
 			m[0] += m[1] # Se mueve uno de posicion
 			if m[0] in [0, len(L)-1]: # Se verifica si esta en una posición borde
 				m[1] *= -1 # Se cambia la dirección
-			if L[m[0]] == 1: # Si la siguiente posicion es una estacion debe ser True
-				m[-1] = True
+			# Se verifica que la proxima sea una estación que le sirva 
+			if (L[m[0]] == 1) or (L[m[0]] == m[4]): # Si la siguiente posicion es una estacion que le sirva debe ser True
+				m[-2] = True
 
 	print("\n----------------------------")
 	print(f"Tiempo: {t}")
@@ -47,6 +58,6 @@ for t in range(1, 961): # Se cambio de 601, es la cantidad de tiempo en minutos
 	print("\nEstaciones:")
 	for e in E:
 		print(f"\tEstación en posición {e} tiene {len(E[e])} esperando en el andén")
-	input()
+	#input()
 
 print(f"\nEl tiempo medio de viaje fue {sum(T)/len(T):0.1f} minutos")
