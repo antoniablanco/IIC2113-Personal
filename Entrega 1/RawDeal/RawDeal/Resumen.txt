@@ -1,0 +1,41 @@
+En resumen:
+    Checkear si el maso es valido
+    Roban mano inicial
+        "En esta entrega no se cuentan las superstar abilities"
+    Ver quién comienza el juego
+        "El que tenga un mayor superstar value, si es igual parte el jugador que haya ingresado primero"
+        "En la tabla resumen va primero el jugador que comenzó la partida"
+    Menu inicial 
+        -> Funcionalidad de rendirse, dandole la victoria al otro jugador
+    
+   
+Casos posibles:
+    -> El primer maso esta malo
+    -> El segundo maso es el malo
+    -> Ambos estan buenos, se realiza un primer menu
+    
+Consideraciones:
+    "La primera linea del mazo es la superestrella"
+    "los mazos no deben ser revueltos"
+    "La última linea es la que estaría más arriba en el mazo, es decir se roba de abajo para arriba"
+
+Funciones útiles:
+    -> SayThatDeckIsInvalid(): Indica que el mazo es inv´alido.
+    -> SayThatATurnBegins(string superstarName): Indica que el turno de superstarName comienza.
+    -> ShowGameInfo(PlayerInfo player1, PlayerInfo player2): Muestra la información resumen del
+        estado del juego (el fortitude de cada jugador y el número de cartas en su mano y arsenal). Primero
+        se muestra la informaci´on de player1 y luego la de player2.
+    -> CongratulateWinner(string winnersName): Muestra el mensaje que felicita al ganador del juego.
+    -> AskUserToSelectDeck(string folder): Muestra el men´u para elegir un mazo y retorna el path al
+        mazo elegido por el usuario.
+    -> AskUserWhatToDoWhenItIsNotPossibleToUseItsAbility(): Muestra el men´u con alternativas de cosas que puede hacer 
+        el usuario en su turno. Retorna la acci´on elegida por el usuario. En esta entrega,el usuario siempre elige rendirse.
+        
+Reglas para conformar un mazo:
+    -> Debe tener 60 cartas y una carta superestrella
+    -> No más de tres cartas repetidas (mismo título) exeptuando
+        - unique: solo una
+        - setup: infinita
+    -> No se puede tener cartas heel y face a la vez
+    -> Las cartas de superestrellas solo pueden ser utilizadas por superestrellas, por ejemplo Stone "Cold Stunner", solo 
+        puede ser utilizada por "Stone Cold".

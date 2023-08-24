@@ -19,7 +19,7 @@ for t in range(1, 961): # Es la cantidad de tiempo en minutos
 			recalcular = True
 			while recalcular==True: # Si se esta en la misma estación se cambia
 				if d != e:
-					if L[d]==1 or L[d]==L[e]:
+					if L[d]==1 or L[d]==L[e] or L[e]==1:
 						recalcular = False
 					else:
 						#print("se vuelve a calcular por que el color es ", L[d])
@@ -45,12 +45,8 @@ for t in range(1, 961): # Es la cantidad de tiempo en minutos
 					if ((E[m[0]][i][0] - m[0]) * m[1]) > 0: # Se verifica si le sirve la dirección
 						# Se agrega que verifique si el tren para en esa estación:
 						#print(f"El pasajero va a la posicion {E[m[0]][i][0]} con color {L[E[m[0]][i][0]]}" )
-						if (L[E[m[0]][i][0]] == m[4]) or (L[E[m[0]][i][0]] == 1):
-							#print("Si le sirve")
-							m[2].append(E[m[0]][i]) # Se agrega el pasajero a la lista
-							E[m[0]].pop(i) # Se elimina el pasajero de la espera
-						else:
-							i += 1
+						m[2].append(E[m[0]][i]) # Se agrega el pasajero a la lista
+						E[m[0]].pop(i) # Se elimina el pasajero de la espera
 					else:
 						i += 1
 				else:
