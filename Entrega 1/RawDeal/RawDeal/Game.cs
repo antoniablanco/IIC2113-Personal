@@ -59,11 +59,10 @@ public class Game
             _view.SayThatDeckIsInvalid();
     }
     
-    public void JuegoValido(Mazo mazoUno, Mazo mazoDos) // Debe recibir los jugadores tipo jugador
+    public void JuegoValido(Mazo mazoUno, Mazo mazoDos) 
     {   
         Logica_Juego logicaJuego = new Logica_Juego();
         int numjugadorInicio = logicaJuego.jugadorInicioJuego(mazoUno, mazoDos);
-        Console.Write($"Comienza el juego {numjugadorInicio}");
         List<Mazo> listaMazos = logicaJuego.crearListaMazos(numjugadorInicio, mazoUno, mazoDos);
         List<PlayerInfo> listaPlayers = logicaJuego.crearListaJugadores(numjugadorInicio, mazoUno, mazoDos);
         

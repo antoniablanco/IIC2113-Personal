@@ -49,18 +49,17 @@ public class Mazo
         }
         return fortitudRating;
     }
+    
     public bool IsValid() // Crear Validación (Caso borde, hay mas de un superstar)
     {   
 
         if (_cartasArsenal.Count() != 60)
         {
-            //Console.WriteLine("Se cae en uno");
             return false;
         }
 
         if (_superestar.Name == null)
         {   
-            //Console.WriteLine("Se cae en dos");
             return false;
         }
 
@@ -75,13 +74,11 @@ public class Mazo
                 dictCount[carta.Title]++;
                 if (carta.IsUnique() && dictCount[carta.Title] > 1)
                 {   
-                    //Console.WriteLine("Se cae en 3");
                     return false;
                 }
 
                 if (!carta.IsSetUp() && dictCount[carta.Title] > 3)
                 {   
-                    //Console.WriteLine("Se cae en 4");
                     return false;
                 }
             }
@@ -91,17 +88,14 @@ public class Mazo
             if (carta.IsHeel())
             {
                 isHeel = true;
-                //Console.WriteLine("Se cae en 5");
             }
             else if (carta.IsFace())
             {
                 isFace = true;
-                //Console.WriteLine("Se cae en 6");
             }
 
             if (isHeel && isFace)
             {
-                //Console.WriteLine("Se cae en 7 ");
                 return false;
             }
         }
@@ -113,7 +107,6 @@ public class Mazo
             {   
                 if (carta.containsLogoSuperStar(logo) && _superestar.Logo != logo)
                 {   
-                    //Console.WriteLine("Se cae en 8 ");
                     return false;
                 }
             }

@@ -2,7 +2,6 @@ using System.Reflection;
 
 namespace RawDeal;
 
-// Cartas myDeserializedClass = JsonConvert.DeserializeObject<List<Cartas>>(myJson);
 
 public class CartasJson
 {
@@ -129,7 +128,7 @@ public class Cartas
     }
 }
 
-// Root myDeserializedClass = JsonConvert.DeserializeObject<List<Root>>(myJsonResponse);
+
 public class SuperStarJSON
 {
     public string Name { get; set; }
