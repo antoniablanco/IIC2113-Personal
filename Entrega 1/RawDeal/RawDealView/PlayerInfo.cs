@@ -14,23 +14,6 @@ public class PlayerInfo
         _numberOfCardsInHand = numberOfCardsInHand;
         _numberOfCardsInArsenal = numberOfCardsInArsenal;
     }
-    
-    public int fortitudeRating
-    {
-        get => _fortitudeRating;
-        set => _fortitudeRating = value;
-    }
-    public int numberOfCardsInHand
-    {
-        get => _numberOfCardsInHand;
-        set => _numberOfCardsInHand = value;
-    }
-    
-    public int numberOfCardsInArsenal
-    {
-        get => _numberOfCardsInArsenal;
-        set => _numberOfCardsInArsenal = value;
-    }
 
     public override string ToString()
         => $"{_superstarName}: {_fortitudeRating}F, tiene {_numberOfCardsInHand} cartas en la mano y {_numberOfCardsInArsenal} en el arsenal.";

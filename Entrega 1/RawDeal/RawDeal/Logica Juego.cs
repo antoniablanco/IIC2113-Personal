@@ -114,8 +114,8 @@ public class Logica_Juego
     public void RobarCarta(Mazo mazo, PlayerInfo player)
     {
         mazo.robarCarta();
-        player.numberOfCardsInHand = mazo.cartasHand.Count;
-        player.numberOfCardsInArsenal = mazo.cartasArsenal.Count;
+        //player.numberOfCardsInHand = mazo.cartasHand.Count;
+        //player.numberOfCardsInArsenal = mazo.cartasArsenal.Count;
     }
 }
 

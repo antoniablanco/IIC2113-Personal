@@ -64,7 +64,7 @@ public class Game
         Logica_Juego logicaJuego = new Logica_Juego();
         int numjugadorInicio = logicaJuego.jugadorInicioJuego(mazoUno, mazoDos);
         List<Mazo> listaMazos = logicaJuego.crearListaMazos(numjugadorInicio, mazoUno, mazoDos);
-        List<PlayerInfo> listaPlayers = logicaJuego.crearListaJugadores(numjugadorInicio, mazoUno, mazoDos);
+        // List<PlayerInfo> listaPlayers = logicaJuego.crearListaJugadores(numjugadorInicio, mazoUno, mazoDos);
         
         bool sigueJuego = true;
         int numJugadorActual = 0;
@@ -72,8 +72,10 @@ public class Game
         
         while (sigueJuego)
         {   
-            // Se comienza robando las cartas 
-            logicaJuego.RobarCarta(listaMazos[numJugadorActual],listaPlayers[numJugadorActual]);
+            //logicaJuego.RobarCarta(listaMazos[numJugadorActual],listaPlayers[numJugadorActual]);
+            
+            listaMazos[numJugadorActual].robarCarta();
+            List<PlayerInfo> listaPlayers = logicaJuego.crearListaJugadores(numjugadorInicio, mazoUno, mazoDos);
             _view.SayThatATurnBegins(listaMazos[numJugadorActual].superestar.Name);
             _view.ShowGameInfo(listaPlayers[numJugadorActual], listaPlayers[numJugadorDos]);
             
