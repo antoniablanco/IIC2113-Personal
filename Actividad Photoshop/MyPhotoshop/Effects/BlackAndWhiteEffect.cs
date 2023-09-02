@@ -3,32 +3,18 @@ using SixLabors.ImageSharp.PixelFormats;
 
 namespace MyPhotoshop.Effects;
 
-public class BlackAndWhiteEffect:IPhotoEffect
+public class BlackAndWhiteEffect: AbstractEffect 
 {
-    private readonly string _description = "Cambia la foto a blanco y negro.";
-    
-    public string Description
-    {
-        get { return _description; }
-    }
+    public override string Description => "Cambia la foto a blanco y negro.";
 
-    public Image<Rgb24> Apply(Image<Rgb24> originalImage)
+    public override List<byte> ValorActualizado(Image<Rgb24> originalImage, int x, int y)
     {
-        int width = originalImage.Width;
-        int height = originalImage.Height;
-        Image<Rgb24> blackAndWhiteImage = new Image<Rgb24>(width, height); 
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                int r = originalImage[x, y].R;
-                int g = originalImage[x, y].G;
-                int b = originalImage[x, y].B;
-                Byte averageColor = (Byte)((r+g+b) / 3);
-                blackAndWhiteImage[x, y] = new Rgb24(averageColor,averageColor,averageColor);
-            }   
-        }
-
-        return blackAndWhiteImage;
+        
+        int r = originalImage[x, y].R;
+        int g = originalImage[x, y].G;
+        int b = originalImage[x, y].B;
+        Byte averageColor = (Byte)((r+g+b) / 3);
+        
+        return new List<byte>(){averageColor,averageColor,averageColor};
     }
 }
