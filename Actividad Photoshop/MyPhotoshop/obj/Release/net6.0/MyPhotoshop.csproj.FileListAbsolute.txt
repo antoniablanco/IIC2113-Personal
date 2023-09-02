@@ -1,0 +1,17 @@
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividad Photoshop/MyPhotoshop/bin/Release/net6.0/MyPhotoshop
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividad Photoshop/MyPhotoshop/bin/Release/net6.0/MyPhotoshop.deps.json
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividad Photoshop/MyPhotoshop/bin/Release/net6.0/MyPhotoshop.runtimeconfig.json
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividad Photoshop/MyPhotoshop/bin/Release/net6.0/MyPhotoshop.dll
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividad Photoshop/MyPhotoshop/bin/Release/net6.0/MyPhotoshop.pdb
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividad Photoshop/MyPhotoshop/bin/Release/net6.0/SixLabors.ImageSharp.dll
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividad Photoshop/MyPhotoshop/obj/Release/net6.0/MyPhotoshop.csproj.AssemblyReference.cache
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividad Photoshop/MyPhotoshop/obj/Release/net6.0/MyPhotoshop.GeneratedMSBuildEditorConfig.editorconfig
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividad Photoshop/MyPhotoshop/obj/Release/net6.0/MyPhotoshop.AssemblyInfoInputs.cache
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividad Photoshop/MyPhotoshop/obj/Release/net6.0/MyPhotoshop.AssemblyInfo.cs
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividad Photoshop/MyPhotoshop/obj/Release/net6.0/MyPhotoshop.csproj.CoreCompileInputs.cache
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividad Photoshop/MyPhotoshop/obj/Release/net6.0/MyPhotoshop.csproj.CopyComplete
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividad Photoshop/MyPhotoshop/obj/Release/net6.0/MyPhotoshop.dll
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividad Photoshop/MyPhotoshop/obj/Release/net6.0/refint/MyPhotoshop.dll
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividad Photoshop/MyPhotoshop/obj/Release/net6.0/MyPhotoshop.pdb
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividad Photoshop/MyPhotoshop/obj/Release/net6.0/MyPhotoshop.genruntimeconfig.cache
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividad Photoshop/MyPhotoshop/obj/Release/net6.0/ref/MyPhotoshop.dll

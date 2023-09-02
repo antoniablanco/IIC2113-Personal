@@ -1,0 +1,14 @@
+/Users/antoniablanco/RiderProjects/Actividades/Actividad_03/bin/Debug/net7.0/Actividad_03
+/Users/antoniablanco/RiderProjects/Actividades/Actividad_03/bin/Debug/net7.0/Actividad_03.deps.json
+/Users/antoniablanco/RiderProjects/Actividades/Actividad_03/bin/Debug/net7.0/Actividad_03.runtimeconfig.json
+/Users/antoniablanco/RiderProjects/Actividades/Actividad_03/bin/Debug/net7.0/Actividad_03.dll
+/Users/antoniablanco/RiderProjects/Actividades/Actividad_03/bin/Debug/net7.0/Actividad_03.pdb
+/Users/antoniablanco/RiderProjects/Actividades/Actividad_03/obj/Debug/net7.0/Actividad_03.GeneratedMSBuildEditorConfig.editorconfig
+/Users/antoniablanco/RiderProjects/Actividades/Actividad_03/obj/Debug/net7.0/Actividad_03.AssemblyInfoInputs.cache
+/Users/antoniablanco/RiderProjects/Actividades/Actividad_03/obj/Debug/net7.0/Actividad_03.AssemblyInfo.cs
+/Users/antoniablanco/RiderProjects/Actividades/Actividad_03/obj/Debug/net7.0/Actividad_03.csproj.CoreCompileInputs.cache
+/Users/antoniablanco/RiderProjects/Actividades/Actividad_03/obj/Debug/net7.0/Actividad_03.dll
+/Users/antoniablanco/RiderProjects/Actividades/Actividad_03/obj/Debug/net7.0/refint/Actividad_03.dll
+/Users/antoniablanco/RiderProjects/Actividades/Actividad_03/obj/Debug/net7.0/Actividad_03.pdb
+/Users/antoniablanco/RiderProjects/Actividades/Actividad_03/obj/Debug/net7.0/Actividad_03.genruntimeconfig.cache
+/Users/antoniablanco/RiderProjects/Actividades/Actividad_03/obj/Debug/net7.0/ref/Actividad_03.dll
