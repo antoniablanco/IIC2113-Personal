@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "CXSNRVv1xeic2rmAArigDyb8aCCtRqrcH6s7/hR0i+P+PD3/cHKnVaj+0IKtt+7I4fhIV5JidyxAnDxBpDfhdQ==",
+  "success": true,
+  "projectFilePath": "/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Entrega 2/RawDeal/RawDealView/RawDealView.csproj",
+  "expectedPackageFiles": [
+    "/Users/antoniablanco/.nuget/packages/microsoft.netcore.app.ref/6.0.21/microsoft.netcore.app.ref.6.0.21.nupkg.sha512",
+    "/Users/antoniablanco/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.21/microsoft.aspnetcore.app.ref.6.0.21.nupkg.sha512"
+  ],
+  "logs": []
+}
