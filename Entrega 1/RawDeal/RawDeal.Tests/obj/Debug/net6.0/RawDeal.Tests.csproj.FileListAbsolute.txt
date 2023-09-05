@@ -430,4 +430,4 @@
 /Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Entrega 1/RawDeal/RawDeal.Tests/obj/Debug/net6.0/RawDeal.Tests.pdb
 /Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Entrega 1/RawDeal/RawDeal.Tests/obj/Debug/net6.0/RawDeal.Tests.genruntimeconfig.cache
 /Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Entrega 1/RawDeal/RawDeal.Tests/obj/Debug/net6.0/ref/RawDeal.Tests.dll
-/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Entrega 1/RawDeal/RawDeal.Tests/bin/Debug/net6.0/data/02-InvalidDecks-Tests/01 2.txt
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Entrega 1/RawDeal/RawDeal.Tests/bin/Debug/net6.0/data/02-InvalidDecks-Tests/1.txt

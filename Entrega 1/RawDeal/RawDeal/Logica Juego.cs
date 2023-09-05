@@ -5,24 +5,33 @@ namespace RawDeal;
 using System.Text.Json ;
 
 
-// Hay que cambiarlo para que reciba una clase mazo con cartas tipo carta
 public class Logica_Juego
-{
-    public List<CartasJson> DescerializarJSONCartas()
+{   
+    private bool _sigueJuego = true;
+    public View view;
+    public Mazo MazoUno { get; set; }
+    public Mazo MazoDos { get; set; }
+    public int numJugadorActual = 0;
+    public int numJugadorDos = 1;
+    public int numJugadorGanador = 1;
+    public int numjugadorInicio = 0;
+    public List<Mazo> listaMazos;
+    
+    public List<CartasJson> DescerializarJsonCartas()
     {
         string myJson = File.ReadAllText (Path.Combine("data","cards.json")) ;
         var cartas = JsonSerializer.Deserialize<List<CartasJson>>(myJson) ;
         return cartas;
     }
     
-    public List<SuperStarJSON> DescerializarJSONSuperStar()
+    public List<SuperStarJSON> DescerializarJsonSuperSta()
     {
         string myJson = File.ReadAllText (Path.Combine("data","superstar.json")) ;
         var superstars = JsonSerializer.Deserialize<List<SuperStarJSON>>(myJson) ;
         return superstars;
     }
     
-    public List<Cartas> CrearCartas(string mazoString, List<CartasJson> totalCartas) // Crear Función
+    public List<Cartas> CrearCartas(string mazoString, List<CartasJson> totalCartas) 
     {
         List<Cartas> cartas = new List<Cartas>();
         string pathDeck = Path.Combine($"{mazoString}");
@@ -47,11 +56,11 @@ public class Logica_Juego
     {
         string pathDeck = Path.Combine($"{deck}");
         string[] lines = File.ReadAllLines(pathDeck);
-        string firstLine = lines[0];  // Obtener la primera línea del archivo
+        string firstLine = lines[0];  
         
         foreach (var super in totalSuperStars)
         {   
-            string superName = firstLine.Trim();  // Elimina espacios en blanco alrededor
+            string superName = firstLine.Trim();  
             if (superName.Contains(super.Name))
             {   
                 SuperStar superstar = new SuperStar(super.Name, super.Logo, super.HandSize, super.SuperstarValue,
@@ -64,51 +73,25 @@ public class Logica_Juego
         
     }
 
-    public int jugadorInicioJuego(Mazo mazoUno, Mazo mazoDos)
+    public void JugadorInicioJuego()
     {
-        int respuesta = 0;
-        if (mazoUno.superestar.SuperstarValue < mazoDos.superestar.SuperstarValue)
-            respuesta = 1;
-        
-        return respuesta;
+        numjugadorInicio = (MazoUno.superestar.SuperstarValue < MazoDos.superestar.SuperstarValue) ? 1 : 0;
     }
 
-    public List<PlayerInfo> crearListaJugadores(int numjugadorInicio, Mazo mazoUno, Mazo mazoDos)
+    public List<PlayerInfo> CrearListaJugadores()
     {   
-        List<PlayerInfo> listaPlayers = new List<PlayerInfo>();
         
-        PlayerInfo playerUno = new PlayerInfo(mazoUno.superestar.Name, 0,mazoUno.cartasHand.Count, mazoUno.cartasArsenal.Count);
-        PlayerInfo playerDos = new PlayerInfo(mazoDos.superestar.Name, 0, mazoDos.cartasHand.Count, mazoDos.cartasArsenal.Count);
+        PlayerInfo playerUno = new PlayerInfo(MazoUno.superestar.Name, 0,MazoUno.cartasHand.Count, MazoUno.cartasArsenal.Count);
+        PlayerInfo playerDos = new PlayerInfo(MazoDos.superestar.Name, 0, MazoDos.cartasHand.Count, MazoDos.cartasArsenal.Count);
         
-        if (numjugadorInicio == 0)
-        {
-            listaPlayers.Add(playerUno);
-            listaPlayers.Add(playerDos);
-        }
-        else
-        {
-            listaPlayers.Add(playerDos);
-            listaPlayers.Add(playerUno);
-        }
+        List<PlayerInfo> listaPlayers = (numjugadorInicio == 0) ? new List<PlayerInfo> { playerUno, playerDos } : new List<PlayerInfo> { playerDos, playerUno };
+        
         return listaPlayers;
     }
 
-    public List<Mazo> crearListaMazos(int numInicio, Mazo mazoUno, Mazo mazoDos)
+    public void CrearListaMazos()
     {
-        List<Mazo> listaMazos = new List<Mazo>();
-
-        if (numInicio == 0)
-        {
-            listaMazos.Add(mazoUno);
-            listaMazos.Add(mazoDos);
-        }
-        else
-        {
-            listaMazos.Add(mazoDos);
-            listaMazos.Add(mazoUno);
-        }
-
-        return listaMazos;
+        listaMazos = (numjugadorInicio == 0) ? new List<Mazo> { MazoUno, MazoDos } : new List<Mazo> { MazoDos, MazoUno };
     }
 
     public void RobarCarta(Mazo mazo, PlayerInfo player)
@@ -117,5 +100,12 @@ public class Logica_Juego
         //player.numberOfCardsInHand = mazo.cartasHand.Count;
         //player.numberOfCardsInArsenal = mazo.cartasArsenal.Count;
     }
+
+    public bool SigueJuego()
+    {   
+        return (MazoUno.cartasArsenal.Count() > 0 && MazoDos.cartasArsenal.Count() > 0 && _sigueJuego);
+    }
+
+    
 }
 

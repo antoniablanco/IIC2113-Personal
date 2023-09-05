@@ -5,14 +5,13 @@ public class Mazo
     private SuperStar _superestar;
     private List<Cartas> _cartasArsenal = new List<Cartas>();
     private List<Cartas> _cartasHand = new List<Cartas>();
-
+    private List<Cartas> _cartasRingSide = new List<Cartas>();
+    private List<Cartas> _cartasRingArea = new List<Cartas>();
+    
     public Mazo(List<Cartas> cartasMazo, SuperStar superstar)
     {
-
-        _superestar = superstar;
-        foreach (Cartas carta in cartasMazo) 
-        {_cartasArsenal.Add(carta);}
-
+        superestar = superstar;
+        cartasArsenal.AddRange(cartasMazo);
     }
     
     public SuperStar superestar
@@ -32,25 +31,40 @@ public class Mazo
         get => _cartasHand;
         set => _cartasHand = value ?? throw new ArgumentNullException(nameof(value));
     }
+    
+    public List<Cartas> cartasRingSide
+    {
+        get => _cartasRingSide;
+        set => _cartasRingSide = value ?? throw new ArgumentNullException(nameof(value));
+    }
+    
+    public List<Cartas> cartasRingArea
+    {
+        get => _cartasRingArea;
+        set => _cartasRingArea = value ?? throw new ArgumentNullException(nameof(value));
+    }
 
     public void robarCarta()
     {
-        int lastIndex = _cartasArsenal.Count - 1;
-        _cartasHand.Add(_cartasArsenal[lastIndex]);
-        _cartasArsenal.RemoveAt(lastIndex);
+        if (cartasArsenal.Count > 0)
+        {
+            int lastIndex = _cartasArsenal.Count - 1;
+            _cartasHand.Add(_cartasArsenal[lastIndex]);
+            _cartasArsenal.RemoveAt(lastIndex);
+        }
     }
     
     public int FortitudRating()
     {
         int fortitudRating = 0;
-        foreach (Cartas carta in _cartasArsenal)
+        foreach (Cartas carta in _cartasRingArea)
         {
             fortitudRating += int.Parse(carta.Fortitude);
         }
         return fortitudRating;
     }
     
-    public bool IsValid() // Crear Validación (Caso borde, hay mas de un superstar)
+    public bool IsValid() 
     {   
 
         if (_cartasArsenal.Count() != 60)

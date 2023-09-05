@@ -18,8 +18,8 @@ public class Game
     public Mazo IniciarDeck()
     {
         Logica_Juego logicaJuego = new Logica_Juego(); 
-        List<CartasJson> totalCartas = logicaJuego.DescerializarJSONCartas();
-        List<SuperStarJSON> totalSuperStars = logicaJuego.DescerializarJSONSuperStar();
+        List<CartasJson> totalCartas = logicaJuego.DescerializarJsonCartas();
+        List<SuperStarJSON> totalSuperStars = logicaJuego.DescerializarJsonSuperSta();
         
         string stringDeck = _view.AskUserToSelectDeck(_deckFolder);
         List<Cartas> listCartas = logicaJuego.CrearCartas(stringDeck, totalCartas);
@@ -62,29 +62,24 @@ public class Game
     public void JuegoValido(Mazo mazoUno, Mazo mazoDos) 
     {   
         Logica_Juego logicaJuego = new Logica_Juego();
-        int numjugadorInicio = logicaJuego.jugadorInicioJuego(mazoUno, mazoDos);
-        List<Mazo> listaMazos = logicaJuego.crearListaMazos(numjugadorInicio, mazoUno, mazoDos);
-        // List<PlayerInfo> listaPlayers = logicaJuego.crearListaJugadores(numjugadorInicio, mazoUno, mazoDos);
+        logicaJuego.MazoUno = mazoUno;
+        logicaJuego.MazoDos = mazoDos;
+        logicaJuego.view = _view;
         
-        bool sigueJuego = true;
-        int numJugadorActual = 0;
-        int numJugadorDos = 1;
+        logicaJuego.JugadorInicioJuego();
+        logicaJuego.CrearListaMazos();
         
-        while (sigueJuego)
-        {   
-            //logicaJuego.RobarCarta(listaMazos[numJugadorActual],listaPlayers[numJugadorActual]);
+        
+        while (logicaJuego.SigueJuego())
+        {
+            logicaJuego.listaMazos[logicaJuego.numJugadorActual].robarCarta();
+            List<PlayerInfo> listaPlayers = logicaJuego.CrearListaJugadores();
+            _view.SayThatATurnBegins(logicaJuego.listaMazos[logicaJuego.numJugadorActual].superestar.Name);
+            _view.ShowGameInfo(listaPlayers[logicaJuego.numJugadorActual], listaPlayers[logicaJuego.numJugadorDos]);
             
-            listaMazos[numJugadorActual].robarCarta();
-            List<PlayerInfo> listaPlayers = logicaJuego.crearListaJugadores(numjugadorInicio, mazoUno, mazoDos);
-            _view.SayThatATurnBegins(listaMazos[numJugadorActual].superestar.Name);
-            _view.ShowGameInfo(listaPlayers[numJugadorActual], listaPlayers[numJugadorDos]);
-            
-            // Después se debe cambiar desde aqui
-            //_view.AskUserWhatToDoWhenItIsNotPossibleToUseItsAbility();
-            
-            // Cuando se rinde
-            _view.CongratulateWinner(listaMazos[numJugadorDos].superestar.Name);
-            sigueJuego = false;
+            logicaJuego.AccionSeleccionadaJugador();
         }
+        
+        _view.CongratulateWinner(logicaJuego.listaMazos[logicaJuego.numJugadorGanador].superestar.Name);
     }
 }
