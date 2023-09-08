@@ -45,7 +45,7 @@ public class Logica_Juego
         {
             foreach (var carta in totalCartas)
             {
-                string title = line.Trim();  // Elimina espacios en blanco alrededor
+                string title = line.Trim();  
                 if (title == carta.Title)
                 {
                     Carta nuevaCarta = new Carta(carta.Title, carta.Types,carta.Subtypes,carta.Fortitude, carta.Damage, carta.StunValue, carta.CardEffect );
@@ -120,7 +120,7 @@ public class Logica_Juego
                 SeleccionarCartasVer();
                 break;
             case NextPlay.PlayCard:
-                SeleccionarCartasJugar();
+                SeleccionarAccionJugarCartas();
                 break;
             case NextPlay.EndTurn:
                 ActualizarVariablesPorFinTurno();
@@ -131,9 +131,17 @@ public class Logica_Juego
         }
     }
 
-    public void SeleccionarCartasJugar()
+    public void SeleccionarAccionJugarCartas()
     {
-        
+        var cartaSeleccionada = view.AskUserToSelectAPlay(ObtenerStringCartasPosiblesJugar());
+    }
+
+    public List<string> ObtenerStringCartasPosiblesJugar()
+    {   
+        List<Carta> cartasPosiblesJugar = listaMazos[numJugadorActual].CartasPosiblesDeJugar();
+        List<string> stringDeCartas= listaMazos[numJugadorActual].CrearListaStringCartaPlayed(cartasPosiblesJugar);
+
+        return stringDeCartas;
     }
     
     public void SeleccionarCartasVer()
@@ -142,24 +150,24 @@ public class Logica_Juego
         switch (setCartasParaVer)
         {
             case CardSet.Hand:
-                AccionVercartas(listaMazos[numJugadorActual], listaMazos[numJugadorActual].cartasHand);
+                AccionVercartasTotales(listaMazos[numJugadorActual], listaMazos[numJugadorActual].cartasHand);
                 break;
             case CardSet.RingArea:
-                AccionVercartas(listaMazos[numJugadorActual], listaMazos[numJugadorActual].cartasRingArea);
+                AccionVercartasTotales(listaMazos[numJugadorActual], listaMazos[numJugadorActual].cartasRingArea);
                 break;
             case CardSet.RingsidePile:
-                AccionVercartas(listaMazos[numJugadorActual], listaMazos[numJugadorActual].cartasRingSide);
+                AccionVercartasTotales(listaMazos[numJugadorActual], listaMazos[numJugadorActual].cartasRingSide);
                 break;
             case CardSet.OpponentsRingArea:
-                AccionVercartas(listaMazos[numJugadorDos], listaMazos[numJugadorDos].cartasRingArea);
+                AccionVercartasTotales(listaMazos[numJugadorDos], listaMazos[numJugadorDos].cartasRingArea);
                 break;
             case CardSet.OpponentsRingsidePile:
-                AccionVercartas(listaMazos[numJugadorDos], listaMazos[numJugadorDos].cartasRingSide);
+                AccionVercartasTotales(listaMazos[numJugadorDos], listaMazos[numJugadorDos].cartasRingSide);
                 break;
         }
     }
 
-    public void AccionVercartas(Mazo mazo, List<Carta> conjuntoCartas)
+    public void AccionVercartasTotales(Mazo mazo, List<Carta> conjuntoCartas)
     {
         List<String> stringCartas = mazo.CrearListaStringCarta(conjuntoCartas);
         view.ShowCards(stringCartas);
