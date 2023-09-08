@@ -32,19 +32,19 @@ public class VisualisarCartas
     }
     
     
-    private string ObtenerStringInfo<T>(Carta carta, Func<Carta, T> createInfoFunc, Func<T, string> toStringFunc)
+    public string ObtenerStringInfo<T>(Carta carta, Func<Carta, T> createInfoFunc, Func<T, string> toStringFunc)
     {
         T info = createInfoFunc(carta);
         string formattedInfo = toStringFunc(info);
         return formattedInfo;
     }
 
-    private string ObtenerStringCartaInfo(Carta carta)
+    public string ObtenerStringCartaInfo(Carta carta)
     {
         return ObtenerStringInfo(carta, CrearIViewableCardInfo, Formatter.CardToString);
     }
 
-    private string ObtenerStringPlayedInfo(Carta carta)
+    public string ObtenerStringPlayedInfo(Carta carta)
     {
         return ObtenerStringInfo(carta, CrearIViewablePlayedInfo, Formatter.PlayToString);
     }

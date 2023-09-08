@@ -86,8 +86,8 @@ public class Logica_Juego
     public List<PlayerInfo> CrearListaJugadores()
     {   
         
-        PlayerInfo playerUno = new PlayerInfo(MazoUno.superestar.Name, 0,MazoUno.cartasHand.Count, MazoUno.cartasArsenal.Count);
-        PlayerInfo playerDos = new PlayerInfo(MazoDos.superestar.Name, 0, MazoDos.cartasHand.Count, MazoDos.cartasArsenal.Count);
+        PlayerInfo playerUno = new PlayerInfo(MazoUno.superestar.Name, MazoUno.FortitudRating(),MazoUno.cartasHand.Count, MazoUno.cartasArsenal.Count);
+        PlayerInfo playerDos = new PlayerInfo(MazoDos.superestar.Name, MazoDos.FortitudRating(), MazoDos.cartasHand.Count, MazoDos.cartasArsenal.Count);
         
         List<PlayerInfo> listaPlayers = (NumJugadorInicio == 0) ? new List<PlayerInfo> { playerUno, playerDos } : new List<PlayerInfo> { playerDos, playerUno };
         
@@ -121,7 +121,7 @@ public class Logica_Juego
                 SeleccionarCartasVer();
                 break;
             case NextPlay.PlayCard:
-                SeleccionarAccionJugarCartas();
+                AccionJugarCarta();
                 break;
             case NextPlay.EndTurn:
                 ActualizarVariablesPorFinTurno();
@@ -132,9 +132,28 @@ public class Logica_Juego
         }
     }
 
-    public void SeleccionarAccionJugarCartas()
+    public void AccionJugarCarta() // Tengo que agregar que se agregue al ring area
     {
-        var cartaSeleccionada = view.AskUserToSelectAPlay(ObtenerStringCartasPosiblesJugar());
+        int cartaSeleccionada = view.AskUserToSelectAPlay(ObtenerStringCartasPosiblesJugar());
+        if (cartaSeleccionada != -1)
+        {   
+            Carta cartaJugada = listaMazos[numJugadorActual].CartasPosiblesDeJugar()[cartaSeleccionada];
+            ImpresionesAccionJugarCarta(cartaJugada);
+            AgregarCartaJugadaRingArea(cartaJugada);
+        }
+    }
+
+    public void AgregarCartaJugadaRingArea(Carta cartaJugada)
+    {
+        listaMazos[numJugadorActual].CartaPasaDeHandAlRingArea(cartaJugada);
+    }
+    
+    public void ImpresionesAccionJugarCarta(Carta cartaJugada)
+    {   
+        DecirQueVaAJugarCarta(cartaJugada);
+        view.SayThatPlayerSuccessfullyPlayedACard();
+        DecirQueVaARecibirDaño(cartaJugada);
+        ProbocarDanoAccionJugarCarta(cartaJugada);
     }
 
     public List<string> ObtenerStringCartasPosiblesJugar()
@@ -180,6 +199,45 @@ public class Logica_Juego
         numJugadorDos = (numJugadorDos == 0) ? 1 : 0;
     }
 
+    public void DecirQueVaAJugarCarta(Carta cartaJugada)
+    {
+        string cartaJugadaString = visualisarCartas.ObtenerStringPlayedInfo(cartaJugada);
+        string nombreSuperStar = listaMazos[numJugadorActual].superestar.Name;
+        view.SayThatPlayerIsTryingToPlayThisCard(nombreSuperStar, cartaJugadaString);
+    }
+
+    public void DecirQueVaARecibirDaño(Carta cartaJugada)
+    {   
+        int danoRecibido = int.Parse(cartaJugada.Damage);
+        string nombreSuperStarContrario = listaMazos[numJugadorDos].superestar.Name;
+        view.SayThatSuperstarWillTakeSomeDamage(nombreSuperStarContrario, danoRecibido);
+    }
+
+    public void ProbocarDanoAccionJugarCarta(Carta cartaJugada) 
+    {   
+        int danoTotal = int.Parse(cartaJugada.Damage);
+        
+        for (int i = 0; i < int.Parse(cartaJugada.Damage); i++)
+        {   
+            if (VerificarPuedeRecibirDano())
+                MostrarUnaCartaVolteada(i, danoTotal);
+            else
+                SetearVariablesTrasGanar();
+        }
+    }
+    
+    public void MostrarUnaCartaVolteada(int danoActual, int danoTotal)
+    {   
+        Carta cartaVolteada = listaMazos[numJugadorDos].CartaPasaDelArsenalAlRingSide();
+        string cartaVolteadaString = visualisarCartas.ObtenerStringCartaInfo(cartaVolteada);
+        view.ShowCardOverturnByTakingDamage(cartaVolteadaString, danoActual+1, danoTotal);
+    }
+    
+    public bool VerificarPuedeRecibirDano()
+    {
+        return listaMazos[numJugadorDos].cartasArsenal.Count > 0;
+    }
+    
     public void DeclararFinTurno()
     {
         _sigueTurno = false;
@@ -194,6 +252,13 @@ public class Logica_Juego
     {   
         DeclararFinTurno();
         ActualizacionNumJugadores();
+    }
+
+    public void SetearVariablesTrasGanar()
+    {
+        numJugadorGanador = numJugadorActual;
+        _sigueJuego = false;
+        DeclararFinTurno();
     }
     
     public void SetearVariablesTrasRendirse()

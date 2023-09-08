@@ -1,5 +1,3 @@
-using RawDealView.Formatters;
-
 namespace RawDeal;
 
 public class Mazo
@@ -51,17 +49,17 @@ public class Mazo
         if (cartasArsenal.Count > 0)
         {
             int lastIndex = _cartasArsenal.Count - 1;
-            _cartasHand.Add(_cartasArsenal[_cartasArsenal.Count - 1]);
+            _cartasHand.Add(_cartasArsenal[lastIndex]);
             _cartasArsenal.RemoveAt(lastIndex);
         }
     }
     
     public int FortitudRating()
-    {
+    {   
         int fortitudRating = 0;
-        foreach (Carta carta in _cartasRingArea)
+        foreach (Carta carta in cartasRingArea)
         {
-            fortitudRating += int.Parse(carta.Fortitude);
+            fortitudRating += int.Parse(carta.Damage);
         }
         return fortitudRating;
     }
@@ -72,5 +70,20 @@ public class Mazo
             .Where(carta => int.Parse(carta.Fortitude) <= FortitudRating())
             .ToList();
     }
-    
+
+    public Carta CartaPasaDelArsenalAlRingSide()
+    {
+        int lastIndex = _cartasArsenal.Count - 1;
+        Carta cartaMovida = _cartasArsenal[lastIndex];
+        _cartasRingSide.Add(cartaMovida);
+        _cartasArsenal.RemoveAt(lastIndex);
+
+        return cartaMovida;
+    }
+
+    public void CartaPasaDeHandAlRingArea(Carta carta)
+    {   
+        _cartasRingArea.Add(carta);
+        _cartasHand.Remove(carta);
+    }
 }

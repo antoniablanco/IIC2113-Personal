@@ -14,7 +14,8 @@ public class Game
         _view = view;
         _deckFolder = deckFolder;
     }
-
+    
+    // Traer funciones que son de flujo para aca
     public Mazo IniciarDeck() // Aplicar Clean Code
     {
         Logica_Juego logicaJuego = new Logica_Juego(); 
@@ -73,12 +74,12 @@ public class Game
         while (logicaJuego.SigueJuego()) 
         {
             logicaJuego.listaMazos[logicaJuego.numJugadorActual].RobarCarta();
-            List<PlayerInfo> listaPlayers = logicaJuego.CrearListaJugadores();
             logicaJuego.DeclararInicioTurno();
             _view.SayThatATurnBegins(logicaJuego.listaMazos[logicaJuego.numJugadorActual].superestar.Name);
 
             while (logicaJuego.SigueTurno())
-            {
+            {   
+                List<PlayerInfo> listaPlayers = logicaJuego.CrearListaJugadores();
                 _view.ShowGameInfo(listaPlayers[logicaJuego.numJugadorActual], listaPlayers[logicaJuego.numJugadorDos]);
                 logicaJuego.AccionSeleccionadaJugador();
             }
