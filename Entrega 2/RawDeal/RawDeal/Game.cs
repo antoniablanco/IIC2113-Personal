@@ -15,7 +15,7 @@ public class Game
         _deckFolder = deckFolder;
     }
 
-    public Mazo IniciarDeck()
+    public Mazo IniciarDeck() // Aplicar Clean Code
     {
         Logica_Juego logicaJuego = new Logica_Juego(); 
         List<CartasJson> totalCartas = logicaJuego.DescerializarJsonCartas();
@@ -31,11 +31,11 @@ public class Game
     }
         
     
-    public void Play()
+    public void Play() // Aplicar Clean Code
     {
         Mazo mazoUno = IniciarDeck();
         
-        if (mazoUno.IsValid())
+        if (mazoUno.EsValidoElMazo())
         {
             for (int i = 0; i < mazoUno.superestar.HandSize; i++)
             {
@@ -44,7 +44,7 @@ public class Game
                 
             Mazo mazoDos = IniciarDeck();
             
-            if (mazoDos.IsValid())
+            if (mazoDos.EsValidoElMazo())
             {
                 for (int i = 0; i < mazoDos.superestar.HandSize; i++)
                 {
@@ -59,7 +59,7 @@ public class Game
             _view.SayThatDeckIsInvalid();
     }
     
-    public void JuegoValido(Mazo mazoUno, Mazo mazoDos) 
+    public void JuegoValido(Mazo mazoUno, Mazo mazoDos) // Aplicar Clean Code
     {   
         Logica_Juego logicaJuego = new Logica_Juego();
         logicaJuego.MazoUno = mazoUno;
@@ -70,7 +70,7 @@ public class Game
         logicaJuego.CrearListaMazos();
         
         
-        while (logicaJuego.SigueJuego())
+        while (logicaJuego.SigueJuego()) // Revisar porque puede jugar mas de una carta, tiene que ser un while
         {
             logicaJuego.listaMazos[logicaJuego.numJugadorActual].robarCarta();
             List<PlayerInfo> listaPlayers = logicaJuego.CrearListaJugadores();

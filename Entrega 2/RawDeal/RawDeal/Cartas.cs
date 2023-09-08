@@ -1,4 +1,5 @@
 using System.Reflection;
+using RawDealView.Formatters;
 
 namespace RawDeal;
 
@@ -77,7 +78,8 @@ public class Cartas
         get => _CardEffect;
         set => _CardEffect = value ?? throw new ArgumentNullException(nameof(value));
     }
-    public bool IsUnique() 
+    
+    public bool ContieneSubtipoUnique() 
     {
         for (int i = 0; i < Subtypes.Count; i++)
         {   
@@ -87,7 +89,7 @@ public class Cartas
         return false;
     }
     
-    public bool IsSetUp() 
+    public bool ContieneSubtipoSetUp()
     {
         for (int i = 0; i < Subtypes.Count; i++)
         {   
@@ -97,7 +99,7 @@ public class Cartas
         return false;
     }
     
-    public bool IsHeel() 
+    public bool ContieneSubtipoHeel() 
     {
         for (int i = 0; i < Subtypes.Count; i++)
         {   
@@ -107,7 +109,7 @@ public class Cartas
         return false;
     }
     
-    public bool IsFace() 
+    public bool ContieneSubtipoFace() 
     {
         for (int i = 0; i < Subtypes.Count; i++)
         {   
@@ -117,7 +119,7 @@ public class Cartas
         return false;
     }
 
-    public bool containsLogoSuperStar(string superStarLogo)
+    public bool ContieneLogoSuperStar(string superStarLogo)
     {   
         for (int i = 0; i < Subtypes.Count; i++)
         {   
@@ -128,6 +130,27 @@ public class Cartas
     }
 }
 
+public class CardInfoImplementation : IViewableCardInfo
+{
+    public string Title { get; set; }
+    public string Fortitude { get; set; }
+    public string Damage { get; set; }
+    public string StunValue { get; set; }
+    public List<string> Types { get; set; }
+    public List<string> Subtypes { get; set; }
+    public string CardEffect { get; set; }
+    
+    public CardInfoImplementation(string title, string fortitude, string damage, string stunValue, List<string> types, List<string> subtypes, string cardEffect)
+    {
+        Title = title;
+        Fortitude = fortitude;
+        Damage = damage;
+        StunValue = stunValue;
+        Types = types;
+        Subtypes = subtypes;
+        CardEffect = cardEffect;
+    }
+}
 
 public class SuperStarJSON
 {

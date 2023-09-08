@@ -1,3 +1,5 @@
+using RawDealView.Formatters;
+
 namespace RawDeal;
 
 public class Mazo
@@ -49,7 +51,7 @@ public class Mazo
         if (cartasArsenal.Count > 0)
         {
             int lastIndex = _cartasArsenal.Count - 1;
-            _cartasHand.Add(_cartasArsenal[lastIndex]);
+            _cartasHand.Add(_cartasArsenal[_cartasArsenal.Count - 1]);
             _cartasArsenal.RemoveAt(lastIndex);
         }
     }
@@ -64,7 +66,7 @@ public class Mazo
         return fortitudRating;
     }
     
-    public bool IsValid() 
+    public bool EsValidoElMazo() // Aplicar Clean Code
     {   
 
         if (_cartasArsenal.Count() != 60)
@@ -86,12 +88,12 @@ public class Mazo
             if (dictCount.ContainsKey(carta.Title))
             {
                 dictCount[carta.Title]++;
-                if (carta.IsUnique() && dictCount[carta.Title] > 1)
+                if (carta.ContieneSubtipoUnique() && dictCount[carta.Title] > 1)
                 {   
                     return false;
                 }
 
-                if (!carta.IsSetUp() && dictCount[carta.Title] > 3)
+                if (!carta.ContieneSubtipoSetUp() && dictCount[carta.Title] > 3)
                 {   
                     return false;
                 }
@@ -99,11 +101,11 @@ public class Mazo
             else
                 dictCount[carta.Title] = 1;
 
-            if (carta.IsHeel())
+            if (carta.ContieneSubtipoHeel())
             {
                 isHeel = true;
             }
-            else if (carta.IsFace())
+            else if (carta.ContieneSubtipoFace())
             {
                 isFace = true;
             }
@@ -119,7 +121,7 @@ public class Mazo
         {   
             foreach (var logo in nameSuperStars)
             {   
-                if (carta.containsLogoSuperStar(logo) && _superestar.Logo != logo)
+                if (carta.ContieneLogoSuperStar(logo) && _superestar.Logo != logo)
                 {   
                     return false;
                 }
@@ -128,4 +130,37 @@ public class Mazo
 
         return true;
     }
+    
+    public CardInfoImplementation CrearIViewableCardInfo(Cartas carta)
+    {
+        var cardInfo = new CardInfoImplementation(
+            carta.Title,
+            carta.Fortitude,
+            carta.Damage,
+            carta.StunValue,
+            carta.Types,
+            carta.Subtypes,
+            carta.CardEffect);
+        return cardInfo;
+    }
+    
+    private string ObtenerStringCarta(Cartas carta)
+    {
+        CardInfoImplementation cardInfo = CrearIViewableCardInfo(carta);
+        string formattedCard = Formatter.CardToString(cardInfo);
+        return formattedCard;
+    }
+    
+    public List<string> CrearListaStringCartas(List<Cartas> cartasConjuntoSeleccionado)
+    {
+        List<string> stringCartas = new List<string>();
+
+        foreach (var carta in cartasConjuntoSeleccionado)
+        {
+            stringCartas.Add(ObtenerStringCarta(carta));
+        }
+
+        return stringCartas;
+    }
+    
 }

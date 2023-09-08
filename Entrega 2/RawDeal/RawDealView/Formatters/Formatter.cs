@@ -1,3 +1,5 @@
+
+
 namespace RawDealView.Formatters;
 
 public static class Formatter

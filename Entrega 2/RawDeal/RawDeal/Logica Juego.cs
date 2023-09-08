@@ -17,7 +17,7 @@ public class Logica_Juego
     public int numJugadorActual = 0;
     public int numJugadorDos = 1;
     public int numJugadorGanador = 1;
-    public int numjugadorInicio = 0;
+    public int NumJugadorInicio = 0;
     public List<Mazo> listaMazos;
     
     public List<CartasJson> DescerializarJsonCartas()
@@ -34,7 +34,7 @@ public class Logica_Juego
         return superstars;
     }
     
-    public List<Cartas> CrearCartas(string mazoString, List<CartasJson> totalCartas) 
+    public List<Cartas> CrearCartas(string mazoString, List<CartasJson> totalCartas) // Aplicar Clean Code
     {
         List<Cartas> cartas = new List<Cartas>();
         string pathDeck = Path.Combine($"{mazoString}");
@@ -55,7 +55,7 @@ public class Logica_Juego
         return cartas;
     }
     
-    public SuperStar CrearSuperStar(string deck, List<SuperStarJSON> totalSuperStars)
+    public SuperStar CrearSuperStar(string deck, List<SuperStarJSON> totalSuperStars) // Aplicar Clean Code
     {
         string pathDeck = Path.Combine($"{deck}");
         string[] lines = File.ReadAllLines(pathDeck);
@@ -78,7 +78,7 @@ public class Logica_Juego
 
     public void JugadorInicioJuego()
     {
-        numjugadorInicio = (MazoUno.superestar.SuperstarValue < MazoDos.superestar.SuperstarValue) ? 1 : 0;
+        NumJugadorInicio = (MazoUno.superestar.SuperstarValue < MazoDos.superestar.SuperstarValue) ? 1 : 0;
     }
 
     public List<PlayerInfo> CrearListaJugadores()
@@ -87,14 +87,14 @@ public class Logica_Juego
         PlayerInfo playerUno = new PlayerInfo(MazoUno.superestar.Name, 0,MazoUno.cartasHand.Count, MazoUno.cartasArsenal.Count);
         PlayerInfo playerDos = new PlayerInfo(MazoDos.superestar.Name, 0, MazoDos.cartasHand.Count, MazoDos.cartasArsenal.Count);
         
-        List<PlayerInfo> listaPlayers = (numjugadorInicio == 0) ? new List<PlayerInfo> { playerUno, playerDos } : new List<PlayerInfo> { playerDos, playerUno };
+        List<PlayerInfo> listaPlayers = (NumJugadorInicio == 0) ? new List<PlayerInfo> { playerUno, playerDos } : new List<PlayerInfo> { playerDos, playerUno };
         
         return listaPlayers;
     }
 
     public void CrearListaMazos()
     {
-        listaMazos = (numjugadorInicio == 0) ? new List<Mazo> { MazoUno, MazoDos } : new List<Mazo> { MazoDos, MazoUno };
+        listaMazos = (NumJugadorInicio == 0) ? new List<Mazo> { MazoUno, MazoDos } : new List<Mazo> { MazoDos, MazoUno };
     }
 
     public void RobarCarta(Mazo mazo, PlayerInfo player)
@@ -112,57 +112,67 @@ public class Logica_Juego
     public void AccionSeleccionadaJugador()
     {
         var actividadRealizar = view.AskUserWhatToDoWhenHeCannotUseHisAbility();
-        Mazo mazo = listaMazos[numJugadorActual];
 
         switch (actividadRealizar)
         {
             case NextPlay.UseAbility:
-                Console.WriteLine("El usuario eligió usar su habilidad.");
                 break;
             case NextPlay.ShowCards:
-                Console.WriteLine("El usuario eligió ver sus cartas.");
-                AccionVerCartas(mazo);
+                SeleccionarCartasVer();
                 break;
             case NextPlay.PlayCard:
-                Console.WriteLine("El usuario eligió jugar una carta.");
                 break;
             case NextPlay.EndTurn:
-                Console.WriteLine("El usuario eligió terminar su turno.");
+                ActualizacionNumJugadores();
                 break;
             case NextPlay.GiveUp:
-                Console.WriteLine("El usuario eligió rendirse.");
-                numJugadorGanador = (numJugadorActual == 0) ? 1 : 0;
-                _sigueJuego = false;
+                SetearVariablesTrasRendirse();
                 break;
             default:
-                Console.WriteLine("Opción no válida.");
                 break;
         }
     }
 
-    public void AccionVerCartas(Mazo mazo)
+    public void SeleccionarCartasVer()
     {
         var setCartasParaVer = view.AskUserWhatSetOfCardsHeWantsToSee();
         switch (setCartasParaVer)
         {
             case CardSet.Hand:
-                Console.WriteLine("El usuario eligió ver su mano.");
+                AccionVercartas(listaMazos[numJugadorActual], listaMazos[numJugadorActual].cartasHand);
                 break;
             case CardSet.RingArea:
-                Console.WriteLine("El usuario eligió ver Ring Area.");
+                AccionVercartas(listaMazos[numJugadorActual], listaMazos[numJugadorActual].cartasRingArea);
                 break;
             case CardSet.RingsidePile:
-                Console.WriteLine("El usuario eligió ver su RingsidePile.");
+                AccionVercartas(listaMazos[numJugadorActual], listaMazos[numJugadorActual].cartasRingSide);
                 break;
             case CardSet.OpponentsRingArea:
-                Console.WriteLine("El usuario eligió ver OpponentsRingArea.");
+                AccionVercartas(listaMazos[numJugadorDos], listaMazos[numJugadorDos].cartasRingArea);
                 break;
             case CardSet.OpponentsRingsidePile:
-                Console.WriteLine("El usuario eligió ver OpponentsRingsidePile.");
+                AccionVercartas(listaMazos[numJugadorDos], listaMazos[numJugadorDos].cartasRingSide);
                 break;
             default:
-                Console.WriteLine("Opción no válida.");
                 break;
         }
+    }
+
+    public void AccionVercartas(Mazo mazo, List<Cartas> conjuntoCartas)
+    {
+        List<String> stringCartas = mazo.CrearListaStringCartas(conjuntoCartas);
+        view.ShowCards(stringCartas);
+    }
+
+    public void ActualizacionNumJugadores()
+    {
+        numJugadorActual = (numJugadorActual == 0) ? 1 : 0;
+        numJugadorDos = (numJugadorDos == 0) ? 1 : 0;
+    }
+
+    public void SetearVariablesTrasRendirse()
+    {
+        numJugadorGanador = (numJugadorActual == 0) ? 1 : 0;
+        _sigueJuego = false;
     }
 }

@@ -81,3 +81,14 @@
 /Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Entrega 2/RawDeal/RawDealView/obj/Debug/net6.0/refint/RawDealView.dll
 /Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Entrega 2/RawDeal/RawDealView/obj/Debug/net6.0/RawDealView.pdb
 /Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Entrega 2/RawDeal/RawDealView/obj/Debug/net6.0/ref/RawDealView.dll
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Proyecto/Entrega 2/RawDeal/RawDealView/bin/Debug/net6.0/RawDealView.deps.json
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Proyecto/Entrega 2/RawDeal/RawDealView/bin/Debug/net6.0/RawDealView.dll
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Proyecto/Entrega 2/RawDeal/RawDealView/bin/Debug/net6.0/RawDealView.pdb
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Proyecto/Entrega 2/RawDeal/RawDealView/obj/Debug/net6.0/RawDealView.GeneratedMSBuildEditorConfig.editorconfig
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Proyecto/Entrega 2/RawDeal/RawDealView/obj/Debug/net6.0/RawDealView.AssemblyInfoInputs.cache
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Proyecto/Entrega 2/RawDeal/RawDealView/obj/Debug/net6.0/RawDealView.AssemblyInfo.cs
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Proyecto/Entrega 2/RawDeal/RawDealView/obj/Debug/net6.0/RawDealView.csproj.CoreCompileInputs.cache
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Proyecto/Entrega 2/RawDeal/RawDealView/obj/Debug/net6.0/RawDealView.dll
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Proyecto/Entrega 2/RawDeal/RawDealView/obj/Debug/net6.0/refint/RawDealView.dll
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Proyecto/Entrega 2/RawDeal/RawDealView/obj/Debug/net6.0/RawDealView.pdb
+/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Proyecto/Entrega 2/RawDeal/RawDealView/obj/Debug/net6.0/ref/RawDealView.dll
