@@ -22,4 +22,5 @@ public class CardInfoImplementation : IViewableCardInfo
         Subtypes = subtypes;
         CardEffect = cardEffect;
     }
+    
 }

@@ -29,7 +29,6 @@ public class Game
         
         return mazoReturn;
     }
-        
     
     public void Play() // Aplicar Clean Code
     {

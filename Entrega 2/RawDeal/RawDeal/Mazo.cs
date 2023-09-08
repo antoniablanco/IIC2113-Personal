@@ -65,92 +65,12 @@ public class Mazo
         }
         return fortitudRating;
     }
-
-    public List<Carta> CartasPosiblesDeJugar()
-    {   
-        List<Carta> cartasPosiblesDeJugar = new List<Carta>();
-        foreach (var carta in cartasHand)
-        {
-            if (int.Parse(carta.Fortitude) <= FortitudRating())
-            {
-                cartasPosiblesDeJugar.Add(carta);
-            }
-        }
-
-        return cartasPosiblesDeJugar;
-    }
     
-    public List<Carta> CartasPosiblesDeJugar2()
+    public List<Carta> CartasPosiblesDeJugar()
     {
         return cartasHand
             .Where(carta => int.Parse(carta.Fortitude) <= FortitudRating())
             .ToList();
-    }
-    
-    public CardInfoImplementation CrearIViewableCardInfo(Carta carta)
-    {
-        var cardInfo = new CardInfoImplementation(
-            carta.Title,
-            carta.Fortitude,
-            carta.Damage,
-            carta.StunValue,
-            carta.Types,
-            carta.Subtypes,
-            carta.CardEffect);
-        return cardInfo;
-    }
-    
-    public PlayInfoImplementation CrearIViewablePlayedInfo(Carta carta)
-    {   
-        var cardInfo = new PlayInfoImplementation(
-            carta.Title,
-            carta.Fortitude,
-            carta.Damage,
-            carta.StunValue,
-            carta.Types,
-            carta.Subtypes,
-            carta.CardEffect);
-        
-        return cardInfo;
-    }
-    
-    // Son demasiado parecidas tendre que implementar polimorfismo
-    private string ObtenerStringCartaInfo(Carta carta)
-    {
-        CardInfoImplementation cardInfo = CrearIViewableCardInfo(carta);
-        string formattedCard = Formatter.CardToString(cardInfo);
-        return formattedCard;
-    }
-    
-    private string ObtenerStringPlayedInfo(Carta carta)
-    {   
-        PlayInfoImplementation playInfo = CrearIViewablePlayedInfo(carta);
-        string formattedCard = Formatter.PlayToString(playInfo);
-        return formattedCard;
-    }
-    
-    public List<string> CrearListaStringCarta(List<Carta> cartasConjuntoSeleccionado)
-    {
-        List<string> stringCartas = new List<string>();
-
-        foreach (var carta in cartasConjuntoSeleccionado)
-        {
-            stringCartas.Add(ObtenerStringCartaInfo(carta));
-        }
-
-        return stringCartas;
-    }
-    
-    public List<string> CrearListaStringCartaPlayed(List<Carta> cartasConjuntoSeleccionado)
-    {   
-        List<string> stringCartas = new List<string>();
-
-        foreach (var carta in cartasConjuntoSeleccionado)
-        {
-            stringCartas.Add(ObtenerStringPlayedInfo(carta));
-        }
-        
-        return stringCartas;
     }
     
 }

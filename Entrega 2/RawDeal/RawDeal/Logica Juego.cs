@@ -20,6 +20,7 @@ public class Logica_Juego
     public int numJugadorGanador = 1;
     public int NumJugadorInicio = 0;
     public List<Mazo> listaMazos;
+    public VisualisarCartas visualisarCartas = new VisualisarCartas();
     
     public List<CartasJson> DescerializarJsonCartas()
     {
@@ -139,7 +140,7 @@ public class Logica_Juego
     public List<string> ObtenerStringCartasPosiblesJugar()
     {   
         List<Carta> cartasPosiblesJugar = listaMazos[numJugadorActual].CartasPosiblesDeJugar();
-        List<string> stringDeCartas= listaMazos[numJugadorActual].CrearListaStringCartaPlayed(cartasPosiblesJugar);
+        List<string> stringDeCartas= visualisarCartas.CrearListaStringCartaPlayed(cartasPosiblesJugar);
 
         return stringDeCartas;
     }
@@ -150,26 +151,26 @@ public class Logica_Juego
         switch (setCartasParaVer)
         {
             case CardSet.Hand:
-                AccionVercartasTotales(listaMazos[numJugadorActual], listaMazos[numJugadorActual].cartasHand);
+                AccionVercartasTotales(listaMazos[numJugadorActual].cartasHand);
                 break;
             case CardSet.RingArea:
-                AccionVercartasTotales(listaMazos[numJugadorActual], listaMazos[numJugadorActual].cartasRingArea);
+                AccionVercartasTotales(listaMazos[numJugadorActual].cartasRingArea);
                 break;
             case CardSet.RingsidePile:
-                AccionVercartasTotales(listaMazos[numJugadorActual], listaMazos[numJugadorActual].cartasRingSide);
+                AccionVercartasTotales(listaMazos[numJugadorActual].cartasRingSide);
                 break;
             case CardSet.OpponentsRingArea:
-                AccionVercartasTotales(listaMazos[numJugadorDos], listaMazos[numJugadorDos].cartasRingArea);
+                AccionVercartasTotales(listaMazos[numJugadorDos].cartasRingArea);
                 break;
             case CardSet.OpponentsRingsidePile:
-                AccionVercartasTotales(listaMazos[numJugadorDos], listaMazos[numJugadorDos].cartasRingSide);
+                AccionVercartasTotales(listaMazos[numJugadorDos].cartasRingSide);
                 break;
         }
     }
 
-    public void AccionVercartasTotales(Mazo mazo, List<Carta> conjuntoCartas)
-    {
-        List<String> stringCartas = mazo.CrearListaStringCarta(conjuntoCartas);
+    public void AccionVercartasTotales(List<Carta> conjuntoCartas)
+    {   
+        List<String> stringCartas = visualisarCartas.CrearListaStringCarta(conjuntoCartas);
         view.ShowCards(stringCartas);
     }
 
