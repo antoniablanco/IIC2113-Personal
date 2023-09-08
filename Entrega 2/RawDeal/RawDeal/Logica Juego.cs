@@ -11,6 +11,7 @@ using System.Text.Json ;
 public class Logica_Juego
 {   
     private bool _sigueJuego = true;
+    private bool _sigueTurno = true;
     public View view;
     public Mazo MazoUno { get; set; }
     public Mazo MazoDos { get; set; }
@@ -34,9 +35,9 @@ public class Logica_Juego
         return superstars;
     }
     
-    public List<Cartas> CrearCartas(string mazoString, List<CartasJson> totalCartas) // Aplicar Clean Code
+    public List<Carta> CrearCartas(string mazoString, List<CartasJson> totalCartas) // Aplicar Clean Code
     {
-        List<Cartas> cartas = new List<Cartas>();
+        List<Carta> cartas = new List<Carta>();
         string pathDeck = Path.Combine($"{mazoString}");
         string[] lines = File.ReadAllLines(pathDeck);
 
@@ -47,7 +48,7 @@ public class Logica_Juego
                 string title = line.Trim();  // Elimina espacios en blanco alrededor
                 if (title == carta.Title)
                 {
-                    Cartas nuevaCarta = new Cartas(carta.Title, carta.Types,carta.Subtypes,carta.Fortitude, carta.Damage, carta.StunValue, carta.CardEffect );
+                    Carta nuevaCarta = new Carta(carta.Title, carta.Types,carta.Subtypes,carta.Fortitude, carta.Damage, carta.StunValue, carta.CardEffect );
                     cartas.Add(nuevaCarta);
                 }
             }
@@ -97,18 +98,16 @@ public class Logica_Juego
         listaMazos = (NumJugadorInicio == 0) ? new List<Mazo> { MazoUno, MazoDos } : new List<Mazo> { MazoDos, MazoUno };
     }
 
-    public void RobarCarta(Mazo mazo, PlayerInfo player)
-    {
-        mazo.robarCarta();
-        //player.numberOfCardsInHand = mazo.cartasHand.Count;
-        //player.numberOfCardsInArsenal = mazo.cartasArsenal.Count;
-    }
-
     public bool SigueJuego()
     {   
         return (MazoUno.cartasArsenal.Count() > 0 && MazoDos.cartasArsenal.Count() > 0 && _sigueJuego);
     }
 
+    public bool SigueTurno()
+    {
+        return _sigueTurno;
+    }
+    
     public void AccionSeleccionadaJugador()
     {
         var actividadRealizar = view.AskUserWhatToDoWhenHeCannotUseHisAbility();
@@ -121,18 +120,22 @@ public class Logica_Juego
                 SeleccionarCartasVer();
                 break;
             case NextPlay.PlayCard:
+                SeleccionarCartasJugar();
                 break;
             case NextPlay.EndTurn:
-                ActualizacionNumJugadores();
+                ActualizarVariablesPorFinTurno();
                 break;
             case NextPlay.GiveUp:
                 SetearVariablesTrasRendirse();
                 break;
-            default:
-                break;
         }
     }
 
+    public void SeleccionarCartasJugar()
+    {
+        
+    }
+    
     public void SeleccionarCartasVer()
     {
         var setCartasParaVer = view.AskUserWhatSetOfCardsHeWantsToSee();
@@ -153,14 +156,12 @@ public class Logica_Juego
             case CardSet.OpponentsRingsidePile:
                 AccionVercartas(listaMazos[numJugadorDos], listaMazos[numJugadorDos].cartasRingSide);
                 break;
-            default:
-                break;
         }
     }
 
-    public void AccionVercartas(Mazo mazo, List<Cartas> conjuntoCartas)
+    public void AccionVercartas(Mazo mazo, List<Carta> conjuntoCartas)
     {
-        List<String> stringCartas = mazo.CrearListaStringCartas(conjuntoCartas);
+        List<String> stringCartas = mazo.CrearListaStringCarta(conjuntoCartas);
         view.ShowCards(stringCartas);
     }
 
@@ -170,9 +171,27 @@ public class Logica_Juego
         numJugadorDos = (numJugadorDos == 0) ? 1 : 0;
     }
 
+    public void DeclararFinTurno()
+    {
+        _sigueTurno = false;
+    }
+
+    public void DeclararInicioTurno()
+    {
+        _sigueTurno = true;
+    }
+    
+    public void ActualizarVariablesPorFinTurno()
+    {   
+        DeclararFinTurno();
+        ActualizacionNumJugadores();
+    }
+    
     public void SetearVariablesTrasRendirse()
     {
         numJugadorGanador = (numJugadorActual == 0) ? 1 : 0;
         _sigueJuego = false;
+        DeclararFinTurno();
     }
+    
 }
