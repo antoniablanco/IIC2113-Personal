@@ -29,7 +29,7 @@ public class Logica_Juego
         return cartas;
     }
     
-    public List<SuperStarJSON> DescerializarJsonSuperSta()
+    public List<SuperStarJSON> DescerializarJsonSuperStar()
     {
         string myJson = File.ReadAllText (Path.Combine("data","superstar.json")) ;
         var superstars = JsonSerializer.Deserialize<List<SuperStarJSON>>(myJson) ;

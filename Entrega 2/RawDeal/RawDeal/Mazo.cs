@@ -53,6 +53,14 @@ public class Mazo
             _cartasArsenal.RemoveAt(lastIndex);
         }
     }
+
+    public void RobarCartasHandInicial()
+    {
+        for (int i = 0; i < superestar.HandSize; i++)
+        {
+            RobarCarta();
+        }
+    }
     
     public int FortitudRating()
     {   
