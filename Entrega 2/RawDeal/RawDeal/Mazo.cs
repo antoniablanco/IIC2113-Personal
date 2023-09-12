@@ -1,6 +1,6 @@
 namespace RawDeal;
 
-public class Mazo
+public class Player
 {
     private SuperStar _superestar;
     private List<Carta> _cartasArsenal = new List<Carta>();
@@ -8,10 +8,10 @@ public class Mazo
     private List<Carta> _cartasRingSide = new List<Carta>();
     private List<Carta> _cartasRingArea = new List<Carta>();
     
-    public Mazo(List<Carta> cartasMazo, SuperStar superstar)
+    public Player(List<Carta> cartasPlayer, SuperStar superstar)
     {
         superestar = superstar;
-        cartasArsenal.AddRange(cartasMazo);
+        cartasArsenal.AddRange(cartasPlayer);
     }
     
     public SuperStar superestar

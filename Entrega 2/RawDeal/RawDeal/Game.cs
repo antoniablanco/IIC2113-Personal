@@ -18,15 +18,15 @@ public class Game
     }
     
     // Traer funciones que son de flujo para aca
-    public Mazo IniciarMazo(List<CartasJson> totalCartas,List<SuperStarJSON> totalSuperStars) 
+    public Player IniciarPlayer(List<CartasJson> totalCartas,List<SuperStarJSON> totalSuperStars) 
     {
-        string stringMazo = _view.AskUserToSelectDeck(_deckFolder);
-        List<Carta> listaCartasMazo = _logicaJuego.CrearCartas(stringMazo, totalCartas);
-        SuperStar superStarMazo = _logicaJuego.CrearSuperStar(stringMazo, totalSuperStars);
+        string stringPlayer = _view.AskUserToSelectDeck(_deckFolder);
+        List<Carta> listaCartasPlayer = _logicaJuego.CrearCartas(stringPlayer, totalCartas);
+        SuperStar superStarPlayer = _logicaJuego.CrearSuperStar(stringPlayer, totalSuperStars);
         
-        Mazo mazoReturn = new Mazo(listaCartasMazo, superStarMazo);
+        Player playerReturn = new Player(listaCartasPlayer, superStarPlayer);
         
-        return mazoReturn;
+        return playerReturn;
     }
     
     public (List<CartasJson>, List<SuperStarJSON>) ObtenerTotalCartasYSuperStars() 
@@ -37,41 +37,41 @@ public class Game
         return (totalCartas, totalSuperStars);
     }
 
-    public Mazo CrearMazo()
+    public Player CrearPlayer()
     {
         var (totalCartas, totalSuperStars) = ObtenerTotalCartasYSuperStars();
-        Mazo mazo = IniciarMazo(totalCartas, totalSuperStars);
-        if (!_validarDeck.EsValidoMazo(mazo))
+        Player player = IniciarPlayer(totalCartas, totalSuperStars);
+        if (!_validarDeck.EsValidoMazo(player))
         {
             throw new ExcepcionMazoNoValido("El mazo no es valido");
         }
-        return mazo;
+        return player;
     }
     
-    public void IniciarVariablesLogicaJuego(Mazo mazoUno, Mazo mazoDos)
+    public void IniciarVariablesLogicaJuego(Player playerUno, Player playerDos)
     {
-        _logicaJuego.MazoUno = mazoUno;
-        _logicaJuego.MazoDos = mazoDos;
+        _logicaJuego.PlayerUno = playerUno;
+        _logicaJuego.PlayerDos = playerDos;
         _logicaJuego.view = _view;
         
         _logicaJuego.JugadorInicioJuego();
-        _logicaJuego.CrearListaMazos();
+        _logicaJuego.CrearListaPlayers();
     }
 
-    public void InicializarHandsMazos()
+    public void InicializarHandsPlayers()
     {
-        _logicaJuego.MazoUno.RobarCartasHandInicial();
-        _logicaJuego.MazoDos.RobarCartasHandInicial();
+        _logicaJuego.PlayerUno.RobarCartasHandInicial();
+        _logicaJuego.PlayerDos.RobarCartasHandInicial();
     }
     
     public void Play() 
     {
         try
         {
-            Mazo mazoUno = CrearMazo();
-            Mazo mazoDos = CrearMazo();
-            IniciarVariablesLogicaJuego(mazoUno, mazoDos);
-            InicializarHandsMazos();
+            Player playerUno = CrearPlayer();
+            Player playerDos = CrearPlayer();
+            IniciarVariablesLogicaJuego(playerUno, playerDos);
+            InicializarHandsPlayers();
             JuegoDadoQueLosMazosSonValido();
         }
         catch (ExcepcionMazoNoValido e)
@@ -80,21 +80,25 @@ public class Game
         }
     }
     
-    public void JuegoDadoQueLosMazosSonValido() // Aplicar Clean Code
+    public void JuegoDadoQueLosMazosSonValido()
     {
-        while (_logicaJuego.SigueJuego()) 
+        while (_logicaJuego.SigueJuego())
         {
-            _logicaJuego.listaMazos[_logicaJuego.numJugadorActual].RobarCarta();
-            _logicaJuego.DeclararInicioTurno();
-            _view.SayThatATurnBegins(_logicaJuego.listaMazos[_logicaJuego.numJugadorActual].superestar.Name);
-
-            while (_logicaJuego.SigueTurno())
-            {   
-                List<PlayerInfo> listaPlayers = _logicaJuego.CrearListaJugadores();
-                _view.ShowGameInfo(listaPlayers[_logicaJuego.numJugadorActual], listaPlayers[_logicaJuego.numJugadorDos]);
-                _logicaJuego.AccionSeleccionadaJugador();
-            }
+            SeJuegaUnTurno();
         }
-        _view.CongratulateWinner(_logicaJuego.listaMazos[_logicaJuego.numJugadorGanador].superestar.Name);
+        _view.CongratulateWinner(_logicaJuego.listaPlayers[_logicaJuego.numJugadorGanador].superestar.Name);
+    }
+
+    public void SeJuegaUnTurno() 
+    {
+        _logicaJuego.listaPlayers[_logicaJuego.numJugadorActual].RobarCarta();
+        _logicaJuego.SetearVariableTruePorqueInicioTurno();
+        _view.SayThatATurnBegins(_logicaJuego.listaPlayers[_logicaJuego.numJugadorActual].superestar.Name);
+
+        while (_logicaJuego.SigueTurno())
+        {
+            _logicaJuego.MostrarInformacionJugadores();
+            _logicaJuego.AccionSeleccionadaJugador();
+        }
     }
 }

@@ -2,17 +2,17 @@ namespace RawDeal;
 
 public class ValidarDeck
 {
-    public bool CumpleTamanoMazo(Mazo mazo)
+    public bool CumpleTamanoMazo(Player mazo)
     {
         return (mazo.cartasArsenal.Count() == 60);
     }
     
-    public bool CumpleTenerSuperStar(Mazo mazo)
+    public bool CumpleTenerSuperStar(Player mazo)
     {
         return (mazo.superestar != null);
     }
 
-    public bool CumpleSubtipos(Mazo mazo)
+    public bool CumpleSubtipos(Player mazo)
     {
         Dictionary<string, int> dictNumeroPorCartas = new Dictionary<string, int>();
         bool isHeel = MazoContieneIsHeel(mazo);
@@ -23,7 +23,7 @@ public class ValidarDeck
         return (!(isHeel && isFace) && cumpleUnique && cumpleNoSetUp);
     }
 
-    public bool MazoCumpleCantidadUnique(Mazo mazo)
+    public bool MazoCumpleCantidadUnique(Player mazo)
     {
         Dictionary<string, int> dictNumeroPorCartas = new Dictionary<string, int>();
         
@@ -39,7 +39,7 @@ public class ValidarDeck
         return true;
     }
     
-    public bool MazoCumpleCantidadNoSetUp(Mazo mazo)
+    public bool MazoCumpleCantidadNoSetUp(Player mazo)
     {
         Dictionary<string, int> dictNumeroPorCartas = new Dictionary<string, int>();
         
@@ -55,7 +55,7 @@ public class ValidarDeck
         return true;
     }
 
-    public bool MazoContieneIsHeel(Mazo mazo)
+    public bool MazoContieneIsHeel(Player mazo)
     {
         foreach (var carta in mazo.cartasArsenal)
         {
@@ -66,7 +66,7 @@ public class ValidarDeck
         return false;
     }
     
-    public bool MazoContieneIsFace(Mazo mazo)
+    public bool MazoContieneIsFace(Player mazo)
     {
         foreach (var carta in mazo.cartasArsenal)
         {
@@ -77,7 +77,7 @@ public class ValidarDeck
         return false;
     }
     
-    public bool MazoCumpleLogoSuperStar(Mazo mazo)
+    public bool MazoCumpleLogoSuperStar(Player mazo)
     {   
         foreach (var carta in mazo.cartasArsenal)
         {   
@@ -98,7 +98,7 @@ public class ValidarDeck
         return true;
     }
     
-    public bool EsValidoMazo(Mazo mazo)
+    public bool EsValidoMazo(Player mazo)
     {
         return (CumpleTamanoMazo(mazo) && CumpleTenerSuperStar(mazo) && CumpleSubtipos(mazo) && MazoCumpleLogoSuperStar(mazo));
     }

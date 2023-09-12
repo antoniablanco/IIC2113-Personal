@@ -13,13 +13,13 @@ public class Logica_Juego
     private bool _sigueJuego = true;
     private bool _sigueTurno = true;
     public View view;
-    public Mazo MazoUno { get; set; }
-    public Mazo MazoDos { get; set; }
+    public Player PlayerUno { get; set; }
+    public Player PlayerDos { get; set; }
     public int numJugadorActual = 0;
     public int numJugadorDos = 1;
     public int numJugadorGanador = 1;
     public int NumJugadorInicio = 0;
-    public List<Mazo> listaMazos;
+    public List<Player> listaPlayers;
     public VisualisarCartas visualisarCartas = new VisualisarCartas();
     
     public List<CartasJson> DescerializarJsonCartas()
@@ -80,28 +80,29 @@ public class Logica_Juego
 
     public void JugadorInicioJuego()
     {
-        NumJugadorInicio = (MazoUno.superestar.SuperstarValue < MazoDos.superestar.SuperstarValue) ? 1 : 0;
+        NumJugadorInicio = (PlayerUno.superestar.SuperstarValue < PlayerDos.superestar.SuperstarValue) ? 1 : 0;
     }
 
-    public List<PlayerInfo> CrearListaJugadores()
+    public void MostrarInformacionJugadores() 
     {   
         
-        PlayerInfo playerUno = new PlayerInfo(MazoUno.superestar.Name, MazoUno.FortitudRating(),MazoUno.cartasHand.Count, MazoUno.cartasArsenal.Count);
-        PlayerInfo playerDos = new PlayerInfo(MazoDos.superestar.Name, MazoDos.FortitudRating(), MazoDos.cartasHand.Count, MazoDos.cartasArsenal.Count);
+        PlayerInfo playerUno = new PlayerInfo(PlayerUno.superestar.Name, PlayerUno.FortitudRating(),PlayerUno.cartasHand.Count, PlayerUno.cartasArsenal.Count);
+        PlayerInfo playerDos = new PlayerInfo(PlayerDos.superestar.Name, PlayerDos.FortitudRating(), PlayerDos.cartasHand.Count, PlayerDos.cartasArsenal.Count);
         
-        List<PlayerInfo> listaPlayers = (NumJugadorInicio == 0) ? new List<PlayerInfo> { playerUno, playerDos } : new List<PlayerInfo> { playerDos, playerUno };
+        List<PlayerInfo> listaPlayersParaImprimir = (NumJugadorInicio == 0) ? new List<PlayerInfo> { playerUno, playerDos } : new List<PlayerInfo> { playerDos, playerUno };
         
-        return listaPlayers;
+        view.ShowGameInfo(listaPlayersParaImprimir[numJugadorActual], listaPlayersParaImprimir[numJugadorDos]);
+        
     }
 
-    public void CrearListaMazos()
+    public void CrearListaPlayers()
     {
-        listaMazos = (NumJugadorInicio == 0) ? new List<Mazo> { MazoUno, MazoDos } : new List<Mazo> { MazoDos, MazoUno };
+        listaPlayers = (NumJugadorInicio == 0) ? new List<Player> { PlayerUno, PlayerDos } : new List<Player> { PlayerDos, PlayerUno };
     }
 
     public bool SigueJuego()
     {   
-        return (MazoUno.cartasArsenal.Count() > 0 && MazoDos.cartasArsenal.Count() > 0 && _sigueJuego);
+        return (PlayerUno.cartasArsenal.Count() > 0 && PlayerDos.cartasArsenal.Count() > 0 && _sigueJuego);
     }
 
     public bool SigueTurno()
@@ -132,12 +133,12 @@ public class Logica_Juego
         }
     }
 
-    public void AccionJugarCarta() // Tengo que agregar que se agregue al ring area
+    public void AccionJugarCarta() 
     {
         int cartaSeleccionada = view.AskUserToSelectAPlay(ObtenerStringCartasPosiblesJugar());
         if (cartaSeleccionada != -1)
         {   
-            Carta cartaJugada = listaMazos[numJugadorActual].CartasPosiblesDeJugar()[cartaSeleccionada];
+            Carta cartaJugada = listaPlayers[numJugadorActual].CartasPosiblesDeJugar()[cartaSeleccionada];
             ImpresionesAccionJugarCarta(cartaJugada);
             AgregarCartaJugadaRingArea(cartaJugada);
         }
@@ -145,7 +146,7 @@ public class Logica_Juego
 
     public void AgregarCartaJugadaRingArea(Carta cartaJugada)
     {
-        listaMazos[numJugadorActual].CartaPasaDeHandAlRingArea(cartaJugada);
+        listaPlayers[numJugadorActual].CartaPasaDeHandAlRingArea(cartaJugada);
     }
     
     public void ImpresionesAccionJugarCarta(Carta cartaJugada)
@@ -158,7 +159,7 @@ public class Logica_Juego
 
     public List<string> ObtenerStringCartasPosiblesJugar()
     {   
-        List<Carta> cartasPosiblesJugar = listaMazos[numJugadorActual].CartasPosiblesDeJugar();
+        List<Carta> cartasPosiblesJugar = listaPlayers[numJugadorActual].CartasPosiblesDeJugar();
         List<string> stringDeCartas= visualisarCartas.CrearListaStringCartaPlayed(cartasPosiblesJugar);
 
         return stringDeCartas;
@@ -170,19 +171,19 @@ public class Logica_Juego
         switch (setCartasParaVer)
         {
             case CardSet.Hand:
-                AccionVercartasTotales(listaMazos[numJugadorActual].cartasHand);
+                AccionVercartasTotales(listaPlayers[numJugadorActual].cartasHand);
                 break;
             case CardSet.RingArea:
-                AccionVercartasTotales(listaMazos[numJugadorActual].cartasRingArea);
+                AccionVercartasTotales(listaPlayers[numJugadorActual].cartasRingArea);
                 break;
             case CardSet.RingsidePile:
-                AccionVercartasTotales(listaMazos[numJugadorActual].cartasRingSide);
+                AccionVercartasTotales(listaPlayers[numJugadorActual].cartasRingSide);
                 break;
             case CardSet.OpponentsRingArea:
-                AccionVercartasTotales(listaMazos[numJugadorDos].cartasRingArea);
+                AccionVercartasTotales(listaPlayers[numJugadorDos].cartasRingArea);
                 break;
             case CardSet.OpponentsRingsidePile:
-                AccionVercartasTotales(listaMazos[numJugadorDos].cartasRingSide);
+                AccionVercartasTotales(listaPlayers[numJugadorDos].cartasRingSide);
                 break;
         }
     }
@@ -202,14 +203,14 @@ public class Logica_Juego
     public void DecirQueVaAJugarCarta(Carta cartaJugada)
     {
         string cartaJugadaString = visualisarCartas.ObtenerStringPlayedInfo(cartaJugada);
-        string nombreSuperStar = listaMazos[numJugadorActual].superestar.Name;
+        string nombreSuperStar = listaPlayers[numJugadorActual].superestar.Name;
         view.SayThatPlayerIsTryingToPlayThisCard(nombreSuperStar, cartaJugadaString);
     }
 
     public void DecirQueVaARecibirDaño(Carta cartaJugada)
     {   
         int danoRecibido = int.Parse(cartaJugada.Damage);
-        string nombreSuperStarContrario = listaMazos[numJugadorDos].superestar.Name;
+        string nombreSuperStarContrario = listaPlayers[numJugadorDos].superestar.Name;
         view.SayThatSuperstarWillTakeSomeDamage(nombreSuperStarContrario, danoRecibido);
     }
 
@@ -228,14 +229,14 @@ public class Logica_Juego
     
     public void MostrarUnaCartaVolteada(int danoActual, int danoTotal)
     {   
-        Carta cartaVolteada = listaMazos[numJugadorDos].CartaPasaDelArsenalAlRingSide();
+        Carta cartaVolteada = listaPlayers[numJugadorDos].CartaPasaDelArsenalAlRingSide();
         string cartaVolteadaString = visualisarCartas.ObtenerStringCartaInfo(cartaVolteada);
         view.ShowCardOverturnByTakingDamage(cartaVolteadaString, danoActual+1, danoTotal);
     }
     
     public bool VerificarPuedeRecibirDano()
     {
-        return listaMazos[numJugadorDos].cartasArsenal.Count > 0;
+        return listaPlayers[numJugadorDos].cartasArsenal.Count > 0;
     }
     
     public void DeclararFinTurno()
@@ -243,8 +244,8 @@ public class Logica_Juego
         _sigueTurno = false;
     }
 
-    public void DeclararInicioTurno()
-    {
+    public void SetearVariableTruePorqueInicioTurno()
+    {   
         _sigueTurno = true;
     }
     
