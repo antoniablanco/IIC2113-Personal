@@ -36,37 +36,18 @@ public class Game
     
         return (totalCartas, totalSuperStars);
     }
-    
-    public bool SonLosMazosValidos() // Aplicar Clean Code
-    {   
+
+    public Mazo CrearMazo()
+    {
         var (totalCartas, totalSuperStars) = ObtenerTotalCartasYSuperStars();
-        
-        Mazo mazoUno = IniciarMazo(totalCartas, totalSuperStars);
-        
-        if (_validarDeck.EsValidoMazo(mazoUno))
+        Mazo mazo = IniciarMazo(totalCartas, totalSuperStars);
+        if (!_validarDeck.EsValidoMazo(mazo))
         {
-                
-            Mazo mazoDos = IniciarMazo(totalCartas, totalSuperStars);
-            
-            if (_validarDeck.EsValidoMazo(mazoDos))
-            {
-                IniciarVariablesLogicaJuego(mazoUno, mazoDos);
-            }
-            else
-            {
-                _view.SayThatDeckIsInvalid();
-                return false;
-            }
+            throw new ExcepcionMazoNoValido("El mazo no es valido");
         }
-        else
-        {
-            _view.SayThatDeckIsInvalid();
-            return false;
-        }
-
-        return true;
+        return mazo;
     }
-
+    
     public void IniciarVariablesLogicaJuego(Mazo mazoUno, Mazo mazoDos)
     {
         _logicaJuego.MazoUno = mazoUno;
@@ -84,13 +65,18 @@ public class Game
     }
     
     public void Play() 
-    {   
-        bool sonMazosValidos = SonLosMazosValidos();
-
-        if (sonMazosValidos)
+    {
+        try
         {
+            Mazo mazoUno = CrearMazo();
+            Mazo mazoDos = CrearMazo();
+            IniciarVariablesLogicaJuego(mazoUno, mazoDos);
             InicializarHandsMazos();
             JuegoDadoQueLosMazosSonValido();
+        }
+        catch (ExcepcionMazoNoValido e)
+        {
+            _view.SayThatDeckIsInvalid();
         }
     }
     
