@@ -112,7 +112,7 @@ public class Logica_Juego
     
     public void AccionSeleccionadaJugador()
     {
-        var actividadRealizar = view.AskUserWhatToDoWhenHeCannotUseHisAbility();
+        var actividadRealizar = ObtenerProximaJugada();
 
         switch (actividadRealizar)
         {
@@ -128,9 +128,30 @@ public class Logica_Juego
                 ActualizarVariablesPorFinTurno();
                 break;
             case NextPlay.GiveUp:
-                SetearVariablesTrasRendirse();
+                SetearVariablesTrasPerder();
                 break;
         }
+    }
+
+    public NextPlay ObtenerProximaJugada()
+    {   
+        NextPlay actividadRealizar;
+        
+        if (JugadorPuedeUtilizarHabilidadSuperStar())
+        {
+            actividadRealizar = view.AskUserWhatToDoWhenUsingHisAbilityIsPossible();
+        }
+        else
+        {
+            actividadRealizar = view.AskUserWhatToDoWhenHeCannotUseHisAbility();
+        }
+
+        return actividadRealizar;
+    }
+
+    public bool JugadorPuedeUtilizarHabilidadSuperStar() // Hay que corregirla para que realmente verifique
+    {
+        return false;
     }
 
     public void AccionJugarCarta() 
@@ -253,8 +274,17 @@ public class Logica_Juego
     {   
         DeclararFinTurno();
         ActualizacionNumJugadores();
+        if (!VerificarSiJugadorTieneCartasEnArsenalParaSeguirJugando())
+        {
+            SetearVariablesTrasPerder();
+        }
     }
 
+    private bool VerificarSiJugadorTieneCartasEnArsenalParaSeguirJugando()
+    {
+        return listaPlayers[numJugadorActual].TieneCartasEnArsenal();
+    }
+    
     public void SetearVariablesTrasGanar()
     {
         numJugadorGanador = numJugadorActual;
@@ -262,7 +292,7 @@ public class Logica_Juego
         DeclararFinTurno();
     }
     
-    public void SetearVariablesTrasRendirse()
+    public void SetearVariablesTrasPerder()
     {
         numJugadorGanador = (numJugadorActual == 0) ? 1 : 0;
         _sigueJuego = false;

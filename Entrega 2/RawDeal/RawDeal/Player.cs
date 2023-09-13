@@ -94,4 +94,9 @@ public class Player
         _cartasRingArea.Add(carta);
         _cartasHand.Remove(carta);
     }
+
+    public bool TieneCartasEnArsenal()
+    {
+        return (cartasArsenal.Count > 0);
+    }
 }
