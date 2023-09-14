@@ -14,11 +14,11 @@ public class Undertaker: SuperStar
         jugadorActual.HabilidadUtilizada = true;
         _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
 
-        DescartandoCartasDeHand(jugadorActual);
-        AgregandoCartaHand(jugadorActual);
+        DescartandoCartasDeHandAlRingSide(jugadorActual);
+        AgregandoCartaHandDelRingSide(jugadorActual);
     }
     
-    public void DescartandoCartasDeHand(Player jugadorActual)
+    public void DescartandoCartasDeHandAlRingSide(Player jugadorActual)
     {
         for (int i = 0; i < 2; i++)
         {   
@@ -28,12 +28,12 @@ public class Undertaker: SuperStar
             if (cartaSeleccionada != -1)
             {
                 Carta cartaDescartada = jugadorActual.cartasHand[cartaSeleccionada];
-                jugadorActual.CartaPasaDeHandAlRingSide(cartaDescartada);
+                jugadorActual.TraspasoDeCartas(cartaDescartada, jugadorActual.cartasHand, jugadorActual.cartasRingSide);
             }
         }
     }
     
-    public void AgregandoCartaHand(Player jugadorActual)
+    public void AgregandoCartaHandDelRingSide(Player jugadorActual)
     {
         List<string> ringSideFormatoString = visualisarCartas.CrearListaStringCarta(jugadorActual.cartasRingSide);
         int cartaSeleccionada =_view.AskPlayerToSelectCardsToPutInHisHand(Name, 1, ringSideFormatoString);
@@ -41,7 +41,7 @@ public class Undertaker: SuperStar
         if (cartaSeleccionada != -1)
         {
             Carta cartaAgregada = jugadorActual.cartasRingSide[cartaSeleccionada];
-            jugadorActual.CartaPasaDelRingSideAHand(cartaAgregada);
+            jugadorActual.TraspasoDeCartas(cartaAgregada, jugadorActual.cartasRingSide, jugadorActual.cartasHand);
         }
     }
 

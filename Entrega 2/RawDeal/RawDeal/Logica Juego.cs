@@ -162,7 +162,9 @@ public class Logica_Juego
 
     public void AgregarCartaJugadaRingArea(Carta cartaJugada)
     {
-        listaPlayers[numJugadorActual].CartaPasaDeHandAlRingArea(cartaJugada);
+        List<Carta> cartasHand = listaPlayers[numJugadorActual].cartasHand;
+        List<Carta> cartasRingArea = listaPlayers[numJugadorActual].cartasRingArea;
+        listaPlayers[numJugadorActual].TraspasoDeCartas(cartaJugada, cartasHand, cartasRingArea);
     }
     
     public void ImpresionesAccionJugarCarta(Carta cartaJugada)

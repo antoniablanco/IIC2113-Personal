@@ -92,23 +92,11 @@ public class Player
 
         return cartaMovida;
     }
-
-    public void CartaPasaDeHandAlRingArea(Carta carta)
-    {   
-        _cartasRingArea.Add(carta);
-        _cartasHand.Remove(carta);
-    }
     
-    public void CartaPasaDeHandAlRingSide(Carta carta)
+    public void TraspasoDeCartas(Carta carta, List<Carta> ListaOrigen, List<Carta> ListaDestino)
     {
-        _cartasRingArea.Add(carta);
-        _cartasHand.Remove(carta);
-    }
-    
-    public void CartaPasaDelRingSideAHand(Carta carta)
-    {
-        _cartasHand.Add(carta);
-        _cartasRingSide.Remove(carta);
+        ListaDestino.Add(carta);
+        ListaOrigen.Remove(carta);
     }
 
     public bool TieneCartasEnArsenal()
