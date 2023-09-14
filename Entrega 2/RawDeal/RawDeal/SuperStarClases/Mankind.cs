@@ -9,7 +9,7 @@ public class Mankind: SuperStar
         // Constructor de la clase base
     }
     
-    public override void UtilizandoSuperHabilidad(Player jugadorActual, Player jugadorCotrario)
+    public override void UtilizandoSuperHabilidadAutomaticaAlInicioDelTurno(Player jugadorActual, Player jugadorCotrario)
     {
         if (jugadorActual.cartasArsenal.Count > 0)
             jugadorActual.RobarCarta();

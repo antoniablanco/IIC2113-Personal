@@ -8,8 +8,9 @@ public class StoneCold: SuperStar
     {
         // Constructor de la clase base
     }
-    public override void UtilizandoSuperHabilidad(Player jugadorActual, Player jugadorCotrario)
-    {   
+    
+    public override void UtilizandoSuperHabilidadElectiva(Player jugadorActual, Player jugadorCotrario)
+    {
         jugadorActual.HabilidadUtilizada = true;
         _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
         

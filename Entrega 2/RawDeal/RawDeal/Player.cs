@@ -128,8 +128,13 @@ public class Player
         return superestar.PuedeUtilizarSuperAbility(jugadorCotrario, jugadorActual);
     }
 
-    public void UtilizandoSuperHabilidadDelSuperStar(Player jugadorActual, Player jugadorCotrario)
+    public void UtilizandoSuperHabilidadElectiva(Player jugadorActual, Player jugadorCotrario)
     {
-        superestar.UtilizandoSuperHabilidad(jugadorCotrario, jugadorActual);
+        superestar.UtilizandoSuperHabilidadElectiva(jugadorCotrario, jugadorActual);
+    }
+    
+    public void UtilizandoSuperHabilidadAutomatica(Player jugadorActual, Player jugadorCotrario)
+    {
+        superestar.UtilizandoSuperHabilidadAutomaticaAlInicioDelTurno(jugadorCotrario, jugadorActual);
     }
 }

@@ -146,7 +146,13 @@ public class Logica_Juego
 
     public void AccionUtilizarSuperHabilidad()
     {
-        listaPlayers[numJugadorActual].UtilizandoSuperHabilidadDelSuperStar(listaPlayers[numJugadorActual], listaPlayers[numJugadorDos]);
+        listaPlayers[numJugadorActual].UtilizandoSuperHabilidadElectiva(listaPlayers[numJugadorActual], listaPlayers[numJugadorDos]);
+    }
+    
+    public void SeUtilizaLaSuperHabilidadQueEsAlInicioDelTurno()
+    {
+        listaPlayers[numJugadorActual]
+            .UtilizandoSuperHabilidadAutomatica(listaPlayers[numJugadorActual], listaPlayers[numJugadorDos]);
     }
     
     public void AccionJugarCarta() 
@@ -241,7 +247,7 @@ public class Logica_Juego
 
     public void ProbocarDanoAccionJugarCarta(Carta cartaJugada, int danoTotal) 
     {
-        for (int i = 0; i < int.Parse(cartaJugada.Damage); i++)
+        for (int i = 0; i < danoTotal; i++)
         {   
             if (VerificarPuedeRecibirDano())
                 MostrarUnaCartaVolteada(i, danoTotal);

@@ -96,6 +96,7 @@ public class Game
         _logicaJuego.listaPlayers[_logicaJuego.numJugadorActual].RobarCarta();
         _logicaJuego.SetearVariableTruePorqueInicioTurno();
         _view.SayThatATurnBegins(_logicaJuego.listaPlayers[_logicaJuego.numJugadorActual].superestar.Name);
+        //_logicaJuego.SeUtilizaLaSuperHabilidadQueEsAlInicioDelTurno();
 
         while (_logicaJuego.SigueTurno())
         {

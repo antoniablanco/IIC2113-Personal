@@ -9,7 +9,7 @@ public class TheRock: SuperStar
         // Constructor de la clase base
     }
     
-    public override void UtilizandoSuperHabilidad(Player jugadorActual, Player jugadorCotrario)
+    public virtual void UtilizandoSuperHabilidadAutomaticaAlInicioDelTurno(Player jugadorActual, Player jugadorCotrario)
     {
         if (_view.DoesPlayerWantToUseHisAbility(Name)) ;
         {

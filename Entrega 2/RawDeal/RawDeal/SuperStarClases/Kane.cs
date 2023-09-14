@@ -1,7 +1,7 @@
 namespace RawDeal.SuperStarClases;
 using RawDealView;
 
-public class Kane: SuperStar
+public class Kane: SuperStar // Hay que escribir superhabilidad
 {
     public Kane(string name, string logo, int handSize, int superstarValue, string superstarAbility, View view)
         : base(name, logo, handSize, superstarValue, superstarAbility, view)
@@ -9,9 +9,12 @@ public class Kane: SuperStar
         // Constructor de la clase base
     }
     
-    public override void UtilizandoSuperHabilidad(Player jugadorActual, Player jugadorCotrario)
+    public override void UtilizandoSuperHabilidadAutomaticaAlInicioDelTurno(Player jugadorActual, Player jugadorCotrario)
     {
-        _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
+        
+        Carta cartaVolteada = jugadorCotrario.TraspasoDeCartaSinSeleccionar(jugadorCotrario.cartasArsenal, jugadorCotrario.cartasRingSide);
+        string cartaVolteadaString = visualisarCartas.ObtenerStringCartaInfo(cartaVolteada);
+        _view.SayThatSuperstarWillTakeSomeDamage(jugadorCotrario.superestar.Name, 1);
+        _view.ShowCardOverturnByTakingDamage(cartaVolteadaString, 1, 1);
     }
-    
 }

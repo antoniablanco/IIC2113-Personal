@@ -59,7 +59,12 @@ public abstract class SuperStar
         return false;
     }
 
-    public virtual void UtilizandoSuperHabilidad(Player jugadorActual, Player jugadorCotrario)
+    public virtual void UtilizandoSuperHabilidadElectiva(Player jugadorActual, Player jugadorCotrario)
+    {
+        
+    }
+    
+    public virtual void UtilizandoSuperHabilidadAutomaticaAlInicioDelTurno(Player jugadorActual, Player jugadorCotrario)
     {
         
     }
