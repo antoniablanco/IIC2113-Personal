@@ -4,7 +4,7 @@ using RawDealView.Formatters;
 namespace RawDeal;
 
 
-public class CartasJson
+public class CartasJson: IViewableCardInfo
 {
     public string Title { get; set; }
     public List<string> Types { get; set; }

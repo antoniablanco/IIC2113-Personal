@@ -12,15 +12,19 @@ public class Logica_Juego
 {   
     private bool _sigueJuego = true;
     private bool _sigueTurno = true;
+    
     public View view;
+    public VisualisarCartas visualisarCartas = new VisualisarCartas();
+    
     public Player PlayerUno { get; set; }
     public Player PlayerDos { get; set; }
+    public List<Player> listaPlayers;
+    
     public int numJugadorActual = 0;
     public int numJugadorDos = 1;
     public int numJugadorGanador = 1;
     public int NumJugadorInicio = 0;
-    public List<Player> listaPlayers;
-    public VisualisarCartas visualisarCartas = new VisualisarCartas();
+    
     
     public List<CartasJson> DescerializarJsonCartas()
     {
@@ -45,9 +49,8 @@ public class Logica_Juego
         foreach (var line in lines)
         {
             foreach (var carta in totalCartas)
-            {
-                string title = line.Trim();  
-                if (title == carta.Title)
+            {  
+                if (line.Trim() == carta.Title)
                 {
                     Carta nuevaCarta = new Carta(carta.Title, carta.Types,carta.Subtypes,carta.Fortitude, carta.Damage, carta.StunValue, carta.CardEffect );
                     cartas.Add(nuevaCarta);
@@ -57,22 +60,16 @@ public class Logica_Juego
         return cartas;
     }
     
-    public SuperStar CrearSuperStar(string deck, List<SuperStarJSON> totalSuperStars) // Aplicar Clean Code
+    public SuperStar? CrearSuperStar(string deck, List<SuperStarJSON> totalSuperStars) // Aplicar Clean Code
     {
-        string pathDeck = Path.Combine($"{deck}");
-        string[] lines = File.ReadAllLines(pathDeck);
-        string firstLine = lines[0];
-
-        Dictionary<SuperStarJSON, Type> superStarTypes = ObtenerDiccionarioSuperStars(totalSuperStars);
+        string firstLineDeck = ObtenerNombreSuperStar(deck);
+        Dictionary<SuperStarJSON, Type> superStarTypes = ObtenerDiccionarioTiposSuperStars(totalSuperStars);
         
         foreach (var super in superStarTypes)
         {
-            string superStarName = super.Key.Name;
-            Type superStarType = super.Value;
-
-            if (firstLine.Contains(superStarName))
+            if (firstLineDeck.Contains(super.Key.Name))
             {   
-                SuperStar superstar = (SuperStar)Activator.CreateInstance(superStarType,super.Key.Name, super.Key.Logo, super.Key.HandSize, super.Key.SuperstarValue, super.Key.SuperstarAbility);
+                SuperStar superstar = (SuperStar)Activator.CreateInstance(super.Value,super.Key.Name, super.Key.Logo, super.Key.HandSize, super.Key.SuperstarValue, super.Key.SuperstarAbility);
                 return superstar;
             }
         }
@@ -81,7 +78,14 @@ public class Logica_Juego
         return superstarNull;
     }
     
-    public Dictionary<SuperStarJSON, Type> ObtenerDiccionarioSuperStars(List<SuperStarJSON> totalSuperStars)
+    public string ObtenerNombreSuperStar(string deck)
+    {
+        string pathDeck = Path.Combine($"{deck}");
+        string[] lines = File.ReadAllLines(pathDeck);
+        return lines[0];
+    }
+    
+    public Dictionary<SuperStarJSON, Type> ObtenerDiccionarioTiposSuperStars(List<SuperStarJSON> totalSuperStars)
     {
         Dictionary<SuperStarJSON, Type> superStarTypes = new Dictionary<SuperStarJSON, Type>();
         foreach (var super in totalSuperStars)
@@ -111,15 +115,13 @@ public class Logica_Juego
     }
 
     public void MostrarInformacionJugadores() 
-    {   
-        
+    {
         PlayerInfo playerUno = new PlayerInfo(PlayerUno.superestar.Name, PlayerUno.FortitudRating(),PlayerUno.cartasHand.Count, PlayerUno.cartasArsenal.Count);
         PlayerInfo playerDos = new PlayerInfo(PlayerDos.superestar.Name, PlayerDos.FortitudRating(), PlayerDos.cartasHand.Count, PlayerDos.cartasArsenal.Count);
         
         List<PlayerInfo> listaPlayersParaImprimir = (NumJugadorInicio == 0) ? new List<PlayerInfo> { playerUno, playerDos } : new List<PlayerInfo> { playerDos, playerUno };
         
         view.ShowGameInfo(listaPlayersParaImprimir[numJugadorActual], listaPlayersParaImprimir[numJugadorDos]);
-        
     }
 
     public void CrearListaPlayers()
@@ -137,50 +139,16 @@ public class Logica_Juego
         return _sigueTurno;
     }
     
-    public void AccionSeleccionadaJugador()
+    public bool JugadorPuedeUtilizarHabilidadSuperStar() 
     {
-        var actividadRealizar = ObtenerProximaJugada();
-
-        switch (actividadRealizar)
-        {
-            case NextPlay.UseAbility:
-                break;
-            case NextPlay.ShowCards:
-                SeleccionarCartasVer();
-                break;
-            case NextPlay.PlayCard:
-                AccionJugarCarta();
-                break;
-            case NextPlay.EndTurn:
-                ActualizarVariablesPorFinTurno();
-                break;
-            case NextPlay.GiveUp:
-                SetearVariablesTrasPerder();
-                break;
-        }
+        return listaPlayers[numJugadorActual].SuSuperStarPuedeUtilizarSuperAbility();
     }
 
-    public NextPlay ObtenerProximaJugada()
-    {   
-        NextPlay actividadRealizar;
-        
-        if (JugadorPuedeUtilizarHabilidadSuperStar())
-        {
-            actividadRealizar = view.AskUserWhatToDoWhenUsingHisAbilityIsPossible();
-        }
-        else
-        {
-            actividadRealizar = view.AskUserWhatToDoWhenHeCannotUseHisAbility();
-        }
-
-        return actividadRealizar;
-    }
-
-    public bool JugadorPuedeUtilizarHabilidadSuperStar() // Hay que corregirla para que realmente verifique
+    public void AccionUtilizarSuperHabilidad()
     {
-        return false;
+        listaPlayers[numJugadorActual].UtilizandoSuperHabilidadDelSuperStar();
     }
-
+    
     public void AccionJugarCarta() 
     {
         int cartaSeleccionada = view.AskUserToSelectAPlay(ObtenerStringCartasPosiblesJugar());
@@ -206,10 +174,9 @@ public class Logica_Juego
     }
 
     public List<string> ObtenerStringCartasPosiblesJugar()
-    {   
+    {
         List<Carta> cartasPosiblesJugar = listaPlayers[numJugadorActual].CartasPosiblesDeJugar();
-        List<string> stringDeCartas= visualisarCartas.CrearListaStringCartaPlayed(cartasPosiblesJugar);
-
+        List<string> stringDeCartas = visualisarCartas.CrearListaStringCartaPlayed(cartasPosiblesJugar);
         return stringDeCartas;
     }
     

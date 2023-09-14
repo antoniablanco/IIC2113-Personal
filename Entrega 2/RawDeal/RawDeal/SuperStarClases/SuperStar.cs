@@ -49,4 +49,14 @@ public abstract class SuperStar
         get => _SuperstarAbility;
         set => _SuperstarAbility = value ?? throw new ArgumentNullException(nameof(value));
     }
+
+    public virtual bool PuedeUtilizarSuperAbility()
+    {
+        return false;
+    }
+
+    public virtual void UtilizandoSuperHabilidad()
+    {
+        
+    }
 }

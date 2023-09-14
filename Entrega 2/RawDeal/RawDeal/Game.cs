@@ -1,5 +1,6 @@
 using System.ComponentModel.Design;
 using RawDealView;
+using RawDealView.Options;
 using RawDeal.SuperStarClases;
 
 namespace RawDeal;
@@ -99,7 +100,44 @@ public class Game
         while (_logicaJuego.SigueTurno())
         {
             _logicaJuego.MostrarInformacionJugadores();
-            _logicaJuego.AccionSeleccionadaJugador();
+            AccionSeleccionadaJugador();
         }
     }
+    
+    public void AccionSeleccionadaJugador()
+    {
+        var actividadRealizar = ObtenerProximaJugada();
+
+        switch (actividadRealizar)
+        {
+            case NextPlay.UseAbility:
+                _logicaJuego.AccionUtilizarSuperHabilidad();
+                break;
+            case NextPlay.ShowCards:
+                _logicaJuego.SeleccionarCartasVer();
+                break;
+            case NextPlay.PlayCard:
+                _logicaJuego.AccionJugarCarta();
+                break;
+            case NextPlay.EndTurn:
+                _logicaJuego.ActualizarVariablesPorFinTurno();
+                break;
+            case NextPlay.GiveUp:
+                _logicaJuego.SetearVariablesTrasPerder();
+                break;
+        }
+    }
+    
+    public NextPlay ObtenerProximaJugada()
+    {   
+        NextPlay actividadRealizar;
+        
+        if (_logicaJuego.JugadorPuedeUtilizarHabilidadSuperStar())
+            actividadRealizar = _view.AskUserWhatToDoWhenUsingHisAbilityIsPossible();
+        else
+            actividadRealizar = _view.AskUserWhatToDoWhenHeCannotUseHisAbility();
+
+        return actividadRealizar;
+    }
+    
 }

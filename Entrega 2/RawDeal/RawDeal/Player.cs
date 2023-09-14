@@ -101,4 +101,14 @@ public class Player
     {
         return (cartasArsenal.Count > 0);
     }
+    
+    public bool SuSuperStarPuedeUtilizarSuperAbility()
+    {
+        return superestar.PuedeUtilizarSuperAbility();
+    }
+
+    public void UtilizandoSuperHabilidadDelSuperStar()
+    {
+        superestar.UtilizandoSuperHabilidad();
+    }
 }
