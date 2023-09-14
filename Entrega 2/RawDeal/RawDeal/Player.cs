@@ -1,4 +1,5 @@
 using RawDeal.SuperStarClases;
+using RawDealView;
 
 namespace RawDeal;
 
@@ -9,6 +10,7 @@ public class Player
     private List<Carta> _cartasHand = new List<Carta>();
     private List<Carta> _cartasRingSide = new List<Carta>();
     private List<Carta> _cartasRingArea = new List<Carta>();
+    public bool HabilidadUtilizada = false;
     
     public Player(List<Carta> cartasPlayer, SuperStar superstar)
     {
@@ -96,19 +98,31 @@ public class Player
         _cartasRingArea.Add(carta);
         _cartasHand.Remove(carta);
     }
+    
+    public void CartaPasaDeHandAlRingSide(Carta carta)
+    {
+        _cartasRingArea.Add(carta);
+        _cartasHand.Remove(carta);
+    }
+    
+    public void CartaPasaDelRingSideAHand(Carta carta)
+    {
+        _cartasHand.Add(carta);
+        _cartasRingSide.Remove(carta);
+    }
 
     public bool TieneCartasEnArsenal()
     {
         return (cartasArsenal.Count > 0);
     }
     
-    public bool SuSuperStarPuedeUtilizarSuperAbility()
+    public bool SuSuperStarPuedeUtilizarSuperAbility(Player jugadorActual, Player jugadorCotrario)
     {
-        return superestar.PuedeUtilizarSuperAbility();
+        return superestar.PuedeUtilizarSuperAbility(jugadorCotrario, jugadorActual);
     }
 
-    public void UtilizandoSuperHabilidadDelSuperStar()
+    public void UtilizandoSuperHabilidadDelSuperStar(Player jugadorActual, Player jugadorCotrario)
     {
-        superestar.UtilizandoSuperHabilidad();
+        superestar.UtilizandoSuperHabilidad(jugadorCotrario, jugadorActual);
     }
 }

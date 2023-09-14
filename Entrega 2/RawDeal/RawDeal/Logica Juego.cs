@@ -69,12 +69,12 @@ public class Logica_Juego
         {
             if (firstLineDeck.Contains(super.Key.Name))
             {   
-                SuperStar superstar = (SuperStar)Activator.CreateInstance(super.Value,super.Key.Name, super.Key.Logo, super.Key.HandSize, super.Key.SuperstarValue, super.Key.SuperstarAbility);
+                SuperStar superstar = (SuperStar)Activator.CreateInstance(super.Value,super.Key.Name, super.Key.Logo, super.Key.HandSize, super.Key.SuperstarValue, super.Key.SuperstarAbility, view);
                 return superstar;
             }
         }
         
-        SuperStar superstarNull = new HHH("Null", "Null", 0, 0,"Null");
+        SuperStar superstarNull = new HHH("Null", "Null", 0, 0,"Null", view);
         return superstarNull;
     }
     
@@ -141,12 +141,12 @@ public class Logica_Juego
     
     public bool JugadorPuedeUtilizarHabilidadSuperStar() 
     {
-        return listaPlayers[numJugadorActual].SuSuperStarPuedeUtilizarSuperAbility();
+        return listaPlayers[numJugadorActual].SuSuperStarPuedeUtilizarSuperAbility(listaPlayers[numJugadorActual], listaPlayers[numJugadorDos]);
     }
 
     public void AccionUtilizarSuperHabilidad()
     {
-        listaPlayers[numJugadorActual].UtilizandoSuperHabilidadDelSuperStar();
+        listaPlayers[numJugadorActual].UtilizandoSuperHabilidadDelSuperStar(listaPlayers[numJugadorActual], listaPlayers[numJugadorDos]);
     }
     
     public void AccionJugarCarta() 
@@ -169,8 +169,17 @@ public class Logica_Juego
     {   
         DecirQueVaAJugarCarta(cartaJugada);
         view.SayThatPlayerSuccessfullyPlayedACard();
-        DecirQueVaARecibirDaño(cartaJugada);
-        ProbocarDanoAccionJugarCarta(cartaJugada);
+        int danoTotal = ObtenerDanoProducido(cartaJugada);
+        DecirQueVaARecibirDaño(cartaJugada, danoTotal);
+        ProbocarDanoAccionJugarCarta(cartaJugada, danoTotal);
+    }
+
+    public int ObtenerDanoProducido(Carta cartaJugada)
+    {
+        int danoTotal = int.Parse(cartaJugada.Damage);
+        if (listaPlayers[numJugadorDos].superestar.Name == "MANKIND")
+            danoTotal = -1;
+        return danoTotal;
     }
 
     public List<string> ObtenerStringCartasPosiblesJugar()
@@ -222,17 +231,14 @@ public class Logica_Juego
         view.SayThatPlayerIsTryingToPlayThisCard(nombreSuperStar, cartaJugadaString);
     }
 
-    public void DecirQueVaARecibirDaño(Carta cartaJugada)
+    public void DecirQueVaARecibirDaño(Carta cartaJugada, int danoRecibido)
     {   
-        int danoRecibido = int.Parse(cartaJugada.Damage);
         string nombreSuperStarContrario = listaPlayers[numJugadorDos].superestar.Name;
         view.SayThatSuperstarWillTakeSomeDamage(nombreSuperStarContrario, danoRecibido);
     }
 
-    public void ProbocarDanoAccionJugarCarta(Carta cartaJugada) 
-    {   
-        int danoTotal = int.Parse(cartaJugada.Damage);
-        
+    public void ProbocarDanoAccionJugarCarta(Carta cartaJugada, int danoTotal) 
+    {
         for (int i = 0; i < int.Parse(cartaJugada.Damage); i++)
         {   
             if (VerificarPuedeRecibirDano())
@@ -262,6 +268,7 @@ public class Logica_Juego
     public void SetearVariableTruePorqueInicioTurno()
     {   
         _sigueTurno = true;
+        listaPlayers[numJugadorActual].HabilidadUtilizada = false;
     }
     
     public void ActualizarVariablesPorFinTurno()

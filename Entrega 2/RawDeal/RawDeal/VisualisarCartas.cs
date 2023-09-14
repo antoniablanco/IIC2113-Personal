@@ -34,7 +34,6 @@ public class VisualisarCartas
     
     public string ObtenerStringInfo<T>(Carta carta, Func<Carta, T> createInfoFunc, Func<T, string> toStringFunc)
     {   
-        Console.WriteLine("Y llegamos a ObtenerStringInfo");
         T info = createInfoFunc(carta);
         string formattedInfo = toStringFunc(info);
         return formattedInfo;
@@ -57,7 +56,6 @@ public class VisualisarCartas
 
         foreach (var carta in cartasConjuntoSeleccionado)
         {   
-            Console.WriteLine("La carta que se esta viendo es:" +carta.Title);
             stringCartas.Add(obtenerInfoFunc(carta));
         }
 
