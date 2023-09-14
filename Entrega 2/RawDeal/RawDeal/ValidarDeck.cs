@@ -8,7 +8,7 @@ public class ValidarDeck
     }
     
     public bool CumpleTenerSuperStar(Player mazo)
-    {
+    {   
         return (mazo.superestar != null);
     }
 
@@ -62,7 +62,6 @@ public class ValidarDeck
             if (carta.ContieneSubtipoHeel())
                 return true;
         }
-
         return false;
     }
     
@@ -80,9 +79,11 @@ public class ValidarDeck
     public bool MazoCumpleLogoSuperStar(Player mazo)
     {   
         foreach (var carta in mazo.cartasArsenal)
-        {   
+        {
             if (!EstaCartaCumpleLogoSuperStar(carta, mazo.superestar.Logo))
+            {
                 return false;
+            }
         }
         return true;
     }
@@ -93,13 +94,15 @@ public class ValidarDeck
         foreach (var logo in logoSuperStars)
         {   
             if (carta.ContieneLogoSuperStar(logo) && logoSuperStar != logo)
+            {   
                 return false;
+            }
         }
         return true;
     }
     
     public bool EsValidoMazo(Player mazo)
-    {
+    {   
         return (CumpleTamanoMazo(mazo) && CumpleTenerSuperStar(mazo) && CumpleSubtipos(mazo) && MazoCumpleLogoSuperStar(mazo));
     }
 }

@@ -1,4 +1,4 @@
-
+using RawDeal.SuperStarClases;
 using RawDealView;
 using RawDealView.Options;
 using RawDealView.Utils;
@@ -61,21 +61,48 @@ public class Logica_Juego
     {
         string pathDeck = Path.Combine($"{deck}");
         string[] lines = File.ReadAllLines(pathDeck);
-        string firstLine = lines[0];  
+        string firstLine = lines[0];
+
+        Dictionary<SuperStarJSON, Type> superStarTypes = ObtenerDiccionarioSuperStars(totalSuperStars);
         
-        foreach (var super in totalSuperStars)
-        {   
-            string superName = firstLine.Trim();  
-            if (superName.Contains(super.Name))
+        foreach (var super in superStarTypes)
+        {
+            string superStarName = super.Key.Name;
+            Type superStarType = super.Value;
+
+            if (firstLine.Contains(superStarName))
             {   
-                SuperStar superstar = new SuperStar(super.Name, super.Logo, super.HandSize, super.SuperstarValue,
-                    super.SuperstarAbility);
+                SuperStar superstar = (SuperStar)Activator.CreateInstance(superStarType,super.Key.Name, super.Key.Logo, super.Key.HandSize, super.Key.SuperstarValue, super.Key.SuperstarAbility);
                 return superstar;
             }
         }
-        SuperStar superstarNull = new SuperStar("Null", "Null", 0, 0,"Null");
-        return superstarNull;
         
+        SuperStar superstarNull = new HHH("Null", "Null", 0, 0,"Null");
+        return superstarNull;
+    }
+    
+    public Dictionary<SuperStarJSON, Type> ObtenerDiccionarioSuperStars(List<SuperStarJSON> totalSuperStars)
+    {
+        Dictionary<SuperStarJSON, Type> superStarTypes = new Dictionary<SuperStarJSON, Type>();
+        foreach (var super in totalSuperStars)
+        {
+            if (super.Name == "STONE COLD STEVE AUSTIN")
+                superStarTypes.Add(super, typeof(StoneCold));
+            else if (super.Name == "THE UNDERTAKER")
+                superStarTypes.Add(super, typeof(Undertaker));
+            else if (super.Name == "MANKIND")
+                superStarTypes.Add(super, typeof(Mankind));
+            else if (super.Name == "KANE")
+                superStarTypes.Add(super, typeof(Kane));
+            else if (super.Name == "HHH")
+                superStarTypes.Add(super, typeof(HHH));
+            else if (super.Name == "THE ROCK")
+                superStarTypes.Add(super, typeof(TheRock));
+            else if (super.Name == "CHRIS JERICHO")
+                superStarTypes.Add(super, typeof(Jericho));
+        }
+
+        return superStarTypes;
     }
 
     public void JugadorInicioJuego()

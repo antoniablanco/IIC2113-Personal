@@ -1,3 +1,5 @@
+using RawDeal.SuperStarClases;
+
 namespace RawDeal;
 
 public class Player

@@ -122,9 +122,11 @@ public class Carta
     public bool ContieneLogoSuperStar(string superStarLogo)
     {   
         for (int i = 0; i < Subtypes.Count; i++)
-        {   
+        {
             if (Subtypes[i].Contains(superStarLogo))
+            {
                 return true;
+            }
         }
         return false;
     }

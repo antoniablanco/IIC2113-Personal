@@ -1,5 +1,6 @@
 using System.ComponentModel.Design;
 using RawDealView;
+using RawDeal.SuperStarClases;
 
 namespace RawDeal;
 
