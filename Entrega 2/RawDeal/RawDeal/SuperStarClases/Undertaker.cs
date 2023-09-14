@@ -28,7 +28,7 @@ public class Undertaker: SuperStar
             if (cartaSeleccionada != -1)
             {
                 Carta cartaDescartada = jugadorActual.cartasHand[cartaSeleccionada];
-                jugadorActual.TraspasoDeCartas(cartaDescartada, jugadorActual.cartasHand, jugadorActual.cartasRingSide);
+                jugadorActual.TraspasoDeCartasEscogiendoCualSeQuiereCambiar(cartaDescartada, jugadorActual.cartasHand, jugadorActual.cartasRingSide);
             }
         }
     }
@@ -41,7 +41,7 @@ public class Undertaker: SuperStar
         if (cartaSeleccionada != -1)
         {
             Carta cartaAgregada = jugadorActual.cartasRingSide[cartaSeleccionada];
-            jugadorActual.TraspasoDeCartas(cartaAgregada, jugadorActual.cartasRingSide, jugadorActual.cartasHand);
+            jugadorActual.TraspasoDeCartasEscogiendoCualSeQuiereCambiar(cartaAgregada, jugadorActual.cartasRingSide, jugadorActual.cartasHand);
         }
     }
 

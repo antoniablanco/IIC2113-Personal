@@ -11,37 +11,37 @@ public class Player
     private List<Carta> _cartasRingSide = new List<Carta>();
     private List<Carta> _cartasRingArea = new List<Carta>();
     public bool HabilidadUtilizada = false;
-    
+
     public Player(List<Carta> cartasPlayer, SuperStar superstar)
     {
         superestar = superstar;
         cartasArsenal.AddRange(cartasPlayer);
     }
-    
+
     public SuperStar superestar
     {
         get => _superestar;
         set => _superestar = value ?? throw new ArgumentNullException(nameof(value));
     }
-    
+
     public List<Carta> cartasArsenal
     {
         get => _cartasArsenal;
         set => _cartasArsenal = value ?? throw new ArgumentNullException(nameof(value));
     }
-    
+
     public List<Carta> cartasHand
     {
         get => _cartasHand;
         set => _cartasHand = value ?? throw new ArgumentNullException(nameof(value));
     }
-    
+
     public List<Carta> cartasRingSide
     {
         get => _cartasRingSide;
         set => _cartasRingSide = value ?? throw new ArgumentNullException(nameof(value));
     }
-    
+
     public List<Carta> cartasRingArea
     {
         get => _cartasRingArea;
@@ -50,12 +50,8 @@ public class Player
 
     public void RobarCarta()
     {
-        if (cartasArsenal.Count > 0)
-        {
-            int lastIndex = _cartasArsenal.Count - 1;
-            _cartasHand.Add(_cartasArsenal[lastIndex]);
-            _cartasArsenal.RemoveAt(lastIndex);
-        }
+        TraspasoDeCartaSinSeleccionar(cartasArsenal, cartasHand);
+        
     }
 
     public void RobarCartasHandInicial()
@@ -65,38 +61,61 @@ public class Player
             RobarCarta();
         }
     }
-    
+
     public int FortitudRating()
-    {   
+    {
         int fortitudRating = 0;
         foreach (Carta carta in cartasRingArea)
         {
             fortitudRating += int.Parse(carta.Damage);
         }
+
         return fortitudRating;
     }
-    
+
     public List<Carta> CartasPosiblesDeJugar()
     {
         return cartasHand
             .Where(carta => int.Parse(carta.Fortitude) <= FortitudRating())
             .ToList();
     }
-
-    public Carta CartaPasaDelArsenalAlRingSide()
-    {
-        int lastIndex = _cartasArsenal.Count - 1;
-        Carta cartaMovida = _cartasArsenal[lastIndex];
-        _cartasRingSide.Add(cartaMovida);
-        _cartasArsenal.RemoveAt(lastIndex);
-
-        return cartaMovida;
-    }
     
-    public void TraspasoDeCartas(Carta carta, List<Carta> ListaOrigen, List<Carta> ListaDestino)
+    public Carta? TraspasoDeCartaSinSeleccionar(List<Carta> listaOrigen, List<Carta> listaDestino, string posicion = "Final")
     {
-        ListaDestino.Add(carta);
-        ListaOrigen.Remove(carta);
+        int lastIndex = listaOrigen.Count - 1;
+        if (listaOrigen.Count > 0)
+        {
+            Carta cartaMovida = listaOrigen[lastIndex];
+            if (posicion == "Inicio")
+            {
+                listaDestino.Insert(0, cartaMovida);
+            }
+            else
+            {
+                listaDestino.Add(cartaMovida);
+            }
+            listaOrigen.RemoveAt(lastIndex);
+            return cartaMovida;
+        }
+
+        return null;
+    }
+
+    public void TraspasoDeCartasEscogiendoCualSeQuiereCambiar(Carta carta, List<Carta> listaOrigen, List<Carta> listaDestino, string posicion = "Final")
+    {   
+        if (listaOrigen.Count > 0)
+        {
+            if (posicion == "Inicio")
+            {
+                listaDestino.Insert(0, carta);
+                listaOrigen.Remove(carta);
+            }
+            else
+            {
+                listaDestino.Add(carta);
+                listaOrigen.Remove(carta);
+            }
+        }
     }
 
     public bool TieneCartasEnArsenal()

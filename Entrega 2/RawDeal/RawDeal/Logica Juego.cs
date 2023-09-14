@@ -164,7 +164,7 @@ public class Logica_Juego
     {
         List<Carta> cartasHand = listaPlayers[numJugadorActual].cartasHand;
         List<Carta> cartasRingArea = listaPlayers[numJugadorActual].cartasRingArea;
-        listaPlayers[numJugadorActual].TraspasoDeCartas(cartaJugada, cartasHand, cartasRingArea);
+        listaPlayers[numJugadorActual].TraspasoDeCartasEscogiendoCualSeQuiereCambiar(cartaJugada, cartasHand, cartasRingArea);
     }
     
     public void ImpresionesAccionJugarCarta(Carta cartaJugada)
@@ -252,7 +252,9 @@ public class Logica_Juego
     
     public void MostrarUnaCartaVolteada(int danoActual, int danoTotal)
     {   
-        Carta cartaVolteada = listaPlayers[numJugadorDos].CartaPasaDelArsenalAlRingSide();
+        List<Carta> cartasRingSide = listaPlayers[numJugadorDos].cartasRingSide;
+        List<Carta> cartasArsenal = listaPlayers[numJugadorDos].cartasArsenal;
+        Carta cartaVolteada = listaPlayers[numJugadorDos].TraspasoDeCartaSinSeleccionar(cartasArsenal, cartasRingSide);
         string cartaVolteadaString = visualisarCartas.ObtenerStringCartaInfo(cartaVolteada);
         view.ShowCardOverturnByTakingDamage(cartaVolteadaString, danoActual+1, danoTotal);
     }

@@ -13,35 +13,29 @@ public class StoneCold: SuperStar
         jugadorActual.HabilidadUtilizada = true;
         _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
         
-        AgregandoCartaHandDelArsenal(jugadorActual);
+        AgregandoCartaDelArsenalAHand(jugadorActual);
         DescartandoCartasDeHandAlArsenal(jugadorActual);
     }
     
-    public void AgregandoCartaHandDelArsenal(Player jugadorActual)
+    public void AgregandoCartaDelArsenalAHand(Player jugadorActual)
     {
-        List<string> ringSideFormatoString = visualisarCartas.CrearListaStringCarta(jugadorActual.cartasRingSide);
-        int cartaSeleccionada =_view.AskPlayerToSelectCardsToPutInHisHand(Name, 1, ringSideFormatoString);
-        
-        if (cartaSeleccionada != -1)
-        {
-            Carta cartaAgregada = jugadorActual.cartasRingSide[cartaSeleccionada];
-            jugadorActual.TraspasoDeCartas(cartaAgregada, jugadorActual.cartasHand, jugadorActual.cartasArsenal);
-        }
+        _view.SayThatPlayerDrawCards(Name, 1);
+
+        jugadorActual.TraspasoDeCartaSinSeleccionar(jugadorActual.cartasArsenal, jugadorActual.cartasHand);
     }
     
     public void DescartandoCartasDeHandAlArsenal(Player jugadorActual)
     {
-        for (int i = 0; i < 2; i++)
-        {   
-            List<string> handFormatoString = visualisarCartas.CrearListaStringCarta(jugadorActual.cartasHand);
-            int cartaSeleccionada =_view.AskPlayerToSelectACardToDiscard(handFormatoString, Name, Name, 2);
-            
-            if (cartaSeleccionada != -1)
-            {
-                Carta cartaDescartada = jugadorActual.cartasHand[cartaSeleccionada];
-                jugadorActual.TraspasoDeCartas(cartaDescartada, jugadorActual.cartasArsenal, jugadorActual.cartasHand);
-            }
+        
+        List<string> cartasHandFormatoString = visualisarCartas.CrearListaStringCarta(jugadorActual.cartasHand);
+        int cartaSeleccionada = _view.AskPlayerToReturnOneCardFromHisHandToHisArsenal(Name, cartasHandFormatoString);
+        
+        if (cartaSeleccionada != -1)
+        {
+            Carta cartaDescartada = jugadorActual.cartasHand[cartaSeleccionada];
+            jugadorActual.TraspasoDeCartasEscogiendoCualSeQuiereCambiar(cartaDescartada,  jugadorActual.cartasHand,jugadorActual.cartasArsenal, "Inicio");
         }
+        
     }
     
     public override bool PuedeUtilizarSuperAbility(Player jugadorCotrario, Player jugadorActual)
