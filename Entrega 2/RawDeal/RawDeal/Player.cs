@@ -76,7 +76,7 @@ public class Player
     public List<Carta> CartasPosiblesDeJugar()
     {
         return cartasHand
-            .Where(carta => int.Parse(carta.Fortitude) <= FortitudRating())
+            .Where(carta => int.Parse(carta.Fortitude) <= FortitudRating() && !carta.EsTipoReversal())
             .ToList();
     }
     

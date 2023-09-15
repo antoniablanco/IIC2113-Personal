@@ -130,4 +130,9 @@ public class Carta
         }
         return false;
     }
+
+    public bool EsTipoReversal()
+    {
+        return Types[0]=="Reversal";
+    }
 }
