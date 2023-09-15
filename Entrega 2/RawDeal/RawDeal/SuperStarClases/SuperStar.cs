@@ -11,7 +11,7 @@ public abstract class SuperStar
     private int _HandSize;
     private int _SuperstarValue;
     private string _SuperstarAbility;
-    protected View _view;
+    public View _view;
     protected VisualisarCartas visualisarCartas = new VisualisarCartas();
 
     public SuperStar(string name, string logo, int handSize, int superstarValue, string superstarAbility, View view)
@@ -68,15 +68,15 @@ public abstract class SuperStar
     {
         
     }
-    public void DescartandoCartasDeHandAlRingSide(Player jugadorActual)
+    public void DescartandoCartasDeHandAlRingSide(Player jugador, int numCartasADescartar)
     {
-        List<string> handFormatoString = visualisarCartas.CrearListaStringCarta(jugadorActual.cartasHand);
-        int cartaSeleccionada =_view.AskPlayerToSelectACardToDiscard(handFormatoString, Name, Name, 2);
+        List<string> handFormatoString = visualisarCartas.CrearListaStringCarta(jugador.cartasHand);
+        int cartaSeleccionada =_view.AskPlayerToSelectACardToDiscard(handFormatoString, jugador.superestar.Name, jugador.superestar.Name, numCartasADescartar);
             
         if (cartaSeleccionada != -1)
         {
-            Carta cartaDescartada = jugadorActual.cartasHand[cartaSeleccionada];
-            jugadorActual.TraspasoDeCartasEscogiendoCualSeQuiereCambiar(cartaDescartada, jugadorActual.cartasHand, jugadorActual.cartasRingSide);
+            Carta cartaDescartada = jugador.cartasHand[cartaSeleccionada];
+            jugador.TraspasoDeCartasEscogiendoCualSeQuiereCambiar(cartaDescartada, jugador.cartasHand, jugador.cartasRingSide);
         }
     }
     

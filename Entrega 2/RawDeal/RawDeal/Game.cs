@@ -23,6 +23,7 @@ public class Game
     public Player IniciarPlayer(List<CartasJson> totalCartas,List<SuperStarJSON> totalSuperStars) 
     {
         string stringPlayer = _view.AskUserToSelectDeck(_deckFolder);
+        _logicaJuego.view = _view;
         List<Carta> listaCartasPlayer = _logicaJuego.CrearCartas(stringPlayer, totalCartas);
         SuperStar superStarPlayer = _logicaJuego.CrearSuperStar(stringPlayer, totalSuperStars);
         
@@ -54,7 +55,6 @@ public class Game
     {
         _logicaJuego.PlayerUno = playerUno;
         _logicaJuego.PlayerDos = playerDos;
-        _logicaJuego.view = _view;
         
         _logicaJuego.JugadorInicioJuego();
         _logicaJuego.CrearListaPlayers();

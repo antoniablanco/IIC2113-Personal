@@ -11,9 +11,10 @@ public class Jericho: SuperStar // Implementar SuperHabilidad
     
     public override void UtilizandoSuperHabilidadElectiva(Player jugadorActual, Player jugadorCotrario)
     {
+        _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
         jugadorActual.HabilidadUtilizada = true;
-        DescartandoCartasDeHandAlRingSide(jugadorActual);
-        DescartandoCartasDeHandAlRingSide(jugadorCotrario);
+        DescartandoCartasDeHandAlRingSide(jugadorActual, 1);
+        DescartandoCartasDeHandAlRingSide(jugadorCotrario, 1);
     }
     
     public override bool PuedeUtilizarSuperAbility(Player jugadorActual)

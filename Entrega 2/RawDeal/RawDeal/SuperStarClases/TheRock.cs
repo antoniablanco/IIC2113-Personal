@@ -10,19 +10,23 @@ public class TheRock: SuperStar
     }
     
     public override void UtilizandoSuperHabilidadAutomaticaAlInicioDelTurno(Player jugadorActual, Player jugadorCotrario)
-    {
-        if (_view.DoesPlayerWantToUseHisAbility(Name) && PuedeUtilizarSuperAbility(jugadorActual)) ;
-        {
-            _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
-            List<string> ringAreaFormatoString = visualisarCartas.CrearListaStringCarta(jugadorActual.cartasRingSide);
-            int intCartaSeleccionada = _view.AskPlayerToSelectCardsToRecover(Name, 1, ringAreaFormatoString);
-            Carta cartaDescartada = jugadorActual.cartasRingSide[intCartaSeleccionada];
-            jugadorActual.TraspasoDeCartasEscogiendoCualSeQuiereCambiar(cartaDescartada, jugadorActual.cartasRingSide, jugadorActual.cartasArsenal);
+    {  
+        if (PuedeUtilizarSuperAbility(jugadorActual))
+        {   
+            jugadorActual.HabilidadUtilizada = true;
+            if (_view.DoesPlayerWantToUseHisAbility(Name)) 
+            {
+                _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
+                List<string> ringAreaFormatoString = visualisarCartas.CrearListaStringCarta(jugadorActual.cartasRingSide);
+                int intCartaSeleccionada = _view.AskPlayerToSelectCardsToRecover(Name, 1, ringAreaFormatoString);
+                Carta cartaDescartada = jugadorActual.cartasRingSide[intCartaSeleccionada];
+                jugadorActual.TraspasoDeCartasEscogiendoCualSeQuiereCambiar(cartaDescartada, jugadorActual.cartasRingSide, jugadorActual.cartasArsenal);
+            }
         }
     }
     
     public override bool PuedeUtilizarSuperAbility(Player jugadorActual)
     {
-        return jugadorActual.cartasRingSide.Count > 0;
+        return jugadorActual.cartasRingSide.Count > 0 && !jugadorActual.HabilidadUtilizada;
     }
 }

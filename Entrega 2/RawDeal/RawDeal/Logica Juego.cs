@@ -73,7 +73,6 @@ public class Logica_Juego
                 return superstar;
             }
         }
-        
         SuperStar superstarNull = new HHH("Null", "Null", 0, 0,"Null", view);
         return superstarNull;
     }
@@ -114,7 +113,7 @@ public class Logica_Juego
         listaPlayers[numJugadorActual].RobarCarta();
         SetearVariableTruePorqueInicioTurno();
         view.SayThatATurnBegins(listaPlayers[numJugadorActual].superestar.Name);
-        //SeUtilizaLaSuperHabilidadQueEsAlInicioDelTurno();
+        SeUtilizaLaSuperHabilidadQueEsAlInicioDelTurno();
     }
     
     public void JugadorInicioJuego()
@@ -194,7 +193,7 @@ public class Logica_Juego
     {
         int danoTotal = int.Parse(cartaJugada.Damage);
         if (listaPlayers[numJugadorDos].superestar.Name == "MANKIND")
-            danoTotal = -1;
+            danoTotal -= 1;
         return danoTotal;
     }
 

@@ -15,7 +15,7 @@ public class Undertaker: SuperStar
         _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
         for (int i = 0; i < 2; i++)
         {   
-            DescartandoCartasDeHandAlRingSide(jugadorActual);
+            DescartandoCartasDeHandAlRingSide(jugadorActual, 2-i);
         }
         AgregandoCartaDelRingSideaHand(jugadorActual);
     }

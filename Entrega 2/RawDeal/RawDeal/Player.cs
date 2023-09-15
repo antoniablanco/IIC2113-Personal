@@ -135,6 +135,6 @@ public class Player
     
     public void UtilizandoSuperHabilidadAutomatica(Player jugadorActual, Player jugadorCotrario)
     {
-        superestar.UtilizandoSuperHabilidadAutomaticaAlInicioDelTurno(jugadorCotrario, jugadorActual);
+        superestar.UtilizandoSuperHabilidadAutomaticaAlInicioDelTurno( jugadorActual, jugadorCotrario);
     }
 }

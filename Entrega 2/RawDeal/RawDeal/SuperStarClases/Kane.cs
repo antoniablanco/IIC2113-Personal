@@ -10,10 +10,10 @@ public class Kane: SuperStar // Hay que escribir superhabilidad
     }
     
     public override void UtilizandoSuperHabilidadAutomaticaAlInicioDelTurno(Player jugadorActual, Player jugadorCotrario)
-    {
-        
+    {   
         Carta cartaVolteada = jugadorCotrario.TraspasoDeCartaSinSeleccionar(jugadorCotrario.cartasArsenal, jugadorCotrario.cartasRingSide);
         string cartaVolteadaString = visualisarCartas.ObtenerStringCartaInfo(cartaVolteada);
+        _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
         _view.SayThatSuperstarWillTakeSomeDamage(jugadorCotrario.superestar.Name, 1);
         _view.ShowCardOverturnByTakingDamage(cartaVolteadaString, 1, 1);
     }
