@@ -109,6 +109,14 @@ public class Logica_Juego
         return superStarTypes;
     }
 
+    public void SeSeteaInformacionInicioTurno()
+    {
+        listaPlayers[numJugadorActual].RobarCarta();
+        SetearVariableTruePorqueInicioTurno();
+        view.SayThatATurnBegins(listaPlayers[numJugadorActual].superestar.Name);
+        //SeUtilizaLaSuperHabilidadQueEsAlInicioDelTurno();
+    }
+    
     public void JugadorInicioJuego()
     {
         NumJugadorInicio = (PlayerUno.superestar.SuperstarValue < PlayerDos.superestar.SuperstarValue) ? 1 : 0;

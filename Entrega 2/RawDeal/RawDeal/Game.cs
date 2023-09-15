@@ -91,12 +91,9 @@ public class Game
         _view.CongratulateWinner(_logicaJuego.listaPlayers[_logicaJuego.numJugadorGanador].superestar.Name);
     }
 
-    public void SeJuegaUnTurno() 
+    public void SeJuegaUnTurno()
     {
-        _logicaJuego.listaPlayers[_logicaJuego.numJugadorActual].RobarCarta();
-        _logicaJuego.SetearVariableTruePorqueInicioTurno();
-        _view.SayThatATurnBegins(_logicaJuego.listaPlayers[_logicaJuego.numJugadorActual].superestar.Name);
-        //_logicaJuego.SeUtilizaLaSuperHabilidadQueEsAlInicioDelTurno();
+        _logicaJuego.SeSeteaInformacionInicioTurno();
 
         while (_logicaJuego.SigueTurno())
         {
