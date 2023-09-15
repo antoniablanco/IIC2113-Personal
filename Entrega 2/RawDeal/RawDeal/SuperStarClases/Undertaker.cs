@@ -13,13 +13,15 @@ public class Undertaker: SuperStar
     {
         jugadorActual.HabilidadUtilizada = true;
         _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
-
-        DescartandoCartasDeHandAlRingSide(jugadorActual);
-        AgregandoCartaHandDelRingSide(jugadorActual);
+        for (int i = 0; i < 2; i++)
+        {   
+            DescartandoCartasDeHandAlRingSide(jugadorActual);
+        }
+        AgregandoCartaDelRingSideaHand(jugadorActual);
     }
     
 
-    public override bool PuedeUtilizarSuperAbility(Player jugadorCotrario, Player jugadorActual)
+    public override bool PuedeUtilizarSuperAbility(Player jugadorActual)
     {
         return (jugadorActual.cartasHand.Count > 1 && !jugadorActual.HabilidadUtilizada);
     }

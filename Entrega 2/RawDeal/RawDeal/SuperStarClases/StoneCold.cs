@@ -39,7 +39,7 @@ public class StoneCold: SuperStar
         
     }
     
-    public override bool PuedeUtilizarSuperAbility(Player jugadorCotrario, Player jugadorActual)
+    public override bool PuedeUtilizarSuperAbility(Player jugadorActual)
     {
         return (jugadorActual.cartasArsenal.Count > 0 && !jugadorActual.HabilidadUtilizada);
     }

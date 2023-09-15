@@ -125,12 +125,12 @@ public class Player
     
     public bool SuSuperStarPuedeUtilizarSuperAbility(Player jugadorActual, Player jugadorCotrario)
     {
-        return superestar.PuedeUtilizarSuperAbility(jugadorCotrario, jugadorActual);
+        return superestar.PuedeUtilizarSuperAbility(jugadorActual);
     }
 
     public void UtilizandoSuperHabilidadElectiva(Player jugadorActual, Player jugadorCotrario)
     {
-        superestar.UtilizandoSuperHabilidadElectiva(jugadorCotrario, jugadorActual);
+        superestar.UtilizandoSuperHabilidadElectiva(jugadorActual, jugadorCotrario);
     }
     
     public void UtilizandoSuperHabilidadAutomatica(Player jugadorActual, Player jugadorCotrario)

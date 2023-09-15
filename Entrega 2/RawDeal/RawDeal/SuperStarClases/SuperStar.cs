@@ -54,7 +54,7 @@ public abstract class SuperStar
         set => _SuperstarAbility = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public virtual bool PuedeUtilizarSuperAbility(Player jugadorCotrario, Player jugadorActual)
+    public virtual bool PuedeUtilizarSuperAbility(Player jugadorActual)
     {
         return false;
     }
@@ -68,23 +68,19 @@ public abstract class SuperStar
     {
         
     }
-    
     public void DescartandoCartasDeHandAlRingSide(Player jugadorActual)
     {
-        for (int i = 0; i < 2; i++)
-        {   
-            List<string> handFormatoString = visualisarCartas.CrearListaStringCarta(jugadorActual.cartasHand);
-            int cartaSeleccionada =_view.AskPlayerToSelectACardToDiscard(handFormatoString, Name, Name, 2);
+        List<string> handFormatoString = visualisarCartas.CrearListaStringCarta(jugadorActual.cartasHand);
+        int cartaSeleccionada =_view.AskPlayerToSelectACardToDiscard(handFormatoString, Name, Name, 2);
             
-            if (cartaSeleccionada != -1)
-            {
-                Carta cartaDescartada = jugadorActual.cartasHand[cartaSeleccionada];
-                jugadorActual.TraspasoDeCartasEscogiendoCualSeQuiereCambiar(cartaDescartada, jugadorActual.cartasHand, jugadorActual.cartasRingSide);
-            }
+        if (cartaSeleccionada != -1)
+        {
+            Carta cartaDescartada = jugadorActual.cartasHand[cartaSeleccionada];
+            jugadorActual.TraspasoDeCartasEscogiendoCualSeQuiereCambiar(cartaDescartada, jugadorActual.cartasHand, jugadorActual.cartasRingSide);
         }
     }
     
-    public void AgregandoCartaHandDelRingSide(Player jugadorActual)
+    public void AgregandoCartaDelRingSideaHand(Player jugadorActual)
     {
         List<string> ringSideFormatoString = visualisarCartas.CrearListaStringCarta(jugadorActual.cartasRingSide);
         int cartaSeleccionada =_view.AskPlayerToSelectCardsToPutInHisHand(Name, 1, ringSideFormatoString);

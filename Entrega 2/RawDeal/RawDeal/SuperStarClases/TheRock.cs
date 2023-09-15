@@ -9,13 +9,20 @@ public class TheRock: SuperStar
         // Constructor de la clase base
     }
     
-    public virtual void UtilizandoSuperHabilidadAutomaticaAlInicioDelTurno(Player jugadorActual, Player jugadorCotrario)
+    public override void UtilizandoSuperHabilidadAutomaticaAlInicioDelTurno(Player jugadorActual, Player jugadorCotrario)
     {
-        if (_view.DoesPlayerWantToUseHisAbility(Name)) ;
+        if (_view.DoesPlayerWantToUseHisAbility(Name) && PuedeUtilizarSuperAbility(jugadorActual)) ;
         {
             _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
             List<string> ringAreaFormatoString = visualisarCartas.CrearListaStringCarta(jugadorActual.cartasRingSide);
-            _view.AskPlayerToSelectCardsToRecover(Name, 1, ringAreaFormatoString);
+            int intCartaSeleccionada = _view.AskPlayerToSelectCardsToRecover(Name, 1, ringAreaFormatoString);
+            Carta cartaDescartada = jugadorActual.cartasRingSide[intCartaSeleccionada];
+            jugadorActual.TraspasoDeCartasEscogiendoCualSeQuiereCambiar(cartaDescartada, jugadorActual.cartasRingSide, jugadorActual.cartasArsenal);
         }
+    }
+    
+    public override bool PuedeUtilizarSuperAbility(Player jugadorActual)
+    {
+        return jugadorActual.cartasRingSide.Count > 0;
     }
 }
