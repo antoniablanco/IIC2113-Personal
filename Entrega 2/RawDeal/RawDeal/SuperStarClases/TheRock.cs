@@ -20,7 +20,7 @@ public class TheRock: SuperStar
                 List<string> ringAreaFormatoString = visualisarCartas.CrearListaStringCarta(jugadorActual.cartasRingSide);
                 int intCartaSeleccionada = _view.AskPlayerToSelectCardsToRecover(Name, 1, ringAreaFormatoString);
                 Carta cartaDescartada = jugadorActual.cartasRingSide[intCartaSeleccionada];
-                jugadorActual.TraspasoDeCartasEscogiendoCualSeQuiereCambiar(cartaDescartada, jugadorActual.cartasRingSide, jugadorActual.cartasArsenal);
+                jugadorActual.TraspasoDeCartasEscogiendoCualSeQuiereCambiar(cartaDescartada, jugadorActual.cartasRingSide, jugadorActual.cartasArsenal, "Inicio");
             }
         }
     }
