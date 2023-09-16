@@ -55,7 +55,7 @@ public class ValidateDeck
 
     private bool DeckContainsIsHeel(Player player)
     {
-        return player.cardsArsenal.Any(carta => carta.ContieneSubtipoHeel());
+        return player.cardsArsenal.Any(carta => carta.ContainsHeelSubtype());
     }
 
     private static bool DeckContainsIsFace(Player player)

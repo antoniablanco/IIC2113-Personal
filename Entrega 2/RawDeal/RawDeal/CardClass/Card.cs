@@ -4,17 +4,6 @@ using RawDealView.Formatters;
 namespace RawDeal;
 
 
-public class CartasJson: IViewableCardInfo
-{
-    public string Title { get; set; }
-    public List<string> Types { get; set; }
-    public List<string> Subtypes { get; set; }
-    public string Fortitude { get; set; }
-    public string Damage { get; set; }
-    public string StunValue { get; set; }
-    public string CardEffect { get; set; }
-}
-
 public class Card
 {
     private string _Title;
@@ -79,59 +68,32 @@ public class Card
         set => _CardEffect = value ?? throw new ArgumentNullException(nameof(value));
     }
     
-    public bool ContainsUniqueSubtype() 
+    public bool ContainsUniqueSubtype()
     {
-        for (int i = 0; i < Subtypes.Count; i++)
-        {   
-            if (Subtypes[i]=="Unique")
-                return true;
-        }
-        return false;
+        return Subtypes.Any(t => t == "Unique");
     }
     
     public bool ContainsSetUpSubtype()
     {
-        for (int i = 0; i < Subtypes.Count; i++)
-        {   
-            if (Subtypes[i]=="SetUp")
-                return true;
-        }
-        return false;
+        return Subtypes.Any(t => t == "SetUp");
     }
     
-    public bool ContieneSubtipoHeel() 
+    public bool ContainsHeelSubtype()
     {
-        for (int i = 0; i < Subtypes.Count; i++)
-        {   
-            if (Subtypes[i]=="Heel")
-                return true;
-        }
-        return false;
+        return Subtypes.Any(t => t == "Heel");
     }
     
     public bool ContainsFaceSubtype()
     {
-        for (int i = 0; i < Subtypes.Count; i++)
-        {   
-            if (Subtypes[i]=="Face")
-                return true;
-        }
-        return false;
+        return Subtypes.Any(t => t == "Face");
     }
 
     public bool ContainsSuperStarLogo(string superStarLogo)
-    {   
-        for (int i = 0; i < Subtypes.Count; i++)
-        {
-            if (Subtypes[i].Contains(superStarLogo))
-            {
-                return true;
-            }
-        }
-        return false;
+    {
+        return Subtypes.Any(t => t.Contains(superStarLogo));
     }
 
-    public bool EsTipoReversal()
+    public bool IsReversalType()
     {
         return Types[0]=="Reversal";
     }

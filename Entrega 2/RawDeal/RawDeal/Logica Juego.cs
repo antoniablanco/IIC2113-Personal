@@ -26,10 +26,10 @@ public class Logica_Juego
     public int NumJugadorInicio = 0;
     
     
-    public List<CartasJson> DescerializarJsonCartas()
+    public List<CardJson> DescerializarJsonCartas()
     {
         string myJson = File.ReadAllText (Path.Combine("data","cards.json")) ;
-        var cartas = JsonSerializer.Deserialize<List<CartasJson>>(myJson) ;
+        var cartas = JsonSerializer.Deserialize<List<CardJson>>(myJson) ;
         return cartas;
     }
     
@@ -40,7 +40,7 @@ public class Logica_Juego
         return superstars;
     }
     
-    public List<Card> CrearCartas(string mazoString, List<CartasJson> totalCartas) // Aplicar Clean Code
+    public List<Card> CrearCartas(string mazoString, List<CardJson> totalCartas) // Aplicar Clean Code
     {
         List<Card> cartas = new List<Card>();
         string pathDeck = Path.Combine($"{mazoString}");
@@ -148,7 +148,7 @@ public class Logica_Juego
     
     public bool JugadorPuedeUtilizarHabilidadSuperStar() 
     {
-        return listaPlayers[numJugadorActual].SuSuperStarPuedeUtilizarSuperAbility(listaPlayers[numJugadorActual], listaPlayers[numJugadorDos]);
+        return listaPlayers[numJugadorActual].TheirSuperStarCanUseSuperAbility(listaPlayers[numJugadorActual]);
     }
 
     public void AccionUtilizarSuperHabilidad()
@@ -167,7 +167,7 @@ public class Logica_Juego
         int cartaSeleccionada = view.AskUserToSelectAPlay(ObtenerStringCartasPosiblesJugar());
         if (cartaSeleccionada != -1)
         {   
-            Card cardJugada = listaPlayers[numJugadorActual].CartasPosiblesDeJugar()[cartaSeleccionada];
+            Card cardJugada = listaPlayers[numJugadorActual].CardsAvailableToPlay()[cartaSeleccionada];
             ImpresionesAccionJugarCarta(cardJugada);
             AgregarCartaJugadaRingArea(cardJugada);
         }
@@ -199,7 +199,7 @@ public class Logica_Juego
 
     public List<string> ObtenerStringCartasPosiblesJugar()
     {
-        List<Card> cartasPosiblesJugar = listaPlayers[numJugadorActual].CartasPosiblesDeJugar();
+        List<Card> cartasPosiblesJugar = listaPlayers[numJugadorActual].CardsAvailableToPlay();
         List<string> stringDeCartas = VisualizeCards.CreateStringPlayedCardList(cartasPosiblesJugar);
         return stringDeCartas;
     }
@@ -300,7 +300,7 @@ public class Logica_Juego
 
     private bool VerificarSiJugadorTieneCartasEnArsenalParaSeguirJugando()
     {
-        return listaPlayers[numJugadorActual].TieneCartasEnArsenal();
+        return listaPlayers[numJugadorActual].HasCardsInArsenal();
     }
     
     public void SetearVariablesTrasGanar()

@@ -19,7 +19,7 @@ public class Game
         _deckFolder = deckFolder;
     }
     
-    public Player IniciarPlayer(List<CartasJson> totalCartas,List<SuperStarJSON> totalSuperStars) 
+    public Player IniciarPlayer(List<CardJson> totalCartas,List<SuperStarJSON> totalSuperStars) 
     {
         string stringPlayer = _view.AskUserToSelectDeck(_deckFolder);
         _logicaJuego.view = _view;
@@ -31,9 +31,9 @@ public class Game
         return playerReturn;
     }
     
-    public (List<CartasJson>, List<SuperStarJSON>) ObtenerTotalCartasYSuperStars() 
+    public (List<CardJson>, List<SuperStarJSON>) ObtenerTotalCartasYSuperStars() 
     {
-        List<CartasJson> totalCartas = _logicaJuego.DescerializarJsonCartas();
+        List<CardJson> totalCartas = _logicaJuego.DescerializarJsonCartas();
         List<SuperStarJSON> totalSuperStars = _logicaJuego.DescerializarJsonSuperStar();
     
         return (totalCartas, totalSuperStars);
@@ -61,8 +61,8 @@ public class Game
 
     public void InicializarHandsPlayers()
     {
-        _logicaJuego.PlayerUno.RobarCartasHandInicial();
-        _logicaJuego.PlayerDos.RobarCartasHandInicial();
+        _logicaJuego.PlayerUno.DrawInitialHandCards();
+        _logicaJuego.PlayerDos.DrawInitialHandCards();
     }
     
     public void Play() 

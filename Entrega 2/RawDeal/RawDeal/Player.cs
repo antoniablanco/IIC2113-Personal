@@ -12,10 +12,10 @@ public class Player
     private List<Card> _cardsRingArea = new List<Card>();
     public bool theHabilityHasBeenUsedThisTurn = false;
 
-    public Player(List<Card> cartasPlayer, SuperStar superstar)
+    public Player(List<Card> cardsPlayer, SuperStar superstar)
     {
         superestar = superstar;
-        cardsArsenal.AddRange(cartasPlayer);
+        cardsArsenal.AddRange(cardsPlayer);
     }
 
     public SuperStar superestar
@@ -58,9 +58,9 @@ public class Player
         return superestar.Name;
     }
 
-    public void RobarCartasHandInicial()
+    public void DrawInitialHandCards()
     {
-        for (int i = 0; i < superestar.HandSize; i++)
+        for (var i = 0; i < superestar.HandSize; i++)
         {
             DrawCard();
         }
@@ -68,77 +68,56 @@ public class Player
 
     public int FortitudRating()
     {
-        int fortitudRating = 0;
-        foreach (Card carta in cardsRingArea)
-        {
-            fortitudRating += int.Parse(carta.Damage);
-        }
-
-        return fortitudRating;
+        return cardsRingArea.Sum(card => int.Parse(card.Damage));
     }
 
-    public List<Card> CartasPosiblesDeJugar()
+    public List<Card> CardsAvailableToPlay()
     {
         return cardsHand
-            .Where(carta => int.Parse(carta.Fortitude) <= FortitudRating() && !carta.EsTipoReversal())
+            .Where(carta => int.Parse(carta.Fortitude) <= FortitudRating() && !carta.IsReversalType())
             .ToList();
     }
     
-    public Card? TransferOfUnselectedCard(List<Card> listaOrigen, List<Card> listaDestino, string posicion = "End")
+    public Card? TransferOfUnselectedCard(List<Card> sourceList, List<Card> destinationList, bool moveToStart = false)
     {
-        int lastIndex = listaOrigen.Count - 1;
-        if (listaOrigen.Count > 0)
-        {
-            Card cardMovida = listaOrigen[lastIndex];
-            if (posicion == "Start")
-            {
-                listaDestino.Insert(0, cardMovida);
-            }
-            else
-            {
-                listaDestino.Add(cardMovida);
-            }
-            listaOrigen.RemoveAt(lastIndex);
-            return cardMovida;
-        }
-
-        return null;
+        if (sourceList.Count == 0) return null;
+    
+        int index = moveToStart ? 0 : sourceList.Count - 1;
+        Card cardMoved = sourceList[index];
+    
+        sourceList.RemoveAt(index);
+        destinationList.Insert(moveToStart ? 0 : destinationList.Count, cardMoved);
+    
+        return cardMoved;
     }
-
-    public void CardTransferChoosingWhichOneToChange(Card card, List<Card> listaOrigen, List<Card> listaDestino, string posicion = "End")
+    
+    public void CardTransferChoosingWhichOneToChange(Card card, List<Card> sourceList, List<Card> destinationList, string moveToStart = "End")
     {   
-        if (listaOrigen.Count > 0)
+        if (sourceList.Count > 0)
         {
-            if (posicion == "Start")
-            {
-                listaDestino.Insert(0, card);
-                listaOrigen.Remove(card);
-            }
-            else
-            {
-                listaDestino.Add(card);
-                listaOrigen.Remove(card);
-            }
+            int index = (moveToStart == "Start") ? 0 : destinationList.Count;
+            destinationList.Insert(index, card);
+            sourceList.Remove(card);
         }
     }
 
-    public bool TieneCartasEnArsenal()
+    public bool HasCardsInArsenal()
     {
         return (cardsArsenal.Count > 0);
     }
     
-    public bool SuSuperStarPuedeUtilizarSuperAbility(Player jugadorActual, Player jugadorCotrario)
+    public bool TheirSuperStarCanUseSuperAbility(Player currentPlayer)
     {
-        return superestar.CanUseSuperAbility(jugadorActual);
+        return superestar.CanUseSuperAbility(currentPlayer);
     }
 
-    public void UtilizandoSuperHabilidadElectiva(Player jugadorActual, Player jugadorCotrario)
+    public void UtilizandoSuperHabilidadElectiva(Player currentPlayer, Player oppositePlayer)
     {
-        superestar.UsingElectiveSuperAbility(jugadorActual, jugadorCotrario);
+        superestar.UsingElectiveSuperAbility(currentPlayer, oppositePlayer);
     }
     
-    public void UtilizandoSuperHabilidadAutomatica(Player jugadorActual, Player jugadorCotrario)
+    public void UtilizandoSuperHabilidadAutomatica(Player currentPlayer, Player oppositePlayer)
     {
-        superestar.UsingAutomaticSuperAbilityAtTheStartOfTheTurn( jugadorActual, jugadorCotrario);
+        superestar.UsingAutomaticSuperAbilityAtTheStartOfTheTurn( currentPlayer, oppositePlayer);
     }
 }
