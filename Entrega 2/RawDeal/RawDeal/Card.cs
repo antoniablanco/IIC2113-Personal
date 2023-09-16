@@ -15,7 +15,7 @@ public class CartasJson: IViewableCardInfo
     public string CardEffect { get; set; }
 }
 
-public class Carta
+public class Card
 {
     private string _Title;
     private List<string> _Types = new List<string>();
@@ -25,7 +25,7 @@ public class Carta
     private string _StunValue;
     private string _CardEffect;
 
-    public Carta(string title, List<string> types, List<string> subtypes, string fortitude, string damage,
+    public Card(string title, List<string> types, List<string> subtypes, string fortitude, string damage,
         string stunValue, string cardEffect)
     {
         _Title = title;

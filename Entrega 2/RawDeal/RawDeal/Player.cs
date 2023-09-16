@@ -6,16 +6,16 @@ namespace RawDeal;
 public class Player
 {
     private SuperStar _superestar;
-    private List<Carta> _cartasArsenal = new List<Carta>();
-    private List<Carta> _cartasHand = new List<Carta>();
-    private List<Carta> _cartasRingSide = new List<Carta>();
-    private List<Carta> _cartasRingArea = new List<Carta>();
-    public bool HabilidadUtilizada = false;
+    private List<Card> _cardsArsenal = new List<Card>();
+    private List<Card> _cardsHand = new List<Card>();
+    private List<Card> _cardsRingSide = new List<Card>();
+    private List<Card> _cardsRingArea = new List<Card>();
+    public bool theHabilityHasBeenUsedThisTurn = false;
 
-    public Player(List<Carta> cartasPlayer, SuperStar superstar)
+    public Player(List<Card> cartasPlayer, SuperStar superstar)
     {
         superestar = superstar;
-        cartasArsenal.AddRange(cartasPlayer);
+        cardsArsenal.AddRange(cartasPlayer);
     }
 
     public SuperStar superestar
@@ -24,48 +24,52 @@ public class Player
         set => _superestar = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public List<Carta> cartasArsenal
+    public List<Card> cardsArsenal
     {
-        get => _cartasArsenal;
-        set => _cartasArsenal = value ?? throw new ArgumentNullException(nameof(value));
+        get => _cardsArsenal;
+        set => _cardsArsenal = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public List<Carta> cartasHand
+    public List<Card> cardsHand
     {
-        get => _cartasHand;
-        set => _cartasHand = value ?? throw new ArgumentNullException(nameof(value));
+        get => _cardsHand;
+        set => _cardsHand = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public List<Carta> cartasRingSide
+    public List<Card> cardsRingSide
     {
-        get => _cartasRingSide;
-        set => _cartasRingSide = value ?? throw new ArgumentNullException(nameof(value));
+        get => _cardsRingSide;
+        set => _cardsRingSide = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public List<Carta> cartasRingArea
+    public List<Card> cardsRingArea
     {
-        get => _cartasRingArea;
-        set => _cartasRingArea = value ?? throw new ArgumentNullException(nameof(value));
+        get => _cardsRingArea;
+        set => _cardsRingArea = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public void RobarCarta()
+    public void DrawCard()
     {
-        TraspasoDeCartaSinSeleccionar(cartasArsenal, cartasHand);
-        
+        TransferOfUnselectedCard(cardsArsenal, cardsHand);
+    }
+    
+    public string NameOfSuperStar()
+    {
+        return superestar.Name;
     }
 
     public void RobarCartasHandInicial()
     {
         for (int i = 0; i < superestar.HandSize; i++)
         {
-            RobarCarta();
+            DrawCard();
         }
     }
 
     public int FortitudRating()
     {
         int fortitudRating = 0;
-        foreach (Carta carta in cartasRingArea)
+        foreach (Card carta in cardsRingArea)
         {
             fortitudRating += int.Parse(carta.Damage);
         }
@@ -73,68 +77,68 @@ public class Player
         return fortitudRating;
     }
 
-    public List<Carta> CartasPosiblesDeJugar()
+    public List<Card> CartasPosiblesDeJugar()
     {
-        return cartasHand
+        return cardsHand
             .Where(carta => int.Parse(carta.Fortitude) <= FortitudRating() && !carta.EsTipoReversal())
             .ToList();
     }
     
-    public Carta? TraspasoDeCartaSinSeleccionar(List<Carta> listaOrigen, List<Carta> listaDestino, string posicion = "Final")
+    public Card? TransferOfUnselectedCard(List<Card> listaOrigen, List<Card> listaDestino, string posicion = "End")
     {
         int lastIndex = listaOrigen.Count - 1;
         if (listaOrigen.Count > 0)
         {
-            Carta cartaMovida = listaOrigen[lastIndex];
-            if (posicion == "Inicio")
+            Card cardMovida = listaOrigen[lastIndex];
+            if (posicion == "Start")
             {
-                listaDestino.Insert(0, cartaMovida);
+                listaDestino.Insert(0, cardMovida);
             }
             else
             {
-                listaDestino.Add(cartaMovida);
+                listaDestino.Add(cardMovida);
             }
             listaOrigen.RemoveAt(lastIndex);
-            return cartaMovida;
+            return cardMovida;
         }
 
         return null;
     }
 
-    public void TraspasoDeCartasEscogiendoCualSeQuiereCambiar(Carta carta, List<Carta> listaOrigen, List<Carta> listaDestino, string posicion = "Final")
+    public void CardTransferChoosingWhichOneToChange(Card card, List<Card> listaOrigen, List<Card> listaDestino, string posicion = "End")
     {   
         if (listaOrigen.Count > 0)
         {
-            if (posicion == "Inicio")
+            if (posicion == "Start")
             {
-                listaDestino.Insert(0, carta);
-                listaOrigen.Remove(carta);
+                listaDestino.Insert(0, card);
+                listaOrigen.Remove(card);
             }
             else
             {
-                listaDestino.Add(carta);
-                listaOrigen.Remove(carta);
+                listaDestino.Add(card);
+                listaOrigen.Remove(card);
             }
         }
     }
 
     public bool TieneCartasEnArsenal()
     {
-        return (cartasArsenal.Count > 0);
+        return (cardsArsenal.Count > 0);
     }
     
     public bool SuSuperStarPuedeUtilizarSuperAbility(Player jugadorActual, Player jugadorCotrario)
     {
-        return superestar.PuedeUtilizarSuperAbility(jugadorActual);
+        return superestar.CanUseSuperAbility(jugadorActual);
     }
 
     public void UtilizandoSuperHabilidadElectiva(Player jugadorActual, Player jugadorCotrario)
     {
-        superestar.UtilizandoSuperHabilidadElectiva(jugadorActual, jugadorCotrario);
+        superestar.UsingElectiveSuperAbility(jugadorActual, jugadorCotrario);
     }
     
     public void UtilizandoSuperHabilidadAutomatica(Player jugadorActual, Player jugadorCotrario)
     {
-        superestar.UtilizandoSuperHabilidadAutomaticaAlInicioDelTurno( jugadorActual, jugadorCotrario);
+        superestar.UsingAutomaticSuperAbilityAtTheStartOfTheTurn( jugadorActual, jugadorCotrario);
     }
 }

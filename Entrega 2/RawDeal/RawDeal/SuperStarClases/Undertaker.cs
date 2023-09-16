@@ -9,20 +9,20 @@ public class Undertaker: SuperStar
         // Constructor de la clase base
     }
     
-    public override void UtilizandoSuperHabilidadElectiva(Player jugadorActual, Player jugadorCotrario)
+    public override void UsingElectiveSuperAbility(Player currentPlayer, Player opponentPlayer)
     {
-        jugadorActual.HabilidadUtilizada = true;
+        currentPlayer.theHabilityHasBeenUsedThisTurn = true;
         _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
-        for (int i = 0; i < 2; i++)
+        for (int currentDamageNumber = 0; currentDamageNumber < 2; currentDamageNumber++)
         {   
-            DescartandoCartasDeHandAlRingSide(jugadorActual, 2-i);
+            DiscardingCardsFromHandToRingSide(currentPlayer, 2-currentDamageNumber);
         }
-        AgregandoCartaDelRingSideaHand(jugadorActual);
+        AddingCardFromRingSideToHand(currentPlayer);
     }
     
 
-    public override bool PuedeUtilizarSuperAbility(Player jugadorActual)
+    public override bool CanUseSuperAbility(Player currentPlayer)
     {
-        return (jugadorActual.cartasHand.Count > 1 && !jugadorActual.HabilidadUtilizada);
+        return (currentPlayer.cardsHand.Count > 1 && !currentPlayer.theHabilityHasBeenUsedThisTurn);
     }
 }

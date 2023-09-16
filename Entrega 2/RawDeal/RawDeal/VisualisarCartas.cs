@@ -3,73 +3,73 @@ using RawDealView.Formatters;
 namespace RawDeal;
 
 public class VisualisarCartas
-{   
-    public CardInfoImplementation CrearIViewableCardInfo(Carta carta)
+{
+    private CardInfoImplementation CrearIViewableCardInfo(Card card)
     {
         var cardInfo = new CardInfoImplementation(
-            carta.Title,
-            carta.Fortitude,
-            carta.Damage,
-            carta.StunValue,
-            carta.Types,
-            carta.Subtypes,
-            carta.CardEffect);
+            card.Title,
+            card.Fortitude,
+            card.Damage,
+            card.StunValue,
+            card.Types,
+            card.Subtypes,
+            card.CardEffect);
         return cardInfo;
     }
-    
-    public PlayInfoImplementation CrearIViewablePlayedInfo(Carta carta)
+
+    private PlayInfoImplementation CrearIViewablePlayedInfo(Card card)
     {   
         var cardInfo = new PlayInfoImplementation(
-            carta.Title,
-            carta.Fortitude,
-            carta.Damage,
-            carta.StunValue,
-            carta.Types,
-            carta.Subtypes,
-            carta.CardEffect);
+            card.Title,
+            card.Fortitude,
+            card.Damage,
+            card.StunValue,
+            card.Types,
+            card.Subtypes,
+            card.CardEffect);
         
         return cardInfo;
     }
-    
-    
-    public string ObtenerStringInfo<T>(Carta carta, Func<Carta, T> createInfoFunc, Func<T, string> toStringFunc)
+
+
+    private string GetStringInfo<T>(Card card, Func<Card, T> createInfoFunc, Func<T, string> toStringFunc)
     {   
-        T info = createInfoFunc(carta);
+        T info = createInfoFunc(card);
         string formattedInfo = toStringFunc(info);
         return formattedInfo;
     }
 
-    public string ObtenerStringCartaInfo(Carta carta)
+    public string GetStringCardInfo(Card card)
     {
-        return ObtenerStringInfo(carta, CrearIViewableCardInfo, Formatter.CardToString);
+        return GetStringInfo(card, CrearIViewableCardInfo, Formatter.CardToString);
     }
 
-    public string ObtenerStringPlayedInfo(Carta carta)
+    public string GetStringPlayedInfo(Card card)
     {
-        return ObtenerStringInfo(carta, CrearIViewablePlayedInfo, Formatter.PlayToString);
+        return GetStringInfo(card, CrearIViewablePlayedInfo, Formatter.PlayToString);
     }
-    
-    
-    public List<string> CrearListaStringInfo(List<Carta> cartasConjuntoSeleccionado, Func<Carta, string> obtenerInfoFunc)
+
+
+    private List<string> CreateStringInfoList(List<Card> cardsInSelectedSet, Func<Card, string> getInfoFunction)
     {
         List<string> stringCartas = new List<string>();
 
-        foreach (var carta in cartasConjuntoSeleccionado)
+        foreach (var card in cardsInSelectedSet)
         {   
-            stringCartas.Add(obtenerInfoFunc(carta));
+            stringCartas.Add(getInfoFunction(card));
         }
 
         return stringCartas;
     }
 
-    public List<string> CrearListaStringCarta(List<Carta> cartasConjuntoSeleccionado)
+    public List<string> CreateStringCardList(List<Card> cardsInSelectedSet)
     {
-        return CrearListaStringInfo(cartasConjuntoSeleccionado, ObtenerStringCartaInfo);
+        return CreateStringInfoList(cardsInSelectedSet, GetStringCardInfo);
     }
 
-    public List<string> CrearListaStringCartaPlayed(List<Carta> cartasConjuntoSeleccionado)
+    public List<string> CreateStringPlayedCardList(List<Card> cardsInSelectedSet)
     {
-        return CrearListaStringInfo(cartasConjuntoSeleccionado, ObtenerStringPlayedInfo);
+        return CreateStringInfoList(cardsInSelectedSet, GetStringPlayedInfo);
     }
     
 }

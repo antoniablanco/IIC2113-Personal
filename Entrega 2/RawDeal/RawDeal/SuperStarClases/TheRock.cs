@@ -9,24 +9,29 @@ public class TheRock: SuperStar
         // Constructor de la clase base
     }
     
-    public override void UtilizandoSuperHabilidadAutomaticaAlInicioDelTurno(Player jugadorActual, Player jugadorCotrario)
+    public override void UsingAutomaticSuperAbilityAtTheStartOfTheTurn(Player currentPlayer, Player opponentPlayer)
     {  
-        if (PuedeUtilizarSuperAbility(jugadorActual))
+        if (CanUseSuperAbility(currentPlayer))
         {   
-            jugadorActual.HabilidadUtilizada = true;
-            if (_view.DoesPlayerWantToUseHisAbility(Name)) 
+            currentPlayer.theHabilityHasBeenUsedThisTurn = true;
+            if (_view.DoesPlayerWantToUseHisAbility(Name))
             {
-                _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
-                List<string> ringAreaFormatoString = visualisarCartas.CrearListaStringCarta(jugadorActual.cartasRingSide);
-                int intCartaSeleccionada = _view.AskPlayerToSelectCardsToRecover(Name, 1, ringAreaFormatoString);
-                Carta cartaDescartada = jugadorActual.cartasRingSide[intCartaSeleccionada];
-                jugadorActual.TraspasoDeCartasEscogiendoCualSeQuiereCambiar(cartaDescartada, jugadorActual.cartasRingSide, jugadorActual.cartasArsenal, "Inicio");
+                AddingCardFromRingSideToArsenal(currentPlayer);
             }
         }
     }
     
-    public override bool PuedeUtilizarSuperAbility(Player jugadorActual)
+    private void AddingCardFromRingSideToArsenal(Player currentPlayer)
     {
-        return jugadorActual.cartasRingSide.Count > 0 && !jugadorActual.HabilidadUtilizada;
+        _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
+        List<string> ringAreaAsString = visualisarCartas.CreateStringCardList(currentPlayer.cardsRingSide);
+        int selectedCardIndex = _view.AskPlayerToSelectCardsToRecover(Name, 1, ringAreaAsString);
+        Card discardedCard = currentPlayer.cardsRingSide[selectedCardIndex];
+        currentPlayer.CardTransferChoosingWhichOneToChange(discardedCard, currentPlayer.cardsRingSide, currentPlayer.cardsArsenal, "Start");
+    }
+    
+    public override bool CanUseSuperAbility(Player currentPlayer)
+    {
+        return currentPlayer.cardsRingSide.Count > 0 && !currentPlayer.theHabilityHasBeenUsedThisTurn;
     }
 }

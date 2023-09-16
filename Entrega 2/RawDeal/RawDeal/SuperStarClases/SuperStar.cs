@@ -54,41 +54,40 @@ public abstract class SuperStar
         set => _SuperstarAbility = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public virtual bool PuedeUtilizarSuperAbility(Player jugadorActual)
+    public virtual bool CanUseSuperAbility(Player currentPlayer)
     {
         return false;
     }
 
-    public virtual void UtilizandoSuperHabilidadElectiva(Player jugadorActual, Player jugadorCotrario)
+    public virtual void UsingElectiveSuperAbility(Player currentPlayer, Player opponentPlayer)
     {
         
     }
     
-    public virtual void UtilizandoSuperHabilidadAutomaticaAlInicioDelTurno(Player jugadorActual, Player jugadorCotrario)
+    public virtual void UsingAutomaticSuperAbilityAtTheStartOfTheTurn(Player currentPlayer, Player opponentPlayer)
     {
         
     }
-    public void DescartandoCartasDeHandAlRingSide(Player jugador, int numCartasADescartar)
+
+    protected void DiscardingCardsFromHandToRingSide(Player player, int cardsToDiscardCoun)
     {
-        List<string> handFormatoString = visualisarCartas.CrearListaStringCarta(jugador.cartasHand);
-        int cartaSeleccionada =_view.AskPlayerToSelectACardToDiscard(handFormatoString, jugador.superestar.Name, jugador.superestar.Name, numCartasADescartar);
+        List<string> handFormatoString = visualisarCartas.CreateStringCardList(player.cardsHand);
+        int selectedCard =_view.AskPlayerToSelectACardToDiscard(handFormatoString, player.NameOfSuperStar(), player.NameOfSuperStar(), cardsToDiscardCoun);
             
-        if (cartaSeleccionada != -1)
+        if (selectedCard != -1)
         {
-            Carta cartaDescartada = jugador.cartasHand[cartaSeleccionada];
-            jugador.TraspasoDeCartasEscogiendoCualSeQuiereCambiar(cartaDescartada, jugador.cartasHand, jugador.cartasRingSide);
+            Card discardCard = player.cardsHand[selectedCard];
+            player.CardTransferChoosingWhichOneToChange(discardCard, player.cardsHand, player.cardsRingSide);
         }
     }
-    
-    public void AgregandoCartaDelRingSideaHand(Player jugadorActual)
+
+    protected void AddingCardFromRingSideToHand(Player player)
     {
-        List<string> ringSideFormatoString = visualisarCartas.CrearListaStringCarta(jugadorActual.cartasRingSide);
-        int cartaSeleccionada =_view.AskPlayerToSelectCardsToPutInHisHand(Name, 1, ringSideFormatoString);
+        List<string> ringSideAsString = visualisarCartas.CreateStringCardList(player.cardsRingSide);
+        int selectedCard =_view.AskPlayerToSelectCardsToPutInHisHand(Name, 1, ringSideAsString);
         
-        if (cartaSeleccionada != -1)
-        {
-            Carta cartaAgregada = jugadorActual.cartasRingSide[cartaSeleccionada];
-            jugadorActual.TraspasoDeCartasEscogiendoCualSeQuiereCambiar(cartaAgregada, jugadorActual.cartasRingSide, jugadorActual.cartasHand);
-        }
+        Card addedCard = player.cardsRingSide[selectedCard];
+        player.CardTransferChoosingWhichOneToChange(addedCard, player.cardsRingSide, player.cardsHand);
+    
     }
 }

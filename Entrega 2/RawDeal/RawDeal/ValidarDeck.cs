@@ -4,7 +4,7 @@ public class ValidarDeck
 {
     public bool CumpleTamanoMazo(Player mazo)
     {
-        return (mazo.cartasArsenal.Count() == 60);
+        return (mazo.cardsArsenal.Count() == 60);
     }
     
     public bool CumpleTenerSuperStar(Player mazo)
@@ -27,7 +27,7 @@ public class ValidarDeck
     {
         Dictionary<string, int> dictNumeroPorCartas = new Dictionary<string, int>();
         
-        foreach (var carta in mazo.cartasArsenal)
+        foreach (var carta in mazo.cardsArsenal)
         {
             dictNumeroPorCartas.TryGetValue(carta.Title, out int count);
             dictNumeroPorCartas[carta.Title] = count + 1;
@@ -43,7 +43,7 @@ public class ValidarDeck
     {
         Dictionary<string, int> dictNumeroPorCartas = new Dictionary<string, int>();
         
-        foreach (var carta in mazo.cartasArsenal)
+        foreach (var carta in mazo.cardsArsenal)
         {
             dictNumeroPorCartas.TryGetValue(carta.Title, out int count);
             dictNumeroPorCartas[carta.Title] = count + 1;
@@ -57,7 +57,7 @@ public class ValidarDeck
 
     public bool MazoContieneIsHeel(Player mazo)
     {
-        foreach (var carta in mazo.cartasArsenal)
+        foreach (var carta in mazo.cardsArsenal)
         {
             if (carta.ContieneSubtipoHeel())
                 return true;
@@ -67,7 +67,7 @@ public class ValidarDeck
     
     public bool MazoContieneIsFace(Player mazo)
     {
-        foreach (var carta in mazo.cartasArsenal)
+        foreach (var carta in mazo.cardsArsenal)
         {
             if (carta.ContieneSubtipoFace())
                 return true;
@@ -78,7 +78,7 @@ public class ValidarDeck
     
     public bool MazoCumpleLogoSuperStar(Player mazo)
     {   
-        foreach (var carta in mazo.cartasArsenal)
+        foreach (var carta in mazo.cardsArsenal)
         {
             if (!EstaCartaCumpleLogoSuperStar(carta, mazo.superestar.Logo))
             {
@@ -88,12 +88,12 @@ public class ValidarDeck
         return true;
     }
 
-    public bool EstaCartaCumpleLogoSuperStar(Carta carta, string logoSuperStar)
+    public bool EstaCartaCumpleLogoSuperStar(Card card, string logoSuperStar)
     {   
         List<String> logoSuperStars = new List<string> {"StoneCold", "Undertaker","Mankind", "HHH","TheRock","Kane","Jericho"};
         foreach (var logo in logoSuperStars)
         {   
-            if (carta.ContieneLogoSuperStar(logo) && logoSuperStar != logo)
+            if (card.ContieneLogoSuperStar(logo) && logoSuperStar != logo)
             {   
                 return false;
             }

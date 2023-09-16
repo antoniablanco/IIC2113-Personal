@@ -19,12 +19,11 @@ public class Game
         _deckFolder = deckFolder;
     }
     
-    // Traer funciones que son de flujo para aca
     public Player IniciarPlayer(List<CartasJson> totalCartas,List<SuperStarJSON> totalSuperStars) 
     {
         string stringPlayer = _view.AskUserToSelectDeck(_deckFolder);
         _logicaJuego.view = _view;
-        List<Carta> listaCartasPlayer = _logicaJuego.CrearCartas(stringPlayer, totalCartas);
+        List<Card> listaCartasPlayer = _logicaJuego.CrearCartas(stringPlayer, totalCartas);
         SuperStar superStarPlayer = _logicaJuego.CrearSuperStar(stringPlayer, totalSuperStars);
         
         Player playerReturn = new Player(listaCartasPlayer, superStarPlayer);
@@ -46,7 +45,7 @@ public class Game
         Player player = IniciarPlayer(totalCartas, totalSuperStars);
         if (!_validarDeck.EsValidoMazo(player))
         {
-            throw new ExcepcionMazoNoValido("El mazo no es valido");
+            throw new InvalidDeckException("El mazo no es valido");
         }
         return player;
     }
@@ -76,7 +75,7 @@ public class Game
             InicializarHandsPlayers();
             JuegoDadoQueLosMazosSonValido();
         }
-        catch (ExcepcionMazoNoValido e)
+        catch (InvalidDeckException e)
         {
             _view.SayThatDeckIsInvalid();
         }
