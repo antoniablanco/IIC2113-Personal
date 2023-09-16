@@ -10,14 +10,14 @@ using System.Text.Json ;
 
 public class Logica_Juego
 {   
-    private bool _sigueJuego = true;
-    private bool _sigueTurno = true;
+    private bool _isTheGameStillPlaying = true;
+    private bool _IsTheTurnBeingPlayed = true;
     
     public View view;
     public VisualizeCards VisualizeCards = new VisualizeCards();
     
-    public Player PlayerUno { get; set; }
-    public Player PlayerDos { get; set; }
+    public Player playerOne { get; set; }
+    public Player playerTwo { get; set; }
     public List<Player> listaPlayers;
     
     public int numJugadorActual = 0;
@@ -26,14 +26,14 @@ public class Logica_Juego
     public int NumJugadorInicio = 0;
     
     
-    public List<CardJson> DescerializarJsonCartas()
+    public List<CardJson> DeserializeJsonCards()
     {
         string myJson = File.ReadAllText (Path.Combine("data","cards.json")) ;
         var cartas = JsonSerializer.Deserialize<List<CardJson>>(myJson) ;
         return cartas;
     }
     
-    public List<SuperStarJSON> DescerializarJsonSuperStar()
+    public List<SuperStarJSON> DeserializeJsonSuperStar()
     {
         string myJson = File.ReadAllText (Path.Combine("data","superstar.json")) ;
         var superstars = JsonSerializer.Deserialize<List<SuperStarJSON>>(myJson) ;
@@ -108,7 +108,7 @@ public class Logica_Juego
         return superStarTypes;
     }
 
-    public void SeSeteaInformacionInicioTurno()
+    public void SettingTurnStartInformation()
     {
         listaPlayers[numJugadorActual].DrawCard();
         SetearVariableTruePorqueInicioTurno();
@@ -118,13 +118,24 @@ public class Logica_Juego
     
     public void JugadorInicioJuego()
     {
-        NumJugadorInicio = (PlayerUno.superestar.SuperstarValue < PlayerDos.superestar.SuperstarValue) ? 1 : 0;
+        NumJugadorInicio = (playerOne.superestar.SuperstarValue < playerTwo.superestar.SuperstarValue) ? 1 : 0;
     }
 
-    public void MostrarInformacionJugadores() 
+    public void ThePlayerDrawTheirInitialsHands()
     {
-        PlayerInfo playerUno = new PlayerInfo(PlayerUno.superestar.Name, PlayerUno.FortitudRating(),PlayerUno.cardsHand.Count, PlayerUno.cardsArsenal.Count);
-        PlayerInfo playerDos = new PlayerInfo(PlayerDos.superestar.Name, PlayerDos.FortitudRating(), PlayerDos.cardsHand.Count, PlayerDos.cardsArsenal.Count);
+        playerOne.DrawInitialHandCards();
+        playerTwo.DrawInitialHandCards();
+    }
+    
+    public string GetWinnerSuperstarName()
+    {
+        return listaPlayers[numJugadorGanador].NameOfSuperStar();
+    }
+    
+    public void DisplayPlayerInformation() 
+    {
+        PlayerInfo playerUno = new PlayerInfo(playerOne.superestar.Name, playerOne.FortitudRating(),playerOne.cardsHand.Count, playerOne.cardsArsenal.Count);
+        PlayerInfo playerDos = new PlayerInfo(playerTwo.superestar.Name, playerTwo.FortitudRating(), playerTwo.cardsHand.Count, playerTwo.cardsArsenal.Count);
         
         List<PlayerInfo> listaPlayersParaImprimir = (NumJugadorInicio == 0) ? new List<PlayerInfo> { playerUno, playerDos } : new List<PlayerInfo> { playerDos, playerUno };
         
@@ -133,36 +144,36 @@ public class Logica_Juego
 
     public void CrearListaPlayers()
     {
-        listaPlayers = (NumJugadorInicio == 0) ? new List<Player> { PlayerUno, PlayerDos } : new List<Player> { PlayerDos, PlayerUno };
+        listaPlayers = (NumJugadorInicio == 0) ? new List<Player> { playerOne, playerTwo } : new List<Player> { playerTwo, playerOne };
     }
 
-    public bool SigueJuego()
+    public bool ShouldWeContinueTheGame()
     {   
-        return (PlayerUno.cardsArsenal.Count() > 0 && PlayerDos.cardsArsenal.Count() > 0 && _sigueJuego);
+        return (playerOne.cardsArsenal.Count() > 0 && playerTwo.cardsArsenal.Count() > 0 && _isTheGameStillPlaying);
     }
 
-    public bool SigueTurno()
+    public bool TheTurnIsBeingPlayed()
     {
-        return _sigueTurno;
+        return _IsTheTurnBeingPlayed;
     }
     
-    public bool JugadorPuedeUtilizarHabilidadSuperStar() 
+    public bool PlayerCanUseSuperStarAbility() 
     {
         return listaPlayers[numJugadorActual].TheirSuperStarCanUseSuperAbility(listaPlayers[numJugadorActual]);
     }
 
-    public void AccionUtilizarSuperHabilidad()
+    public void ActionUseSuperAbility()
     {
-        listaPlayers[numJugadorActual].UtilizandoSuperHabilidadElectiva(listaPlayers[numJugadorActual], listaPlayers[numJugadorDos]);
+        listaPlayers[numJugadorActual].UsingElectiveSuperAbility(listaPlayers[numJugadorActual], listaPlayers[numJugadorDos]);
     }
     
     public void SeUtilizaLaSuperHabilidadQueEsAlInicioDelTurno()
     {
         listaPlayers[numJugadorActual]
-            .UtilizandoSuperHabilidadAutomatica(listaPlayers[numJugadorActual], listaPlayers[numJugadorDos]);
+            .UsingAutomaticSuperAbility(listaPlayers[numJugadorActual], listaPlayers[numJugadorDos]);
     }
     
-    public void AccionJugarCarta() 
+    public void ActionPlayCard() 
     {
         int cartaSeleccionada = view.AskUserToSelectAPlay(ObtenerStringCartasPosiblesJugar());
         if (cartaSeleccionada != -1)
@@ -204,7 +215,7 @@ public class Logica_Juego
         return stringDeCartas;
     }
     
-    public void SeleccionarCartasVer()
+    public void SelectCardsToView()
     {
         var setCartasParaVer = view.AskUserWhatSetOfCardsHeWantsToSee();
         switch (setCartasParaVer)
@@ -279,22 +290,22 @@ public class Logica_Juego
     
     public void DeclararFinTurno()
     {
-        _sigueTurno = false;
+        _IsTheTurnBeingPlayed = false;
     }
 
     public void SetearVariableTruePorqueInicioTurno()
     {   
-        _sigueTurno = true;
+        _IsTheTurnBeingPlayed = true;
         listaPlayers[numJugadorActual].theHabilityHasBeenUsedThisTurn = false;
     }
     
-    public void ActualizarVariablesPorFinTurno()
+    public void UpdateVariablesAtEndOfTurn()
     {   
         DeclararFinTurno();
         ActualizacionNumJugadores();
         if (!VerificarSiJugadorTieneCartasEnArsenalParaSeguirJugando())
         {
-            SetearVariablesTrasPerder();
+            SetVariablesAfterLosing();
         }
     }
 
@@ -306,14 +317,14 @@ public class Logica_Juego
     public void SetearVariablesTrasGanar()
     {
         numJugadorGanador = numJugadorActual;
-        _sigueJuego = false;
+        _isTheGameStillPlaying = false;
         DeclararFinTurno();
     }
     
-    public void SetearVariablesTrasPerder()
+    public void SetVariablesAfterLosing()
     {
         numJugadorGanador = (numJugadorActual == 0) ? 1 : 0;
-        _sigueJuego = false;
+        _isTheGameStillPlaying = false;
         DeclararFinTurno();
     }
     

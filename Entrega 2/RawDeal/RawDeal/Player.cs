@@ -5,20 +5,20 @@ namespace RawDeal;
 
 public class Player
 {
-    private SuperStar _superestar;
+    private SuperStar? _superestar;
     private List<Card> _cardsArsenal = new List<Card>();
     private List<Card> _cardsHand = new List<Card>();
     private List<Card> _cardsRingSide = new List<Card>();
     private List<Card> _cardsRingArea = new List<Card>();
     public bool theHabilityHasBeenUsedThisTurn = false;
 
-    public Player(List<Card> cardsPlayer, SuperStar superstar)
+    public Player(List<Card> cardsPlayer, SuperStar? superstar)
     {
         superestar = superstar;
         cardsArsenal.AddRange(cardsPlayer);
     }
 
-    public SuperStar superestar
+    public SuperStar? superestar
     {
         get => _superestar;
         set => _superestar = value ?? throw new ArgumentNullException(nameof(value));
@@ -74,7 +74,7 @@ public class Player
     public List<Card> CardsAvailableToPlay()
     {
         return cardsHand
-            .Where(carta => int.Parse(carta.Fortitude) <= FortitudRating() && !carta.IsReversalType())
+            .Where(card => int.Parse(card.Fortitude) <= FortitudRating() && !card.IsReversalType())
             .ToList();
     }
     
@@ -111,12 +111,12 @@ public class Player
         return superestar.CanUseSuperAbility(currentPlayer);
     }
 
-    public void UtilizandoSuperHabilidadElectiva(Player currentPlayer, Player oppositePlayer)
+    public void UsingElectiveSuperAbility(Player currentPlayer, Player oppositePlayer)
     {
         superestar.UsingElectiveSuperAbility(currentPlayer, oppositePlayer);
     }
     
-    public void UtilizandoSuperHabilidadAutomatica(Player currentPlayer, Player oppositePlayer)
+    public void UsingAutomaticSuperAbility(Player currentPlayer, Player oppositePlayer)
     {
         superestar.UsingAutomaticSuperAbilityAtTheStartOfTheTurn( currentPlayer, oppositePlayer);
     }

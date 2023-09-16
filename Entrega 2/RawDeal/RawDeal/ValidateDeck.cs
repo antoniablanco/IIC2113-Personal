@@ -1,7 +1,12 @@
 namespace RawDeal;
 
 public class ValidateDeck
-{
+{   
+    public bool IsValidDeck(Player player)
+    {   
+        return (DeckSizeComplies(player) && HasSuperStar(player) && MeetsSubtypeConditions(player) && DeckSatisfiesSuperStarLogo(player));
+    }
+    
     private bool DeckSizeComplies(Player player)
     {
         return (player.cardsArsenal.Count() == 60);
@@ -74,8 +79,4 @@ public class ValidateDeck
         return superstarLogos.All(logo => !card.ContainsSuperStarLogo(logo) || logoSuperStar == logo);
     }
     
-    public bool IsValidDeck(Player player)
-    {   
-        return (DeckSizeComplies(player) && HasSuperStar(player) && MeetsSubtypeConditions(player) && DeckSatisfiesSuperStarLogo(player));
-    }
 }

@@ -19,61 +19,15 @@ public class Game
         _deckFolder = deckFolder;
     }
     
-    public Player IniciarPlayer(List<CardJson> totalCartas,List<SuperStarJSON> totalSuperStars) 
-    {
-        string stringPlayer = _view.AskUserToSelectDeck(_deckFolder);
-        _logicaJuego.view = _view;
-        List<Card> listaCartasPlayer = _logicaJuego.CrearCartas(stringPlayer, totalCartas);
-        SuperStar superStarPlayer = _logicaJuego.CrearSuperStar(stringPlayer, totalSuperStars);
-        
-        Player playerReturn = new Player(listaCartasPlayer, superStarPlayer);
-        
-        return playerReturn;
-    }
-    
-    public (List<CardJson>, List<SuperStarJSON>) ObtenerTotalCartasYSuperStars() 
-    {
-        List<CardJson> totalCartas = _logicaJuego.DescerializarJsonCartas();
-        List<SuperStarJSON> totalSuperStars = _logicaJuego.DescerializarJsonSuperStar();
-    
-        return (totalCartas, totalSuperStars);
-    }
-
-    public Player CrearPlayer()
-    {
-        var (totalCartas, totalSuperStars) = ObtenerTotalCartasYSuperStars();
-        Player player = IniciarPlayer(totalCartas, totalSuperStars);
-        if (!_validateDeck.IsValidDeck(player))
-        {
-            throw new InvalidDeckException("El mazo no es valido");
-        }
-        return player;
-    }
-    
-    public void IniciarVariablesLogicaJuego(Player playerUno, Player playerDos)
-    {
-        _logicaJuego.PlayerUno = playerUno;
-        _logicaJuego.PlayerDos = playerDos;
-        
-        _logicaJuego.JugadorInicioJuego();
-        _logicaJuego.CrearListaPlayers();
-    }
-
-    public void InicializarHandsPlayers()
-    {
-        _logicaJuego.PlayerUno.DrawInitialHandCards();
-        _logicaJuego.PlayerDos.DrawInitialHandCards();
-    }
-    
     public void Play() 
     {
         try
         {
-            Player playerUno = CrearPlayer();
-            Player playerDos = CrearPlayer();
-            IniciarVariablesLogicaJuego(playerUno, playerDos);
-            InicializarHandsPlayers();
-            JuegoDadoQueLosMazosSonValido();
+            Player playerUno = CreatePlayer();
+            Player playerDos = CreatePlayer();
+            InitializeGameLogicVariables(playerUno, playerDos);
+            InitializePlayerHands();
+            GameGivenThatTheDecksAreValid();
         }
         catch (InvalidDeckException e)
         {
@@ -81,60 +35,107 @@ public class Game
         }
     }
     
-    public void JuegoDadoQueLosMazosSonValido()
+    private Player CreatePlayer()
     {
-        while (_logicaJuego.SigueJuego())
+        var (totalCards, totalSuperStars) = GetTotalCardsAndSuperStars();
+        Player player = InitializePlayer(totalCards, totalSuperStars);
+        if (!_validateDeck.IsValidDeck(player))
         {
-            SeJuegaUnTurno();
+            throw new InvalidDeckException("The Deck Is Not Valid");
         }
-        _view.CongratulateWinner(_logicaJuego.listaPlayers[_logicaJuego.numJugadorGanador].superestar.Name);
-    }
-
-    public void SeJuegaUnTurno()
-    {
-        _logicaJuego.SeSeteaInformacionInicioTurno();
-
-        while (_logicaJuego.SigueTurno())
-        {
-            _logicaJuego.MostrarInformacionJugadores();
-            AccionSeleccionadaJugador();
-        }
+        return player;
     }
     
-    public void AccionSeleccionadaJugador()
+    private (List<CardJson>, List<SuperStarJSON>) GetTotalCardsAndSuperStars() 
     {
-        var actividadRealizar = ObtenerProximaJugada();
+        List<CardJson> totalCards = _logicaJuego.DeserializeJsonCards();
+        List<SuperStarJSON> totalSuperStars = _logicaJuego.DeserializeJsonSuperStar();
+    
+        return (totalCards, totalSuperStars);
+    }
+    
+    private Player InitializePlayer(List<CardJson> totalCards,List<SuperStarJSON> totalSuperStars) 
+    {
+        string stringPlayer = _view.AskUserToSelectDeck(_deckFolder);
+        _logicaJuego.view = _view;
+        List<Card> playerCardList = _logicaJuego.CrearCartas(stringPlayer, totalCards);
+        SuperStar? superStarPlayer = _logicaJuego.CrearSuperStar(stringPlayer, totalSuperStars);
+        
+        Player playerReturn = new Player(playerCardList, superStarPlayer);
+        
+        return playerReturn;
+    }
+    
+    private void InitializeGameLogicVariables(Player playerOne, Player playerTwo)
+    {
+        _logicaJuego.playerOne = playerOne;
+        _logicaJuego.playerTwo = playerTwo;
+        
+        _logicaJuego.JugadorInicioJuego();
+        _logicaJuego.CrearListaPlayers();
+    }
 
-        switch (actividadRealizar)
+    private void InitializePlayerHands()
+    {
+        _logicaJuego.ThePlayerDrawTheirInitialsHands();
+    }
+    
+    private void GameGivenThatTheDecksAreValid()
+    {
+        while (_logicaJuego.ShouldWeContinueTheGame())
+        {
+            OneTurnIsPlayed();
+        }
+        _view.CongratulateWinner(_logicaJuego.GetWinnerSuperstarName());
+    }
+
+    private void OneTurnIsPlayed()
+    {
+        _logicaJuego.SettingTurnStartInformation();
+
+        while (_logicaJuego.TheTurnIsBeingPlayed())
+        {
+            _logicaJuego.DisplayPlayerInformation();
+            PlayerSelectedAction();
+        }
+    }
+
+    private void PlayerSelectedAction()
+    {
+        var activityToPerform = GetNextMove();
+
+        switch (activityToPerform)
         {
             case NextPlay.UseAbility:
-                _logicaJuego.AccionUtilizarSuperHabilidad();
+                _logicaJuego.ActionUseSuperAbility();
                 break;
             case NextPlay.ShowCards:
-                _logicaJuego.SeleccionarCartasVer();
+                _logicaJuego.SelectCardsToView();
                 break;
             case NextPlay.PlayCard:
-                _logicaJuego.AccionJugarCarta();
+                _logicaJuego.ActionPlayCard();
                 break;
             case NextPlay.EndTurn:
-                _logicaJuego.ActualizarVariablesPorFinTurno();
+                _logicaJuego.UpdateVariablesAtEndOfTurn();
                 break;
             case NextPlay.GiveUp:
-                _logicaJuego.SetearVariablesTrasPerder();
+                _logicaJuego.SetVariablesAfterLosing();
                 break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
     }
-    
-    public NextPlay ObtenerProximaJugada()
-    {   
-        NextPlay actividadRealizar;
-        
-        if (_logicaJuego.JugadorPuedeUtilizarHabilidadSuperStar())
-            actividadRealizar = _view.AskUserWhatToDoWhenUsingHisAbilityIsPossible();
-        else
-            actividadRealizar = _view.AskUserWhatToDoWhenHeCannotUseHisAbility();
 
-        return actividadRealizar;
+    private NextPlay GetNextMove()
+    {   
+        NextPlay activityToPerform;
+        
+        if (_logicaJuego.PlayerCanUseSuperStarAbility())
+            activityToPerform = _view.AskUserWhatToDoWhenUsingHisAbilityIsPossible();
+        else
+            activityToPerform = _view.AskUserWhatToDoWhenHeCannotUseHisAbility();
+
+        return activityToPerform;
     }
     
 }
