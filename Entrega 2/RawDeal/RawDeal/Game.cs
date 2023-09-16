@@ -9,7 +9,7 @@ public class Game
 {
     private View _view;
     private string _deckFolder;
-    private Logica_Juego _logicaJuego = new Logica_Juego();
+    private GameLogic _gameLogic = new GameLogic();
     private ValidateDeck _validateDeck = new ValidateDeck();
     
     
@@ -48,8 +48,8 @@ public class Game
     
     private (List<CardJson>, List<SuperStarJSON>) GetTotalCardsAndSuperStars() 
     {
-        List<CardJson> totalCards = _logicaJuego.DeserializeJsonCards();
-        List<SuperStarJSON> totalSuperStars = _logicaJuego.DeserializeJsonSuperStar();
+        List<CardJson> totalCards = _gameLogic.DeserializeJsonCards();
+        List<SuperStarJSON> totalSuperStars = _gameLogic.DeserializeJsonSuperStar();
     
         return (totalCards, totalSuperStars);
     }
@@ -57,9 +57,9 @@ public class Game
     private Player InitializePlayer(List<CardJson> totalCards,List<SuperStarJSON> totalSuperStars) 
     {
         string stringPlayer = _view.AskUserToSelectDeck(_deckFolder);
-        _logicaJuego.view = _view;
-        List<Card> playerCardList = _logicaJuego.CrearCartas(stringPlayer, totalCards);
-        SuperStar? superStarPlayer = _logicaJuego.CrearSuperStar(stringPlayer, totalSuperStars);
+        _gameLogic.view = _view;
+        List<Card> playerCardList = _gameLogic.CreateCards(stringPlayer, totalCards);
+        SuperStar? superStarPlayer = _gameLogic.CreateSuperStar(stringPlayer, totalSuperStars);
         
         Player playerReturn = new Player(playerCardList, superStarPlayer);
         
@@ -68,34 +68,34 @@ public class Game
     
     private void InitializeGameLogicVariables(Player playerOne, Player playerTwo)
     {
-        _logicaJuego.playerOne = playerOne;
-        _logicaJuego.playerTwo = playerTwo;
+        _gameLogic.playerOne = playerOne;
+        _gameLogic.playerTwo = playerTwo;
         
-        _logicaJuego.JugadorInicioJuego();
-        _logicaJuego.CrearListaPlayers();
+        _gameLogic.PlayerStartedGame();
+        _gameLogic.CreatePlayerList();
     }
 
     private void InitializePlayerHands()
     {
-        _logicaJuego.ThePlayerDrawTheirInitialsHands();
+        _gameLogic.ThePlayerDrawTheirInitialsHands();
     }
     
     private void GameGivenThatTheDecksAreValid()
     {
-        while (_logicaJuego.ShouldWeContinueTheGame())
+        while (_gameLogic.ShouldWeContinueTheGame())
         {
             OneTurnIsPlayed();
         }
-        _view.CongratulateWinner(_logicaJuego.GetWinnerSuperstarName());
+        _view.CongratulateWinner(_gameLogic.GetWinnerSuperstarName());
     }
 
     private void OneTurnIsPlayed()
     {
-        _logicaJuego.SettingTurnStartInformation();
+        _gameLogic.SettingTurnStartInformation();
 
-        while (_logicaJuego.TheTurnIsBeingPlayed())
+        while (_gameLogic.TheTurnIsBeingPlayed())
         {
-            _logicaJuego.DisplayPlayerInformation();
+            _gameLogic.DisplayPlayerInformation();
             PlayerSelectedAction();
         }
     }
@@ -107,19 +107,19 @@ public class Game
         switch (activityToPerform)
         {
             case NextPlay.UseAbility:
-                _logicaJuego.ActionUseSuperAbility();
+                _gameLogic.ActionUseSuperAbility();
                 break;
             case NextPlay.ShowCards:
-                _logicaJuego.SelectCardsToView();
+                _gameLogic.SelectCardsToView();
                 break;
             case NextPlay.PlayCard:
-                _logicaJuego.ActionPlayCard();
+                _gameLogic.ActionPlayCard();
                 break;
             case NextPlay.EndTurn:
-                _logicaJuego.UpdateVariablesAtEndOfTurn();
+                _gameLogic.UpdateVariablesAtEndOfTurn();
                 break;
             case NextPlay.GiveUp:
-                _logicaJuego.SetVariablesAfterLosing();
+                _gameLogic.SetVariablesAfterLosing();
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -130,7 +130,7 @@ public class Game
     {   
         NextPlay activityToPerform;
         
-        if (_logicaJuego.PlayerCanUseSuperStarAbility())
+        if (_gameLogic.PlayerCanUseSuperStarAbility())
             activityToPerform = _view.AskUserWhatToDoWhenUsingHisAbilityIsPossible();
         else
             activityToPerform = _view.AskUserWhatToDoWhenHeCannotUseHisAbility();

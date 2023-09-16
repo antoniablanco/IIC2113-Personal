@@ -71,6 +71,21 @@ public class Player
         return cardsRingArea.Sum(card => int.Parse(card.Damage));
     }
 
+    public bool IsTheSuperStarMankind()
+    {
+        return NameOfSuperStar() == "MANKIND";
+    }
+
+    public int GetSuperStarValue()
+    {
+        return superestar.SuperstarValue;
+    }
+
+    public bool AreThereCardsLeftInTheArsenal()
+    {
+        return cardsArsenal.Count() > 0;
+    }
+    
     public List<Card> CardsAvailableToPlay()
     {
         return cardsHand

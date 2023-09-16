@@ -4,7 +4,7 @@ namespace RawDeal;
 
 public class VisualizeCards
 {
-    private CardInfoImplementation CrearIViewableCardInfo(Card card)
+    private CardInfoImplementation CreateIViewableCardInfo(Card card)
     {
         var cardInfo = new CardInfoImplementation(
             card.Title,
@@ -17,7 +17,7 @@ public class VisualizeCards
         return cardInfo;
     }
 
-    private PlayInfoImplementation CrearIViewablePlayedInfo(Card card)
+    private PlayInfoImplementation CreateIViewablePlayedInfo(Card card)
     {   
         var cardInfo = new PlayInfoImplementation(
             card.Title,
@@ -41,25 +41,18 @@ public class VisualizeCards
 
     public string GetStringCardInfo(Card card)
     {
-        return GetStringInfo(card, CrearIViewableCardInfo, Formatter.CardToString);
+        return GetStringInfo(card, CreateIViewableCardInfo, Formatter.CardToString);
     }
 
     public string GetStringPlayedInfo(Card card)
     {
-        return GetStringInfo(card, CrearIViewablePlayedInfo, Formatter.PlayToString);
+        return GetStringInfo(card, CreateIViewablePlayedInfo, Formatter.PlayToString);
     }
 
 
     private List<string> CreateStringInfoList(List<Card> cardsInSelectedSet, Func<Card, string> getInfoFunction)
     {
-        List<string> stringCartas = new List<string>();
-
-        foreach (var card in cardsInSelectedSet)
-        {   
-            stringCartas.Add(getInfoFunction(card));
-        }
-
-        return stringCartas;
+        return cardsInSelectedSet.Select(getInfoFunction).ToList();
     }
 
     public List<string> CreateStringCardList(List<Card> cardsInSelectedSet)
