@@ -26,7 +26,7 @@ public class StoneCold: SuperStar
 
     private void DiscardingCardsFromHandToArsenal(Player currentPlayer)
     {
-        List<string> handCardsAsString = visualisarCartas.CreateStringCardList(currentPlayer.cardsHand);
+        List<string> handCardsAsString = VisualizeCards.CreateStringCardList(currentPlayer.cardsHand);
         int selectedCard = _view.AskPlayerToReturnOneCardFromHisHandToHisArsenal(Name, handCardsAsString);
         
         Card discardedCard = currentPlayer.cardsHand[selectedCard];

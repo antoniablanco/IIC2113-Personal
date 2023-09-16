@@ -2,7 +2,7 @@ using RawDealView.Formatters;
 
 namespace RawDeal;
 
-public class VisualisarCartas
+public class VisualizeCards
 {
     private CardInfoImplementation CrearIViewableCardInfo(Card card)
     {

@@ -79,7 +79,7 @@ public class Card
         set => _CardEffect = value ?? throw new ArgumentNullException(nameof(value));
     }
     
-    public bool ContieneSubtipoUnique() 
+    public bool ContainsUniqueSubtype() 
     {
         for (int i = 0; i < Subtypes.Count; i++)
         {   
@@ -89,7 +89,7 @@ public class Card
         return false;
     }
     
-    public bool ContieneSubtipoSetUp()
+    public bool ContainsSetUpSubtype()
     {
         for (int i = 0; i < Subtypes.Count; i++)
         {   
@@ -109,7 +109,7 @@ public class Card
         return false;
     }
     
-    public bool ContieneSubtipoFace() 
+    public bool ContainsFaceSubtype()
     {
         for (int i = 0; i < Subtypes.Count; i++)
         {   
@@ -119,7 +119,7 @@ public class Card
         return false;
     }
 
-    public bool ContieneLogoSuperStar(string superStarLogo)
+    public bool ContainsSuperStarLogo(string superStarLogo)
     {   
         for (int i = 0; i < Subtypes.Count; i++)
         {

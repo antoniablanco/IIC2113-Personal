@@ -24,7 +24,7 @@ public class TheRock: SuperStar
     private void AddingCardFromRingSideToArsenal(Player currentPlayer)
     {
         _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
-        List<string> ringAreaAsString = visualisarCartas.CreateStringCardList(currentPlayer.cardsRingSide);
+        List<string> ringAreaAsString = VisualizeCards.CreateStringCardList(currentPlayer.cardsRingSide);
         int selectedCardIndex = _view.AskPlayerToSelectCardsToRecover(Name, 1, ringAreaAsString);
         Card discardedCard = currentPlayer.cardsRingSide[selectedCardIndex];
         currentPlayer.CardTransferChoosingWhichOneToChange(discardedCard, currentPlayer.cardsRingSide, currentPlayer.cardsArsenal, "Start");

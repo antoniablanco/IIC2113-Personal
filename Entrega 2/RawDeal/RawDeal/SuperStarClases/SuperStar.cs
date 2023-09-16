@@ -12,7 +12,7 @@ public abstract class SuperStar
     private int _SuperstarValue;
     private string _SuperstarAbility;
     public View _view;
-    protected VisualisarCartas visualisarCartas = new VisualisarCartas();
+    protected VisualizeCards VisualizeCards = new VisualizeCards();
 
     public SuperStar(string name, string logo, int handSize, int superstarValue, string superstarAbility, View view)
     {
@@ -71,7 +71,7 @@ public abstract class SuperStar
 
     protected void DiscardingCardsFromHandToRingSide(Player player, int cardsToDiscardCoun)
     {
-        List<string> handFormatoString = visualisarCartas.CreateStringCardList(player.cardsHand);
+        List<string> handFormatoString = VisualizeCards.CreateStringCardList(player.cardsHand);
         int selectedCard =_view.AskPlayerToSelectACardToDiscard(handFormatoString, player.NameOfSuperStar(), player.NameOfSuperStar(), cardsToDiscardCoun);
             
         if (selectedCard != -1)
@@ -83,7 +83,7 @@ public abstract class SuperStar
 
     protected void AddingCardFromRingSideToHand(Player player)
     {
-        List<string> ringSideAsString = visualisarCartas.CreateStringCardList(player.cardsRingSide);
+        List<string> ringSideAsString = VisualizeCards.CreateStringCardList(player.cardsRingSide);
         int selectedCard =_view.AskPlayerToSelectCardsToPutInHisHand(Name, 1, ringSideAsString);
         
         Card addedCard = player.cardsRingSide[selectedCard];

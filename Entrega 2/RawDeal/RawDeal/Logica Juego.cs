@@ -14,7 +14,7 @@ public class Logica_Juego
     private bool _sigueTurno = true;
     
     public View view;
-    public VisualisarCartas visualisarCartas = new VisualisarCartas();
+    public VisualizeCards VisualizeCards = new VisualizeCards();
     
     public Player PlayerUno { get; set; }
     public Player PlayerDos { get; set; }
@@ -200,7 +200,7 @@ public class Logica_Juego
     public List<string> ObtenerStringCartasPosiblesJugar()
     {
         List<Card> cartasPosiblesJugar = listaPlayers[numJugadorActual].CartasPosiblesDeJugar();
-        List<string> stringDeCartas = visualisarCartas.CreateStringPlayedCardList(cartasPosiblesJugar);
+        List<string> stringDeCartas = VisualizeCards.CreateStringPlayedCardList(cartasPosiblesJugar);
         return stringDeCartas;
     }
     
@@ -229,7 +229,7 @@ public class Logica_Juego
 
     public void AccionVercartasTotales(List<Card> conjuntoCartas)
     {   
-        List<String> stringCartas = visualisarCartas.CreateStringCardList(conjuntoCartas);
+        List<String> stringCartas = VisualizeCards.CreateStringCardList(conjuntoCartas);
         view.ShowCards(stringCartas);
     }
 
@@ -241,7 +241,7 @@ public class Logica_Juego
 
     public void DecirQueVaAJugarCarta(Card cardJugada)
     {
-        string cartaJugadaString = visualisarCartas.GetStringPlayedInfo(cardJugada);
+        string cartaJugadaString = VisualizeCards.GetStringPlayedInfo(cardJugada);
         string nombreSuperStar = listaPlayers[numJugadorActual].superestar.Name;
         view.SayThatPlayerIsTryingToPlayThisCard(nombreSuperStar, cartaJugadaString);
     }
@@ -268,7 +268,7 @@ public class Logica_Juego
         List<Card> cartasRingSide = listaPlayers[numJugadorDos].cardsRingSide;
         List<Card> cartasArsenal = listaPlayers[numJugadorDos].cardsArsenal;
         Card cardVolteada = listaPlayers[numJugadorDos].TransferOfUnselectedCard(cartasArsenal, cartasRingSide);
-        string cartaVolteadaString = visualisarCartas.GetStringCardInfo(cardVolteada);
+        string cartaVolteadaString = VisualizeCards.GetStringCardInfo(cardVolteada);
         view.ShowCardOverturnByTakingDamage(cartaVolteadaString, danoActual+1, danoTotal);
     }
     

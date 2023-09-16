@@ -10,7 +10,7 @@ public class Game
     private View _view;
     private string _deckFolder;
     private Logica_Juego _logicaJuego = new Logica_Juego();
-    private ValidarDeck _validarDeck = new ValidarDeck();
+    private ValidateDeck _validateDeck = new ValidateDeck();
     
     
     public Game(View view, string deckFolder)
@@ -43,7 +43,7 @@ public class Game
     {
         var (totalCartas, totalSuperStars) = ObtenerTotalCartasYSuperStars();
         Player player = IniciarPlayer(totalCartas, totalSuperStars);
-        if (!_validarDeck.EsValidoMazo(player))
+        if (!_validateDeck.IsValidDeck(player))
         {
             throw new InvalidDeckException("El mazo no es valido");
         }
