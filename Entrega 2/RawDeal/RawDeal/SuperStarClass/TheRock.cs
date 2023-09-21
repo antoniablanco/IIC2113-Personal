@@ -26,8 +26,8 @@ public class TheRock: SuperStar
         _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
         List<string> ringAreaAsString = currentPlayer.StringCardsRingSide();
         int selectedCardIndex = _view.AskPlayerToSelectCardsToRecover(Name, 1, ringAreaAsString);
-        Card discardedCard = currentPlayer.GetSpecificCardFromRingSide(selectedCardIndex);
-        currentPlayer.TransferChoosinCardFromRingSideToArsenal(discardedCard,  "Start");
+        CardController discardedCardController = currentPlayer.GetSpecificCardFromRingSide(selectedCardIndex);
+        currentPlayer.TransferChoosinCardFromRingSideToArsenal(discardedCardController,  "Start");
     }
     
     public override bool CanUseSuperAbility(PlayerController currentPlayer)

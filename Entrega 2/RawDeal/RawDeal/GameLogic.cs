@@ -41,13 +41,19 @@ public class GameLogic
         return superstars;
     }
     
-    public List<Card> CreateCards(string playerString, List<CardJson> totalCards) 
+    public List<CardController> CreateCards(string playerString, List<CardJson> totalCards) 
     {
-        string pathDeck = Path.Combine($"{playerString}");
+        string pathDeck = Path.Combine(playerString);
         string[] lines = File.ReadAllLines(pathDeck);
 
-        return (from line in lines from card in totalCards where line.Trim() ==  card.Title 
-            select new Card( card.Title,  card.Types,  card.Subtypes,  card.Fortitude,  card.Damage,  card.StunValue,  card.CardEffect)).ToList();
+        var matchingCards = (from line in lines
+            from card in totalCards
+            where line.Trim() == card.Title 
+            select new Card(card.Title, card.Types, card.Subtypes, card.Fortitude, card.Damage, card.StunValue, card.CardEffect)).ToList();
+
+        var cardControllers = matchingCards.Select(card => new CardController(card)).ToList();
+
+        return cardControllers;
     }
     
     public SuperStar? CreateSuperStar(string deck, List<SuperStarJSON> totalSuperStars) 
@@ -172,9 +178,9 @@ public class GameLogic
         int selectedCard = view.AskUserToSelectAPlay(GetPossibleCardsToPlayString());
         if ( IsValidIndexOfCard(selectedCard))
         {   
-            Card playedCard = playersList[numCurrentPlayer].CardsAvailableToPlay()[selectedCard];
-            PrintActionPlayCard(playedCard);
-            AddCardPlayedToRingArea(playedCard);
+            CardController playedCardController = playersList[numCurrentPlayer].CardsAvailableToPlay()[selectedCard];
+            PrintActionPlayCard(playedCardController);
+            AddCardPlayedToRingArea(playedCardController);
         }
     }
 
@@ -185,30 +191,30 @@ public class GameLogic
 
     private List<string> GetPossibleCardsToPlayString()
     {
-        List<Card> possibleCardsToPlay = playersList[numCurrentPlayer].CardsAvailableToPlay();
+        List<CardController> possibleCardsToPlay = playersList[numCurrentPlayer].CardsAvailableToPlay();
         List<string> cardsStrings = VisualizeCards.CreateStringPlayedCardList(possibleCardsToPlay);
         return cardsStrings;
     }
 
-    private void PrintActionPlayCard(Card playedCard)
+    private void PrintActionPlayCard(CardController playedCardController)
     {   
-        SayThatTheyAreGoingToPlayACard(playedCard);
+        SayThatTheyAreGoingToPlayACard(playedCardController);
         view.SayThatPlayerSuccessfullyPlayedACard();
-        int totalDamage = GetDamageProduced(playedCard);
+        int totalDamage = GetDamageProduced(playedCardController);
         SayThatTheyAreGoingToReceiveDamage(totalDamage);
         CauseDamageActionPlayCard(totalDamage);
     }
 
-    private void SayThatTheyAreGoingToPlayACard(Card playedCard)
+    private void SayThatTheyAreGoingToPlayACard(CardController playedCardController)
     {
-        string playedCardString = VisualizeCards.GetStringPlayedInfo(playedCard);
+        string playedCardString = VisualizeCards.GetStringPlayedInfo(playedCardController);
         string nameSuperStar = playersList[numCurrentPlayer].NameOfSuperStar();
         view.SayThatPlayerIsTryingToPlayThisCard(nameSuperStar, playedCardString);
     }
 
-    private int GetDamageProduced(Card playedCard)
+    private int GetDamageProduced(CardController playedCardController)
     {
-        int totalDamage = int.Parse(playedCard.Damage);
+        int totalDamage = playedCardController.GetDamageProducedByTheCard();
         if (playersList[numOppositePlayer].IsTheSuperStarMankind())
             totalDamage -= 1;
         return  totalDamage;
@@ -238,8 +244,8 @@ public class GameLogic
 
     private void ShowOneFaceDownCard(int currentDamage, int totalDamage)
     {
-        Card flippedCard = playersList[numOppositePlayer].TranferUnselectedCardFromArsenalToRingSide();
-        string flippedCardString = VisualizeCards.GetStringCardInfo(flippedCard);
+        CardController flippedCardController = playersList[numOppositePlayer].TranferUnselectedCardFromArsenalToRingSide();
+        string flippedCardString = VisualizeCards.GetStringCardInfo(flippedCardController);
         view.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
     }
 
@@ -255,9 +261,9 @@ public class GameLogic
         _IsTheTurnBeingPlayed = false;
     }
 
-    private void AddCardPlayedToRingArea(Card playedCard)
+    private void AddCardPlayedToRingArea(CardController playedCardController)
     {
-        playersList[numCurrentPlayer].TransferChoosinCardFromHandToRingArea(playedCard);
+        playersList[numCurrentPlayer].TransferChoosinCardFromHandToRingArea(playedCardController);
     }
     
     public void SelectCardsToView()

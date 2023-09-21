@@ -66,7 +66,7 @@ public class Game
     private Player InitializePlayer(List<CardJson> totalCards,List<SuperStarJSON> totalSuperStars) 
     {
         string stringPlayer = _view.AskUserToSelectDeck(_deckFolder);
-        List<Card> playerCardList = _gameLogic.CreateCards(stringPlayer, totalCards);
+        List<CardController> playerCardList = _gameLogic.CreateCards(stringPlayer, totalCards);
         SuperStar? superStarPlayer = _gameLogic.CreateSuperStar(stringPlayer, totalSuperStars);
         
         Player playerReturn = new Player(playerCardList, superStarPlayer);

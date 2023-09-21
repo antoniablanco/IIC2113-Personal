@@ -39,8 +39,8 @@ public class ValidateDeck
         
         foreach (var card in player.cardsArsenal)
         {
-            dictionaryNumberByCards.TryGetValue(card.Title, out int count);
-            dictionaryNumberByCards[card.Title] = count + 1;
+            dictionaryNumberByCards.TryGetValue(card.GetCardTitle(), out int count);
+            dictionaryNumberByCards[card.GetCardTitle()] = count + 1;
 
             if (card.ContainsUniqueSubtype() && count > 0)
                 return false;
@@ -54,8 +54,8 @@ public class ValidateDeck
         
         foreach (var card in player.cardsArsenal)
         {
-            dictionaryNumberByCards.TryGetValue(card.Title, out int count);
-            dictionaryNumberByCards[card.Title] = count + 1;
+            dictionaryNumberByCards.TryGetValue(card.GetCardTitle(), out int count);
+            dictionaryNumberByCards[card.GetCardTitle()] = count + 1;
 
             if (!card.ContainsSetUpSubtype() && count > 2)
                 return false;
@@ -79,10 +79,10 @@ public class ValidateDeck
         return player.cardsArsenal.All(card => ThisCardSatisfiesSuperStarLogo(card, player.superestar.Logo));
     }
 
-    private bool ThisCardSatisfiesSuperStarLogo(Card card, string logoSuperStar)
+    private bool ThisCardSatisfiesSuperStarLogo(CardController cardController, string logoSuperStar)
     {   
         List<String> superstarLogos = new List<string> {"StoneCold", "Undertaker","Mankind", "HHH","TheRock","Kane","Jericho"};
-        return superstarLogos.All(logo => !card.ContainsSuperStarLogo(logo) || logoSuperStar == logo);
+        return superstarLogos.All(logo => !cardController.ContainsSuperStarLogo(logo) || logoSuperStar == logo);
     }
     
 }

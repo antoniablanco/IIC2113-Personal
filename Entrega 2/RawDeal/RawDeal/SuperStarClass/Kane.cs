@@ -11,8 +11,8 @@ public class Kane: SuperStar
     
     public override void UsingAutomaticSuperAbilityAtTheStartOfTheTurn(PlayerController currentPlayer, PlayerController opponentPlayer)
     {   
-        Card flippedCard = opponentPlayer.TranferUnselectedCardFromArsenalToRingSide();
-        string flippedCardString = VisualizeCards.GetStringCardInfo(flippedCard);
+        CardController flippedCardController = opponentPlayer.TranferUnselectedCardFromArsenalToRingSide();
+        string flippedCardString = VisualizeCards.GetStringCardInfo(flippedCardController);
         _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
         _view.SayThatSuperstarWillTakeSomeDamage(opponentPlayer.NameOfSuperStar(), 1);
         _view.ShowCardOverturnByTakingDamage(flippedCardString, 1, 1);

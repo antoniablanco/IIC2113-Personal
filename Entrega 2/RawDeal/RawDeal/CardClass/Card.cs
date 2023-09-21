@@ -1,8 +1,6 @@
+namespace RawDeal;
 using System.Reflection;
 using RawDealView.Formatters;
-
-namespace RawDeal;
-
 
 public class Card: IViewableCardInfo
 {
@@ -66,35 +64,5 @@ public class Card: IViewableCardInfo
     {
         get => _CardEffect;
         set => _CardEffect = value ?? throw new ArgumentNullException(nameof(value));
-    }
-    
-    public bool ContainsUniqueSubtype()
-    {
-        return Subtypes.Any(t => t == "Unique");
-    }
-    
-    public bool ContainsSetUpSubtype()
-    {
-        return Subtypes.Any(t => t == "SetUp");
-    }
-    
-    public bool ContainsHeelSubtype()
-    {
-        return Subtypes.Any(t => t == "Heel");
-    }
-    
-    public bool ContainsFaceSubtype()
-    {
-        return Subtypes.Any(t => t == "Face");
-    }
-
-    public bool ContainsSuperStarLogo(string superStarLogo)
-    {
-        return Subtypes.Any(t => t.Contains(superStarLogo));
-    }
-
-    public bool IsReversalType()
-    {
-        return Types[0]=="Reversal";
     }
 }

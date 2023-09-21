@@ -29,8 +29,8 @@ public class StoneCold: SuperStar
         List<string> handCardsAsString = currentPlayer.StringCardsHand();
         int selectedCard = _view.AskPlayerToReturnOneCardFromHisHandToHisArsenal(Name, handCardsAsString);
         
-        Card discardedCard = currentPlayer.GetSpecificCardFromHand(selectedCard);
-        currentPlayer.TransferChoosinCardFromHandToArsenal(discardedCard, "Start");
+        CardController discardedCardController = currentPlayer.GetSpecificCardFromHand(selectedCard);
+        currentPlayer.TransferChoosinCardFromHandToArsenal(discardedCardController, "Start");
     }
     
     public override bool CanUseSuperAbility(PlayerController currentPlayer)

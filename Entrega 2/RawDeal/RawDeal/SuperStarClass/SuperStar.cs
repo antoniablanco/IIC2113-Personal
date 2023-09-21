@@ -76,8 +76,8 @@ public abstract class SuperStar
             
         if (selectedCard != -1)
         {
-            Card discardCard = player.GetSpecificCardFromHand(selectedCard);
-            player.TransferChoosinCardFromHandToRingSide(discardCard);
+            CardController discardCardController = player.GetSpecificCardFromHand(selectedCard);
+            player.TransferChoosinCardFromHandToRingSide(discardCardController);
         }
     }
 
@@ -86,8 +86,8 @@ public abstract class SuperStar
         List<string> ringSideAsString = player.StringCardsRingSide();
         int selectedCard =_view.AskPlayerToSelectCardsToPutInHisHand(Name, 1, ringSideAsString);
         
-        Card addedCard = player.GetSpecificCardFromRingSide(selectedCard);
-        player.TransferChoosinCardFromRingSideToHand(addedCard);
+        CardController addedCardController = player.GetSpecificCardFromRingSide(selectedCard);
+        player.TransferChoosinCardFromRingSideToHand(addedCardController);
     
     }
 }

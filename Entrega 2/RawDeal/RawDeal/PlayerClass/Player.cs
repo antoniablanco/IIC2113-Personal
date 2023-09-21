@@ -6,13 +6,13 @@ namespace RawDeal;
 public class Player
 {
     private SuperStar? _superestar;
-    private List<Card> _cardsArsenal = new List<Card>();
-    private List<Card> _cardsHand = new List<Card>();
-    private List<Card> _cardsRingSide = new List<Card>();
-    private List<Card> _cardsRingArea = new List<Card>();
+    private List<CardController> _cardsArsenal = new List<CardController>();
+    private List<CardController> _cardsHand = new List<CardController>();
+    private List<CardController> _cardsRingSide = new List<CardController>();
+    private List<CardController> _cardsRingArea = new List<CardController>();
     public bool theHabilityHasBeenUsedThisTurn = false;
 
-    public Player(List<Card> cardsPlayer, SuperStar? superstar)
+    public Player(List<CardController> cardsPlayer, SuperStar? superstar)
     {
         superestar = superstar;
         cardsArsenal.AddRange(cardsPlayer);
@@ -24,25 +24,25 @@ public class Player
         set => _superestar = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public List<Card> cardsArsenal
+    public List<CardController> cardsArsenal
     {
         get => _cardsArsenal;
         set => _cardsArsenal = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public List<Card> cardsHand
+    public List<CardController> cardsHand
     {
         get => _cardsHand;
         set => _cardsHand = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public List<Card> cardsRingSide
+    public List<CardController> cardsRingSide
     {
         get => _cardsRingSide;
         set => _cardsRingSide = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public List<Card> cardsRingArea
+    public List<CardController> cardsRingArea
     {
         get => _cardsRingArea;
         set => _cardsRingArea = value ?? throw new ArgumentNullException(nameof(value));
