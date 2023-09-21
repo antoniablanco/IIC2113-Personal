@@ -10,23 +10,20 @@ public class Game
     private View _view;
     private string _deckFolder;
     private GameLogic _gameLogic = new GameLogic();
-    private ValidateDeck _validateDeck = new ValidateDeck();
     
     
     public Game(View view, string deckFolder)
     {
         _view = view;
         _deckFolder = deckFolder;
+        _gameLogic.view = _view;
     }
     
     public void Play() 
     {
         try
         {
-            Player playerUno = CreatePlayer();
-            Player playerDos = CreatePlayer();
-            InitializeGameLogicVariables(playerUno, playerDos);
-            InitializePlayerHands();
+            CreatePlayers();
             GameGivenThatTheDecksAreValid();
         }
         catch (InvalidDeckException e)
@@ -35,15 +32,27 @@ public class Game
         }
     }
     
-    private Player CreatePlayer()
+    private void CreatePlayers()
+    {
+        PlayerController playerUno = CreateOnePlayer();
+        PlayerController playerDos = CreateOnePlayer();
+        InitializeGameLogicVariables(playerUno, playerDos);
+        InitializePlayerHands();
+    }
+    
+    private PlayerController CreateOnePlayer()
     {
         var (totalCards, totalSuperStars) = GetTotalCardsAndSuperStars();
         Player player = InitializePlayer(totalCards, totalSuperStars);
-        if (!_validateDeck.IsValidDeck(player))
+        ValidateDeck _validateDeck = new ValidateDeck(player);
+        
+        if (!_validateDeck.IsValidDeck())
         {
             throw new InvalidDeckException("The Deck Is Not Valid");
         }
-        return player;
+
+        PlayerController playerController = InitializePlayerController(player);
+        return playerController;
     }
     
     private (List<CardJson>, List<SuperStarJSON>) GetTotalCardsAndSuperStars() 
@@ -57,7 +66,6 @@ public class Game
     private Player InitializePlayer(List<CardJson> totalCards,List<SuperStarJSON> totalSuperStars) 
     {
         string stringPlayer = _view.AskUserToSelectDeck(_deckFolder);
-        _gameLogic.view = _view;
         List<Card> playerCardList = _gameLogic.CreateCards(stringPlayer, totalCards);
         SuperStar? superStarPlayer = _gameLogic.CreateSuperStar(stringPlayer, totalSuperStars);
         
@@ -65,8 +73,14 @@ public class Game
         
         return playerReturn;
     }
+
+    private PlayerController InitializePlayerController(Player player)
+    {
+        PlayerController playerController = new PlayerController(player);
+        return playerController;
+    }
     
-    private void InitializeGameLogicVariables(Player playerOne, Player playerTwo)
+    private void InitializeGameLogicVariables(PlayerController playerOne, PlayerController playerTwo)
     {
         _gameLogic.playerOne = playerOne;
         _gameLogic.playerTwo = playerTwo;

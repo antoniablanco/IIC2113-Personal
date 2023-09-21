@@ -9,32 +9,32 @@ public class StoneCold: SuperStar
         // Constructor de la clase base
     }
     
-    public override void UsingElectiveSuperAbility(Player currentPlayer, Player opponentPlayer)
+    public override void UsingElectiveSuperAbility(PlayerController currentPlayer, PlayerController opponentPlayer)
     {
-        currentPlayer.theHabilityHasBeenUsedThisTurn = true;
+        currentPlayer.TheSuperStarHasUsedHisSuperAbilityThisTurn();
         _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
         
         AddingCardFromArsenalToHand(currentPlayer);
         DiscardingCardsFromHandToArsenal(currentPlayer);
     }
 
-    private void AddingCardFromArsenalToHand(Player currentPlayer)
+    private void AddingCardFromArsenalToHand(PlayerController currentPlayer)
     {
         _view.SayThatPlayerDrawCards(Name, 1);
-        currentPlayer.TransferOfUnselectedCard(currentPlayer.cardsArsenal, currentPlayer.cardsHand);
+        currentPlayer.TranferUnselectedCardFromArsenalToHand();
     }
 
-    private void DiscardingCardsFromHandToArsenal(Player currentPlayer)
+    private void DiscardingCardsFromHandToArsenal(PlayerController currentPlayer)
     {
-        List<string> handCardsAsString = VisualizeCards.CreateStringCardList(currentPlayer.cardsHand);
+        List<string> handCardsAsString = currentPlayer.StringCardsHand();
         int selectedCard = _view.AskPlayerToReturnOneCardFromHisHandToHisArsenal(Name, handCardsAsString);
         
-        Card discardedCard = currentPlayer.cardsHand[selectedCard];
-        currentPlayer.CardTransferChoosingWhichOneToChange(discardedCard,  currentPlayer.cardsHand,currentPlayer.cardsArsenal, "Start");
+        Card discardedCard = currentPlayer.GetSpecificCardFromHand(selectedCard);
+        currentPlayer.TransferChoosinCardFromHandToArsenal(discardedCard, "Start");
     }
     
-    public override bool CanUseSuperAbility(Player currentPlayer)
+    public override bool CanUseSuperAbility(PlayerController currentPlayer)
     {
-        return (currentPlayer.cardsArsenal.Count > 0 && !currentPlayer.theHabilityHasBeenUsedThisTurn);
+        return (currentPlayer.NumberOfCardsInTheArsenal() > 0 && !currentPlayer.HasTheSuperAbilityBeenUsedThisTurn());
     }
 }

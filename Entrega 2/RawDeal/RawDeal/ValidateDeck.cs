@@ -2,32 +2,38 @@ namespace RawDeal;
 
 public class ValidateDeck
 {   
-    public bool IsValidDeck(Player player)
+    private Player player;
+    
+    public ValidateDeck(Player player)
+    {
+        this.player = player;
+    }
+    public bool IsValidDeck()
     {   
-        return (DeckSizeComplies(player) && HasSuperStar(player) && MeetsSubtypeConditions(player) && DeckSatisfiesSuperStarLogo(player));
+        return (DeckSizeComplies() && HasSuperStar() && MeetsSubtypeConditions() && DeckSatisfiesSuperStarLogo());
     }
     
-    private bool DeckSizeComplies(Player player)
+    private bool DeckSizeComplies()
     {
         return (player.cardsArsenal.Count() == 60);
     }
 
-    private bool HasSuperStar(Player player)
+    private bool HasSuperStar()
     {   
         return (player.superestar != null);
     }
 
-    private bool MeetsSubtypeConditions(Player player)
+    private bool MeetsSubtypeConditions()
     {
-        bool isDeckHeel = DeckContainsIsHeel(player);
-        bool isDeckFace = DeckContainsIsFace(player);
-        bool uniqueCardsMeetInfiniteCriteria = DeckMeetsUniqueQuantity(player);
-        bool noSetUpCardsMeetCriteria = DeckMeetsNoSetUpQuantity(player);
+        bool isDeckHeel = DeckContainsIsHeel();
+        bool isDeckFace = DeckContainsIsFace();
+        bool uniqueCardsMeetInfiniteCriteria = DeckMeetsUniqueQuantity();
+        bool noSetUpCardsMeetCriteria = DeckMeetsNoSetUpQuantity();
 
         return (!(isDeckHeel && isDeckFace) && uniqueCardsMeetInfiniteCriteria && noSetUpCardsMeetCriteria);
     }
 
-    private bool DeckMeetsUniqueQuantity(Player player)
+    private bool DeckMeetsUniqueQuantity()
     {
         var dictionaryNumberByCards = new Dictionary<string, int>();
         
@@ -42,7 +48,7 @@ public class ValidateDeck
         return true;
     }
 
-    private bool DeckMeetsNoSetUpQuantity(Player player)
+    private bool DeckMeetsNoSetUpQuantity()
     {
         var dictionaryNumberByCards = new Dictionary<string, int>();
         
@@ -58,17 +64,17 @@ public class ValidateDeck
         return true;
     }
 
-    private bool DeckContainsIsHeel(Player player)
+    private bool DeckContainsIsHeel()
     {
         return player.cardsArsenal.Any(carta => carta.ContainsHeelSubtype());
     }
 
-    private static bool DeckContainsIsFace(Player player)
+    private bool DeckContainsIsFace()
     {
         return player.cardsArsenal.Any(card => card.ContainsFaceSubtype());
     }
 
-    private bool DeckSatisfiesSuperStarLogo(Player player)
+    private bool DeckSatisfiesSuperStarLogo()
     {
         return player.cardsArsenal.All(card => ThisCardSatisfiesSuperStarLogo(card, player.superestar.Logo));
     }

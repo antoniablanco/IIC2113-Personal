@@ -16,10 +16,10 @@ public class GameLogic
     public View view;
     private VisualizeCards VisualizeCards = new VisualizeCards();
     
-    public Player playerOne { get; set; }
-    public Player playerTwo { get; set; }
+    public PlayerController playerOne { get; set; }
+    public PlayerController playerTwo { get; set; }
     
-    private List<Player> playersList;
+    private List<PlayerController> playersList;
 
     private int numCurrentPlayer = 0;
     private int numOppositePlayer = 1;
@@ -106,13 +106,13 @@ public class GameLogic
     private void SetVariableTrueBecauseTurnStarted()
     {   
         _IsTheTurnBeingPlayed = true;
-        playersList[numCurrentPlayer].theHabilityHasBeenUsedThisTurn = false;
+        playersList[numCurrentPlayer].TheTurnHasJustStartTheSuperStarHasNotUsedHisSuperAbility();
     }
 
     private void TheSuperAbilityThatIsAtTheStartOfTheTurnIsUsed()
     {
-        Player currentPlayer = playersList[numCurrentPlayer];
-        Player oppositePlayer = playersList[numOppositePlayer];
+        PlayerController currentPlayer = playersList[numCurrentPlayer];
+        PlayerController oppositePlayer = playersList[numOppositePlayer];
         playersList[numCurrentPlayer].UsingAutomaticSuperAbility(currentPlayer, oppositePlayer);
     }
     
@@ -134,8 +134,8 @@ public class GameLogic
     
     public void DisplayPlayerInformation() 
     {
-        PlayerInfo playerUno = new PlayerInfo(playerOne.superestar.Name, playerOne.FortitudRating(),playerOne.cardsHand.Count, playerOne.cardsArsenal.Count);
-        PlayerInfo playerDos = new PlayerInfo(playerTwo.superestar.Name, playerTwo.FortitudRating(), playerTwo.cardsHand.Count, playerTwo.cardsArsenal.Count);
+        PlayerInfo playerUno = new PlayerInfo(playerOne.NameOfSuperStar(), playerOne.FortitudRating(), playerOne.NumberOfCardsInTheHand(), playerOne.NumberOfCardsInTheArsenal());
+        PlayerInfo playerDos = new PlayerInfo(playerTwo.NameOfSuperStar(), playerTwo.FortitudRating(), playerTwo.NumberOfCardsInTheHand(), playerTwo.NumberOfCardsInTheArsenal());
         
         List<PlayerInfo> playersListToPrint = (StartingPlayerNumber == 0) ? new List<PlayerInfo> { playerUno, playerDos } : new List<PlayerInfo> { playerDos, playerUno };
         
@@ -144,7 +144,7 @@ public class GameLogic
 
     public void CreatePlayerList()
     {
-        playersList = (StartingPlayerNumber == 0) ? new List<Player> { playerOne, playerTwo } : new List<Player> { playerTwo, playerOne };
+        playersList = (StartingPlayerNumber == 0) ? new List<PlayerController> { playerOne, playerTwo } : new List<PlayerController> { playerTwo, playerOne };
     }
 
     public bool ShouldWeContinueTheGame()
@@ -170,12 +170,17 @@ public class GameLogic
     public void ActionPlayCard() 
     {
         int selectedCard = view.AskUserToSelectAPlay(GetPossibleCardsToPlayString());
-        if (selectedCard != -1)
+        if ( IsValidIndexOfCard(selectedCard))
         {   
             Card playedCard = playersList[numCurrentPlayer].CardsAvailableToPlay()[selectedCard];
             PrintActionPlayCard(playedCard);
             AddCardPlayedToRingArea(playedCard);
         }
+    }
+
+    private bool IsValidIndexOfCard(int selectedCard)
+    {
+        return selectedCard != -1;
     }
 
     private List<string> GetPossibleCardsToPlayString()
@@ -232,10 +237,8 @@ public class GameLogic
     }
 
     private void ShowOneFaceDownCard(int currentDamage, int totalDamage)
-    {   
-        List<Card> cardsRingSide = playersList[numOppositePlayer].cardsRingSide;
-        List<Card> cardsArsenal = playersList[numOppositePlayer].cardsArsenal;
-        Card flippedCard = playersList[numOppositePlayer].TransferOfUnselectedCard(cardsArsenal, cardsRingSide);
+    {
+        Card flippedCard = playersList[numOppositePlayer].TranferUnselectedCardFromArsenalToRingSide();
         string flippedCardString = VisualizeCards.GetStringCardInfo(flippedCard);
         view.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
     }
@@ -254,9 +257,7 @@ public class GameLogic
 
     private void AddCardPlayedToRingArea(Card playedCard)
     {
-        List<Card> cardsHand = playersList[numCurrentPlayer].cardsHand;
-        List<Card> cardsRingArea = playersList[numCurrentPlayer].cardsRingArea;
-        playersList[numCurrentPlayer].CardTransferChoosingWhichOneToChange(playedCard, cardsHand, cardsRingArea);
+        playersList[numCurrentPlayer].TransferChoosinCardFromHandToRingArea(playedCard);
     }
     
     public void SelectCardsToView()
@@ -265,28 +266,27 @@ public class GameLogic
         switch (setCardsToView)
         {
             case CardSet.Hand:
-                ActionSeeTotalCards(playersList[numCurrentPlayer].cardsHand);
+                ActionSeeTotalCards(playersList[numCurrentPlayer].StringCardsHand());
                 break;
             case CardSet.RingArea:
-                ActionSeeTotalCards(playersList[numCurrentPlayer].cardsRingArea);
+                ActionSeeTotalCards(playersList[numCurrentPlayer].StringCardsRingArea());
                 break;
             case CardSet.RingsidePile:
-                ActionSeeTotalCards(playersList[numCurrentPlayer].cardsRingSide);
+                ActionSeeTotalCards(playersList[numCurrentPlayer].StringCardsRingSide());
                 break;
             case CardSet.OpponentsRingArea:
-                ActionSeeTotalCards(playersList[numOppositePlayer].cardsRingArea);
+                ActionSeeTotalCards(playersList[numOppositePlayer].StringCardsRingArea());
                 break;
             case CardSet.OpponentsRingsidePile:
-                ActionSeeTotalCards(playersList[numOppositePlayer].cardsRingSide);
+                ActionSeeTotalCards(playersList[numOppositePlayer].StringCardsRingSide());
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
     }
 
-    private void ActionSeeTotalCards(List<Card> cardSet)
+    private void ActionSeeTotalCards(List<String> stringCardSet)
     {   
-        List<String> stringCardSet = VisualizeCards.CreateStringCardList(cardSet);
         view.ShowCards(stringCardSet);
     }
 

@@ -4,7 +4,7 @@ using RawDealView.Formatters;
 namespace RawDeal;
 
 
-public class Card
+public class Card: IViewableCardInfo
 {
     private string _Title;
     private List<string> _Types = new List<string>();

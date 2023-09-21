@@ -9,11 +9,11 @@ public class TheRock: SuperStar
         // Constructor de la clase base
     }
     
-    public override void UsingAutomaticSuperAbilityAtTheStartOfTheTurn(Player currentPlayer, Player opponentPlayer)
+    public override void UsingAutomaticSuperAbilityAtTheStartOfTheTurn(PlayerController currentPlayer, PlayerController opponentPlayer)
     {  
         if (CanUseSuperAbility(currentPlayer))
-        {   
-            currentPlayer.theHabilityHasBeenUsedThisTurn = true;
+        {
+            currentPlayer.TheSuperStarHasUsedHisSuperAbilityThisTurn();
             if (_view.DoesPlayerWantToUseHisAbility(Name))
             {
                 AddingCardFromRingSideToArsenal(currentPlayer);
@@ -21,17 +21,17 @@ public class TheRock: SuperStar
         }
     }
     
-    private void AddingCardFromRingSideToArsenal(Player currentPlayer)
+    private void AddingCardFromRingSideToArsenal(PlayerController currentPlayer)
     {
         _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
-        List<string> ringAreaAsString = VisualizeCards.CreateStringCardList(currentPlayer.cardsRingSide);
+        List<string> ringAreaAsString = currentPlayer.StringCardsRingSide();
         int selectedCardIndex = _view.AskPlayerToSelectCardsToRecover(Name, 1, ringAreaAsString);
-        Card discardedCard = currentPlayer.cardsRingSide[selectedCardIndex];
-        currentPlayer.CardTransferChoosingWhichOneToChange(discardedCard, currentPlayer.cardsRingSide, currentPlayer.cardsArsenal, "Start");
+        Card discardedCard = currentPlayer.GetSpecificCardFromRingSide(selectedCardIndex);
+        currentPlayer.TransferChoosinCardFromRingSideToArsenal(discardedCard,  "Start");
     }
     
-    public override bool CanUseSuperAbility(Player currentPlayer)
+    public override bool CanUseSuperAbility(PlayerController currentPlayer)
     {
-        return currentPlayer.cardsRingSide.Count > 0 && !currentPlayer.theHabilityHasBeenUsedThisTurn;
+        return currentPlayer.NumberOfCardsInRingSide() > 0 && !currentPlayer.HasTheSuperAbilityBeenUsedThisTurn();
     }
 }

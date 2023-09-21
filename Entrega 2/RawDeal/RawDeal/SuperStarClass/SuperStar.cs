@@ -54,40 +54,40 @@ public abstract class SuperStar
         set => _SuperstarAbility = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public virtual bool CanUseSuperAbility(Player currentPlayer)
+    public virtual bool CanUseSuperAbility(PlayerController currentPlayer)
     {
         return false;
     }
 
-    public virtual void UsingElectiveSuperAbility(Player currentPlayer, Player opponentPlayer)
+    public virtual void UsingElectiveSuperAbility(PlayerController currentPlayer, PlayerController opponentPlayer)
     {
         
     }
     
-    public virtual void UsingAutomaticSuperAbilityAtTheStartOfTheTurn(Player currentPlayer, Player opponentPlayer)
+    public virtual void UsingAutomaticSuperAbilityAtTheStartOfTheTurn(PlayerController currentPlayer, PlayerController opponentPlayer)
     {
         
     }
 
-    protected void DiscardingCardsFromHandToRingSide(Player player, int cardsToDiscardCoun)
+    protected void DiscardingCardsFromHandToRingSide(PlayerController player, int cardsToDiscardCount)
     {
-        List<string> handFormatoString = VisualizeCards.CreateStringCardList(player.cardsHand);
-        int selectedCard =_view.AskPlayerToSelectACardToDiscard(handFormatoString, player.NameOfSuperStar(), player.NameOfSuperStar(), cardsToDiscardCoun);
+        List<string> handFormatoString = player.StringCardsHand();
+        int selectedCard =_view.AskPlayerToSelectACardToDiscard(handFormatoString, player.NameOfSuperStar(), player.NameOfSuperStar(), cardsToDiscardCount);
             
         if (selectedCard != -1)
         {
-            Card discardCard = player.cardsHand[selectedCard];
-            player.CardTransferChoosingWhichOneToChange(discardCard, player.cardsHand, player.cardsRingSide);
+            Card discardCard = player.GetSpecificCardFromHand(selectedCard);
+            player.TransferChoosinCardFromHandToRingSide(discardCard);
         }
     }
 
-    protected void AddingCardFromRingSideToHand(Player player)
+    protected void AddingCardFromRingSideToHand(PlayerController player)
     {
-        List<string> ringSideAsString = VisualizeCards.CreateStringCardList(player.cardsRingSide);
+        List<string> ringSideAsString = player.StringCardsRingSide();
         int selectedCard =_view.AskPlayerToSelectCardsToPutInHisHand(Name, 1, ringSideAsString);
         
-        Card addedCard = player.cardsRingSide[selectedCard];
-        player.CardTransferChoosingWhichOneToChange(addedCard, player.cardsRingSide, player.cardsHand);
+        Card addedCard = player.GetSpecificCardFromRingSide(selectedCard);
+        player.TransferChoosinCardFromRingSideToHand(addedCard);
     
     }
 }
