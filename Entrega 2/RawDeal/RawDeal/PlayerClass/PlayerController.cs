@@ -113,12 +113,7 @@ public class PlayerController
             sourceList.Remove(cardController);
         }
     }
-
-    public void TheSuperStarHasUsedHisSuperAbilityThisTurn()
-    {
-        player.theHabilityHasBeenUsedThisTurn = true;
-    }
-
+    
     public void TransferChoosinCardFromHandToRingArea(CardController cardController, string moveToStart = "End")
     {
         CardTransferChoosingWhichOneToChange(cardController, player.cardsHand, player.cardsRingArea, moveToStart);
@@ -144,6 +139,11 @@ public class PlayerController
         CardTransferChoosingWhichOneToChange(cardController, player.cardsRingSide, player.cardsArsenal, moveToStart);
     }
     
+    public void TheSuperStarHasUsedHisSuperAbilityThisTurn()
+    {
+        player.theHabilityHasBeenUsedThisTurn = true;
+    }
+
     public void TheTurnHasJustStartTheSuperStarHasNotUsedHisSuperAbility()
     {
         player.theHabilityHasBeenUsedThisTurn = false;

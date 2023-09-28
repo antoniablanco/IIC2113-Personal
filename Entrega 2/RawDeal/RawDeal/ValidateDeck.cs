@@ -27,13 +27,12 @@ public class ValidateDeck
     {
         bool isDeckHeel = DeckContainsIsHeel();
         bool isDeckFace = DeckContainsIsFace();
-        bool uniqueCardsMeetInfiniteCriteria = DeckMeetsUniqueQuantity();
-        bool noSetUpCardsMeetCriteria = DeckMeetsNoSetUpQuantity();
+        bool cardsMeetsQuantityCriteria = DeckMeetsQuantityCriteria();
 
-        return (!(isDeckHeel && isDeckFace) && uniqueCardsMeetInfiniteCriteria && noSetUpCardsMeetCriteria);
+        return (!(isDeckHeel && isDeckFace) && cardsMeetsQuantityCriteria);
     }
 
-    private bool DeckMeetsUniqueQuantity()
+    private bool DeckMeetsQuantityCriteria()
     {
         var dictionaryNumberByCards = new Dictionary<string, int>();
         
@@ -42,26 +41,15 @@ public class ValidateDeck
             dictionaryNumberByCards.TryGetValue(card.GetCardTitle(), out int count);
             dictionaryNumberByCards[card.GetCardTitle()] = count + 1;
 
-            if (card.ContainsUniqueSubtype() && count > 0)
+            if (SatisfiedCount(card, count))
                 return false;
         }
         return true;
     }
 
-    private bool DeckMeetsNoSetUpQuantity()
+    private bool SatisfiedCount(CardController card, int count)
     {
-        var dictionaryNumberByCards = new Dictionary<string, int>();
-        
-        foreach (var card in player.cardsArsenal)
-        {
-            dictionaryNumberByCards.TryGetValue(card.GetCardTitle(), out int count);
-            dictionaryNumberByCards[card.GetCardTitle()] = count + 1;
-
-            if (!card.ContainsSetUpSubtype() && count > 2)
-                return false;
-        }
-
-        return true;
+        return (card.ContainsUniqueSubtype() && count > 0) || (!card.ContainsSetUpSubtype() && count > 2);
     }
 
     private bool DeckContainsIsHeel()
