@@ -1,7 +1,7 @@
 using System.Reflection;
 using RawDealView.Formatters;
 
-namespace RawDeal.SuperStarClases;
+namespace RawDeal.SuperStarClass;
 
 public class SuperStarJSON
 {

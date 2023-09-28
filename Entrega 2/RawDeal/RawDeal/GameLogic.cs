@@ -1,8 +1,6 @@
-using RawDeal.SuperStarClases;
+using RawDeal.SuperStarClass;
 using RawDealView;
 using RawDealView.Options;
-using RawDealView.Utils;
-using RawDealView.Views;
 
 namespace RawDeal;
 using System.Text.Json ;
@@ -66,8 +64,8 @@ public class GameLogic
         {
             return superstar;
         }
-        SuperStar superstarNull = new HHH("Null", "Null", 0, 0,"Null", view);
-        return superstarNull;
+
+        return null;
     }
 
     private string GetSuperStarName(string deck)

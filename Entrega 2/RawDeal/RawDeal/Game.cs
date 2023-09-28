@@ -1,7 +1,7 @@
 using System.ComponentModel.Design;
 using RawDealView;
 using RawDealView.Options;
-using RawDeal.SuperStarClases;
+using RawDeal.SuperStarClass;
 
 namespace RawDeal;
 

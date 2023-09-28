@@ -1,18 +1,22 @@
+using RawDeal.DecksBehavior;
+
 namespace RawDeal;
 
 public class PlayerController
 {
     private Player player;
     private VisualizeCards VisualizeCards = new VisualizeCards();
+    private CardMovement CardMovement;
     
     public PlayerController(Player player)
     {
         this.player = player;
+        CardMovement = new CardMovement(player);
     }
     
     public void DrawCard()
-    {
-        TransferOfUnselectedCard(player.cardsArsenal, player.cardsHand, false);
+    {   
+        CardMovement.TransferOfUnselectedCard(player.cardsArsenal, player.cardsHand, false);
     }
     
     public string NameOfSuperStar()
@@ -75,70 +79,6 @@ public class PlayerController
         player.superestar.UsingAutomaticSuperAbilityAtTheStartOfTheTurn( currentPlayer, oppositePlayer);
     }
     
-    public CardController? TransferOfUnselectedCard(List<CardController> sourceList, List<CardController> destinationList, bool moveToStart)
-    {
-        if (sourceList.Count == 0) return null;
-    
-        int index = moveToStart ? 0 : sourceList.Count - 1;
-        CardController cardControllerMoved = sourceList[index];
-    
-        sourceList.RemoveAt(index);
-        destinationList.Insert(moveToStart ? 0 : destinationList.Count, cardControllerMoved);
-    
-        return cardControllerMoved;
-    }
-    
-    
-    public CardController? TranferUnselectedCardFromArsenalToRingArea(bool moveToStart = false)
-    {
-        return TransferOfUnselectedCard(player.cardsArsenal, player.cardsRingArea, moveToStart);
-    }
-    
-    public CardController? TranferUnselectedCardFromArsenalToHand(bool moveToStart = false)
-    {
-        return TransferOfUnselectedCard(player.cardsArsenal, player.cardsHand, moveToStart);
-    }
-    
-    public CardController? TranferUnselectedCardFromArsenalToRingSide(bool moveToStart = false)
-    {
-        return TransferOfUnselectedCard(player.cardsArsenal, player.cardsRingSide, moveToStart);
-    }
-    
-    public void CardTransferChoosingWhichOneToChange(CardController cardController, List<CardController> sourceList, List<CardController> destinationList, string moveToStart)
-    {   
-        if (sourceList.Count > 0)
-        {
-            int index = (moveToStart == "Start") ? 0 : destinationList.Count;
-            destinationList.Insert(index, cardController);
-            sourceList.Remove(cardController);
-        }
-    }
-    
-    public void TransferChoosinCardFromHandToRingArea(CardController cardController, string moveToStart = "End")
-    {
-        CardTransferChoosingWhichOneToChange(cardController, player.cardsHand, player.cardsRingArea, moveToStart);
-    }
-    
-    public void TransferChoosinCardFromHandToArsenal(CardController cardController, string moveToStart = "End")
-    {
-        CardTransferChoosingWhichOneToChange(cardController, player.cardsHand, player.cardsArsenal, moveToStart);
-    }
-    
-    public void TransferChoosinCardFromHandToRingSide(CardController cardController, string moveToStart = "End")
-    {
-        CardTransferChoosingWhichOneToChange(cardController, player.cardsHand, player.cardsRingSide, moveToStart);
-    }
-    
-    public void TransferChoosinCardFromRingSideToHand(CardController cardController, string moveToStart = "End")
-    {
-        CardTransferChoosingWhichOneToChange(cardController, player.cardsRingSide, player.cardsHand, moveToStart);
-    }
-    
-    public void TransferChoosinCardFromRingSideToArsenal(CardController cardController, string moveToStart = "End")
-    {
-        CardTransferChoosingWhichOneToChange(cardController, player.cardsRingSide, player.cardsArsenal, moveToStart);
-    }
-    
     public void TheSuperStarHasUsedHisSuperAbilityThisTurn()
     {
         player.theHabilityHasBeenUsedThisTurn = true;
@@ -195,6 +135,49 @@ public class PlayerController
     public bool HasTheSuperAbilityBeenUsedThisTurn()
     {
         return player.theHabilityHasBeenUsedThisTurn;
+    }
+    
+    
+    
+    public CardController? TranferUnselectedCardFromArsenalToRingArea(bool moveToStart = false)
+    {
+        return CardMovement.TransferOfUnselectedCard(player.cardsArsenal, player.cardsRingArea, moveToStart);
+    }
+    
+    public CardController? TranferUnselectedCardFromArsenalToHand(bool moveToStart = false)
+    {
+        return CardMovement.TransferOfUnselectedCard(player.cardsArsenal, player.cardsHand, moveToStart);
+    }
+    
+    public CardController? TranferUnselectedCardFromArsenalToRingSide(bool moveToStart = false)
+    {
+        return CardMovement.TransferOfUnselectedCard(player.cardsArsenal, player.cardsRingSide, moveToStart);
+    }
+    
+    
+    public void TransferChoosinCardFromHandToRingArea(CardController cardController, string moveToStart = "End")
+    {
+        CardMovement.CardTransferChoosingWhichOneToChange(cardController, player.cardsHand, player.cardsRingArea, moveToStart);
+    }
+    
+    public void TransferChoosinCardFromHandToArsenal(CardController cardController, string moveToStart = "End")
+    {
+        CardMovement.CardTransferChoosingWhichOneToChange(cardController, player.cardsHand, player.cardsArsenal, moveToStart);
+    }
+    
+    public void TransferChoosinCardFromHandToRingSide(CardController cardController, string moveToStart = "End")
+    {
+        CardMovement.CardTransferChoosingWhichOneToChange(cardController, player.cardsHand, player.cardsRingSide, moveToStart);
+    }
+    
+    public void TransferChoosinCardFromRingSideToHand(CardController cardController, string moveToStart = "End")
+    {
+        CardMovement.CardTransferChoosingWhichOneToChange(cardController, player.cardsRingSide, player.cardsHand, moveToStart);
+    }
+    
+    public void TransferChoosinCardFromRingSideToArsenal(CardController cardController, string moveToStart = "End")
+    {
+        CardMovement.CardTransferChoosingWhichOneToChange(cardController, player.cardsRingSide, player.cardsArsenal, moveToStart);
     }
     
 }

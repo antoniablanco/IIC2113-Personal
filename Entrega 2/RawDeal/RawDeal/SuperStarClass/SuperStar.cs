@@ -1,8 +1,9 @@
 using System.Reflection;
 using RawDealView.Formatters;
 using RawDealView;
+using RawDeal.DecksBehavior;
 
-namespace RawDeal.SuperStarClases;
+namespace RawDeal.SuperStarClass;
 
 public abstract class SuperStar
 {

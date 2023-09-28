@@ -1,4 +1,4 @@
-using RawDeal.SuperStarClases;
+using RawDeal.SuperStarClass;
 using RawDealView;
 
 namespace RawDeal;
