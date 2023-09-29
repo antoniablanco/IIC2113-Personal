@@ -2,7 +2,7 @@ namespace RawDeal;
 using System.Reflection;
 using RawDealView.Formatters;
 
-public class Card: IViewableCardInfo
+public abstract class Card
 {
     private string _Title;
     private List<string> _Types = new List<string>();

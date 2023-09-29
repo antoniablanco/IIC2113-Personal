@@ -39,21 +39,6 @@ public class GameLogic
         return superstars;
     }
     
-    public List<CardController> CreateCards(string playerString, List<CardJson> totalCards) 
-    {
-        string pathDeck = Path.Combine(playerString);
-        string[] lines = File.ReadAllLines(pathDeck);
-
-        var matchingCards = (from line in lines
-            from card in totalCards
-            where line.Trim() == card.Title 
-            select new Card(card.Title, card.Types, card.Subtypes, card.Fortitude, card.Damage, card.StunValue, card.CardEffect)).ToList();
-
-        var cardControllers = matchingCards.Select(card => new CardController(card)).ToList();
-
-        return cardControllers;
-    }
-    
     public SuperStar? CreateSuperStar(string deck, List<SuperStarJSON> totalSuperStars) 
     {
         string firstLineDeck = GetSuperStarName(deck);

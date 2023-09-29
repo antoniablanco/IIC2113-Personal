@@ -2,6 +2,7 @@ using System.ComponentModel.Design;
 using RawDealView;
 using RawDealView.Options;
 using RawDeal.SuperStarClass;
+using RawDeal.CardClass;
 
 namespace RawDeal;
 
@@ -10,6 +11,7 @@ public class Game
     private View _view;
     private string _deckFolder;
     private GameLogic _gameLogic = new GameLogic();
+    private CreateCards _createCards = new CreateCards();
     
     
     public Game(View view, string deckFolder)
@@ -66,7 +68,8 @@ public class Game
     private Player InitializePlayer(List<CardJson> totalCards,List<SuperStarJSON> totalSuperStars) 
     {
         string stringPlayer = _view.AskUserToSelectDeck(_deckFolder);
-        List<CardController> playerCardList = _gameLogic.CreateCards(stringPlayer, totalCards);
+        //List<CardController> playerCardList = _gameLogic.CreateCards(stringPlayer, totalCards);
+        List<CardController> playerCardList = _createCards.CreateDiferentTypesOfCard(stringPlayer, totalCards);
         SuperStar? superStarPlayer = _gameLogic.CreateSuperStar(stringPlayer, totalSuperStars);
         
         Player playerReturn = new Player(playerCardList, superStarPlayer);
