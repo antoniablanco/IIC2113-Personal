@@ -13,12 +13,40 @@ public class PlayCard
         int selectedCard = gameStructureInfo.view.AskUserToSelectAPlay(GetPossibleCardsToPlayString());
         if ( IsValidIndexOfCard(selectedCard))
         {   
-            CardController playedCardController = gameStructureInfo.ControllerCurrentPlayer.CardsAvailableToPlay()[selectedCard];
-            PrintActionPlayCard(playedCardController);
-            gameStructureInfo.GameLogic.AddCardPlayedToRingArea(playedCardController);
+            Tuple<CardController, int> playedCardController = GetCardPlayed(selectedCard);
+            PlayCardByType(playedCardController);
         }
     }
+    
+    private Tuple<CardController, int> GetCardPlayed(int indexSelectedCard) 
+    {   
+        List<CardController> possibleCardsToPlay = gameStructureInfo.ControllerCurrentPlayer.CardsAvailableToPlay();
+        List<Tuple<CardController, int>> allCardsAndTheirTypes = gameStructureInfo.VisualizeCards.GetPosiblesCardsToPlay(possibleCardsToPlay);
 
+        return allCardsAndTheirTypes[indexSelectedCard];
+
+    }
+    
+    private void PlayCardByType(Tuple<CardController, int> playedCardController)
+    {
+        if (playedCardController.Item1.GetCardTypes()[playedCardController.Item2] == "Maneuver")
+        {
+            PlayManeuverCard(playedCardController.Item1, playedCardController.Item2);
+        }
+        else if (playedCardController.Item1.GetCardTypes()[playedCardController.Item2] == "Action")
+        {
+            PlayActionCard(playedCardController.Item1, playedCardController.Item2);
+        }
+        else 
+            Console.WriteLine("No se encuentra el tipo de carta");
+    }
+    
+    private void PlayManeuverCard(CardController playedCardController, int indexType)
+    {
+        PrintActionPlayCard(playedCardController, indexType);
+        gameStructureInfo.GameLogic.AddCardPlayedToRingArea(playedCardController);
+    }
+    
     private bool IsValidIndexOfCard(int selectedCard)
     {
         return selectedCard != -1;
@@ -31,20 +59,21 @@ public class PlayCard
         return cardsStrings;
     }
 
-    private void PrintActionPlayCard(CardController playedCardController)
+    private void PrintActionPlayCard(CardController playedCardController, int indexType)
     {   
-        SayThatTheyAreGoingToPlayACard(playedCardController);
-        gameStructureInfo.view.SayThatPlayerSuccessfullyPlayedACard();
+        SayThatTheyAreGoingToPlayACard(playedCardController, indexType);
         int totalDamage = GetDamageProduced(playedCardController);
-        SayThatTheyAreGoingToReceiveDamage(totalDamage);
+        if (totalDamage > 0)
+            SayThatTheyAreGoingToReceiveDamage(totalDamage);
         CauseDamageActionPlayCard(totalDamage);
     }
 
-    private void SayThatTheyAreGoingToPlayACard(CardController playedCardController)
+    private void SayThatTheyAreGoingToPlayACard(CardController playedCardController, int indexType)
     {
-        string playedCardString = gameStructureInfo.VisualizeCards.GetStringPlayedInfo(playedCardController);
+        string playedCardString = gameStructureInfo.VisualizeCards.GetStringPlayedInfo(playedCardController, indexType);
         string nameSuperStar = gameStructureInfo.ControllerCurrentPlayer.NameOfSuperStar();
         gameStructureInfo.view.SayThatPlayerIsTryingToPlayThisCard(nameSuperStar, playedCardString);
+        gameStructureInfo.view.SayThatPlayerSuccessfullyPlayedACard();
     }
 
     private int GetDamageProduced(CardController playedCardController)
@@ -83,6 +112,27 @@ public class PlayCard
         CardController flippedCardController = gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
         string flippedCardString = gameStructureInfo.VisualizeCards.GetStringCardInfo(flippedCardController);
         gameStructureInfo.view.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
+    }
+
+    private void PlayActionCard(CardController playedCardController, int indexType)
+    {
+        SayThatTheyAreGoingToPlayACard(playedCardController, indexType);
+        gameStructureInfo.view.SayThatPlayerMustDiscardThisCard(gameStructureInfo.ControllerCurrentPlayer.NameOfSuperStar(), playedCardController.GetCardTitle());
+        gameStructureInfo.view.SayThatPlayerDrawCards(gameStructureInfo.ControllerCurrentPlayer.NameOfSuperStar(), 1);
+        DiscardActionCard(playedCardController);
+        StealCard();
+    }
+
+    private void DiscardActionCard(CardController playedCardController)
+    {
+        Player player = gameStructureInfo.GetCurrentPlayer();
+        gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingSide(player, playedCardController);
+    }
+    
+    private void StealCard()
+    {   
+        Player player = gameStructureInfo.GetCurrentPlayer();
+        gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToHand(player);
     }
     
 }

@@ -20,6 +20,7 @@ public class GameLogic
         GetSetGameVariables.SetVariableTrueBecauseTurnStarted();
         GameStructureInfo.view.SayThatATurnBegins(GameStructureInfo.ControllerCurrentPlayer.NameOfSuperStar());
         TheSuperAbilityThatIsAtTheStartOfTheTurnIsUsed();
+        GameStructureInfo.ControllerCurrentPlayer.BlockinSuperAbilityBecauseIsJustAtTheStartOfTheTurn(GameStructureInfo);
     }
     
     private void TheSuperAbilityThatIsAtTheStartOfTheTurnIsUsed()

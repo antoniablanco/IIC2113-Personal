@@ -71,6 +71,12 @@ public abstract class SuperStar
     {
         
     }
+    
+    public virtual void BlockinSuperAbilityBecauseIsJustAtTheStartOfTheTurn(GameStructureInfo gameStructureInfo)
+    {
+        
+    }
+    
     protected void DiscardingCardsFromHandToRingSide(GameStructureInfo gameStructureInfo, PlayerController player, int cardsToDiscardCount)
     {
         List<string> handFormatoString = player.StringCardsHand();

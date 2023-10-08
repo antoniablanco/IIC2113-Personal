@@ -43,4 +43,17 @@ public class VisualizeCards
         int[] indexes = Enumerable.Range(0, cardController.GetCardTypes().Count()).ToArray();
         return indexes.Select(index => GetStringPlayedInfo(cardController, index)).ToList();
     }
+
+    public List<Tuple<CardController, int>> GetPosiblesCardsToPlay(List<CardController> cardsInSelectedSet)
+    {
+        List<Tuple<CardController, int>> allTypesForCard = new List<Tuple<CardController, int>>();
+
+        foreach (var cardController in cardsInSelectedSet)
+        {
+            int[] indexes = Enumerable.Range(0, cardController.GetCardTypes().Count()).ToArray();
+            allTypesForCard.AddRange(indexes.Select(index => new Tuple<CardController, int>(cardController, index)));
+        }
+
+        return allTypesForCard;
+    }
 }

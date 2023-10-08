@@ -79,6 +79,11 @@ public class PlayerController
         player.superestar.UsingAutomaticSuperAbilityAtTheStartOfTheTurn(gameStructureInfo);
     }
     
+    public void BlockinSuperAbilityBecauseIsJustAtTheStartOfTheTurn(GameStructureInfo gameStructureInfo)
+    {
+        player.superestar.BlockinSuperAbilityBecauseIsJustAtTheStartOfTheTurn(gameStructureInfo);
+    }
+    
     public void TheSuperStarHasUsedHisSuperAbilityThisTurn()
     {
         player.theHabilityHasBeenUsedThisTurn = true;
