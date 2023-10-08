@@ -11,5 +11,6 @@ public class GameStructureInfo
     public PlayerController playerTwo;
     public PlayerController currentPlayer;
     public PlayerController opponentPlayer;
+    public PlayerController winnerPlayer;
 
 }

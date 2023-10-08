@@ -14,17 +14,6 @@ public class GameLogic
     private VisualizeCards VisualizeCards = new VisualizeCards();
     public GameStructureInfo gameStructureInfo = new GameStructureInfo();
     
-    public PlayerController playerOne { get; set; }
-    public PlayerController playerTwo { get; set; }
-    
-    private List<PlayerController> playersList;
-
-    private int numCurrentPlayer = 0;
-    private int numOppositePlayer = 1;
-    private int numWinnerPlayer = 1;
-    private int StartingPlayerNumber = 0;
-    
-    
     public List<CardJson> DeserializeJsonCards()
     {
         string myJson = File.ReadAllText (Path.Combine("data","cards.json")) ;
@@ -86,60 +75,60 @@ public class GameLogic
 
     public void SettingTurnStartInformation()
     {
-        playersList[numCurrentPlayer].DrawCard();
+        gameStructureInfo.currentPlayer.DrawCard();
         SetVariableTrueBecauseTurnStarted();
-        gameStructureInfo.view.SayThatATurnBegins(playersList[numCurrentPlayer].NameOfSuperStar());
+        gameStructureInfo.view.SayThatATurnBegins(gameStructureInfo.currentPlayer.NameOfSuperStar());
         TheSuperAbilityThatIsAtTheStartOfTheTurnIsUsed();
     }
 
     private void SetVariableTrueBecauseTurnStarted()
     {   
         _IsTheTurnBeingPlayed = true;
-        playersList[numCurrentPlayer].TheTurnHasJustStartTheSuperStarHasNotUsedHisSuperAbility();
+        gameStructureInfo.currentPlayer.TheTurnHasJustStartTheSuperStarHasNotUsedHisSuperAbility();
     }
 
     private void TheSuperAbilityThatIsAtTheStartOfTheTurnIsUsed()
     {
-        PlayerController currentPlayer = playersList[numCurrentPlayer];
-        PlayerController oppositePlayer = playersList[numOppositePlayer];
-        playersList[numCurrentPlayer].UsingAutomaticSuperAbility(currentPlayer, oppositePlayer);
+        PlayerController currentPlayer = gameStructureInfo.currentPlayer;
+        PlayerController oppositePlayer = gameStructureInfo.opponentPlayer;
+        gameStructureInfo.currentPlayer.UsingAutomaticSuperAbility(currentPlayer, oppositePlayer);
     }
     
-    public void PlayerStartedGame() // REVISAR
-    {
-        StartingPlayerNumber = (playerOne.GetSuperStarValue() < playerTwo.GetSuperStarValue()) ? 1 : 0;
-        //gameStructureInfo.currentPlayer = (gameStructureInfo.playerOne.GetSuperStarValue() < gameStructureInfo.playerTwo.GetSuperStarValue()) ? gameStructureInfo.playerTwo : gameStructureInfo.playerOne;
-    }
 
     public void ThePlayerDrawTheirInitialsHands()
     {
-        playerOne.DrawInitialHandCards();
-        playerTwo.DrawInitialHandCards();
+        gameStructureInfo.playerOne.DrawInitialHandCards();
+        gameStructureInfo.playerTwo.DrawInitialHandCards();
     }
     
-    public string GetWinnerSuperstarName()
-    {
-        return playersList[numWinnerPlayer].NameOfSuperStar();
+    public string GetWinnerSuperstarName() //ELIMINAR PRINT
+    {   
+        Console.WriteLine("El ganador es: ");
+        return gameStructureInfo.winnerPlayer.NameOfSuperStar();
     }
     
     public void DisplayPlayerInformation() 
     {
-        PlayerInfo playerUno = new PlayerInfo(playerOne.NameOfSuperStar(), playerOne.FortitudRating(), playerOne.NumberOfCardsInTheHand(), playerOne.NumberOfCardsInTheArsenal());
-        PlayerInfo playerDos = new PlayerInfo(playerTwo.NameOfSuperStar(), playerTwo.FortitudRating(), playerTwo.NumberOfCardsInTheHand(), playerTwo.NumberOfCardsInTheArsenal());
+        PlayerInfo playerUno = new PlayerInfo(gameStructureInfo.playerOne.NameOfSuperStar(), gameStructureInfo.playerOne.FortitudRating(), gameStructureInfo.playerOne.NumberOfCardsInTheHand(), gameStructureInfo.playerOne.NumberOfCardsInTheArsenal());
+        PlayerInfo playerDos = new PlayerInfo(gameStructureInfo.playerTwo.NameOfSuperStar(), gameStructureInfo.playerTwo.FortitudRating(), gameStructureInfo.playerTwo.NumberOfCardsInTheHand(), gameStructureInfo.playerTwo.NumberOfCardsInTheArsenal());
         
-        List<PlayerInfo> playersListToPrint = (StartingPlayerNumber == 0) ? new List<PlayerInfo> { playerUno, playerDos } : new List<PlayerInfo> { playerDos, playerUno };
+        List<PlayerInfo> playersListToPrint =  new List<PlayerInfo> { playerUno, playerDos };
+        
+        int numCurrentPlayer = gameStructureInfo.currentPlayer == gameStructureInfo.playerOne ? 0 : 1;
+        int numOppositePlayer = gameStructureInfo.opponentPlayer == gameStructureInfo.playerOne ? 0 : 1;
         
         gameStructureInfo.view.ShowGameInfo(playersListToPrint[numCurrentPlayer], playersListToPrint[numOppositePlayer]);
     }
 
-    public void CreatePlayerList()
+    public void CreatePlayerInitialOrder()
     {
-        playersList = (StartingPlayerNumber == 0) ? new List<PlayerController> { playerOne, playerTwo } : new List<PlayerController> { playerTwo, playerOne };
+        gameStructureInfo.currentPlayer = (gameStructureInfo.playerOne.GetSuperStarValue() < gameStructureInfo.playerTwo.GetSuperStarValue()) ? gameStructureInfo.playerTwo : gameStructureInfo.playerOne;
+        gameStructureInfo.opponentPlayer = (gameStructureInfo.playerOne.GetSuperStarValue() < gameStructureInfo.playerTwo.GetSuperStarValue()) ? gameStructureInfo.playerOne : gameStructureInfo.playerTwo;
     }
 
     public bool ShouldWeContinueTheGame()
     {   
-        return (playerOne.AreThereCardsLeftInTheArsenal() && playerTwo.AreThereCardsLeftInTheArsenal() && _isTheGameStillPlaying);
+        return (gameStructureInfo.playerOne.AreThereCardsLeftInTheArsenal() && gameStructureInfo.playerTwo.AreThereCardsLeftInTheArsenal() && _isTheGameStillPlaying);
     }
 
     public bool TheTurnIsBeingPlayed()
@@ -149,12 +138,12 @@ public class GameLogic
     
     public bool PlayerCanUseSuperStarAbility() 
     {
-        return playersList[numCurrentPlayer].TheirSuperStarCanUseSuperAbility(playersList[numCurrentPlayer]);
+        return gameStructureInfo.currentPlayer.TheirSuperStarCanUseSuperAbility(gameStructureInfo.currentPlayer);
     }
 
     public void ActionUseSuperAbility()
     {
-        playersList[numCurrentPlayer].UsingElectiveSuperAbility(playersList[numCurrentPlayer], playersList[numOppositePlayer]);
+        gameStructureInfo.currentPlayer.UsingElectiveSuperAbility(gameStructureInfo.currentPlayer, gameStructureInfo.opponentPlayer);
     }
     
     public void ActionPlayCard() 
@@ -162,7 +151,7 @@ public class GameLogic
         int selectedCard = gameStructureInfo.view.AskUserToSelectAPlay(GetPossibleCardsToPlayString());
         if ( IsValidIndexOfCard(selectedCard))
         {   
-            CardController playedCardController = playersList[numCurrentPlayer].CardsAvailableToPlay()[selectedCard];
+            CardController playedCardController = gameStructureInfo.currentPlayer.CardsAvailableToPlay()[selectedCard];
             PrintActionPlayCard(playedCardController);
             AddCardPlayedToRingArea(playedCardController);
         }
@@ -175,7 +164,7 @@ public class GameLogic
 
     private List<string> GetPossibleCardsToPlayString()
     {
-        List<CardController> possibleCardsToPlay = playersList[numCurrentPlayer].CardsAvailableToPlay();
+        List<CardController> possibleCardsToPlay = gameStructureInfo.currentPlayer.CardsAvailableToPlay();
         List<string> cardsStrings = VisualizeCards.CreateStringPlayedCardList(possibleCardsToPlay);
         return cardsStrings;
     }
@@ -192,21 +181,21 @@ public class GameLogic
     private void SayThatTheyAreGoingToPlayACard(CardController playedCardController)
     {
         string playedCardString = VisualizeCards.GetStringPlayedInfo(playedCardController);
-        string nameSuperStar = playersList[numCurrentPlayer].NameOfSuperStar();
+        string nameSuperStar = gameStructureInfo.currentPlayer.NameOfSuperStar();
         gameStructureInfo.view.SayThatPlayerIsTryingToPlayThisCard(nameSuperStar, playedCardString);
     }
 
     private int GetDamageProduced(CardController playedCardController)
     {
         int totalDamage = playedCardController.GetDamageProducedByTheCard();
-        if (playersList[numOppositePlayer].IsTheSuperStarMankind())
+        if (gameStructureInfo.opponentPlayer.IsTheSuperStarMankind())
             totalDamage -= 1;
         return  totalDamage;
     }
 
     private void SayThatTheyAreGoingToReceiveDamage(int totalDamage)
     {   
-        string opposingSuperStarName = playersList[numOppositePlayer].NameOfSuperStar();
+        string opposingSuperStarName = gameStructureInfo.opponentPlayer.NameOfSuperStar();
         gameStructureInfo.view.SayThatSuperstarWillTakeSomeDamage(opposingSuperStarName, totalDamage);
     }
 
@@ -223,19 +212,19 @@ public class GameLogic
 
     private bool CheckCanReceiveDamage()
     {
-        return playersList[numOppositePlayer].AreThereCardsLeftInTheArsenal();
+        return gameStructureInfo.opponentPlayer.AreThereCardsLeftInTheArsenal();
     }
 
     private void ShowOneFaceDownCard(int currentDamage, int totalDamage)
     {
-        CardController flippedCardController = playersList[numOppositePlayer].TranferUnselectedCardFromArsenalToRingSide();
+        CardController flippedCardController = gameStructureInfo.opponentPlayer.TranferUnselectedCardFromArsenalToRingSide();
         string flippedCardString = VisualizeCards.GetStringCardInfo(flippedCardController);
         gameStructureInfo.view.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
     }
 
     private void SetVariablesAfterWinning()
     {
-        numWinnerPlayer = numCurrentPlayer;
+        gameStructureInfo.winnerPlayer = gameStructureInfo.currentPlayer;
         _isTheGameStillPlaying = false;
         DeclareEndOfTurn();
     }
@@ -247,7 +236,7 @@ public class GameLogic
 
     private void AddCardPlayedToRingArea(CardController playedCardController)
     {
-        playersList[numCurrentPlayer].TransferChoosinCardFromHandToRingArea(playedCardController);
+        gameStructureInfo.currentPlayer.TransferChoosinCardFromHandToRingArea(playedCardController);
     }
     
     public void SelectCardsToView()
@@ -256,19 +245,19 @@ public class GameLogic
         switch (setCardsToView)
         {
             case CardSet.Hand:
-                ActionSeeTotalCards(playersList[numCurrentPlayer].StringCardsHand());
+                ActionSeeTotalCards(gameStructureInfo.currentPlayer.StringCardsHand());
                 break;
             case CardSet.RingArea:
-                ActionSeeTotalCards(playersList[numCurrentPlayer].StringCardsRingArea());
+                ActionSeeTotalCards(gameStructureInfo.currentPlayer.StringCardsRingArea());
                 break;
             case CardSet.RingsidePile:
-                ActionSeeTotalCards(playersList[numCurrentPlayer].StringCardsRingSide());
+                ActionSeeTotalCards(gameStructureInfo.currentPlayer.StringCardsRingSide());
                 break;
             case CardSet.OpponentsRingArea:
-                ActionSeeTotalCards(playersList[numOppositePlayer].StringCardsRingArea());
+                ActionSeeTotalCards(gameStructureInfo.opponentPlayer.StringCardsRingArea());
                 break;
             case CardSet.OpponentsRingsidePile:
-                ActionSeeTotalCards(playersList[numOppositePlayer].StringCardsRingSide());
+                ActionSeeTotalCards(gameStructureInfo.opponentPlayer.StringCardsRingSide());
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -283,27 +272,34 @@ public class GameLogic
     public void UpdateVariablesAtEndOfTurn()
     {   
         DeclareEndOfTurn();
-        UpdateNumberOfPlayers();
-        if (!CheckIfPlayerHasCardsInArsenalToContinuePlaying())
+        if (!CheckIfPlayersHasCardsInArsenalToContinuePlaying())
         {
             SetVariablesAfterLosing();
         }
+        UpdateNumberOfPlayers();
     }
     
     private void UpdateNumberOfPlayers()
     {
-        numCurrentPlayer = (numCurrentPlayer == 0) ? 1 : 0;
-        numOppositePlayer = (numOppositePlayer == 0) ? 1 : 0;
+        gameStructureInfo.currentPlayer = (gameStructureInfo.currentPlayer == gameStructureInfo.playerOne) ? gameStructureInfo.playerTwo : gameStructureInfo.playerOne;
+        gameStructureInfo.opponentPlayer = (gameStructureInfo.opponentPlayer == gameStructureInfo.playerOne) ? gameStructureInfo.playerTwo : gameStructureInfo.playerOne;
     }
     
-    private bool CheckIfPlayerHasCardsInArsenalToContinuePlaying()
-    {
-        return playersList[numCurrentPlayer].HasCardsInArsenal();
+    private bool CheckIfPlayersHasCardsInArsenalToContinuePlaying()
+    {   
+        return gameStructureInfo.currentPlayer.HasCardsInArsenal() && gameStructureInfo.opponentPlayer.HasCardsInArsenal();
     }
     
-    public void SetVariablesAfterLosing()
+    public void SetVariablesAfterLosing() 
+    {   
+        gameStructureInfo.winnerPlayer = (gameStructureInfo.currentPlayer.HasCardsInArsenal()) ? gameStructureInfo.playerTwo : gameStructureInfo.playerOne;
+        _isTheGameStillPlaying = false;
+        DeclareEndOfTurn();
+    }
+
+    public void SetVariablesAfterGaveUp()
     {
-        numWinnerPlayer = (numCurrentPlayer == 0) ? 1 : 0;
+        gameStructureInfo.winnerPlayer = (gameStructureInfo.currentPlayer == gameStructureInfo.playerOne) ? gameStructureInfo.playerTwo : gameStructureInfo.playerOne;
         _isTheGameStillPlaying = false;
         DeclareEndOfTurn();
     }

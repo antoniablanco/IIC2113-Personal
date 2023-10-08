@@ -84,17 +84,12 @@ public class Game
         return playerController;
     }
     
-    // REVISAR
     private void InitializeGameLogicVariables(PlayerController playerOne, PlayerController playerTwo) 
     {
-        _gameLogic.playerOne = playerOne;
-        _gameLogic.playerTwo = playerTwo;
-        
         gameStructureInfo.playerOne = playerOne;
         gameStructureInfo.playerTwo = playerTwo;
         
-        _gameLogic.PlayerStartedGame();
-        _gameLogic.CreatePlayerList();
+        _gameLogic.CreatePlayerInitialOrder();
     }
 
     private void InitializePlayerHands()
@@ -141,7 +136,7 @@ public class Game
                 _gameLogic.UpdateVariablesAtEndOfTurn();
                 break;
             case NextPlay.GiveUp:
-                _gameLogic.SetVariablesAfterLosing();
+                _gameLogic.SetVariablesAfterGaveUp();
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
