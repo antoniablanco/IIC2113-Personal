@@ -20,13 +20,13 @@ public class GameStructureInfo
     
     public Player GetCurrentPlayer()
     {
-        Player player = (ControllerCurrentPlayer == ControllerPlayerOne) ? playerTwo : playerOne;
+        Player player = (ControllerCurrentPlayer == ControllerPlayerOne) ? playerOne : playerTwo;
         return player;
     }
     
     public Player GetOpponentPlayer()
     {
-        Player player = (ControllerOpponentPlayer == ControllerPlayerOne) ? playerTwo : playerOne;
+        Player player = (ControllerCurrentPlayer == ControllerPlayerOne) ? playerTwo : playerOne;
         return player;
     }
 }

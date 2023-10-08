@@ -16,18 +16,20 @@ public class TheRock: SuperStar
             gameStructureInfo.ControllerCurrentPlayer.TheSuperStarHasUsedHisSuperAbilityThisTurn();
             if (_view.DoesPlayerWantToUseHisAbility(Name))
             {
-                AddingCardFromRingSideToArsenal(gameStructureInfo.ControllerCurrentPlayer);
+                AddingCardFromRingSideToArsenal(gameStructureInfo);
             }
         }
     }
     
-    private void AddingCardFromRingSideToArsenal(PlayerController currentPlayer)
+    private void AddingCardFromRingSideToArsenal(GameStructureInfo gameStructureInfo)
     {
         _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
-        List<string> ringAreaAsString = currentPlayer.StringCardsRingSide();
+        List<string> ringAreaAsString = gameStructureInfo.ControllerCurrentPlayer.StringCardsRingSide();
         int selectedCardIndex = _view.AskPlayerToSelectCardsToRecover(Name, 1, ringAreaAsString);
-        CardController discardedCardController = currentPlayer.GetSpecificCardFromRingSide(selectedCardIndex);
-        currentPlayer.TransferChoosinCardFromRingSideToArsenal(discardedCardController,  "Start");
+        CardController discardedCardController = gameStructureInfo.ControllerCurrentPlayer.GetSpecificCardFromRingSide(selectedCardIndex);
+        
+        Player player = gameStructureInfo.GetCurrentPlayer();
+        gameStructureInfo.CardMovement.TransferChoosinCardFromRingSideToArsenal(player, discardedCardController, "Start");
     }
     
     public override bool CanUseSuperAbility(PlayerController currentPlayer)

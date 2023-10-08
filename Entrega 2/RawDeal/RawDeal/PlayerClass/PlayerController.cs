@@ -135,48 +135,5 @@ public class PlayerController
     {
         return player.theHabilityHasBeenUsedThisTurn;
     }
-    
-    
-    
-    public CardController? TranferUnselectedCardFromArsenalToRingArea(bool moveToStart = false)
-    {
-        return CardMovement.TransferOfUnselectedCard(player.cardsArsenal, player.cardsRingArea, moveToStart);
-    }
-    
-    public CardController? TranferUnselectedCardFromArsenalToHand(bool moveToStart = false)
-    {
-        return CardMovement.TransferOfUnselectedCard(player.cardsArsenal, player.cardsHand, moveToStart);
-    }
-    
-    public CardController? TranferUnselectedCardFromArsenalToRingSide(bool moveToStart = false)
-    {
-        return CardMovement.TransferOfUnselectedCard(player.cardsArsenal, player.cardsRingSide, moveToStart);
-    }
-    
-    
-    public void TransferChoosinCardFromHandToRingArea(CardController cardController, string moveToStart = "End")
-    {
-        CardMovement.CardTransferChoosingWhichOneToChange(cardController, player.cardsHand, player.cardsRingArea, moveToStart);
-    }
-    
-    public void TransferChoosinCardFromHandToArsenal(CardController cardController, string moveToStart = "End")
-    {
-        CardMovement.CardTransferChoosingWhichOneToChange(cardController, player.cardsHand, player.cardsArsenal, moveToStart);
-    }
-    
-    public void TransferChoosinCardFromHandToRingSide(CardController cardController, string moveToStart = "End")
-    {
-        CardMovement.CardTransferChoosingWhichOneToChange(cardController, player.cardsHand, player.cardsRingSide, moveToStart);
-    }
-    
-    public void TransferChoosinCardFromRingSideToHand(CardController cardController, string moveToStart = "End")
-    {
-        CardMovement.CardTransferChoosingWhichOneToChange(cardController, player.cardsRingSide, player.cardsHand, moveToStart);
-    }
-    
-    public void TransferChoosinCardFromRingSideToArsenal(CardController cardController, string moveToStart = "End")
-    {
-        CardMovement.CardTransferChoosingWhichOneToChange(cardController, player.cardsRingSide, player.cardsArsenal, moveToStart);
-    }
-    
+ 
 }

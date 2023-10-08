@@ -212,7 +212,7 @@ public class GameLogic
 
     private void ShowOneFaceDownCard(int currentDamage, int totalDamage) 
     {
-        Player player = gameStructureInfo.GetCurrentPlayer();
+        Player player = gameStructureInfo.GetOpponentPlayer();
         CardController flippedCardController = gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
         string flippedCardString = gameStructureInfo.VisualizeCards.GetStringCardInfo(flippedCardController);
         gameStructureInfo.view.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
@@ -232,7 +232,7 @@ public class GameLogic
 
     private void AddCardPlayedToRingArea(CardController playedCardController) 
     {   
-        Player player = gameStructureInfo.GetOpponentPlayer();
+        Player player = gameStructureInfo.GetCurrentPlayer();
         gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(player, playedCardController);
     }
     

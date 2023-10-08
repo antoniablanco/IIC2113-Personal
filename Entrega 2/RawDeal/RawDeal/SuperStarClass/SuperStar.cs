@@ -69,7 +69,7 @@ public abstract class SuperStar
     {
         
     }
-    protected void DiscardingCardsFromHandToRingSide(PlayerController player, int cardsToDiscardCount)
+    protected void DiscardingCardsFromHandToRingSide(GameStructureInfo gameStructureInfo, PlayerController player, int cardsToDiscardCount)
     {
         List<string> handFormatoString = player.StringCardsHand();
         int selectedCard =_view.AskPlayerToSelectACardToDiscard(handFormatoString, player.NameOfSuperStar(), player.NameOfSuperStar(), cardsToDiscardCount);
@@ -77,17 +77,19 @@ public abstract class SuperStar
         if (selectedCard != -1)
         {
             CardController discardCardController = player.GetSpecificCardFromHand(selectedCard);
-            player.TransferChoosinCardFromHandToRingSide(discardCardController);
+            Player playerHowDiscardCard = (player == gameStructureInfo.ControllerCurrentPlayer)? gameStructureInfo.GetCurrentPlayer(): gameStructureInfo.GetOpponentPlayer();
+            
+            gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingSide(playerHowDiscardCard, discardCardController);
         }
     }
 
-    protected void AddingCardFromRingSideToHand(PlayerController player)
+    protected void AddingCardFromRingSideToHand(GameStructureInfo gameStructureInfo, PlayerController player)
     {
         List<string> ringSideAsString = player.StringCardsRingSide();
         int selectedCard =_view.AskPlayerToSelectCardsToPutInHisHand(Name, 1, ringSideAsString);
         
         CardController addedCardController = player.GetSpecificCardFromRingSide(selectedCard);
-        player.TransferChoosinCardFromRingSideToHand(addedCardController);
-    
+        Player playerHowDiscardCard = (player == gameStructureInfo.ControllerCurrentPlayer)? gameStructureInfo.GetCurrentPlayer(): gameStructureInfo.GetOpponentPlayer();
+        gameStructureInfo.CardMovement.TransferChoosinCardFromRingSideToHand(playerHowDiscardCard, addedCardController);
     }
 }

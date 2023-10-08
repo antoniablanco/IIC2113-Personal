@@ -15,9 +15,9 @@ public class Undertaker: SuperStar
         _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
         for (int currentDamageNumber = 0; currentDamageNumber < 2; currentDamageNumber++)
         {   
-            DiscardingCardsFromHandToRingSide(gameStructureInfo.ControllerCurrentPlayer, 2-currentDamageNumber);
+            DiscardingCardsFromHandToRingSide(gameStructureInfo, gameStructureInfo.ControllerCurrentPlayer, 2-currentDamageNumber);
         }
-        AddingCardFromRingSideToHand(gameStructureInfo.ControllerCurrentPlayer);
+        AddingCardFromRingSideToHand(gameStructureInfo, gameStructureInfo.ControllerCurrentPlayer);
     }
     
 

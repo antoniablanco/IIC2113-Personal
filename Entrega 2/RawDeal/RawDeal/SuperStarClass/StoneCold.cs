@@ -14,23 +14,26 @@ public class StoneCold: SuperStar
         gameStructureInfo.ControllerCurrentPlayer.TheSuperStarHasUsedHisSuperAbilityThisTurn();
         _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
         
-        AddingCardFromArsenalToHand(gameStructureInfo.ControllerCurrentPlayer);
-        DiscardingCardsFromHandToArsenal(gameStructureInfo.ControllerCurrentPlayer);
+        AddingCardFromArsenalToHand(gameStructureInfo);
+        DiscardingCardsFromHandToArsenal(gameStructureInfo);
     }
 
-    private void AddingCardFromArsenalToHand(PlayerController currentPlayer)
+    private void AddingCardFromArsenalToHand(GameStructureInfo gameStructureInfo)
     {
         _view.SayThatPlayerDrawCards(Name, 1);
-        currentPlayer.TranferUnselectedCardFromArsenalToHand();
+        Player player = gameStructureInfo.GetCurrentPlayer();
+        gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToHand(player);
     }
 
-    private void DiscardingCardsFromHandToArsenal(PlayerController currentPlayer)
+    private void DiscardingCardsFromHandToArsenal(GameStructureInfo gameStructureInfo)
     {
-        List<string> handCardsAsString = currentPlayer.StringCardsHand();
+        List<string> handCardsAsString = gameStructureInfo.ControllerCurrentPlayer.StringCardsHand();
         int selectedCard = _view.AskPlayerToReturnOneCardFromHisHandToHisArsenal(Name, handCardsAsString);
         
-        CardController discardedCardController = currentPlayer.GetSpecificCardFromHand(selectedCard);
-        currentPlayer.TransferChoosinCardFromHandToArsenal(discardedCardController, "Start");
+        CardController discardedCardController = gameStructureInfo.ControllerCurrentPlayer.GetSpecificCardFromHand(selectedCard);
+        
+        Player player = gameStructureInfo.GetCurrentPlayer();
+        gameStructureInfo.CardMovement.TransferChoosinCardFromHandToArsenal(player, discardedCardController, "Start");
     }
     
     public override bool CanUseSuperAbility(PlayerController currentPlayer)
