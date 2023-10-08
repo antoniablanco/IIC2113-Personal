@@ -11,7 +11,6 @@ public class GameLogic
     private bool _isTheGameStillPlaying = true;
     private bool _IsTheTurnBeingPlayed = true;
     
-    private VisualizeCards VisualizeCards = new VisualizeCards();
     public GameStructureInfo gameStructureInfo = new GameStructureInfo();
     
     public List<CardJson> DeserializeJsonCards()
@@ -101,9 +100,8 @@ public class GameLogic
         gameStructureInfo.playerTwo.DrawInitialHandCards();
     }
     
-    public string GetWinnerSuperstarName() //ELIMINAR PRINT
+    public string GetWinnerSuperstarName() 
     {   
-        Console.WriteLine("El ganador es: ");
         return gameStructureInfo.winnerPlayer.NameOfSuperStar();
     }
     
@@ -165,7 +163,7 @@ public class GameLogic
     private List<string> GetPossibleCardsToPlayString()
     {
         List<CardController> possibleCardsToPlay = gameStructureInfo.currentPlayer.CardsAvailableToPlay();
-        List<string> cardsStrings = VisualizeCards.CreateStringPlayedCardList(possibleCardsToPlay);
+        List<string> cardsStrings = gameStructureInfo.VisualizeCards.CreateStringPlayedCardList(possibleCardsToPlay);
         return cardsStrings;
     }
 
@@ -180,7 +178,7 @@ public class GameLogic
 
     private void SayThatTheyAreGoingToPlayACard(CardController playedCardController)
     {
-        string playedCardString = VisualizeCards.GetStringPlayedInfo(playedCardController);
+        string playedCardString = gameStructureInfo.VisualizeCards.GetStringPlayedInfo(playedCardController);
         string nameSuperStar = gameStructureInfo.currentPlayer.NameOfSuperStar();
         gameStructureInfo.view.SayThatPlayerIsTryingToPlayThisCard(nameSuperStar, playedCardString);
     }
@@ -218,7 +216,7 @@ public class GameLogic
     private void ShowOneFaceDownCard(int currentDamage, int totalDamage)
     {
         CardController flippedCardController = gameStructureInfo.opponentPlayer.TranferUnselectedCardFromArsenalToRingSide();
-        string flippedCardString = VisualizeCards.GetStringCardInfo(flippedCardController);
+        string flippedCardString = gameStructureInfo.VisualizeCards.GetStringCardInfo(flippedCardController);
         gameStructureInfo.view.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
     }
 
