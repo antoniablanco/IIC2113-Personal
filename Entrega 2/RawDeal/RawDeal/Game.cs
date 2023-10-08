@@ -15,14 +15,16 @@ public class Game
     private string _deckFolder;
     private GameLogic _gameLogic = new GameLogic();
     private CreateCards _createCards = new CreateCards();
+    private CreateSuperStart _createSuperStart = new CreateSuperStart();
+    private PlayCard PlayCard = new PlayCard();
     public GameStructureInfo gameStructureInfo = new GameStructureInfo();
-    public PlayCard PlayCard = new PlayCard();
     
     
     public Game(View view, string deckFolder)
     {
         _view = view;
         _deckFolder = deckFolder;
+        _createSuperStart.view = _view;
         AsignGameStructureInfo();
     }
     
@@ -74,7 +76,7 @@ public class Game
     private (List<CardJson>, List<SuperStarJSON>) GetTotalCardsAndSuperStars() 
     {
         List<CardJson> totalCards = _createCards.DeserializeJsonCards();
-        List<SuperStarJSON> totalSuperStars = _gameLogic.DeserializeJsonSuperStar();
+        List<SuperStarJSON> totalSuperStars = _createSuperStart.DeserializeJsonSuperStar();
     
         return (totalCards, totalSuperStars);
     }
@@ -83,7 +85,7 @@ public class Game
     {
         string stringPlayer = _view.AskUserToSelectDeck(_deckFolder);
         List<CardController> playerCardList = _createCards.CreateDiferentTypesOfCard(stringPlayer, totalCards, _view);
-        SuperStar? superStarPlayer = _gameLogic.CreateSuperStar(stringPlayer, totalSuperStars);
+        SuperStar? superStarPlayer = _createSuperStart.CreateSuperStar(stringPlayer, totalSuperStars);
         
         Player playerReturn = new Player(playerCardList, superStarPlayer);
 
