@@ -1,7 +1,9 @@
 using System.Reflection;
+using RawDeal.CardClass;
 using RawDealView.Formatters;
 using RawDealView;
 using RawDeal.DecksBehavior;
+using RawDeal.PlayerClass;
 
 namespace RawDeal.SuperStarClass;
 

@@ -1,8 +1,7 @@
-using System.Reflection;
+using RawDeal.PlayerClass;
 using RawDealView;
-using RawDealView.Formatters;
 
-namespace RawDeal;
+namespace RawDeal.CardClass;
 
 
 public class CardController

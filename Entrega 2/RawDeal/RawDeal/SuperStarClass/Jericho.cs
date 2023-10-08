@@ -1,3 +1,5 @@
+using RawDeal.PlayerClass;
+
 namespace RawDeal.SuperStarClass;
 using RawDealView;
 

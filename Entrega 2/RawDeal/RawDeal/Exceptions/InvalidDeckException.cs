@@ -1,4 +1,4 @@
-namespace RawDeal;
+namespace RawDeal.Exceptions;
 
 public class InvalidDeckException : Exception
 {

@@ -3,6 +3,9 @@ using RawDealView;
 using RawDealView.Options;
 using RawDeal.SuperStarClass;
 using RawDeal.CardClass;
+using RawDeal.DecksBehavior;
+using RawDeal.Exceptions;
+using RawDeal.PlayerClass;
 
 namespace RawDeal;
 
@@ -13,14 +16,23 @@ public class Game
     private GameLogic _gameLogic = new GameLogic();
     private CreateCards _createCards = new CreateCards();
     public GameStructureInfo gameStructureInfo = new GameStructureInfo();
+    public PlayCard PlayCard = new PlayCard();
     
     
     public Game(View view, string deckFolder)
     {
         _view = view;
         _deckFolder = deckFolder;
+        AsignGameStructureInfo();
+    }
+    
+    public void AsignGameStructureInfo()
+    {
         _gameLogic.gameStructureInfo = gameStructureInfo;
-        gameStructureInfo.view = view;
+        gameStructureInfo.view = _view;
+        gameStructureInfo.GameLogic = _gameLogic;
+        PlayCard.gameStructureInfo = gameStructureInfo;
+        gameStructureInfo.PlayCard = PlayCard;
     }
     
     public void Play() 
@@ -61,7 +73,7 @@ public class Game
     
     private (List<CardJson>, List<SuperStarJSON>) GetTotalCardsAndSuperStars() 
     {
-        List<CardJson> totalCards = _gameLogic.DeserializeJsonCards();
+        List<CardJson> totalCards = _createCards.DeserializeJsonCards();
         List<SuperStarJSON> totalSuperStars = _gameLogic.DeserializeJsonSuperStar();
     
         return (totalCards, totalSuperStars);
@@ -140,7 +152,7 @@ public class Game
                 _gameLogic.SelectCardsToView();
                 break;
             case NextPlay.PlayCard:
-                _gameLogic.ActionPlayCard();
+                gameStructureInfo.PlayCard.ActionPlayCard();
                 break;
             case NextPlay.EndTurn:
                 _gameLogic.UpdateVariablesAtEndOfTurn();

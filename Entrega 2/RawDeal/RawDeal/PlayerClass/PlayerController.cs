@@ -1,6 +1,7 @@
+using RawDeal.CardClass;
 using RawDeal.DecksBehavior;
 
-namespace RawDeal;
+namespace RawDeal.PlayerClass;
 
 public class PlayerController
 {

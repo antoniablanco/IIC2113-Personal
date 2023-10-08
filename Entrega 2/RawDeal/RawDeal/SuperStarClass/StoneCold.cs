@@ -1,3 +1,6 @@
+using RawDeal.CardClass;
+using RawDeal.PlayerClass;
+
 namespace RawDeal.SuperStarClass;
 using RawDealView;
 

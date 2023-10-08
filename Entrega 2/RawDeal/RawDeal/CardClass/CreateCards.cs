@@ -1,3 +1,4 @@
+using System.Text.Json;
 using RawDeal.CardClass.Maneuver;
 using RawDeal.CardClass.Hibrid;
 using RawDeal.CardClass.Reversal;
@@ -8,7 +9,14 @@ using RawDealView;
 namespace RawDeal.CardClass;
 
 public class CreateCards
-{
+{   
+    public List<CardJson> DeserializeJsonCards()
+    {
+        string myJson = File.ReadAllText (Path.Combine("data","cards.json")) ;
+        var cartas = JsonSerializer.Deserialize<List<CardJson>>(myJson) ;
+        return cartas;
+    }
+    
     public List<CardController> CreateDiferentTypesOfCard(string playerString, List<CardJson> totalCards, View view) 
     {
         string pathDeck = Path.Combine(playerString);

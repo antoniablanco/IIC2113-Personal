@@ -1,6 +1,8 @@
+using RawDeal.CardClass;
+using RawDeal.PlayerClass;
 using RawDealView.Formatters;
 
-namespace RawDeal;
+namespace RawDeal.DecksBehavior;
 
 public class VisualizeCards
 {

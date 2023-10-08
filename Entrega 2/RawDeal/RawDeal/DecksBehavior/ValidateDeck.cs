@@ -1,4 +1,7 @@
-namespace RawDeal;
+using RawDeal.CardClass;
+using RawDeal.PlayerClass;
+
+namespace RawDeal.DecksBehavior;
 
 public class ValidateDeck
 {   

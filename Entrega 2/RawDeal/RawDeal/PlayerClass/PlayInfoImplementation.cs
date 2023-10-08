@@ -1,6 +1,7 @@
+using RawDeal.CardClass;
 using RawDealView.Formatters;
 
-namespace RawDeal;
+namespace RawDeal.PlayerClass;
 
 public class PlayInfoImplementation : IViewablePlayInfo
 {
