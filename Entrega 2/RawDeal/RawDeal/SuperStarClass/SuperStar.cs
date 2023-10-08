@@ -60,16 +60,15 @@ public abstract class SuperStar
         return false;
     }
 
-    public virtual void UsingElectiveSuperAbility(PlayerController currentPlayer, PlayerController opponentPlayer)
+    public virtual void UsingElectiveSuperAbility(GameStructureInfo gameStructureInfo)
     {
         
     }
     
-    public virtual void UsingAutomaticSuperAbilityAtTheStartOfTheTurn(PlayerController currentPlayer, PlayerController opponentPlayer)
+    public virtual void UsingAutomaticSuperAbilityAtTheStartOfTheTurn(GameStructureInfo gameStructureInfo)
     {
         
     }
-
     protected void DiscardingCardsFromHandToRingSide(PlayerController player, int cardsToDiscardCount)
     {
         List<string> handFormatoString = player.StringCardsHand();

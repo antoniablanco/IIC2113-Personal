@@ -6,12 +6,11 @@ public class PlayerController
 {
     private Player player;
     private VisualizeCards VisualizeCards = new VisualizeCards();
-    private CardMovement CardMovement;
+    private CardMovement CardMovement =new CardMovement();
     
     public PlayerController(Player player)
     {
         this.player = player;
-        CardMovement = new CardMovement(player);
     }
     
     public void DrawCard()
@@ -69,14 +68,14 @@ public class PlayerController
         return player.superestar.CanUseSuperAbility(currentPlayer);
     }
 
-    public void UsingElectiveSuperAbility(PlayerController currentPlayer, PlayerController oppositePlayer)
+    public void UsingElectiveSuperAbility(GameStructureInfo gameStructureInfo)
     {
-        player.superestar.UsingElectiveSuperAbility(currentPlayer, oppositePlayer);
+        player.superestar.UsingElectiveSuperAbility(gameStructureInfo);
     }
-    
-    public void UsingAutomaticSuperAbility(PlayerController currentPlayer, PlayerController oppositePlayer)
+        
+    public void UsingAutomaticSuperAbility(GameStructureInfo gameStructureInfo)
     {
-        player.superestar.UsingAutomaticSuperAbilityAtTheStartOfTheTurn( currentPlayer, oppositePlayer);
+        player.superestar.UsingAutomaticSuperAbilityAtTheStartOfTheTurn(gameStructureInfo);
     }
     
     public void TheSuperStarHasUsedHisSuperAbilityThisTurn()

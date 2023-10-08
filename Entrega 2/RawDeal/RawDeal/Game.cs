@@ -40,7 +40,7 @@ public class Game
     {
         PlayerController playerUno = CreateOnePlayer();
         PlayerController playerDos = CreateOnePlayer();
-        InitializeGameLogicVariables(playerUno, playerDos);
+        InitializeGameVariables(playerUno, playerDos);
         InitializePlayerHands();
     }
     
@@ -74,8 +74,18 @@ public class Game
         SuperStar? superStarPlayer = _gameLogic.CreateSuperStar(stringPlayer, totalSuperStars);
         
         Player playerReturn = new Player(playerCardList, superStarPlayer);
+
+        SavePlayerInGameStructureInfo(playerReturn);
         
         return playerReturn;
+    }
+
+    private void SavePlayerInGameStructureInfo(Player player)
+    {
+        if (gameStructureInfo.playerOne == null)
+            gameStructureInfo.playerOne = player;
+        else
+            gameStructureInfo.playerTwo = player;
     }
 
     private PlayerController InitializePlayerController(Player player)
@@ -84,10 +94,10 @@ public class Game
         return playerController;
     }
     
-    private void InitializeGameLogicVariables(PlayerController playerOne, PlayerController playerTwo) 
+    private void InitializeGameVariables(PlayerController playerOne, PlayerController playerTwo) 
     {
-        gameStructureInfo.playerOne = playerOne;
-        gameStructureInfo.playerTwo = playerTwo;
+        gameStructureInfo.ControllerPlayerOne = playerOne;
+        gameStructureInfo.ControllerPlayerTwo = playerTwo;
         
         _gameLogic.CreatePlayerInitialOrder();
     }

@@ -9,12 +9,12 @@ public class Jericho: SuperStar
         // Constructor de la clase base
     }
     
-    public override void UsingElectiveSuperAbility(PlayerController currentPlayer, PlayerController opponentPlayer)
+    public override void UsingElectiveSuperAbility(GameStructureInfo gameStructureInfo)
     {
         _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
-        currentPlayer.TheSuperStarHasUsedHisSuperAbilityThisTurn();
-        DiscardingCardsFromHandToRingSide(currentPlayer, 1);
-        DiscardingCardsFromHandToRingSide(opponentPlayer, 1);
+        gameStructureInfo.ControllerCurrentPlayer.TheSuperStarHasUsedHisSuperAbilityThisTurn();
+        DiscardingCardsFromHandToRingSide(gameStructureInfo.ControllerCurrentPlayer, 1);
+        DiscardingCardsFromHandToRingSide(gameStructureInfo.ControllerOpponentPlayer, 1);
     }
     
     public override bool CanUseSuperAbility(PlayerController currentPlayer)

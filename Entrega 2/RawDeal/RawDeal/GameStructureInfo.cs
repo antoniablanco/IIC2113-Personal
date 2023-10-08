@@ -1,3 +1,5 @@
+using RawDeal.DecksBehavior;
+
 namespace RawDeal;
 using RawDeal.SuperStarClass;
 using RawDealView;
@@ -7,10 +9,25 @@ public class GameStructureInfo
 {
     public View view;
     public VisualizeCards VisualizeCards = new VisualizeCards();
-    public PlayerController playerOne;
-    public PlayerController playerTwo;
-    public PlayerController currentPlayer;
-    public PlayerController opponentPlayer;
+    public CardMovement CardMovement =new CardMovement();
+    public Player playerOne;
+    public Player playerTwo;
+    public PlayerController ControllerPlayerOne;
+    public PlayerController ControllerPlayerTwo;
+    public PlayerController ControllerCurrentPlayer;
+    public PlayerController ControllerOpponentPlayer;
     public PlayerController winnerPlayer;
-
+    
+    public Player GetCurrentPlayer()
+    {
+        Player player = (ControllerCurrentPlayer == ControllerPlayerOne) ? playerTwo : playerOne;
+        return player;
+    }
+    
+    public Player GetOpponentPlayer()
+    {
+        Player player = (ControllerOpponentPlayer == ControllerPlayerOne) ? playerTwo : playerOne;
+        return player;
+    }
 }
+

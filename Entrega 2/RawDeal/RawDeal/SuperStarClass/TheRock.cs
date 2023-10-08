@@ -9,14 +9,14 @@ public class TheRock: SuperStar
         // Constructor de la clase base
     }
     
-    public override void UsingAutomaticSuperAbilityAtTheStartOfTheTurn(PlayerController currentPlayer, PlayerController opponentPlayer)
+    public override void UsingAutomaticSuperAbilityAtTheStartOfTheTurn(GameStructureInfo gameStructureInfo)
     {  
-        if (CanUseSuperAbility(currentPlayer))
+        if (CanUseSuperAbility(gameStructureInfo.ControllerCurrentPlayer))
         {
-            currentPlayer.TheSuperStarHasUsedHisSuperAbilityThisTurn();
+            gameStructureInfo.ControllerCurrentPlayer.TheSuperStarHasUsedHisSuperAbilityThisTurn();
             if (_view.DoesPlayerWantToUseHisAbility(Name))
             {
-                AddingCardFromRingSideToArsenal(currentPlayer);
+                AddingCardFromRingSideToArsenal(gameStructureInfo.ControllerCurrentPlayer);
             }
         }
     }

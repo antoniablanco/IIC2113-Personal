@@ -9,12 +9,12 @@ public class Kane: SuperStar
         // Constructor de la clase base
     }
     
-    public override void UsingAutomaticSuperAbilityAtTheStartOfTheTurn(PlayerController currentPlayer, PlayerController opponentPlayer)
+    public override void UsingAutomaticSuperAbilityAtTheStartOfTheTurn(GameStructureInfo gameStructureInfo)
     {   
-        CardController flippedCardController = opponentPlayer.TranferUnselectedCardFromArsenalToRingSide();
+        CardController flippedCardController = gameStructureInfo.ControllerOpponentPlayer.TranferUnselectedCardFromArsenalToRingSide();
         string flippedCardString = VisualizeCards.GetStringCardInfo(flippedCardController);
         _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
-        _view.SayThatSuperstarWillTakeSomeDamage(opponentPlayer.NameOfSuperStar(), 1);
+        _view.SayThatSuperstarWillTakeSomeDamage(gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar(), 1);
         _view.ShowCardOverturnByTakingDamage(flippedCardString, 1, 1);
     }
 }

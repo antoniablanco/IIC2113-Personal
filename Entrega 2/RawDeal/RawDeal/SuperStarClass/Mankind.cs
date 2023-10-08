@@ -9,9 +9,9 @@ public class Mankind: SuperStar
         // Constructor de la clase base
     }
     
-    public override void UsingAutomaticSuperAbilityAtTheStartOfTheTurn(PlayerController currentPlayer, PlayerController opponentPlayer)
+    public override void UsingAutomaticSuperAbilityAtTheStartOfTheTurn(GameStructureInfo gameStructureInfo)
     {
-        if (currentPlayer.NumberOfCardsInTheArsenal() > 0) 
-            currentPlayer.DrawCard();
+        if (gameStructureInfo.ControllerCurrentPlayer.NumberOfCardsInTheArsenal() > 0) 
+            gameStructureInfo.ControllerCurrentPlayer.DrawCard();
     }
 }

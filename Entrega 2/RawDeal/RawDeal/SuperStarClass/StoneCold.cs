@@ -9,13 +9,13 @@ public class StoneCold: SuperStar
         // Constructor de la clase base
     }
     
-    public override void UsingElectiveSuperAbility(PlayerController currentPlayer, PlayerController opponentPlayer)
+    public override void UsingElectiveSuperAbility(GameStructureInfo gameStructureInfo)
     {
-        currentPlayer.TheSuperStarHasUsedHisSuperAbilityThisTurn();
+        gameStructureInfo.ControllerCurrentPlayer.TheSuperStarHasUsedHisSuperAbilityThisTurn();
         _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
         
-        AddingCardFromArsenalToHand(currentPlayer);
-        DiscardingCardsFromHandToArsenal(currentPlayer);
+        AddingCardFromArsenalToHand(gameStructureInfo.ControllerCurrentPlayer);
+        DiscardingCardsFromHandToArsenal(gameStructureInfo.ControllerCurrentPlayer);
     }
 
     private void AddingCardFromArsenalToHand(PlayerController currentPlayer)
