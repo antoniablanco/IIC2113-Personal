@@ -55,6 +55,11 @@ public class CardController
         return _card.Title;
     }
     
+    public List<string> GetCardTypes()
+    {
+        return _card.Types;
+    }
+    
     public int GetCardFortitude()
     {
         return int.Parse(_card.Fortitude);
@@ -73,7 +78,7 @@ public class CardController
         return cardInfo;
     }
     
-    public PlayInfoImplementation CreateIViewablePlayedInfo()
+    public PlayInfoImplementation CreateIViewablePlayedInfo(int playedAs)
     {   
         var cardInfo = new PlayInfoImplementation(
             _card.Title,
@@ -82,7 +87,9 @@ public class CardController
             _card.StunValue,
             _card.Types,
             _card.Subtypes,
-            _card.CardEffect);
+            _card.CardEffect,
+            _card.Types[playedAs].ToUpper()  
+            );
         
         return cardInfo;
     }

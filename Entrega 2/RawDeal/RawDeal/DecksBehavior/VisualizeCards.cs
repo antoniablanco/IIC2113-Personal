@@ -6,48 +6,41 @@ namespace RawDeal.DecksBehavior;
 
 public class VisualizeCards
 {
-    private CardInfoImplementation CreateIViewableCardInfo(CardController cardController)
-    {
-        return cardController.CreateIViewableCardInfo();
-    }
-
-    private PlayInfoImplementation CreateIViewablePlayedInfo(CardController cardController)
-    {
-        return cardController.CreateIViewablePlayedInfo();
-    }
-
-
-    private string GetStringInfo<T>(CardController cardController, Func<CardController, T> createInfoFunc, Func<T, string> toStringFunc)
+    public string GetStringCardInfo(CardController cardController)
     {   
-        T info = createInfoFunc(cardController);
-        string formattedInfo = toStringFunc(info);
+        CardInfoImplementation cardInfoImplementation = cardController.CreateIViewableCardInfo();
+        string formattedInfo = Formatter.CardToString(cardInfoImplementation);
         return formattedInfo;
     }
 
-    public string GetStringCardInfo(CardController cardController)
-    {
-        return GetStringInfo(cardController, CreateIViewableCardInfo, Formatter.CardToString);
+    public string GetStringPlayedInfo(CardController cardController, int numType = 0)
+    {   
+        PlayInfoImplementation playInfoImplementation = cardController.CreateIViewablePlayedInfo(numType);
+        string formattedInfo = Formatter.PlayToString(playInfoImplementation);
+        return formattedInfo;
     }
-
-    public string GetStringPlayedInfo(CardController cardController)
-    {
-        return GetStringInfo(cardController, CreateIViewablePlayedInfo, Formatter.PlayToString);
-    }
-
-
-    private List<string> CreateStringInfoList(List<CardController> cardsInSelectedSet, Func<CardController, string> getInfoFunction)
-    {
-        return cardsInSelectedSet.Select(getInfoFunction).ToList();
-    }
+    
 
     public List<string> CreateStringCardList(List<CardController> cardsInSelectedSet)
     {
-        return CreateStringInfoList(cardsInSelectedSet, GetStringCardInfo);
+        return cardsInSelectedSet.Select(cardController => GetStringCardInfo(cardController)).ToList();
     }
 
     public List<string> CreateStringPlayedCardList(List<CardController> cardsInSelectedSet)
     {
-        return CreateStringInfoList(cardsInSelectedSet, GetStringPlayedInfo);
+        List<string> stringList = new List<string>();
+
+        foreach (var cardController in cardsInSelectedSet)
+        {
+            stringList.AddRange(GetStringPlayedCardForType(cardController));
+        }
+
+        return stringList;
     }
-    
+
+    private List<String> GetStringPlayedCardForType(CardController cardController)
+    {
+        int[] indexes = Enumerable.Range(0, cardController.GetCardTypes().Count()).ToArray();
+        return indexes.Select(index => GetStringPlayedInfo(cardController, index)).ToList();
+    }
 }

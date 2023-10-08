@@ -445,7 +445,7 @@ public class CreateCards
                 return new Y2J(card.Title, card.Types, card.Subtypes, card.Fortitude, card.Damage, card.StunValue,
                     card.CardEffect);
             default:
-                return new DefaultCard(card.Title, card.Types, card.Subtypes, card.Fortitude, card.Damage,card.StunValue,
+                return new Y2J(card.Title, card.Types, card.Subtypes, card.Fortitude, card.Damage,card.StunValue,
                     card.CardEffect);
         }
         return null;

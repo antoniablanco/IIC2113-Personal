@@ -9,9 +9,9 @@ public class PlayInfoImplementation : IViewablePlayInfo
 
     public string PlayedAs { get; set; }
     
-    public PlayInfoImplementation(string title, string fortitude, string damage, string stunValue, List<string> types, List<string> subtypes, string cardEffect)
+    public PlayInfoImplementation(string title, string fortitude, string damage, string stunValue, List<string> types, List<string> subtypes, string cardEffect, string playedAs)
     {
         CardInfo = new CardInfoImplementation(title, fortitude, damage, stunValue, types, subtypes, cardEffect); 
-        PlayedAs = types[0].ToUpper();
+        PlayedAs = playedAs;
     }
 }
