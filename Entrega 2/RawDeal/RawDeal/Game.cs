@@ -12,13 +12,15 @@ public class Game
     private string _deckFolder;
     private GameLogic _gameLogic = new GameLogic();
     private CreateCards _createCards = new CreateCards();
+    public GameStructureInfo gameStructureInfo = new GameStructureInfo();
     
     
     public Game(View view, string deckFolder)
     {
         _view = view;
         _deckFolder = deckFolder;
-        _gameLogic.view = _view;
+        _gameLogic.gameStructureInfo = gameStructureInfo;
+        gameStructureInfo.view = view;
     }
     
     public void Play() 
@@ -68,8 +70,7 @@ public class Game
     private Player InitializePlayer(List<CardJson> totalCards,List<SuperStarJSON> totalSuperStars) 
     {
         string stringPlayer = _view.AskUserToSelectDeck(_deckFolder);
-        //List<CardController> playerCardList = _gameLogic.CreateCards(stringPlayer, totalCards);
-        List<CardController> playerCardList = _createCards.CreateDiferentTypesOfCard(stringPlayer, totalCards);
+        List<CardController> playerCardList = _createCards.CreateDiferentTypesOfCard(stringPlayer, totalCards, _view);
         SuperStar? superStarPlayer = _gameLogic.CreateSuperStar(stringPlayer, totalSuperStars);
         
         Player playerReturn = new Player(playerCardList, superStarPlayer);
@@ -83,10 +84,14 @@ public class Game
         return playerController;
     }
     
-    private void InitializeGameLogicVariables(PlayerController playerOne, PlayerController playerTwo)
+    // REVISAR
+    private void InitializeGameLogicVariables(PlayerController playerOne, PlayerController playerTwo) 
     {
         _gameLogic.playerOne = playerOne;
         _gameLogic.playerTwo = playerTwo;
+        
+        gameStructureInfo.playerOne = playerOne;
+        gameStructureInfo.playerTwo = playerTwo;
         
         _gameLogic.PlayerStartedGame();
         _gameLogic.CreatePlayerList();

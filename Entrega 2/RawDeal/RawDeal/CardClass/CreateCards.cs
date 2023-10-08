@@ -3,12 +3,13 @@ using RawDeal.CardClass.Hibrid;
 using RawDeal.CardClass.Reversal;
 using RawDeal.CardClass.Action;
 using RawDeal.CardClass.UnspecifiedType;
+using RawDealView;
 
 namespace RawDeal.CardClass;
 
 public class CreateCards
 {
-    public List<CardController> CreateDiferentTypesOfCard(string playerString, List<CardJson> totalCards) 
+    public List<CardController> CreateDiferentTypesOfCard(string playerString, List<CardJson> totalCards, View view) 
     {
         string pathDeck = Path.Combine(playerString);
         string[] lines = File.ReadAllLines(pathDeck);
@@ -18,7 +19,7 @@ public class CreateCards
             where line.Trim() == card.Title 
             select FindCard(card.Title, card)).ToList();
 
-        var cardControllers = matchingCards.Select(card => new CardController(card)).ToList();
+        var cardControllers = matchingCards.Select(card => new CardController(card, view)).ToList();
 
         return cardControllers;
     }

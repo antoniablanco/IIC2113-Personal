@@ -11,8 +11,8 @@ public class GameLogic
     private bool _isTheGameStillPlaying = true;
     private bool _IsTheTurnBeingPlayed = true;
     
-    public View view;
     private VisualizeCards VisualizeCards = new VisualizeCards();
+    public GameStructureInfo gameStructureInfo = new GameStructureInfo();
     
     public PlayerController playerOne { get; set; }
     public PlayerController playerTwo { get; set; }
@@ -45,7 +45,7 @@ public class GameLogic
         Dictionary<SuperStarJSON, Type> superStarTypes = GetSuperStarTypesDictionary(totalSuperStars);
         
         foreach (var superstar in from super in superStarTypes where firstLineDeck.Contains(super.Key.Name) 
-                 select (SuperStar)Activator.CreateInstance(super.Value,super.Key.Name, super.Key.Logo, super.Key.HandSize, super.Key.SuperstarValue, super.Key.SuperstarAbility, view))
+                 select (SuperStar)Activator.CreateInstance(super.Value,super.Key.Name, super.Key.Logo, super.Key.HandSize, super.Key.SuperstarValue, super.Key.SuperstarAbility, gameStructureInfo.view))
         {
             return superstar;
         }
@@ -88,7 +88,7 @@ public class GameLogic
     {
         playersList[numCurrentPlayer].DrawCard();
         SetVariableTrueBecauseTurnStarted();
-        view.SayThatATurnBegins(playersList[numCurrentPlayer].NameOfSuperStar());
+        gameStructureInfo.view.SayThatATurnBegins(playersList[numCurrentPlayer].NameOfSuperStar());
         TheSuperAbilityThatIsAtTheStartOfTheTurnIsUsed();
     }
 
@@ -105,9 +105,10 @@ public class GameLogic
         playersList[numCurrentPlayer].UsingAutomaticSuperAbility(currentPlayer, oppositePlayer);
     }
     
-    public void PlayerStartedGame()
+    public void PlayerStartedGame() // REVISAR
     {
         StartingPlayerNumber = (playerOne.GetSuperStarValue() < playerTwo.GetSuperStarValue()) ? 1 : 0;
+        //gameStructureInfo.currentPlayer = (gameStructureInfo.playerOne.GetSuperStarValue() < gameStructureInfo.playerTwo.GetSuperStarValue()) ? gameStructureInfo.playerTwo : gameStructureInfo.playerOne;
     }
 
     public void ThePlayerDrawTheirInitialsHands()
@@ -128,7 +129,7 @@ public class GameLogic
         
         List<PlayerInfo> playersListToPrint = (StartingPlayerNumber == 0) ? new List<PlayerInfo> { playerUno, playerDos } : new List<PlayerInfo> { playerDos, playerUno };
         
-        view.ShowGameInfo(playersListToPrint[numCurrentPlayer], playersListToPrint[numOppositePlayer]);
+        gameStructureInfo.view.ShowGameInfo(playersListToPrint[numCurrentPlayer], playersListToPrint[numOppositePlayer]);
     }
 
     public void CreatePlayerList()
@@ -158,7 +159,7 @@ public class GameLogic
     
     public void ActionPlayCard() 
     {
-        int selectedCard = view.AskUserToSelectAPlay(GetPossibleCardsToPlayString());
+        int selectedCard = gameStructureInfo.view.AskUserToSelectAPlay(GetPossibleCardsToPlayString());
         if ( IsValidIndexOfCard(selectedCard))
         {   
             CardController playedCardController = playersList[numCurrentPlayer].CardsAvailableToPlay()[selectedCard];
@@ -182,7 +183,7 @@ public class GameLogic
     private void PrintActionPlayCard(CardController playedCardController)
     {   
         SayThatTheyAreGoingToPlayACard(playedCardController);
-        view.SayThatPlayerSuccessfullyPlayedACard();
+        gameStructureInfo.view.SayThatPlayerSuccessfullyPlayedACard();
         int totalDamage = GetDamageProduced(playedCardController);
         SayThatTheyAreGoingToReceiveDamage(totalDamage);
         CauseDamageActionPlayCard(totalDamage);
@@ -192,7 +193,7 @@ public class GameLogic
     {
         string playedCardString = VisualizeCards.GetStringPlayedInfo(playedCardController);
         string nameSuperStar = playersList[numCurrentPlayer].NameOfSuperStar();
-        view.SayThatPlayerIsTryingToPlayThisCard(nameSuperStar, playedCardString);
+        gameStructureInfo.view.SayThatPlayerIsTryingToPlayThisCard(nameSuperStar, playedCardString);
     }
 
     private int GetDamageProduced(CardController playedCardController)
@@ -206,7 +207,7 @@ public class GameLogic
     private void SayThatTheyAreGoingToReceiveDamage(int totalDamage)
     {   
         string opposingSuperStarName = playersList[numOppositePlayer].NameOfSuperStar();
-        view.SayThatSuperstarWillTakeSomeDamage(opposingSuperStarName, totalDamage);
+        gameStructureInfo.view.SayThatSuperstarWillTakeSomeDamage(opposingSuperStarName, totalDamage);
     }
 
     private void CauseDamageActionPlayCard(int totalDamage) 
@@ -229,7 +230,7 @@ public class GameLogic
     {
         CardController flippedCardController = playersList[numOppositePlayer].TranferUnselectedCardFromArsenalToRingSide();
         string flippedCardString = VisualizeCards.GetStringCardInfo(flippedCardController);
-        view.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
+        gameStructureInfo.view.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
     }
 
     private void SetVariablesAfterWinning()
@@ -251,7 +252,7 @@ public class GameLogic
     
     public void SelectCardsToView()
     {
-        var setCardsToView = view.AskUserWhatSetOfCardsHeWantsToSee();
+        var setCardsToView = gameStructureInfo.view.AskUserWhatSetOfCardsHeWantsToSee();
         switch (setCardsToView)
         {
             case CardSet.Hand:
@@ -276,7 +277,7 @@ public class GameLogic
 
     private void ActionSeeTotalCards(List<String> stringCardSet)
     {   
-        view.ShowCards(stringCardSet);
+        gameStructureInfo.view.ShowCards(stringCardSet);
     }
 
     public void UpdateVariablesAtEndOfTurn()

@@ -1,4 +1,5 @@
 using System.Reflection;
+using RawDealView;
 using RawDealView.Formatters;
 
 namespace RawDeal;
@@ -7,10 +8,12 @@ namespace RawDeal;
 public class CardController
 {
     private Card _card;
+    private View _view;
 
-    public CardController(Card card)
+    public CardController(Card card, View view)
     {
         _card = card;
+        _view = view;
     }
     
     public bool ContainsUniqueSubtype()
@@ -84,4 +87,10 @@ public class CardController
         
         return cardInfo;
     }
+
+    public void PlayManeuverCard()
+    {
+        
+    }
+    
 }
