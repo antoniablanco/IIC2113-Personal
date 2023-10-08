@@ -22,6 +22,7 @@ public class GameStructureInfo
     public PlayerController winnerPlayer;
     public GameLogic GameLogic;
     public GetSetGameVariables GetSetGameVariables;
+    public CardEffects CardEffects;
     public bool IsTheGameStillPlaying = true;
     public bool IsTheTurnBeingPlayed = true;
     

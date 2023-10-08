@@ -4,29 +4,30 @@ using RawDeal.PlayerClass;
 namespace RawDeal.DecksBehavior;
 
 public class PlayCard
-{   
-    
-    public GameStructureInfo gameStructureInfo= new GameStructureInfo();
-    
-    public void ActionPlayCard() 
+{
+
+    public GameStructureInfo gameStructureInfo = new GameStructureInfo();
+
+    public void ActionPlayCard()
     {
         int selectedCard = gameStructureInfo.view.AskUserToSelectAPlay(GetPossibleCardsToPlayString());
-        if ( IsValidIndexOfCard(selectedCard))
-        {   
+        if (IsValidIndexOfCard(selectedCard))
+        {
             Tuple<CardController, int> playedCardController = GetCardPlayed(selectedCard);
             PlayCardByType(playedCardController);
         }
     }
-    
-    private Tuple<CardController, int> GetCardPlayed(int indexSelectedCard) 
-    {   
+
+    private Tuple<CardController, int> GetCardPlayed(int indexSelectedCard)
+    {
         List<CardController> possibleCardsToPlay = gameStructureInfo.ControllerCurrentPlayer.CardsAvailableToPlay();
-        List<Tuple<CardController, int>> allCardsAndTheirTypes = gameStructureInfo.VisualizeCards.GetPosiblesCardsToPlay(possibleCardsToPlay);
+        List<Tuple<CardController, int>> allCardsAndTheirTypes =
+            gameStructureInfo.VisualizeCards.GetPosiblesCardsToPlay(possibleCardsToPlay);
 
         return allCardsAndTheirTypes[indexSelectedCard];
 
     }
-    
+
     private void PlayCardByType(Tuple<CardController, int> playedCardController)
     {
         if (playedCardController.Item1.GetCardTypes()[playedCardController.Item2] == "Maneuver")
@@ -37,16 +38,16 @@ public class PlayCard
         {
             PlayActionCard(playedCardController.Item1, playedCardController.Item2);
         }
-        else 
+        else
             Console.WriteLine("No se encuentra el tipo de carta");
     }
-    
+
     private void PlayManeuverCard(CardController playedCardController, int indexType)
     {
         PrintActionPlayCard(playedCardController, indexType);
         gameStructureInfo.GameLogic.AddCardPlayedToRingArea(playedCardController);
     }
-    
+
     private bool IsValidIndexOfCard(int selectedCard)
     {
         return selectedCard != -1;
@@ -60,7 +61,7 @@ public class PlayCard
     }
 
     private void PrintActionPlayCard(CardController playedCardController, int indexType)
-    {   
+    {
         SayThatTheyAreGoingToPlayACard(playedCardController, indexType);
         int totalDamage = GetDamageProduced(playedCardController);
         if (totalDamage > 0)
@@ -81,21 +82,21 @@ public class PlayCard
         int totalDamage = playedCardController.GetDamageProducedByTheCard();
         if (gameStructureInfo.ControllerOpponentPlayer.IsTheSuperStarMankind())
             totalDamage -= 1;
-        return  totalDamage;
+        return totalDamage;
     }
 
     private void SayThatTheyAreGoingToReceiveDamage(int totalDamage)
-    {   
+    {
         string opposingSuperStarName = gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar();
         gameStructureInfo.view.SayThatSuperstarWillTakeSomeDamage(opposingSuperStarName, totalDamage);
     }
 
-    private void CauseDamageActionPlayCard(int totalDamage) 
+    private void CauseDamageActionPlayCard(int totalDamage)
     {
         for (int currentDamage = 0; currentDamage < totalDamage; currentDamage++)
-        {   
+        {
             if (CheckCanReceiveDamage())
-                ShowOneFaceDownCard(currentDamage+1, totalDamage);
+                ShowOneFaceDownCard(currentDamage + 1, totalDamage);
             else
                 gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning();
         }
@@ -106,10 +107,11 @@ public class PlayCard
         return gameStructureInfo.ControllerOpponentPlayer.AreThereCardsLeftInTheArsenal();
     }
 
-    private void ShowOneFaceDownCard(int currentDamage, int totalDamage) 
+    private void ShowOneFaceDownCard(int currentDamage, int totalDamage)
     {
         Player player = gameStructureInfo.GetOpponentPlayer();
-        CardController flippedCardController = gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
+        CardController flippedCardController =
+            gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
         string flippedCardString = gameStructureInfo.VisualizeCards.GetStringCardInfo(flippedCardController);
         gameStructureInfo.view.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
     }
@@ -117,22 +119,7 @@ public class PlayCard
     private void PlayActionCard(CardController playedCardController, int indexType)
     {
         SayThatTheyAreGoingToPlayACard(playedCardController, indexType);
-        gameStructureInfo.view.SayThatPlayerMustDiscardThisCard(gameStructureInfo.ControllerCurrentPlayer.NameOfSuperStar(), playedCardController.GetCardTitle());
-        gameStructureInfo.view.SayThatPlayerDrawCards(gameStructureInfo.ControllerCurrentPlayer.NameOfSuperStar(), 1);
-        DiscardActionCard(playedCardController);
-        StealCard();
+        gameStructureInfo.CardEffects.DiscardCard(playedCardController);
+        gameStructureInfo.CardEffects.StealCard();
     }
-
-    private void DiscardActionCard(CardController playedCardController)
-    {
-        Player player = gameStructureInfo.GetCurrentPlayer();
-        gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingSide(player, playedCardController);
-    }
-    
-    private void StealCard()
-    {   
-        Player player = gameStructureInfo.GetCurrentPlayer();
-        gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToHand(player);
-    }
-    
 }
