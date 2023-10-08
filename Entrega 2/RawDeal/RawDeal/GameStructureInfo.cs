@@ -25,6 +25,7 @@ public class GameStructureInfo
     public CardEffects CardEffects;
     public bool IsTheGameStillPlaying = true;
     public bool IsTheTurnBeingPlayed = true;
+    public CardController LastPlayedCard;
     
     public Player GetCurrentPlayer()
     {

@@ -48,6 +48,7 @@ public class Game
         PlayCard.gameStructureInfo = gameStructureInfo;
         GetSetGameVariables.gameStructureInfo = gameStructureInfo;
         CardEffects.gameStructureInfo = gameStructureInfo;
+        _createCards.gameStructureInfo = gameStructureInfo;
     }
     
     public void Play() 
@@ -117,7 +118,7 @@ public class Game
 
     private PlayerController InitializePlayerController(Player player)
     {
-        PlayerController playerController = new PlayerController(player);
+        PlayerController playerController = new PlayerController(player, gameStructureInfo);
         return playerController;
     }
     

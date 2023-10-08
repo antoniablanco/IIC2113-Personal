@@ -6,17 +6,17 @@ namespace RawDeal.PlayerClass;
 public class PlayerController
 {
     private Player player;
-    private VisualizeCards VisualizeCards = new VisualizeCards();
-    private CardMovement CardMovement =new CardMovement();
+    private GameStructureInfo gameStructureInfo;
     
-    public PlayerController(Player player)
+    public PlayerController(Player player, GameStructureInfo gameStructureInfo)
     {
         this.player = player;
+        this.gameStructureInfo = gameStructureInfo;
     }
     
     public void DrawCard()
     {   
-        CardMovement.TransferOfUnselectedCard(player.cardsArsenal, player.cardsHand, false);
+        gameStructureInfo.CardMovement.TransferOfUnselectedCard(player.cardsArsenal, player.cardsHand, false);
     }
     
     public string NameOfSuperStar()
@@ -58,7 +58,19 @@ public class PlayerController
             .Where(card => card.GetCardFortitude() <= FortitudRating() && !card.IsReversalType())
             .ToList();
     }
+    
+    public List<CardController> CardsAvailableToReversal(CardController playedCardController) 
+    {
+        return player.cardsHand
+            .Where(card => card.GetCardFortitude() <= FortitudRating() && card.IsReversalType() && CanReversalPlayedCard(card))
+            .ToList();
+    }
 
+    private bool CanReversalPlayedCard(CardController card) 
+    {
+        return card.GetIfCardCanReversalPlayedCard();
+    }
+    
     public bool HasCardsInArsenal()
     {
         return (player.cardsArsenal.Count > 0);
@@ -121,19 +133,19 @@ public class PlayerController
     
     public List<String> StringCardsHand()
     {
-        List<String> stringCardSet = VisualizeCards.CreateStringCardList(player.cardsHand);
+        List<String> stringCardSet = gameStructureInfo.VisualizeCards.CreateStringCardList(player.cardsHand);
         return stringCardSet;
     }
     
     public List<String> StringCardsRingArea()
     {
-        List<String> stringCardSet = VisualizeCards.CreateStringCardList(player.cardsRingArea);
+        List<String> stringCardSet = gameStructureInfo.VisualizeCards.CreateStringCardList(player.cardsRingArea);
         return stringCardSet;
     }
     
     public List<String> StringCardsRingSide()
     {
-        List<String> stringCardSet = VisualizeCards.CreateStringCardList(player.cardsRingSide);
+        List<String> stringCardSet = gameStructureInfo.VisualizeCards.CreateStringCardList(player.cardsRingSide);
         return stringCardSet;
     }
 

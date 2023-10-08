@@ -10,6 +10,7 @@ namespace RawDeal.CardClass;
 
 public class CreateCards
 {   
+    public GameStructureInfo gameStructureInfo;
     public List<CardJson> DeserializeJsonCards()
     {
         string myJson = File.ReadAllText (Path.Combine("data","cards.json")) ;
@@ -27,7 +28,7 @@ public class CreateCards
             where line.Trim() == card.Title 
             select FindCard(card.Title, card)).ToList();
 
-        var cardControllers = matchingCards.Select(card => new CardController(card, view)).ToList();
+        var cardControllers = matchingCards.Select(card => new CardController(card, gameStructureInfo)).ToList();
 
         return cardControllers;
     }

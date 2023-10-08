@@ -40,6 +40,8 @@ public class PlayCard
         }
         else
             Console.WriteLine("No se encuentra el tipo de carta");
+        
+        gameStructureInfo.LastPlayedCard = playedCardController.Item1;
     }
 
     private void PlayManeuverCard(CardController playedCardController, int indexType)
@@ -66,7 +68,7 @@ public class PlayCard
         int totalDamage = GetDamageProduced(playedCardController);
         if (totalDamage > 0)
             SayThatTheyAreGoingToReceiveDamage(totalDamage);
-        CauseDamageActionPlayCard(totalDamage);
+        gameStructureInfo.CardEffects.CauseDamageActionPlayCard(totalDamage);
     }
 
     private void SayThatTheyAreGoingToPlayACard(CardController playedCardController, int indexType)
@@ -89,31 +91,6 @@ public class PlayCard
     {
         string opposingSuperStarName = gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar();
         gameStructureInfo.view.SayThatSuperstarWillTakeSomeDamage(opposingSuperStarName, totalDamage);
-    }
-
-    private void CauseDamageActionPlayCard(int totalDamage)
-    {
-        for (int currentDamage = 0; currentDamage < totalDamage; currentDamage++)
-        {
-            if (CheckCanReceiveDamage())
-                ShowOneFaceDownCard(currentDamage + 1, totalDamage);
-            else
-                gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning();
-        }
-    }
-
-    private bool CheckCanReceiveDamage()
-    {
-        return gameStructureInfo.ControllerOpponentPlayer.AreThereCardsLeftInTheArsenal();
-    }
-
-    private void ShowOneFaceDownCard(int currentDamage, int totalDamage)
-    {
-        Player player = gameStructureInfo.GetOpponentPlayer();
-        CardController flippedCardController =
-            gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
-        string flippedCardString = gameStructureInfo.VisualizeCards.GetStringCardInfo(flippedCardController);
-        gameStructureInfo.view.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
     }
 
     private void PlayActionCard(CardController playedCardController, int indexType)

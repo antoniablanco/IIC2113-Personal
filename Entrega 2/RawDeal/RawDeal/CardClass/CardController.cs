@@ -7,12 +7,12 @@ namespace RawDeal.CardClass;
 public class CardController
 {
     private Card _card;
-    private View _view;
+    private GameStructureInfo gameStructureInfo;
 
-    public CardController(Card card, View view)
+    public CardController(Card card, GameStructureInfo gameStructureInfo)
     {
         _card = card;
-        _view = view;
+        this.gameStructureInfo = gameStructureInfo;
     }
     
     public bool ContainsUniqueSubtype()
@@ -94,9 +94,9 @@ public class CardController
         return cardInfo;
     }
 
-    public void PlayManeuverCard()
+    public bool GetIfCardCanReversalPlayedCard()
     {
-        
+        return _card.CanReversalThisCard(gameStructureInfo.LastPlayedCard);
     }
     
 }
