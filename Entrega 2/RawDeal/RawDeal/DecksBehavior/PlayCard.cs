@@ -42,6 +42,7 @@ public class PlayCard
             Console.WriteLine("No se encuentra el tipo de carta");
         
         gameStructureInfo.LastPlayedCard = playedCardController.Item1;
+        gameStructureInfo.LastPlayedType = playedCardController.Item1.GetCardTypes()[playedCardController.Item2];
     }
 
     private void PlayManeuverCard(CardController playedCardController, int indexType)

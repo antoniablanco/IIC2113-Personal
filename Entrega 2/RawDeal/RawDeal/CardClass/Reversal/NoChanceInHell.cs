@@ -8,4 +8,9 @@ public class NoChanceInHell: Card
     {
          
     }
+    
+    public override bool CanReversalThisCard(CardController playedCardController, string typePlayed)
+    {
+        return playedCardController.VerifyIfPlayThisType("Action");
+    }
 }

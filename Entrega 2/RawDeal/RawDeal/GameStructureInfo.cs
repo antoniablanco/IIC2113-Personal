@@ -26,6 +26,7 @@ public class GameStructureInfo
     public bool IsTheGameStillPlaying = true;
     public bool IsTheTurnBeingPlayed = true;
     public CardController LastPlayedCard;
+    public string LastPlayedType;
     
     public Player GetCurrentPlayer()
     {

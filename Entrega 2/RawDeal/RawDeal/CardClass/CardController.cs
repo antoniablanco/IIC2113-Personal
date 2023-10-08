@@ -96,7 +96,16 @@ public class CardController
 
     public bool GetIfCardCanReversalPlayedCard()
     {
-        return _card.CanReversalThisCard(gameStructureInfo.LastPlayedCard);
+        return _card.CanReversalThisCard(gameStructureInfo.LastPlayedCard, gameStructureInfo.LastPlayedType);
     }
     
+    public bool VerifyIfContainSubtype(string subType)
+    {
+        return _card.Subtypes.Contains(subType);
+    }
+
+    public bool VerifyIfPlayThisType(string type)
+    {
+        return gameStructureInfo.LastPlayedType == type;
+    }
 }

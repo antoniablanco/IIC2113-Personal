@@ -8,4 +8,9 @@ public class StepAside: Card
     {
          
     }
+    
+    public override bool CanReversalThisCard(CardController playedCardController, string typePlayed)
+    {
+        return playedCardController.VerifyIfContainSubtype("Strike") && playedCardController.VerifyIfPlayThisType("Maneuver");
+    }
 }
