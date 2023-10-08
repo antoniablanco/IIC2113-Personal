@@ -18,6 +18,7 @@ public class Game
     private CreateSuperStart _createSuperStart = new CreateSuperStart();
     private PlayCard PlayCard = new PlayCard();
     public GameStructureInfo gameStructureInfo = new GameStructureInfo();
+    public GetSetGameVariables GetSetGameVariables = new GetSetGameVariables();
     
     
     public Game(View view, string deckFolder)
@@ -25,16 +26,26 @@ public class Game
         _view = view;
         _deckFolder = deckFolder;
         _createSuperStart.view = _view;
-        AsignGameStructureInfo();
+        AssigningClassesToGameStructure();
+        AssigningClassGameStructureToClasses();
+        _gameLogic.GetSetGameVariables = GetSetGameVariables;
     }
-    
-    public void AsignGameStructureInfo()
+
+        
+    private void AssigningClassesToGameStructure()
     {
-        _gameLogic.gameStructureInfo = gameStructureInfo;
         gameStructureInfo.view = _view;
         gameStructureInfo.GameLogic = _gameLogic;
-        PlayCard.gameStructureInfo = gameStructureInfo;
         gameStructureInfo.PlayCard = PlayCard;
+        gameStructureInfo.GetSetGameVariables = GetSetGameVariables;
+    }
+    
+    private void AssigningClassGameStructureToClasses()
+    {
+        
+        _gameLogic.GameStructureInfo = gameStructureInfo;
+        PlayCard.gameStructureInfo = gameStructureInfo;
+        GetSetGameVariables.gameStructureInfo = gameStructureInfo;
     }
     
     public void Play() 
@@ -113,7 +124,7 @@ public class Game
         gameStructureInfo.ControllerPlayerOne = playerOne;
         gameStructureInfo.ControllerPlayerTwo = playerTwo;
         
-        _gameLogic.CreatePlayerInitialOrder();
+        GetSetGameVariables.CreatePlayerInitialOrder();
     }
 
     private void InitializePlayerHands()
@@ -123,7 +134,7 @@ public class Game
     
     private void GameGivenThatTheDecksAreValid()
     {
-        while (_gameLogic.ShouldWeContinueTheGame())
+        while (GetSetGameVariables.ShouldWeContinueTheGame())
         {
             OneTurnIsPlayed();
         }
@@ -134,7 +145,7 @@ public class Game
     {
         _gameLogic.SettingTurnStartInformation();
 
-        while (_gameLogic.TheTurnIsBeingPlayed())
+        while (GetSetGameVariables.TheTurnIsBeingPlayed())
         {
             _gameLogic.DisplayPlayerInformation();
             PlayerSelectedAction();
@@ -157,10 +168,10 @@ public class Game
                 gameStructureInfo.PlayCard.ActionPlayCard();
                 break;
             case NextPlay.EndTurn:
-                _gameLogic.UpdateVariablesAtEndOfTurn();
+                GetSetGameVariables.UpdateVariablesAtEndOfTurn();
                 break;
             case NextPlay.GiveUp:
-                _gameLogic.SetVariablesAfterGaveUp();
+                GetSetGameVariables.SetVariablesAfterGaveUp();
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

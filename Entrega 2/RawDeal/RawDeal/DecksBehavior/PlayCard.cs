@@ -68,7 +68,7 @@ public class PlayCard
             if (CheckCanReceiveDamage())
                 ShowOneFaceDownCard(currentDamage+1, totalDamage);
             else
-                gameStructureInfo.GameLogic.SetVariablesAfterWinning();
+                gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning();
         }
     }
 

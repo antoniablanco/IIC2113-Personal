@@ -21,6 +21,9 @@ public class GameStructureInfo
     public PlayerController ControllerOpponentPlayer;
     public PlayerController winnerPlayer;
     public GameLogic GameLogic;
+    public GetSetGameVariables GetSetGameVariables;
+    public bool IsTheGameStillPlaying = true;
+    public bool IsTheTurnBeingPlayed = true;
     
     public Player GetCurrentPlayer()
     {
