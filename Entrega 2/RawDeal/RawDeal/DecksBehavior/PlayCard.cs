@@ -65,7 +65,10 @@ public class PlayCard
     private void PlayManeuverCard(CardController playedCardController)
     {
         PrintActionPlayCard(playedCardController);
-        gameStructureInfo.GameLogic.AddCardPlayedToRingArea(playedCardController);
+        if (!gameStructureInfo.CardEffects.isUserReversalDeckCard)
+            gameStructureInfo.GameLogic.AddCardPlayedToRingArea(playedCardController, gameStructureInfo.GetCurrentPlayer());
+        else
+            gameStructureInfo.GameLogic.AddCardPlayedToRingArea(playedCardController, gameStructureInfo.GetOpponentPlayer());
     }
 
     private bool IsValidIndexOfCard(int selectedCard)

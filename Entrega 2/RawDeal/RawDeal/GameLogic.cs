@@ -62,9 +62,8 @@ public class GameLogic
         GameStructureInfo.ControllerCurrentPlayer.UsingElectiveSuperAbility(GameStructureInfo);
     }
 
-    public void AddCardPlayedToRingArea(CardController playedCardController) 
-    {   
-        Player player = GameStructureInfo.GetCurrentPlayer();
+    public void AddCardPlayedToRingArea(CardController playedCardController, Player player) 
+    {
         GameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(player, playedCardController);
     }
     
