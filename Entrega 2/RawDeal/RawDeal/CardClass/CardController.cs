@@ -133,4 +133,9 @@ public class CardController
     {
         return int.Parse(_card.Damage) + gameStructureInfo.bonusDamage*gameStructureInfo.IsJockeyingForPositionBonusDamage <= maximumDamage;
     }
+    
+    public void ActionEffect()
+    {
+        _card.ActionEffect(gameStructureInfo, this);
+    }
 }

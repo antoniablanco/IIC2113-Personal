@@ -11,11 +11,22 @@ public class JockeyingForPosition: Card
          
     }
     
+    public override bool CanReversalThisCard(CardController playedCardController, string typePlayed)
+    {
+        return playedCardController.GetCardTitle() == "Jockeying for Position";
+    }
+    
     public override void ReversalEffect(GameStructureInfo gameStructureInfo)
     {   
         GetSelectedEffect(gameStructureInfo);
         gameStructureInfo.ContadorTurnosJokeyingForPosition = 2;
         gameStructureInfo.CardEffects.EndTurn();
+    }
+    
+    public override void ActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    {   
+        GetSelectedEffect(gameStructureInfo);
+        gameStructureInfo.ContadorTurnosJokeyingForPosition = 2;
     }
     
     public void GetSelectedEffect(GameStructureInfo gameStructureInfo)
@@ -32,4 +43,5 @@ public class JockeyingForPosition: Card
                 break;
         }
     }
+    
 }

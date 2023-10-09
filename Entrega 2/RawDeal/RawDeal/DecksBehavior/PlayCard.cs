@@ -144,7 +144,6 @@ public class PlayCard
         DeckReversal(flippedCardController, controllerOpponentPlayer);
     }
     
-    // AQUI SE CAE EL PROGRAMA
     private void DeckReversal(CardController flippedCardController, PlayerController controllerOpponentPlayer)
     {
         isUserReversalDeckCard = flippedCardController.CanUseThisReversalCard(controllerOpponentPlayer);
@@ -177,8 +176,7 @@ public class PlayCard
     }
 
     private void PlayActionCard(CardController playedCardController)
-    {
-        gameStructureInfo.CardEffects.DiscardCard(playedCardController, gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.GetCurrentPlayer());
-        gameStructureInfo.CardEffects.StealCard( gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.GetCurrentPlayer());
+    {   
+        playedCardController.ActionEffect();
     }
 }

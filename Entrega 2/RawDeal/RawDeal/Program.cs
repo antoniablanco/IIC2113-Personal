@@ -1,7 +1,7 @@
 ﻿using RawDeal;
 using RawDealView;
 
-string folder = "07-NoEffectReversals";
+string folder = "08-Reversals";
 
 // Esta vista permite verificar el comportamiento de un test particular.
 // El texto en consola saldrá azúl cuando el output sea el esperado y rojo cuando no lo sea. 

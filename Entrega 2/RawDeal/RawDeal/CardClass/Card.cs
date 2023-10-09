@@ -74,4 +74,9 @@ public abstract class Card
         
     }
 
+    public virtual void ActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    {
+        
+    }
+
 }
