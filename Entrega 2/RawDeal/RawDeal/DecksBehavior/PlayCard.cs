@@ -143,14 +143,15 @@ public class PlayCard
         gameStructureInfo.view.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
         DeckReversal(flippedCardController, controllerOpponentPlayer);
     }
-
+    
+    // AQUI SE CAE EL PROGRAMA
     private void DeckReversal(CardController flippedCardController, PlayerController controllerOpponentPlayer)
     {
         isUserReversalDeckCard = flippedCardController.CanUseThisReversalCard(controllerOpponentPlayer);
         if (isUserReversalDeckCard)
-        {
+        {   
+            flippedCardController.ReversalEffect();
             gameStructureInfo.view.SayThatCardWasReversedByDeck(controllerOpponentPlayer.NameOfSuperStar());
-            gameStructureInfo.CardEffects.EndTurn();
         }
     }
     
