@@ -20,33 +20,61 @@ public class VisualizeCards
         return formattedInfo;
     }
     
-
     public List<string> CreateStringCardList(List<CardController> cardsInSelectedSet)
     {
         return cardsInSelectedSet.Select(cardController => GetStringCardInfo(cardController)).ToList();
     }
 
-    public List<string> CreateStringPlayedCardList(List<CardController> cardsInSelectedSet)
+    public List<string> CreateStringPlayedCardListForReversalType(List<CardController> cardsInSelectedSet)
     {
         List<string> stringList = new List<string>();
 
         foreach (var cardController in cardsInSelectedSet)
         {
-            stringList.AddRange(GetStringPlayedCardForType(cardController));
+            stringList.AddRange(GetStringPlayedCardForReversalType(cardController));
         }
 
         return stringList;
     }
 
-    private List<String> GetStringPlayedCardForType(CardController cardController)
+    private List<String> GetStringPlayedCardForReversalType(CardController cardController)
     {
         int[] indexes = Enumerable.Range(0, cardController.GetCardTypes().Count()).ToArray();
+
         return indexes.Select(index => GetStringPlayedInfo(cardController, index)).ToList();
     }
     
-    // REVISANDO
-    public List<Tuple<CardController, int>> GetPosiblesCardsToPlay(List<CardController> cardsInSelectedSet)
+    public List<string> CreateStringPlayedCardListForNotReversalType(List<CardController> cardsInSelectedSet)
     {
+        List<string> stringList = new List<string>();
+
+        foreach (var cardController in cardsInSelectedSet)
+        {
+            stringList.AddRange(GetStringPlayedCardForNotReversalType(cardController));
+        }
+
+        return stringList;
+    }
+
+    private List<String> GetStringPlayedCardForNotReversalType(CardController cardController)
+    {
+        //int[] indexes = Enumerable.Range(0, cardController.GetCardTypes().Count()).ToArray();
+        //return indexes.Select(index => GetStringPlayedInfo(cardController, index)).ToList();
+        int[] indexes = Enumerable.Range(0, cardController.GetCardTypes().Count()).ToArray();
+        List<string> stringList = new List<string>();
+        foreach (var index in indexes)
+        {   
+            Console.WriteLine("El tipo de la carta es: " + cardController.GetCardType(index) + " y el indice es: " + index);
+            if (cardController.GetCardType(index) != "Reversal")
+                stringList.Add(GetStringPlayedInfo(cardController, index));
+        }
+
+        return stringList;
+    }
+    
+    
+    public List<Tuple<CardController, int>> GetPosiblesCardsToPlay(List<CardController> cardsInSelectedSet)
+    {   
         List<Tuple<CardController, int>> allTypesForCard = new List<Tuple<CardController, int>>();
 
         foreach (var cardController in cardsInSelectedSet)
