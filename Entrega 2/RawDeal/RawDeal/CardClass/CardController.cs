@@ -65,6 +65,11 @@ public class CardController
         return int.Parse(_card.Fortitude);
     }
     
+    public int GetCardStunValue()
+    {
+        return int.Parse(_card.StunValue);
+    }
+    
     public CardInfoImplementation CreateIViewableCardInfo()
     {
         var cardInfo = new CardInfoImplementation(
@@ -118,5 +123,9 @@ public class CardController
     {
         return gameStructureInfo.LastPlayedType == type;
     }
-    
+
+    public bool TheCardHadStunValue()
+    {
+        return int.Parse(_card.StunValue) > 0;
+    }
 }

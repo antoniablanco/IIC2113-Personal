@@ -56,7 +56,7 @@ public class GetSetGameVariables
     
     private void SetVariablesAfterLosing() 
     {   
-        gameStructureInfo.winnerPlayer = (gameStructureInfo.ControllerCurrentPlayer.HasCardsInArsenal()) ? gameStructureInfo.ControllerPlayerTwo : gameStructureInfo.ControllerPlayerOne;
+        gameStructureInfo.winnerPlayer = (gameStructureInfo.ControllerCurrentPlayer.HasCardsInArsenal()) ? gameStructureInfo.ControllerCurrentPlayer : gameStructureInfo.ControllerOpponentPlayer;
         gameStructureInfo.IsTheGameStillPlaying = false;
         DeclareEndOfTurn();
     }
