@@ -13,4 +13,9 @@ public class StepAside: Card
     {
         return playedCardController.VerifyIfContainSubtype("Strike") && playedCardController.VerifyIfPlayThisType("Maneuver");
     }
+    
+    public override void ReversalEffect(GameStructureInfo gameStructureInfo)
+    {
+        gameStructureInfo.CardEffects.EndTurn();
+    }
 }

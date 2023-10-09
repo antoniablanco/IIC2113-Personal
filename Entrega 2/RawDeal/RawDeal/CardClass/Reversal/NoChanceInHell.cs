@@ -13,4 +13,9 @@ public class NoChanceInHell: Card
     {
         return playedCardController.VerifyIfPlayThisType("Action");
     }
+    
+    public override void ReversalEffect(GameStructureInfo gameStructureInfo)
+    {
+        gameStructureInfo.CardEffects.EndTurn();
+    }
 }

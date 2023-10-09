@@ -8,4 +8,14 @@ public class ManagerInterferes: Card
     {
          
     }
+    
+    public override bool CanReversalThisCard(CardController playedCardController, string typePlayed)
+    {
+        return playedCardController.VerifyIfPlayThisType("Maneuver");
+    }
+    
+    public override void ReversalEffect(GameStructureInfo gameStructureInfo)
+    {
+        
+    }
 }

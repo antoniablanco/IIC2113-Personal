@@ -69,4 +69,9 @@ public abstract class Card
         return true;
     }
 
+    public virtual void ReversalEffect(GameStructureInfo gameStructureInfo)
+    {
+        
+    }
+
 }

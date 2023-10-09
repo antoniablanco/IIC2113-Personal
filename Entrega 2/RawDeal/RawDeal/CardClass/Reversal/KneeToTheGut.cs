@@ -8,4 +8,14 @@ public class KneeToTheGut: Card
     {
          
     }
+    
+    public override bool CanReversalThisCard(CardController playedCardController, string typePlayed)
+    {
+        return playedCardController.VerifyIfContainSubtype("Strike");
+    }
+    
+    public override void ReversalEffect(GameStructureInfo gameStructureInfo)
+    {
+        
+    }
 }

@@ -14,7 +14,7 @@ public class PlayCard
         if (IsValidIndexOfCard(selectedCard))
         {
             Tuple<CardController, int> playedCardController = GetCardPlayed(selectedCard);
-            PlayCardByType(playedCardController);
+            VerifinIfIsUsedAReversalCard(playedCardController);
         }
     }
 
@@ -28,8 +28,34 @@ public class PlayCard
 
     }
 
-    private void PlayCardByType(Tuple<CardController, int> playedCardController)
+
+    private void VerifinIfIsUsedAReversalCard(Tuple<CardController, int> playedCardController)
+    {   
+        SayThatTheyAreGoingToPlayACard(playedCardController.Item1, playedCardController.Item2);
+        if (GetReversalCard(playedCardController.Item1)!=-1)
+            PlayingReversalCard();
+        else
+        {
+            PlayCardByType(playedCardController);
+            //PlayCardBecauseTheyDontUseAReversalCard(playedCardController.Item1);
+        }
+    }
+    
+    private int GetReversalCard(CardController playedCardController)
+    {   
+        List<CardController> possibleReversalsToPlay = gameStructureInfo.ControllerOpponentPlayer.CardsAvailableToReversal(playedCardController);
+        foreach (var card in possibleReversalsToPlay)
+            Console.WriteLine(card.GetCardTitle()+" "+card.GetCardTypes()[0]);
+        return -1;
+    }
+
+    private void PlayingReversalCard()
     {
+        
+    }
+    
+    private void PlayCardByType(Tuple<CardController, int> playedCardController)
+    {   
         if (playedCardController.Item1.GetCardTypes()[playedCardController.Item2] == "Maneuver")
         {
             PlayManeuverCard(playedCardController.Item1, playedCardController.Item2);
@@ -65,13 +91,12 @@ public class PlayCard
 
     private void PrintActionPlayCard(CardController playedCardController, int indexType)
     {
-        SayThatTheyAreGoingToPlayACard(playedCardController, indexType);
         int totalDamage = GetDamageProduced(playedCardController);
         if (totalDamage > 0)
             SayThatTheyAreGoingToReceiveDamage(totalDamage);
         gameStructureInfo.CardEffects.CauseDamageActionPlayCard(totalDamage);
     }
-
+    
     private void SayThatTheyAreGoingToPlayACard(CardController playedCardController, int indexType)
     {
         string playedCardString = gameStructureInfo.VisualizeCards.GetStringPlayedInfo(playedCardController, indexType);
@@ -96,7 +121,6 @@ public class PlayCard
 
     private void PlayActionCard(CardController playedCardController, int indexType)
     {
-        SayThatTheyAreGoingToPlayACard(playedCardController, indexType);
         gameStructureInfo.CardEffects.DiscardCard(playedCardController);
         gameStructureInfo.CardEffects.StealCard();
     }

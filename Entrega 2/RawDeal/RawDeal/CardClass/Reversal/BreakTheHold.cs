@@ -12,4 +12,9 @@ public class BreakTheHold: Card
      {
          return playedCardController.VerifyIfContainSubtype("Submission") && playedCardController.VerifyIfPlayThisType("Maneuver");
      }
+     
+     public override void ReversalEffect(GameStructureInfo gameStructureInfo)
+     {
+         gameStructureInfo.CardEffects.EndTurn();
+     }
 }

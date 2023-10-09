@@ -44,4 +44,9 @@ public class CardEffects
         string flippedCardString = gameStructureInfo.VisualizeCards.GetStringCardInfo(flippedCardController);
         gameStructureInfo.view.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
     }
+
+    public void EndTurn()
+    {
+        gameStructureInfo.GetSetGameVariables.UpdateVariablesAtEndOfTurn();
+    }
 }
