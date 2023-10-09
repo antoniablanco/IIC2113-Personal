@@ -5,15 +5,36 @@ namespace RawDeal.DecksBehavior;
 public class PlayReversal
 {   
     public GameStructureInfo gameStructureInfo = new GameStructureInfo();
-    
-    public List<CardController> GetReversalCards()
+
+    public bool IsUserUsingReversalCard()
     {   
         List<CardController> possibleReversals = gameStructureInfo.ControllerOpponentPlayer.CardsAvailableToReversal();
-        return possibleReversals;
+        if (possibleReversals.Count() > 0)
+        {
+            int indexReversalCard = UserSelectReversalCard(possibleReversals);
+            if (indexReversalCard != -1)
+            {
+                PlayingReversalCard(indexReversalCard);
+                return true;
+            }
+        }
+        return false;
     }
 
-    public void PlayingReversalCard(List<CardController> possibleReversals)
+    public int UserSelectReversalCard(List<CardController> possibleReversals)
     {
-        Console.WriteLine("Se tiene reversals para jugar");
+        List<String> possibleReversalsString =
+            gameStructureInfo.VisualizeCards.CreateStringPlayedCardList(possibleReversals);
+        int indexReversalCard = gameStructureInfo.view.AskUserToSelectAReversal(
+            gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar(), possibleReversalsString);
+        return indexReversalCard;
+    }
+    
+    public void PlayingReversalCard(int indexReversalCard)
+    {
+        if (indexReversalCard != -1)
+        {
+            Console.WriteLine("You are playing a reversal card");
+        }
     }
 }

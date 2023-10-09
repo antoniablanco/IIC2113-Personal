@@ -33,10 +33,7 @@ public class PlayCard
     
     private void VerifinIfIsUsedAReversalCard(Tuple<CardController, int> playedCardController)
     {
-        List<CardController> possibleReversals = PlayReversal.GetReversalCards();
-        if (possibleReversals.Count() > 0)
-            PlayReversal.PlayingReversalCard(possibleReversals);
-        else
+        if (!PlayReversal.IsUserUsingReversalCard())
         {   
             gameStructureInfo.view.SayThatPlayerSuccessfullyPlayedACard();
             PlayCardByType(playedCardController);
