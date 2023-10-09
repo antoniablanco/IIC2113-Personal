@@ -8,4 +8,9 @@ public class JockeyingForPosition: Card
     {
          
     }
+    
+    public override void ReversalEffect(GameStructureInfo gameStructureInfo)
+    {
+        gameStructureInfo.CardEffects.EndTurn();
+    }
 }

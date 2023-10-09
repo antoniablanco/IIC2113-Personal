@@ -27,6 +27,8 @@ public class GameStructureInfo
     public bool IsTheTurnBeingPlayed = true;
     public CardController LastPlayedCard;
     public string LastPlayedType;
+    public int bonusFortitude = 0;
+    public int bonusDamage = 0;
     
     public Player GetCurrentPlayer()
     {

@@ -1,3 +1,5 @@
+using RawDeal.PlayerClass;
+
 namespace RawDeal.CardClass.Reversal;
 
 public class KneeToTheGut: Card
@@ -11,11 +13,15 @@ public class KneeToTheGut: Card
     
     public override bool CanReversalThisCard(CardController playedCardController, string typePlayed)
     {
-        return playedCardController.VerifyIfContainSubtype("Strike");
+        return playedCardController.VerifyIfContainSubtype("Strike") && playedCardController.DealsTheMaximumDamage(7);
     }
     
     public override void ReversalEffect(GameStructureInfo gameStructureInfo)
-    {
-        
+    {   
+        PlayerController damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
+        int damage = gameStructureInfo.CardEffects.GetDamageProducedByReversalCardWithNotEspecificDamage(damagedPlayerController);
+        gameStructureInfo.CardEffects.Damage(damage, damagedPlayerController,gameStructureInfo.GetCurrentPlayer()); 
+        gameStructureInfo.CardEffects.EndTurn();
     }
+    
 }

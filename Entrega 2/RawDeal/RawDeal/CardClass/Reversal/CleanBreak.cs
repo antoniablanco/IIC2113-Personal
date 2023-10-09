@@ -8,4 +8,16 @@ public class CleanBreak: Card
     {
          
     }
+    
+    public override bool CanReversalThisCard(CardController playedCardController, string typePlayed)
+    {
+        return playedCardController.GetCardTitle() == "Jockeying for Position";
+    }
+    
+    public override void ReversalEffect(GameStructureInfo gameStructureInfo)
+    {   
+        gameStructureInfo.CardEffects.DiscardCardsFromHand(gameStructureInfo.ControllerCurrentPlayer, 4, gameStructureInfo.GetCurrentPlayer());
+        gameStructureInfo.CardEffects.StealCard(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer(), 2);
+        gameStructureInfo.CardEffects.EndTurn();
+    }
 }

@@ -8,4 +8,15 @@ public class ChynaInterferes: Card
     {
          
     }
+    
+    public override bool CanReversalThisCard(CardController playedCardController, string typePlayed)
+    {
+        return playedCardController.VerifyIfPlayThisType("Maneuver");
+    }
+    
+    public override void ReversalEffect(GameStructureInfo gameStructureInfo)
+    {   
+        gameStructureInfo.CardEffects.StealCard(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer(), 2);
+        gameStructureInfo.CardEffects.EndTurn();
+    }
 }

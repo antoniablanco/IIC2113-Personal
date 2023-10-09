@@ -8,4 +8,14 @@ public class ElbowToTheFace: Card
     {
          
     }
+    
+    public override bool CanReversalThisCard(CardController playedCardController, string typePlayed)
+    {
+        return playedCardController.VerifyIfPlayThisType("Maneuver") && playedCardController.DealsTheMaximumDamage(7);
+    }
+    
+    public override void ReversalEffect(GameStructureInfo gameStructureInfo)
+    {
+        gameStructureInfo.CardEffects.EndTurn();
+    }
 }
