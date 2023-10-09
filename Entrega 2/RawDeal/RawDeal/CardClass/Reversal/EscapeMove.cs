@@ -10,7 +10,7 @@ public class EscapeMove: Card
     }
     
     public override bool CanReversalThisCard(CardController playedCardController, string typePlayed)
-    {
+    {   
         return playedCardController.VerifyIfContainSubtype("Grapple") && playedCardController.VerifyIfPlayThisType("Maneuver");
     }
     

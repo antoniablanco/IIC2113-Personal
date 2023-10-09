@@ -7,6 +7,7 @@ public class PlayCard
 {
 
     public GameStructureInfo gameStructureInfo = new GameStructureInfo();
+    private PlayReversal PlayReversal = new PlayReversal();
 
     public void ActionPlayCard()
     {
@@ -14,6 +15,8 @@ public class PlayCard
         if (IsValidIndexOfCard(selectedCard))
         {
             Tuple<CardController, int> playedCardController = GetCardPlayed(selectedCard);
+            SetLastPlayedCardInfo(playedCardController);
+            PlayReversal.gameStructureInfo = gameStructureInfo;
             VerifinIfIsUsedAReversalCard(playedCardController);
         }
     }
@@ -27,31 +30,24 @@ public class PlayCard
         return allCardsAndTheirTypes[indexSelectedCard];
 
     }
-
-
+    
     private void VerifinIfIsUsedAReversalCard(Tuple<CardController, int> playedCardController)
-    {   
-        SayThatTheyAreGoingToPlayACard(playedCardController.Item1, playedCardController.Item2);
-        if (GetReversalCard(playedCardController.Item1)!=-1)
-            PlayingReversalCard();
+    {
+        List<CardController> possibleReversals = PlayReversal.GetReversalCards();
+        if (possibleReversals.Count() > 0)
+            PlayReversal.PlayingReversalCard(possibleReversals);
         else
-        {
+        {   
+            gameStructureInfo.view.SayThatPlayerSuccessfullyPlayedACard();
             PlayCardByType(playedCardController);
-            //PlayCardBecauseTheyDontUseAReversalCard(playedCardController.Item1);
         }
     }
     
-    private int GetReversalCard(CardController playedCardController)
-    {   
-        List<CardController> possibleReversalsToPlay = gameStructureInfo.ControllerOpponentPlayer.CardsAvailableToReversal(playedCardController);
-        foreach (var card in possibleReversalsToPlay)
-            Console.WriteLine(card.GetCardTitle()+" "+card.GetCardTypes()[0]);
-        return -1;
-    }
-
-    private void PlayingReversalCard()
+    private void SetLastPlayedCardInfo(Tuple<CardController, int> playedCardController)
     {
-        
+        gameStructureInfo.LastPlayedCard = playedCardController.Item1;
+        gameStructureInfo.LastPlayedType = playedCardController.Item1.GetCardTypes()[playedCardController.Item2];
+        SayThatTheyAreGoingToPlayACard(playedCardController.Item1, playedCardController.Item2);
     }
     
     private void PlayCardByType(Tuple<CardController, int> playedCardController)
@@ -67,8 +63,6 @@ public class PlayCard
         else
             Console.WriteLine("No se encuentra el tipo de carta");
         
-        gameStructureInfo.LastPlayedCard = playedCardController.Item1;
-        gameStructureInfo.LastPlayedType = playedCardController.Item1.GetCardTypes()[playedCardController.Item2];
     }
 
     private void PlayManeuverCard(CardController playedCardController, int indexType)
@@ -102,7 +96,6 @@ public class PlayCard
         string playedCardString = gameStructureInfo.VisualizeCards.GetStringPlayedInfo(playedCardController, indexType);
         string nameSuperStar = gameStructureInfo.ControllerCurrentPlayer.NameOfSuperStar();
         gameStructureInfo.view.SayThatPlayerIsTryingToPlayThisCard(nameSuperStar, playedCardString);
-        gameStructureInfo.view.SayThatPlayerSuccessfullyPlayedACard();
     }
 
     private int GetDamageProduced(CardController playedCardController)

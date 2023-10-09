@@ -42,7 +42,7 @@ public class CardController
 
     public bool IsReversalType()
     {
-        return _card.Types[0]=="Reversal";
+        return _card.Types.Any(t => t.Contains("Reversal"));
     }
     
     public int GetDamageProducedByTheCard()

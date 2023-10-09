@@ -59,7 +59,7 @@ public class PlayerController
             .ToList();
     }
     
-    public List<CardController> CardsAvailableToReversal(CardController playedCardController) 
+    public List<CardController> CardsAvailableToReversal() 
     {
         return player.cardsHand
             .Where(card => card.GetCardFortitude() <= FortitudRating() && card.IsReversalType() && CanReversalPlayedCard(card))
