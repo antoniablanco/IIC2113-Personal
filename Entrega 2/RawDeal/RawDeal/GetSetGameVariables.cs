@@ -42,14 +42,14 @@ public class GetSetGameVariables
     {   
         DeclareEndOfTurn();
         if (!gameStructureInfo.GameLogic.CheckIfPlayersHasCardsInArsenalToContinuePlaying())
-        {
+        {   
             SetVariablesAfterLosing();
         }
         UpdateNumberOfPlayers();
     }
     
     private void UpdateNumberOfPlayers()
-    {
+    {   
         gameStructureInfo.ControllerCurrentPlayer = (gameStructureInfo.ControllerCurrentPlayer == gameStructureInfo.ControllerPlayerOne) ? gameStructureInfo.ControllerPlayerTwo : gameStructureInfo.ControllerPlayerOne;
         gameStructureInfo.ControllerOpponentPlayer = (gameStructureInfo.ControllerOpponentPlayer == gameStructureInfo.ControllerPlayerOne) ? gameStructureInfo.ControllerPlayerTwo : gameStructureInfo.ControllerPlayerOne;
     }

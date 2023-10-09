@@ -98,6 +98,11 @@ public class CardController
     {
         return _card.CanReversalThisCard(gameStructureInfo.LastPlayedCard, gameStructureInfo.LastPlayedType);
     }
+
+    public bool CanUseThisReversalCard(PlayerController controllerPlayer)
+    {
+        return ((GetCardFortitude() <= controllerPlayer.FortitudRating()) && IsReversalType() && GetIfCardCanReversalPlayedCard());
+    }
     
     public void ReversalEffect()
     {
@@ -113,4 +118,5 @@ public class CardController
     {
         return gameStructureInfo.LastPlayedType == type;
     }
+    
 }

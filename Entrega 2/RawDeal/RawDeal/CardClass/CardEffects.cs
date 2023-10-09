@@ -5,6 +5,7 @@ namespace RawDeal.CardClass;
 public class CardEffects
 {   
     public GameStructureInfo gameStructureInfo= new GameStructureInfo();
+    public bool isUserReversalDeckCard = false;
     
     public void StealCard(PlayerController controllerCurrentPlayer, Player player)
     {   
@@ -20,11 +21,13 @@ public class CardEffects
     
     public void CauseDamageActionPlayCard(int totalDamage, PlayerController controllerOpponentPlayer, Player player)
     {
+        isUserReversalDeckCard = false;
         for (int currentDamage = 0; currentDamage < totalDamage; currentDamage++)
-        {
-            if (CheckCanReceiveDamage(controllerOpponentPlayer))
-                ShowOneFaceDownCard(currentDamage + 1, totalDamage, player);
-            else
+        {   
+            Console.WriteLine(gameStructureInfo.IsTheGameStillPlaying);
+            if (CheckCanReceiveDamage(controllerOpponentPlayer) && !isUserReversalDeckCard)
+                ShowOneFaceDownCard(currentDamage + 1, totalDamage, player, controllerOpponentPlayer);
+            else if (!CheckCanReceiveDamage(controllerOpponentPlayer))
                 gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning();
         }
     }
@@ -34,12 +37,22 @@ public class CardEffects
         return controllerOpponentPlayer.AreThereCardsLeftInTheArsenal();
     }
 
-    private void ShowOneFaceDownCard(int currentDamage, int totalDamage, Player player)
+    private void ShowOneFaceDownCard(int currentDamage, int totalDamage, Player player, PlayerController controllerOpponentPlayer)
     {
-        CardController flippedCardController =
-            gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
+        CardController flippedCardController = gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
         string flippedCardString = gameStructureInfo.VisualizeCards.GetStringCardInfo(flippedCardController);
         gameStructureInfo.view.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
+        DeckReversal(flippedCardController, controllerOpponentPlayer);
+    }
+
+    private void DeckReversal(CardController flippedCardController, PlayerController controllerOpponentPlayer)
+    {
+        isUserReversalDeckCard = flippedCardController.CanUseThisReversalCard(controllerOpponentPlayer);
+        if (isUserReversalDeckCard)
+        {
+            gameStructureInfo.view.SayThatCardWasReversedByDeck(controllerOpponentPlayer.NameOfSuperStar());
+            EndTurn();
+        }
     }
 
     public void EndTurn()
