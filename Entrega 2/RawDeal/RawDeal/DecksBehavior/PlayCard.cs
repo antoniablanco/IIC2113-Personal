@@ -17,12 +17,28 @@ public class PlayCard
         if (IsValidIndexOfCard(selectedCard))
         {
             Tuple<CardController, int> playedCardController = GetCardPlayed(selectedCard);
+            ShouldIDesactivateJockeyingForPositionEfectt(playedCardController.Item1);
             SetLastPlayedCardInfo(playedCardController);
             PlayReversal.gameStructureInfo = gameStructureInfo;
             VerifinIfIsUsedAReversalCard(playedCardController);
+            gameStructureInfo.ContadorTurnosJokeyingForPosition -= 1;
+        }
+    }
+    
+    private void ShouldIDesactivateJockeyingForPositionEfectt(CardController cardController)
+    {   
+        if (!cardController.VerifyIfContainSubtype("Grapple") || gameStructureInfo.ContadorTurnosJokeyingForPosition <= 0)
+        {
+            DesactivatingJockeyForPositionEffect();
         }
     }
 
+    private void DesactivatingJockeyForPositionEffect()
+    {
+        gameStructureInfo.IsJockeyingForPositionBonusDamage = 0;
+        gameStructureInfo.IsJockeyingForPositionBonusFortitud = 0;
+    }
+    
     private Tuple<CardController, int> GetCardPlayed(int indexSelectedCard)
     {
         List<CardController> possibleCardsToPlay = gameStructureInfo.ControllerCurrentPlayer.CardsAvailableToPlay();
@@ -87,7 +103,7 @@ public class PlayCard
 
     private void PrintActionPlayCard(CardController playedCardController)
     {
-        int totalDamage = GetDamageProduced(playedCardController);
+        int totalDamage = GetDamageProduced(playedCardController) + gameStructureInfo.bonusDamage*gameStructureInfo.IsJockeyingForPositionBonusDamage;
         if (totalDamage > 0)
             SayThatTheyAreGoingToReceiveDamage(totalDamage);
         CauseDamageActionPlayCard(totalDamage, gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer());
@@ -147,7 +163,7 @@ public class PlayCard
 
     private int GetDamageProduced(CardController playedCardController)
     {
-        int totalDamage = playedCardController.GetDamageProducedByTheCard();
+        int totalDamage = playedCardController.GetDamageProducedByTheCard() + gameStructureInfo.bonusDamage*gameStructureInfo.IsJockeyingForPositionBonusDamage;
         if (gameStructureInfo.ControllerOpponentPlayer.IsTheSuperStarMankind())
             totalDamage -= 1;
         return totalDamage;

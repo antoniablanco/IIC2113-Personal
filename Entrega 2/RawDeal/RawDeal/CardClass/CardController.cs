@@ -106,7 +106,7 @@ public class CardController
 
     public bool CanUseThisReversalCard(PlayerController controllerPlayer)
     {
-        return ((GetCardFortitude() + gameStructureInfo.bonusFortitude <= controllerPlayer.FortitudRating()) && IsReversalType() && GetIfCardCanReversalPlayedCard());
+        return ((GetCardFortitude() + gameStructureInfo.bonusFortitude*gameStructureInfo.IsJockeyingForPositionBonusFortitud <= controllerPlayer.FortitudRating()) && IsReversalType() && GetIfCardCanReversalPlayedCard());
     }
     
     public void ReversalEffect()
@@ -131,6 +131,6 @@ public class CardController
     
     public bool DealsTheMaximumDamage(int maximumDamage)
     {
-        return int.Parse(_card.Damage) <= maximumDamage;
+        return int.Parse(_card.Damage) + gameStructureInfo.bonusDamage*gameStructureInfo.IsJockeyingForPositionBonusDamage <= maximumDamage;
     }
 }

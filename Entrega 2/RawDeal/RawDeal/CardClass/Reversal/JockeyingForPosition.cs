@@ -1,3 +1,5 @@
+using RawDealView.Options;
+
 namespace RawDeal.CardClass.Reversal;
 
 public class JockeyingForPosition: Card
@@ -10,7 +12,24 @@ public class JockeyingForPosition: Card
     }
     
     public override void ReversalEffect(GameStructureInfo gameStructureInfo)
-    {
+    {   
+        GetSelectedEffect(gameStructureInfo);
+        gameStructureInfo.ContadorTurnosJokeyingForPosition = 2;
         gameStructureInfo.CardEffects.EndTurn();
+    }
+    
+    public void GetSelectedEffect(GameStructureInfo gameStructureInfo)
+    {   
+        SelectedEffect effectToPerform = gameStructureInfo.view.AskUserToSelectAnEffectForJockeyForPosition(gameStructureInfo.ControllerCurrentPlayer
+            .NameOfSuperStar());
+        switch (effectToPerform)
+        {
+            case SelectedEffect.NextGrappleIsPlus4D:
+                gameStructureInfo.IsJockeyingForPositionBonusDamage = 1;
+                break;
+            case SelectedEffect.NextGrapplesReversalIsPlus8F:
+                gameStructureInfo.IsJockeyingForPositionBonusFortitud= 1;
+                break;
+        }
     }
 }
