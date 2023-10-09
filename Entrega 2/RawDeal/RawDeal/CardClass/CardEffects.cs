@@ -6,39 +6,36 @@ public class CardEffects
 {   
     public GameStructureInfo gameStructureInfo= new GameStructureInfo();
     
-    public void StealCard()
+    public void StealCard(PlayerController controllerCurrentPlayer, Player player)
     {   
-        gameStructureInfo.view.SayThatPlayerDrawCards(gameStructureInfo.ControllerCurrentPlayer.NameOfSuperStar(), 1);
-        Player player = gameStructureInfo.GetCurrentPlayer();
+        gameStructureInfo.view.SayThatPlayerDrawCards(controllerCurrentPlayer.NameOfSuperStar(), 1);
         gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToHand(player);
     }
     
-    public void DiscardCard(CardController playedCardController)
+    public void DiscardCard(CardController playedCardController, PlayerController controllerCurrentPlayer, Player player)
     {   
-        gameStructureInfo.view.SayThatPlayerMustDiscardThisCard(gameStructureInfo.ControllerCurrentPlayer.NameOfSuperStar(), playedCardController.GetCardTitle());
-        Player player = gameStructureInfo.GetCurrentPlayer();
+        gameStructureInfo.view.SayThatPlayerMustDiscardThisCard(controllerCurrentPlayer.NameOfSuperStar(), playedCardController.GetCardTitle());
         gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingSide(player, playedCardController);
     }
     
-    public void CauseDamageActionPlayCard(int totalDamage)
+    public void CauseDamageActionPlayCard(int totalDamage, PlayerController controllerOpponentPlayer, Player player)
     {
         for (int currentDamage = 0; currentDamage < totalDamage; currentDamage++)
         {
-            if (CheckCanReceiveDamage())
-                ShowOneFaceDownCard(currentDamage + 1, totalDamage);
+            if (CheckCanReceiveDamage(controllerOpponentPlayer))
+                ShowOneFaceDownCard(currentDamage + 1, totalDamage, player);
             else
                 gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning();
         }
     }
 
-    private bool CheckCanReceiveDamage()
+    private bool CheckCanReceiveDamage(PlayerController controllerOpponentPlayer)
     {
-        return gameStructureInfo.ControllerOpponentPlayer.AreThereCardsLeftInTheArsenal();
+        return controllerOpponentPlayer.AreThereCardsLeftInTheArsenal();
     }
 
-    private void ShowOneFaceDownCard(int currentDamage, int totalDamage)
+    private void ShowOneFaceDownCard(int currentDamage, int totalDamage, Player player)
     {
-        Player player = gameStructureInfo.GetOpponentPlayer();
         CardController flippedCardController =
             gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
         string flippedCardString = gameStructureInfo.VisualizeCards.GetStringCardInfo(flippedCardController);

@@ -51,20 +51,20 @@ public class PlayCard
     {   
         if (playedCardController.Item1.GetCardTypes()[playedCardController.Item2] == "Maneuver")
         {
-            PlayManeuverCard(playedCardController.Item1, playedCardController.Item2);
+            PlayManeuverCard(playedCardController.Item1);
         }
         else if (playedCardController.Item1.GetCardTypes()[playedCardController.Item2] == "Action")
         {
-            PlayActionCard(playedCardController.Item1, playedCardController.Item2);
+            PlayActionCard(playedCardController.Item1);
         }
         else
             Console.WriteLine("No se encuentra el tipo de carta");
         
     }
 
-    private void PlayManeuverCard(CardController playedCardController, int indexType)
+    private void PlayManeuverCard(CardController playedCardController)
     {
-        PrintActionPlayCard(playedCardController, indexType);
+        PrintActionPlayCard(playedCardController);
         gameStructureInfo.GameLogic.AddCardPlayedToRingArea(playedCardController);
     }
 
@@ -80,12 +80,12 @@ public class PlayCard
         return cardsStrings;
     }
 
-    private void PrintActionPlayCard(CardController playedCardController, int indexType)
+    private void PrintActionPlayCard(CardController playedCardController)
     {
         int totalDamage = GetDamageProduced(playedCardController);
         if (totalDamage > 0)
             SayThatTheyAreGoingToReceiveDamage(totalDamage);
-        gameStructureInfo.CardEffects.CauseDamageActionPlayCard(totalDamage);
+        gameStructureInfo.CardEffects.CauseDamageActionPlayCard(totalDamage, gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer());
     }
     
     private void SayThatTheyAreGoingToPlayACard(CardController playedCardController, int indexType)
@@ -109,9 +109,9 @@ public class PlayCard
         gameStructureInfo.view.SayThatSuperstarWillTakeSomeDamage(opposingSuperStarName, totalDamage);
     }
 
-    private void PlayActionCard(CardController playedCardController, int indexType)
+    private void PlayActionCard(CardController playedCardController)
     {
-        gameStructureInfo.CardEffects.DiscardCard(playedCardController);
-        gameStructureInfo.CardEffects.StealCard();
+        gameStructureInfo.CardEffects.DiscardCard(playedCardController, gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.GetCurrentPlayer());
+        gameStructureInfo.CardEffects.StealCard( gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.GetCurrentPlayer());
     }
 }
