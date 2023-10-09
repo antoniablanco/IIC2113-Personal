@@ -45,6 +45,11 @@ public class CardController
         return _card.Types.Any(t => t.Contains("Reversal"));
     }
     
+    public bool HasAnyTypeDifferentOfReversal()
+    {
+        return _card.Types.Any(t => !t.Contains("Reversal"));
+    }
+    
     public int GetDamageProducedByTheCard()
     {
         return int.Parse(_card.Damage);
@@ -58,6 +63,11 @@ public class CardController
     public List<string> GetCardTypes()
     {
         return _card.Types;
+    }
+
+    public string GetCardType(int index)
+    {
+        return _card.Types[index];
     }
     
     public int GetCardFortitude()

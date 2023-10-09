@@ -43,7 +43,8 @@ public class VisualizeCards
         int[] indexes = Enumerable.Range(0, cardController.GetCardTypes().Count()).ToArray();
         return indexes.Select(index => GetStringPlayedInfo(cardController, index)).ToList();
     }
-
+    
+    // REVISANDO
     public List<Tuple<CardController, int>> GetPosiblesCardsToPlay(List<CardController> cardsInSelectedSet)
     {
         List<Tuple<CardController, int>> allTypesForCard = new List<Tuple<CardController, int>>();
@@ -51,7 +52,12 @@ public class VisualizeCards
         foreach (var cardController in cardsInSelectedSet)
         {
             int[] indexes = Enumerable.Range(0, cardController.GetCardTypes().Count()).ToArray();
-            allTypesForCard.AddRange(indexes.Select(index => new Tuple<CardController, int>(cardController, index)));
+            //allTypesForCard.AddRange(indexes.Select(index => new Tuple<CardController, int>(cardController, index)));
+            foreach (var index in indexes)
+            {   
+                if (cardController.GetCardType(index) != "Reversal")
+                    allTypesForCard.Add(new Tuple<CardController, int>(cardController, index));
+            }
         }
 
         return allTypesForCard;
