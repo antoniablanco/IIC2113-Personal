@@ -14,7 +14,7 @@ public class PlayReversal
             int indexReversalCard = UserSelectReversalCard(possibleReversals);
             if (indexReversalCard != -1)
             {
-                PlayingReversalCard(indexReversalCard);
+                PlayingReversalCard(indexReversalCard, possibleReversals);
                 return true;
             }
         }
@@ -30,11 +30,16 @@ public class PlayReversal
         return indexReversalCard;
     }
     
-    public void PlayingReversalCard(int indexReversalCard)
+    public void PlayingReversalCard(int indexReversalCard, List<CardController> possibleReversals) 
     {
         if (indexReversalCard != -1)
-        {
-            Console.WriteLine("You are playing a reversal card");
+        {   
+            CardController cardController = possibleReversals[indexReversalCard];
+            string reversalString = gameStructureInfo.VisualizeCards.GetStringPlayedInfo(cardController);
+            gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingSide(gameStructureInfo.GetCurrentPlayer(),gameStructureInfo.LastPlayedCard);
+            gameStructureInfo.view.SayThatPlayerReversedTheCard(gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar(), reversalString);
+            gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(gameStructureInfo.GetOpponentPlayer(), cardController);
+            cardController.ReversalEffect();
         }
     }
 }

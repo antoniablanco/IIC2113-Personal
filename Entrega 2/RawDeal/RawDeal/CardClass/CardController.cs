@@ -99,6 +99,11 @@ public class CardController
         return _card.CanReversalThisCard(gameStructureInfo.LastPlayedCard, gameStructureInfo.LastPlayedType);
     }
     
+    public void ReversalEffect()
+    {
+        _card.ReversalEffect(gameStructureInfo);
+    }
+    
     public bool VerifyIfContainSubtype(string subType)
     {
         return _card.Subtypes.Contains(subType);
