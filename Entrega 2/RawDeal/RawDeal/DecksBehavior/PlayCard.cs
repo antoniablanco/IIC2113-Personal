@@ -84,9 +84,11 @@ public class PlayCard
     {
         PrintActionPlayCard(playedCardController);
         if (!isUserReversalDeckCard)
-            gameStructureInfo.GameLogic.AddCardPlayedToRingArea(playedCardController, gameStructureInfo.GetCurrentPlayer());
+            gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(gameStructureInfo.GetCurrentPlayer(), playedCardController);
+
         else
-            gameStructureInfo.GameLogic.AddCardPlayedToRingArea(playedCardController, gameStructureInfo.GetOpponentPlayer());
+            gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(gameStructureInfo.GetOpponentPlayer(), playedCardController);
+
     }
 
     private bool IsValidIndexOfCard(int selectedCard)
@@ -103,7 +105,7 @@ public class PlayCard
 
     private void PrintActionPlayCard(CardController playedCardController)
     {
-        int totalDamage = GetDamageProduced(playedCardController) + gameStructureInfo.bonusDamage*gameStructureInfo.IsJockeyingForPositionBonusDamage;
+        int totalDamage = GetDamageProduced(playedCardController);
         if (totalDamage > 0)
             SayThatTheyAreGoingToReceiveDamage(totalDamage);
         CauseDamageActionPlayCard(totalDamage, gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer());
@@ -162,7 +164,7 @@ public class PlayCard
     }
 
     private int GetDamageProduced(CardController playedCardController)
-    {
+    {   
         int totalDamage = playedCardController.GetDamageProducedByTheCard() + gameStructureInfo.bonusDamage*gameStructureInfo.IsJockeyingForPositionBonusDamage;
         if (gameStructureInfo.ControllerOpponentPlayer.IsTheSuperStarMankind())
             totalDamage -= 1;

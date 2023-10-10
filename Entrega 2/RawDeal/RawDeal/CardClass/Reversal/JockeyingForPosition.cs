@@ -27,6 +27,7 @@ public class JockeyingForPosition: Card
     {   
         GetSelectedEffect(gameStructureInfo);
         gameStructureInfo.ContadorTurnosJokeyingForPosition = 2;
+        gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(gameStructureInfo.GetCurrentPlayer(), playedCardController);
     }
     
     public void GetSelectedEffect(GameStructureInfo gameStructureInfo)
