@@ -17,27 +17,10 @@ public class StoneCold: SuperStar
         gameStructureInfo.ControllerCurrentPlayer.TheSuperStarHasUsedHisSuperAbilityThisTurn();
         _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
         
-        AddingCardFromArsenalToHand(gameStructureInfo);
-        DiscardingCardsFromHandToArsenal(gameStructureInfo);
+        gameStructureInfo.CardEffects.AddingCardFromArsenalToHand(gameStructureInfo.ControllerCurrentPlayer);
+        gameStructureInfo.CardEffects.DiscardingCardsFromHandToArsenal(gameStructureInfo.ControllerCurrentPlayer);
     }
 
-    private void AddingCardFromArsenalToHand(GameStructureInfo gameStructureInfo)
-    {
-        _view.SayThatPlayerDrawCards(Name, 1);
-        Player player = gameStructureInfo.GetCurrentPlayer();
-        gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToHand(player);
-    }
-
-    private void DiscardingCardsFromHandToArsenal(GameStructureInfo gameStructureInfo)
-    {
-        List<string> handCardsAsString = gameStructureInfo.ControllerCurrentPlayer.StringCardsHand();
-        int selectedCard = _view.AskPlayerToReturnOneCardFromHisHandToHisArsenal(Name, handCardsAsString);
-        
-        CardController discardedCardController = gameStructureInfo.ControllerCurrentPlayer.GetSpecificCardFromHand(selectedCard);
-        
-        Player player = gameStructureInfo.GetCurrentPlayer();
-        gameStructureInfo.CardMovement.TransferChoosinCardFromHandToArsenal(player, discardedCardController, "Start");
-    }
     
     public override bool CanUseSuperAbility(PlayerController currentPlayer)
     {

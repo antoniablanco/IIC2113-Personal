@@ -16,6 +16,6 @@ public class Kane: SuperStar
     {   
         Player player = gameStructureInfo.GetOpponentPlayer();
         _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
-        gameStructureInfo.CardEffects.takeDamage(gameStructureInfo.ControllerOpponentPlayer, player,1);
+        gameStructureInfo.CardEffects.TakeDamage(gameStructureInfo.ControllerOpponentPlayer, player,1);
     }
 }
