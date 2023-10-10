@@ -51,8 +51,11 @@ public class CardController
     }
     
     public int GetDamageProducedByTheCard()
-    {
-        return int.Parse(_card.Damage);
+    {   
+        if (_card.Damage == "#")
+            return 0;
+        else
+            return int.Parse(_card.Damage);
     }
     
     public string GetCardTitle()

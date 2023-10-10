@@ -150,7 +150,7 @@ public class Game
         _gameLogic.SettingTurnStartInformation();
 
         while (GetSetGameVariables.TheTurnIsBeingPlayed())
-        {
+        {   
             _gameLogic.DisplayPlayerInformation();
             PlayerSelectedAction();
         }

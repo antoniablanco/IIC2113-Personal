@@ -150,7 +150,7 @@ public class PlayCard
         isUserReversalDeckCard = flippedCardController.CanUseThisReversalCard(controllerOpponentPlayer);
         if (isUserReversalDeckCard)
         {   
-            flippedCardController.ReversalEffect();
+            gameStructureInfo.CardEffects.EndTurn();
             gameStructureInfo.view.SayThatCardWasReversedByDeck(controllerOpponentPlayer.NameOfSuperStar());
         }
     }

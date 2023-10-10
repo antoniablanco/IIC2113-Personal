@@ -40,7 +40,7 @@ public class GameLogic
     }
     
     public void DisplayPlayerInformation() 
-    {
+    {   
         PlayerInfo playerUno = new PlayerInfo(GameStructureInfo.ControllerPlayerOne.NameOfSuperStar(), GameStructureInfo.ControllerPlayerOne.FortitudRating(), GameStructureInfo.ControllerPlayerOne.NumberOfCardsInTheHand(), GameStructureInfo.ControllerPlayerOne.NumberOfCardsInTheArsenal());
         PlayerInfo playerDos = new PlayerInfo(GameStructureInfo.ControllerPlayerTwo.NameOfSuperStar(), GameStructureInfo.ControllerPlayerTwo.FortitudRating(), GameStructureInfo.ControllerPlayerTwo.NumberOfCardsInTheHand(), GameStructureInfo.ControllerPlayerTwo.NumberOfCardsInTheArsenal());
         
@@ -48,7 +48,7 @@ public class GameLogic
         
         int numCurrentPlayer = GameStructureInfo.ControllerCurrentPlayer == GameStructureInfo.ControllerPlayerOne ? 0 : 1;
         int numOppositePlayer = GameStructureInfo.ControllerOpponentPlayer == GameStructureInfo.ControllerPlayerOne ? 0 : 1;
-        
+
         GameStructureInfo.view.ShowGameInfo(playersListToPrint[numCurrentPlayer], playersListToPrint[numOppositePlayer]);
     }
     
