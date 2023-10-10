@@ -18,9 +18,9 @@ public class ManagerInterferes: Card
     
     public override void ReversalEffect(GameStructureInfo gameStructureInfo)
     {   
+        gameStructureInfo.CardEffects.StealCard(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer());
         PlayerController damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
         gameStructureInfo.CardEffects.ProduceDamage(int.Parse(Damage), damagedPlayerController,gameStructureInfo.GetCurrentPlayer());
-        gameStructureInfo.CardEffects.StealCard(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer());
         gameStructureInfo.CardEffects.EndTurn();
     }
 }
