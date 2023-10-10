@@ -13,14 +13,14 @@ public class ElbowToTheFace: Card
     
     public override bool CanReversalThisCard(CardController playedCardController, string typePlayed)
     {
-        return playedCardController.VerifyIfPlayThisType("Maneuver") && playedCardController.DealsTheMaximumDamage(7);
+        return playedCardController.VerifyIfTheCardIsOfThisType("Maneuver") && playedCardController.DealsTheMaximumDamage(7);
     }
     
     public override void ReversalEffect(GameStructureInfo gameStructureInfo)
     {   
         PlayerController damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
         int damageProduce = int.Parse(Damage);
-        if (gameStructureInfo.CardEffects.IsTheCardWeAreReversalMankindType(gameStructureInfo.ControllerCurrentPlayer))
+        if (gameStructureInfo.CardEffects.IsTheCardWeAreReversalOfMankindSuperStart(gameStructureInfo.ControllerCurrentPlayer))
             damageProduce -= 1;
         gameStructureInfo.CardEffects.ProduceDamage(damageProduce, damagedPlayerController,gameStructureInfo.GetCurrentPlayer());
         gameStructureInfo.CardEffects.EndTurn();

@@ -8,4 +8,10 @@ public class Reverse: Card
     {
          
     }
+    
+    public override void ManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    {
+        gameStructureInfo.CardEffects.MayStealCards(gameStructureInfo.ControllerCurrentPlayer,
+            gameStructureInfo.GetCurrentPlayer(), 1);
+    }
 }

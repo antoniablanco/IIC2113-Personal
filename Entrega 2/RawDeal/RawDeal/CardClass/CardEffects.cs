@@ -5,14 +5,22 @@ namespace RawDeal.CardClass;
 public class CardEffects
 {   
     public GameStructureInfo gameStructureInfo= new GameStructureInfo();
+
+    public void MayStealCards(PlayerController controllerCurrentPlayer, Player player, int maximumNumberOfcardToDraw)
+    {
+        int numberOfcardToDraw = gameStructureInfo.view.AskHowManyCardsToDrawBecauseOfACardEffect(controllerCurrentPlayer.NameOfSuperStar(), maximumNumberOfcardToDraw);
+        StealCards(controllerCurrentPlayer, player, numberOfcardToDraw);
+    }
     
-    public void StealCard(PlayerController controllerCurrentPlayer, Player player, int numberOfcardToDraw = 1)
+    public void StealCards(PlayerController controllerCurrentPlayer, Player player, int numberOfcardToDraw = 1)
     {
         if (controllerCurrentPlayer.HasCardsInArsenal())
-        {
+        {   
+            if (controllerCurrentPlayer.NumberOfCardsInTheArsenal() < numberOfcardToDraw)
+                numberOfcardToDraw = controllerCurrentPlayer.NumberOfCardsInTheArsenal();
             gameStructureInfo.view.SayThatPlayerDrawCards(controllerCurrentPlayer.NameOfSuperStar(), numberOfcardToDraw);
             for (int i = 0; i < numberOfcardToDraw; i++)
-            {
+            {   
                 gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToHand(player);
             }
         }
@@ -65,7 +73,7 @@ public class CardEffects
             gameStructureInfo.view.SayThatSuperstarWillTakeSomeDamage(controllerOpponentPlayer.NameOfSuperStar(), totalDamage);
             for (int currentDamage = 0; currentDamage < totalDamage; currentDamage++)
             {   
-                if (CheckCanReceiveDamage(controllerOpponentPlayer))
+                if (CheckIfThePlayerCanReceiveDamage(controllerOpponentPlayer))
                     ShowOneFaceDownCard(currentDamage + 1, totalDamage, player, controllerOpponentPlayer);
                 else
                     gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning(controllerOpponentPlayer);
@@ -73,12 +81,12 @@ public class CardEffects
         }
     }
 
-    public bool IsTheCardWeAreReversalMankindType(PlayerController playerController)
+    public bool IsTheCardWeAreReversalOfMankindSuperStart(PlayerController playerController)
     {
         return playerController.IsTheSuperStarMankind();
     }
     
-    private bool CheckCanReceiveDamage(PlayerController controllerOpponentPlayer)
+    private bool CheckIfThePlayerCanReceiveDamage(PlayerController controllerOpponentPlayer)
     {
         return controllerOpponentPlayer.AreThereCardsLeftInTheArsenal();
     }
@@ -107,7 +115,7 @@ public class CardEffects
             gameStructureInfo.view.SayThatSuperstarWillTakeSomeDamage(controllerOpponentPlayer.NameOfSuperStar(), totalDamage);
             for (int currentDamage = 0; currentDamage < totalDamage; currentDamage++)
             {
-                if (CheckCanReceiveDamage(controllerOpponentPlayer))
+                if (CheckIfThePlayerCanReceiveDamage(controllerOpponentPlayer))
                 {
                     string flippedCardString = ShowOneFaceDownCard(currentDamage + 1, totalDamage, player, controllerOpponentPlayer);
                     gameStructureInfo.view.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
@@ -156,13 +164,6 @@ public class CardEffects
         CardController addedCardController = player.GetSpecificCardFromRingSide(selectedCard);
         Player playerHowDiscardCard = (player == gameStructureInfo.ControllerCurrentPlayer)? gameStructureInfo.GetCurrentPlayer(): gameStructureInfo.GetOpponentPlayer();
         gameStructureInfo.CardMovement.TransferChoosinCardFromRingSideToHand(playerHowDiscardCard, addedCardController);
-    }
-    
-    public void AddingCardFromArsenalToHand(PlayerController playerController)
-    {
-        gameStructureInfo.view.SayThatPlayerDrawCards(playerController.NameOfSuperStar(), 1);
-        Player player = gameStructureInfo.GetCurrentPlayer();
-        gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToHand(player);
     }
     
     public void AddingCardFromRingSideToArsenal(PlayerController playerController)

@@ -8,4 +8,10 @@ public class BearHug: Card
     {
          
     }
+    
+    public override void ManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    {
+        gameStructureInfo.CardEffects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerOpponentPlayer,
+            gameStructureInfo.ControllerOpponentPlayer, 1);
+    }
 }

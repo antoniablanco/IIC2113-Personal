@@ -8,4 +8,9 @@ public class ChickenWing: Card
     {
          
     }
+    
+    public override void ManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    {
+        
+    }
 }

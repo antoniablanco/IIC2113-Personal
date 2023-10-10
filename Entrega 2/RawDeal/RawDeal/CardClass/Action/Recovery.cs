@@ -8,4 +8,9 @@ public class Recovery: Card
     {
          
     }
+    
+    public override void ActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    {
+        
+    }
 }

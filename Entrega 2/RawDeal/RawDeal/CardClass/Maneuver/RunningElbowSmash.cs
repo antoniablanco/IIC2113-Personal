@@ -8,4 +8,9 @@ public class RunningElbowSmash: Card
     {
          
     }
+    
+    public override void ManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    {
+        gameStructureInfo.CardEffects.ColateralDamage(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer());
+    }
 }

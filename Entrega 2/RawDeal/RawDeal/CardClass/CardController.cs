@@ -144,12 +144,12 @@ public class CardController
         _card.ReversalEffect(gameStructureInfo);
     }
     
-    public bool VerifyIfContainSubtype(string subType)
+    public bool VerifyIfTheCardContainsThisSubtype(string subType)
     {
         return _card.Subtypes.Contains(subType);
     }
 
-    public bool VerifyIfPlayThisType(string type)
+    public bool VerifyIfTheCardIsOfThisType(string type)
     {
         return gameStructureInfo.LastPlayedType == type;
     }

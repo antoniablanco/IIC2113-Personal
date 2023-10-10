@@ -8,4 +8,15 @@ public class Lionsault: Card
     {
          
     }
+    
+    public override void ManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    {
+        gameStructureInfo.CardEffects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerOpponentPlayer,
+            gameStructureInfo.ControllerOpponentPlayer, 1);
+    }
+    
+    public override bool CardCanBePlayed(GameStructureInfo gameStructureInfo)
+    {
+        return gameStructureInfo.LastDamageComited >= 4;
+    }
 }

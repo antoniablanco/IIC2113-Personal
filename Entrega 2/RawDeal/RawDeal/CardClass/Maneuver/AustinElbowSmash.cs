@@ -13,4 +13,14 @@ public class AustinElbowSmash: Card
     {
         return false;
     }
+    
+    public override void ManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    {
+        
+    }
+    
+    public override bool CardCanBePlayed(GameStructureInfo gameStructureInfo)
+    {
+        return gameStructureInfo.LastDamageComited >= 5;
+    }
 }

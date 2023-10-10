@@ -1,8 +1,8 @@
 namespace RawDeal.CardClass.Maneuver;
 
-public class PowerSlam: Card
+public class ReverseDDT: Card
 {
-    public PowerSlam(string title, List<string> types, List<string> subtypes, string fortitude, string damage,
+    public ReverseDDT(string title, List<string> types, List<string> subtypes, string fortitude, string damage,
         string stunValue, string cardEffect)
         :base(title, types, subtypes, fortitude, damage, stunValue, cardEffect)
     {
@@ -11,7 +11,7 @@ public class PowerSlam: Card
     
     public override void ManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
-        gameStructureInfo.CardEffects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerOpponentPlayer,
-            gameStructureInfo.ControllerOpponentPlayer, 1);
+        gameStructureInfo.CardEffects.MayStealCards(gameStructureInfo.ControllerCurrentPlayer,
+            gameStructureInfo.GetCurrentPlayer(), 1);
     }
 }

@@ -11,7 +11,7 @@ public class NoChanceInHell: Card
     
     public override bool CanReversalThisCard(CardController playedCardController, string typePlayed)
     {
-        return playedCardController.VerifyIfPlayThisType("Action");
+        return playedCardController.VerifyIfTheCardIsOfThisType("Action");
     }
     
     public override void ReversalEffect(GameStructureInfo gameStructureInfo)

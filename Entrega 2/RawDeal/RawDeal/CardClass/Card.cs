@@ -94,5 +94,9 @@ public abstract class Card
         return true;
     }
     
+    public virtual bool CardCanBePlayed(GameStructureInfo gameStructureInfo)
+    {
+        return true;
+    }
 
 }

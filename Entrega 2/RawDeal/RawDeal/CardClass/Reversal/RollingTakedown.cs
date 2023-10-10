@@ -13,7 +13,7 @@ public class RollingTakedown: Card
     
     public override bool CanReversalThisCard(CardController playedCardController, string typePlayed)
     {
-        return playedCardController.VerifyIfContainSubtype("Grapple") && playedCardController.VerifyIfPlayThisType("Maneuver") && playedCardController.DealsTheMaximumDamage(7);
+        return playedCardController.VerifyIfTheCardContainsThisSubtype("Grapple") && playedCardController.VerifyIfTheCardIsOfThisType("Maneuver") && playedCardController.DealsTheMaximumDamage(7);
     }
     
     public override void ReversalEffect(GameStructureInfo gameStructureInfo)

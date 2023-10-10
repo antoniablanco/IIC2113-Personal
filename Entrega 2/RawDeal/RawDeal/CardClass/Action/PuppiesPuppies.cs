@@ -8,4 +8,9 @@ public class PuppiesPuppies: Card
     {
          
     }
+    
+    public override void ActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    {
+        
+    }
 }

@@ -30,7 +30,7 @@ public class PlayCard
     
     private void ShouldIDesactivateJockeyingForPositionEfectt(CardController cardController)
     {   
-        if (!cardController.VerifyIfContainSubtype("Grapple") || gameStructureInfo.ContadorTurnosJokeyingForPosition <= 0 || (gameStructureInfo.HowActivateJockeyingForPosition != gameStructureInfo.ControllerCurrentPlayer && gameStructureInfo.HowActivateJockeyingForPosition != null))
+        if (!cardController.VerifyIfTheCardContainsThisSubtype("Grapple") || gameStructureInfo.ContadorTurnosJokeyingForPosition <= 0 || (gameStructureInfo.HowActivateJockeyingForPosition != gameStructureInfo.ControllerCurrentPlayer && gameStructureInfo.HowActivateJockeyingForPosition != null))
             DesactivatingJockeyForPositionEffect();
     }
 
@@ -135,7 +135,7 @@ public class PlayCard
     {   
         isStunValueUsed = true;
         int numberOfCardsToSteal = gameStructureInfo.view.AskHowManyCardsToDrawBecauseOfStunValue(gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar(), gameStructureInfo.LastPlayedCard.GetCardStunValue());
-        gameStructureInfo.CardEffects.StealCard(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer(), numberOfCardsToSteal);
+        gameStructureInfo.CardEffects.StealCards(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer(), numberOfCardsToSteal);
     }
     
     private bool CheckCanReceiveDamage(PlayerController controllerOpponentPlayer)

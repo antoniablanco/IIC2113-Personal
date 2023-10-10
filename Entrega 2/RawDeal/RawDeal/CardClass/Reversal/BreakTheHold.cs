@@ -10,7 +10,7 @@ public class BreakTheHold: Card
      }
      public override bool CanReversalThisCard(CardController playedCardController, string typePlayed)
      {
-         return playedCardController.VerifyIfContainSubtype("Submission") && playedCardController.VerifyIfPlayThisType("Maneuver");
+         return playedCardController.VerifyIfTheCardContainsThisSubtype("Submission") && playedCardController.VerifyIfTheCardIsOfThisType("Maneuver");
      }
      
      public override void ReversalEffect(GameStructureInfo gameStructureInfo)

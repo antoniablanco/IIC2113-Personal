@@ -8,4 +8,18 @@ public class SpitAtOpponent: Card
     {
          
     }
+    
+    public override void ActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    {
+        gameStructureInfo.CardEffects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerCurrentPlayer,
+            gameStructureInfo.ControllerCurrentPlayer, 1);
+        gameStructureInfo.CardEffects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerOpponentPlayer,
+            gameStructureInfo.ControllerOpponentPlayer, 4);
+        
+    }
+    
+    public override bool CardCanBePlayed(GameStructureInfo gameStructureInfo)
+    {
+        return gameStructureInfo.ControllerOpponentPlayer.NumberOfCardsInTheHand() >= 2;
+    }
 }

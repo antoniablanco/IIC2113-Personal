@@ -17,7 +17,7 @@ public class CleanBreak: Card
     public override void ReversalEffect(GameStructureInfo gameStructureInfo)
     {   
         gameStructureInfo.CardEffects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.ControllerCurrentPlayer,4);
-        gameStructureInfo.CardEffects.StealCard(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer(), 1);
+        gameStructureInfo.CardEffects.StealCards(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer(), 1);
         gameStructureInfo.CardEffects.EndTurn();
     }
 }

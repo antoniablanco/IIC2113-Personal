@@ -13,7 +13,7 @@ public class KneeToTheGut: Card
     
     public override bool CanReversalThisCard(CardController playedCardController, string typePlayed)
     {
-        return playedCardController.VerifyIfContainSubtype("Strike") && playedCardController.DealsTheMaximumDamage(7);
+        return playedCardController.VerifyIfTheCardContainsThisSubtype("Strike") && playedCardController.DealsTheMaximumDamage(7);
     }
     
     public override void ReversalEffect(GameStructureInfo gameStructureInfo)

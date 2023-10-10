@@ -165,6 +165,12 @@ public class PlayerController
         List<String> stringCardSet = gameStructureInfo.VisualizeCards.CreateStringCardList(player.cardsRingSide);
         return stringCardSet;
     }
+    
+    public List<String> StringCardsArsenal()
+    {
+        List<String> stringCardSet = gameStructureInfo.VisualizeCards.CreateStringCardList(player.cardsArsenal);
+        return stringCardSet;
+    }
 
     public bool HasTheSuperAbilityBeenUsedThisTurn()
     {
