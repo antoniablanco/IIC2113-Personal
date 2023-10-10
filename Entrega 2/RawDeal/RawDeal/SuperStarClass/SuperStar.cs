@@ -77,27 +77,4 @@ public abstract class SuperStar
         
     }
     
-    protected void DiscardingCardsFromHandToRingSide(GameStructureInfo gameStructureInfo, PlayerController player, int cardsToDiscardCount)
-    {
-        List<string> handFormatoString = player.StringCardsHand();
-        int selectedCard =_view.AskPlayerToSelectACardToDiscard(handFormatoString, player.NameOfSuperStar(), player.NameOfSuperStar(), cardsToDiscardCount);
-            
-        if (selectedCard != -1)
-        {
-            CardController discardCardController = player.GetSpecificCardFromHand(selectedCard);
-            Player playerHowDiscardCard = (player == gameStructureInfo.ControllerCurrentPlayer)? gameStructureInfo.GetCurrentPlayer(): gameStructureInfo.GetOpponentPlayer();
-            
-            gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingSide(playerHowDiscardCard, discardCardController);
-        }
-    }
-
-    protected void AddingCardFromRingSideToHand(GameStructureInfo gameStructureInfo, PlayerController player)
-    {
-        List<string> ringSideAsString = player.StringCardsRingSide();
-        int selectedCard =_view.AskPlayerToSelectCardsToPutInHisHand(Name, 1, ringSideAsString);
-        
-        CardController addedCardController = player.GetSpecificCardFromRingSide(selectedCard);
-        Player playerHowDiscardCard = (player == gameStructureInfo.ControllerCurrentPlayer)? gameStructureInfo.GetCurrentPlayer(): gameStructureInfo.GetOpponentPlayer();
-        gameStructureInfo.CardMovement.TransferChoosinCardFromRingSideToHand(playerHowDiscardCard, addedCardController);
-    }
 }
