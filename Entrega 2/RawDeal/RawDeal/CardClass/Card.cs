@@ -84,7 +84,7 @@ public abstract class Card
         
     }
     
-    public virtual int GetFortitude()
+    public virtual int GetFortitude(string type)
     {
         return int.Parse(Fortitude);
     }

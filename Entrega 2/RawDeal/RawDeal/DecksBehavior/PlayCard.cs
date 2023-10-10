@@ -44,7 +44,7 @@ public class PlayCard
     {
         List<CardController> possibleCardsToPlay = gameStructureInfo.ControllerCurrentPlayer.CardsAvailableToPlay();
         List<Tuple<CardController, int>> allCardsAndTheirTypes =
-            gameStructureInfo.VisualizeCards.GetPosiblesCardsToPlay(possibleCardsToPlay);
+            gameStructureInfo.ControllerCurrentPlayer.GetPosiblesCardsToPlay(possibleCardsToPlay);
 
         return allCardsAndTheirTypes[indexSelectedCard];
 

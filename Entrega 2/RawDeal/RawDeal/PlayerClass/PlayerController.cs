@@ -55,14 +55,31 @@ public class PlayerController
     public List<CardController> CardsAvailableToPlay()
     {
         return player.cardsHand
-            .Where(card => card.GetCardFortitude() <= FortitudRating() && card.HasAnyTypeDifferentOfReversal())
+            .Where(card => card.GetCardFortitude(card.GetCardTypes()[0]) <= FortitudRating() && card.HasAnyTypeDifferentOfReversal())
             .ToList();
+    }
+    
+    public List<Tuple<CardController, int>> GetPosiblesCardsToPlay(List<CardController> cardsInSelectedSet)
+    {   
+        List<Tuple<CardController, int>> allTypesForCard = new List<Tuple<CardController, int>>();
+
+        foreach (var cardController in cardsInSelectedSet)
+        {
+            int[] indexes = Enumerable.Range(0, cardController.GetCardTypes().Count()).ToArray();
+            foreach (var index in indexes)
+            {   
+                if (cardController.GetCardType(index) != "Reversal" && cardController.GetCardFortitude(cardController.GetCardType(index)) <= FortitudRating())
+                allTypesForCard.Add(new Tuple<CardController, int>(cardController, index));
+            }
+        }
+
+        return allTypesForCard;
     }
     
     public List<CardController> CardsAvailableToReversal() 
     {
         return player.cardsHand
-            .Where(card => card.GetCardFortitude() + gameStructureInfo.bonusFortitude*gameStructureInfo.IsJockeyingForPositionBonusFortitud <= FortitudRating() && card.IsReversalType() && CanReversalPlayedCard(card))
+            .Where(card => card.GetCardFortitude(card.GetCardTypes()[0]) + gameStructureInfo.bonusFortitude*gameStructureInfo.IsJockeyingForPositionBonusFortitud <= FortitudRating() && card.IsReversalType() && CanReversalPlayedCard(card))
             .ToList();
     }
 

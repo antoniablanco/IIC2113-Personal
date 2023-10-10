@@ -8,4 +8,14 @@ public class UndertakersTombstonePiledriver: Card
     {
          
     }
+    
+    public override int GetFortitude(string type)
+    {   
+        if (type == "Maneuver")
+            return 30;
+        else if (type == "Action")
+            return 0;
+        else
+            return int.Parse(Fortitude);
+    }
 }

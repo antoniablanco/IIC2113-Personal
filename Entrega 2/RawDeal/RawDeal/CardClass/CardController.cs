@@ -85,9 +85,9 @@ public class CardController
         return numType;
     }
     
-    public int GetCardFortitude()
+    public int GetCardFortitude(string type)
     {
-        return _card.GetFortitude();
+        return _card.GetFortitude(type);
     }
     
     public int GetCardStunValue()
@@ -136,7 +136,7 @@ public class CardController
 
     public bool CanUseThisReversalCard(PlayerController controllerPlayer)
     {
-        return ((GetCardFortitude() + gameStructureInfo.bonusFortitude*gameStructureInfo.IsJockeyingForPositionBonusFortitud <= controllerPlayer.FortitudRating()) && IsReversalType() && GetIfCardCanReversalPlayedCard());
+        return ((GetCardFortitude(GetCardTypes()[0]) + gameStructureInfo.bonusFortitude*gameStructureInfo.IsJockeyingForPositionBonusFortitud <= controllerPlayer.FortitudRating()) && IsReversalType() && GetIfCardCanReversalPlayedCard());
     }
     
     public void ReversalEffect()
