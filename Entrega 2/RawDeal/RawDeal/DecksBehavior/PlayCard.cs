@@ -27,9 +27,7 @@ public class PlayCard
     private void ShouldIDesactivateJockeyingForPositionEfectt(CardController cardController)
     {   
         if (!cardController.VerifyIfContainSubtype("Grapple") || gameStructureInfo.ContadorTurnosJokeyingForPosition <= 0 || (gameStructureInfo.HowActivateJockeyingForPosition != gameStructureInfo.ControllerCurrentPlayer && gameStructureInfo.HowActivateJockeyingForPosition != null))
-        {
             DesactivatingJockeyForPositionEffect();
-        }
     }
 
     private void DesactivatingJockeyForPositionEffect()

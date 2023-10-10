@@ -155,7 +155,7 @@ public class CardController
     }
     
     public bool DealsTheMaximumDamage(int maximumDamage)
-    {
+    {   
         return int.Parse(_card.Damage) + gameStructureInfo.bonusDamage*gameStructureInfo.IsJockeyingForPositionBonusDamage <= maximumDamage;
     }
     

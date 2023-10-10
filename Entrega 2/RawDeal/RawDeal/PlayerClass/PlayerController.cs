@@ -67,7 +67,7 @@ public class PlayerController
     }
 
     private bool CanReversalPlayedCard(CardController card) 
-    {
+    {   
         return card.GetIfCardCanReversalPlayedCard();
     }
     
