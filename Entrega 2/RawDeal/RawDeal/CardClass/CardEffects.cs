@@ -49,7 +49,7 @@ public class CardEffects
                 if (CheckCanReceiveDamage(controllerOpponentPlayer))
                     ShowOneFaceDownCard(currentDamage + 1, totalDamage, player, controllerOpponentPlayer);
                 else
-                    gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning();
+                    gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning(controllerOpponentPlayer);
             }
         }
     }

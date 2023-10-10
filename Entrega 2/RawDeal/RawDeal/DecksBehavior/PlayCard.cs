@@ -119,7 +119,10 @@ public class PlayCard
             else if (isUserReversalDeckCard && gameStructureInfo.LastPlayedCard.TheCardHadStunValue() && !isStunValueUsed)
                 UseStunValueOpcion();
             else if (!CheckCanReceiveDamage(controllerOpponentPlayer))
-                gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning();
+            {
+                gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning(controllerOpponentPlayer);
+                break;
+            }
         }
     }
 
