@@ -18,22 +18,24 @@ public class JockeyingForPosition: Card
     
     public override void ReversalEffect(GameStructureInfo gameStructureInfo)
     {   
-        GetSelectedEffect(gameStructureInfo);
+        SelectedEffect effectToPerform = gameStructureInfo.view.AskUserToSelectAnEffectForJockeyForPosition(gameStructureInfo.ControllerOpponentPlayer
+            .NameOfSuperStar());
+        GetSelectedEffect(gameStructureInfo, effectToPerform);
         gameStructureInfo.ContadorTurnosJokeyingForPosition = 2;
         gameStructureInfo.CardEffects.EndTurn();
     }
     
     public override void ActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {   
-        GetSelectedEffect(gameStructureInfo);
+        SelectedEffect effectToPerform = gameStructureInfo.view.AskUserToSelectAnEffectForJockeyForPosition(gameStructureInfo.ControllerCurrentPlayer
+            .NameOfSuperStar());
+        GetSelectedEffect(gameStructureInfo, effectToPerform);
         gameStructureInfo.ContadorTurnosJokeyingForPosition = 2;
         gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(gameStructureInfo.GetCurrentPlayer(), playedCardController);
     }
     
-    public void GetSelectedEffect(GameStructureInfo gameStructureInfo)
-    {   
-        SelectedEffect effectToPerform = gameStructureInfo.view.AskUserToSelectAnEffectForJockeyForPosition(gameStructureInfo.ControllerCurrentPlayer
-            .NameOfSuperStar());
+    public void GetSelectedEffect(GameStructureInfo gameStructureInfo, SelectedEffect effectToPerform)
+    {
         switch (effectToPerform)
         {
             case SelectedEffect.NextGrappleIsPlus4D:

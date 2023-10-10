@@ -40,8 +40,15 @@ public class VisualizeCards
     private List<String> GetStringPlayedCardForReversalType(CardController cardController)
     {
         int[] indexes = Enumerable.Range(0, cardController.GetCardTypes().Count()).ToArray();
+        List<string> stringList = new List<string>();
+        foreach (var index in indexes)
+        {   
+            if (cardController.GetCardType(index) == "Reversal")
+                stringList.Add(GetStringPlayedInfo(cardController, index));
+        }
 
-        return indexes.Select(index => GetStringPlayedInfo(cardController, index)).ToList();
+        return stringList;
+
     }
     
     public List<string> CreateStringPlayedCardListForNotReversalType(List<CardController> cardsInSelectedSet)

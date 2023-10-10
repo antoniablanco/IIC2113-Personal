@@ -69,6 +69,18 @@ public class CardController
     {
         return _card.Types[index];
     }
+
+    public int GetIndexForType(string type)
+    {
+        int numType = 0;
+        int[] indexes = Enumerable.Range(0, GetCardTypes().Count()).ToArray();
+        foreach (var index in indexes)
+        {   
+            if (GetCardType(index) == type)
+                numType = index;
+        }
+        return numType;
+    }
     
     public int GetCardFortitude()
     {
