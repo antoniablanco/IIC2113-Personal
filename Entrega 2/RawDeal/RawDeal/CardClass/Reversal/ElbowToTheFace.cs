@@ -1,3 +1,5 @@
+using RawDeal.PlayerClass;
+
 namespace RawDeal.CardClass.Reversal;
 
 public class ElbowToTheFace: Card
@@ -15,7 +17,10 @@ public class ElbowToTheFace: Card
     }
     
     public override void ReversalEffect(GameStructureInfo gameStructureInfo)
-    {
+    {   
+        PlayerController damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
+        
+        gameStructureInfo.CardEffects.ProduceDamage(int.Parse(Damage), damagedPlayerController,gameStructureInfo.GetCurrentPlayer());
         gameStructureInfo.CardEffects.EndTurn();
     }
 }

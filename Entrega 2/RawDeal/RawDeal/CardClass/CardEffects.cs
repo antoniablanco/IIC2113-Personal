@@ -39,8 +39,9 @@ public class CardEffects
         gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingSide(player, playedCardController);
     }
 
-    public void Damage(int totalDamage, PlayerController controllerOpponentPlayer, Player player)
-    {
+    public void ProduceDamage(int totalDamage, PlayerController controllerOpponentPlayer, Player player)
+    {   
+        gameStructureInfo.view.SayThatSuperstarWillTakeSomeDamage(controllerOpponentPlayer.NameOfSuperStar(), totalDamage);
         for (int currentDamage = 0; currentDamage < totalDamage; currentDamage++)
         {   
             if (CheckCanReceiveDamage(controllerOpponentPlayer))

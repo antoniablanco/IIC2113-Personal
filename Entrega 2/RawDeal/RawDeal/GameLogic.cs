@@ -58,13 +58,9 @@ public class GameLogic
     }
 
     public void ActionUseSuperAbility()
-    {
+    {   
+        //GameStructureInfo.ContadorTurnosJokeyingForPosition += 1;
         GameStructureInfo.ControllerCurrentPlayer.UsingElectiveSuperAbility(GameStructureInfo);
-    }
-
-    public void AddCardPlayedToRingArea(CardController playedCardController, Player player) 
-    {
-        GameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(player, playedCardController);
     }
     
     public void SelectCardsToView()

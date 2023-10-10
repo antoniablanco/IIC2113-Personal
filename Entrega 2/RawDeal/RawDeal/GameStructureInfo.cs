@@ -32,6 +32,7 @@ public class GameStructureInfo
     public int IsJockeyingForPositionBonusFortitud = 0;
     public int IsJockeyingForPositionBonusDamage = 0;
     public int ContadorTurnosJokeyingForPosition = 0;
+    public PlayerController HowActivateJockeyingForPosition;
     
     public Player GetCurrentPlayer()
     {

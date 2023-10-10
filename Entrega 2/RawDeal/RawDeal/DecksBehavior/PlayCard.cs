@@ -21,13 +21,12 @@ public class PlayCard
             SetLastPlayedCardInfo(playedCardController);
             PlayReversal.gameStructureInfo = gameStructureInfo;
             VerifinIfIsUsedAReversalCard(playedCardController);
-            gameStructureInfo.ContadorTurnosJokeyingForPosition -= 1;
         }
     }
     
     private void ShouldIDesactivateJockeyingForPositionEfectt(CardController cardController)
     {   
-        if (!cardController.VerifyIfContainSubtype("Grapple") || gameStructureInfo.ContadorTurnosJokeyingForPosition <= 0)
+        if (!cardController.VerifyIfContainSubtype("Grapple") || gameStructureInfo.ContadorTurnosJokeyingForPosition <= 0 || (gameStructureInfo.HowActivateJockeyingForPosition != gameStructureInfo.ControllerCurrentPlayer && gameStructureInfo.HowActivateJockeyingForPosition != null))
         {
             DesactivatingJockeyForPositionEffect();
         }

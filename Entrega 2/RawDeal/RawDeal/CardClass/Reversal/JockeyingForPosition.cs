@@ -21,6 +21,7 @@ public class JockeyingForPosition: Card
         SelectedEffect effectToPerform = gameStructureInfo.view.AskUserToSelectAnEffectForJockeyForPosition(gameStructureInfo.ControllerOpponentPlayer
             .NameOfSuperStar());
         GetSelectedEffect(gameStructureInfo, effectToPerform);
+        gameStructureInfo.HowActivateJockeyingForPosition = gameStructureInfo.ControllerOpponentPlayer;
         gameStructureInfo.ContadorTurnosJokeyingForPosition = 2;
         gameStructureInfo.CardEffects.EndTurn();
     }
@@ -30,6 +31,7 @@ public class JockeyingForPosition: Card
         SelectedEffect effectToPerform = gameStructureInfo.view.AskUserToSelectAnEffectForJockeyForPosition(gameStructureInfo.ControllerCurrentPlayer
             .NameOfSuperStar());
         GetSelectedEffect(gameStructureInfo, effectToPerform);
+        gameStructureInfo.HowActivateJockeyingForPosition = gameStructureInfo.ControllerCurrentPlayer;
         gameStructureInfo.ContadorTurnosJokeyingForPosition = 2;
         gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(gameStructureInfo.GetCurrentPlayer(), playedCardController);
     }
