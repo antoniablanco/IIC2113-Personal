@@ -146,11 +146,11 @@ public class Game
 
     private void OneTurnIsPlayed()
     {   
-        gameStructureInfo.ContadorTurnosJokeyingForPosition -= 1;
         _gameLogic.SettingTurnStartInformation();
 
         while (GetSetGameVariables.TheTurnIsBeingPlayed())
         {   
+            gameStructureInfo.ContadorTurnosJokeyingForPosition -= 1;
             _gameLogic.DisplayPlayerInformation();
             PlayerSelectedAction();
         }

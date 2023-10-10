@@ -59,12 +59,13 @@ public class GameLogic
 
     public void ActionUseSuperAbility()
     {   
-        //GameStructureInfo.ContadorTurnosJokeyingForPosition += 1;
+        GameStructureInfo.ContadorTurnosJokeyingForPosition += 1;
         GameStructureInfo.ControllerCurrentPlayer.UsingElectiveSuperAbility(GameStructureInfo);
     }
     
     public void SelectCardsToView()
-    {
+    {   
+        GameStructureInfo.ContadorTurnosJokeyingForPosition += 1;
         var setCardsToView = GameStructureInfo.view.AskUserWhatSetOfCardsHeWantsToSee();
         switch (setCardsToView)
         {

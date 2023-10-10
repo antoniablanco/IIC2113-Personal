@@ -22,6 +22,10 @@ public class PlayCard
             PlayReversal.gameStructureInfo = gameStructureInfo;
             VerifinIfIsUsedAReversalCard(playedCardController);
         }
+        else
+        {
+            gameStructureInfo.ContadorTurnosJokeyingForPosition += 1;
+        }
     }
     
     private void ShouldIDesactivateJockeyingForPositionEfectt(CardController cardController)
