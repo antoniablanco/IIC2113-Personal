@@ -8,4 +8,9 @@ public class TreeOfWoe: Card
     {
          
     }
+    
+    public override bool CardCanBeReverted()
+    {
+        return false;
+    }
 }

@@ -87,7 +87,7 @@ public class CardController
     
     public int GetCardFortitude()
     {
-        return int.Parse(_card.Fortitude);
+        return _card.GetFortitude();
     }
     
     public int GetCardStunValue()
@@ -126,7 +126,12 @@ public class CardController
 
     public bool GetIfCardCanReversalPlayedCard()
     {
-        return _card.CanReversalThisCard(gameStructureInfo.LastPlayedCard, gameStructureInfo.LastPlayedType);
+        return _card.CanReversalThisCard(gameStructureInfo.LastPlayedCard, gameStructureInfo.LastPlayedType) && gameStructureInfo.LastPlayedCard.CanThisCardBeReversal();
+    }
+
+    public bool CanThisCardBeReversal()
+    {
+        return _card.CardCanBeReverted();
     }
 
     public bool CanUseThisReversalCard(PlayerController controllerPlayer)

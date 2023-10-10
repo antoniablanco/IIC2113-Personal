@@ -107,6 +107,7 @@ public class PlayCard
     private void PrintActionPlayCard(CardController playedCardController)
     {
         int totalDamage = GetDamageProduced(playedCardController);
+        gameStructureInfo.LastDamageComited = totalDamage;
         if (totalDamage > 0)
             SayThatTheyAreGoingToReceiveDamage(totalDamage);
         CauseDamageActionPlayCard(totalDamage, gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer());

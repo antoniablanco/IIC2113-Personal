@@ -7,11 +7,14 @@ public class CardEffects
     public GameStructureInfo gameStructureInfo= new GameStructureInfo();
     
     public void StealCard(PlayerController controllerCurrentPlayer, Player player, int numberOfcardToDraw = 1)
-    {   
-        gameStructureInfo.view.SayThatPlayerDrawCards(controllerCurrentPlayer.NameOfSuperStar(), numberOfcardToDraw);
-        for (int i = 0; i < numberOfcardToDraw; i++)
+    {
+        if (controllerCurrentPlayer.HasCardsInArsenal())
         {
-            gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToHand(player);
+            gameStructureInfo.view.SayThatPlayerDrawCards(controllerCurrentPlayer.NameOfSuperStar(), numberOfcardToDraw);
+            for (int i = 0; i < numberOfcardToDraw; i++)
+            {
+                gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToHand(player);
+            }
         }
     }
     
@@ -64,11 +67,12 @@ public class CardEffects
         return controllerOpponentPlayer.AreThereCardsLeftInTheArsenal();
     }
 
-    private void ShowOneFaceDownCard(int currentDamage, int totalDamage, Player player, PlayerController controllerOpponentPlayer)
+    private string ShowOneFaceDownCard(int currentDamage, int totalDamage, Player player, PlayerController controllerOpponentPlayer)
     {
         CardController flippedCardController = gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
         string flippedCardString = gameStructureInfo.VisualizeCards.GetStringCardInfo(flippedCardController);
         gameStructureInfo.view.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
+        return flippedCardString;
     }
 
     public int GetDamageProducedByReversalCardWithNotEspecificDamage()
@@ -77,7 +81,74 @@ public class CardEffects
         if (gameStructureInfo.ControllerOpponentPlayer.IsTheSuperStarMankind() || gameStructureInfo.ControllerCurrentPlayer.IsTheSuperStarMankind())
             totalDamage -= 1;
         return totalDamage;
-    }   
+    }
+
+    public void DiscardMyCardOfMyChoiceFromHand(PlayerController playerController, int cardsToDiscardCount)
+    {
+        List<string> handFormatoString = playerController.StringCardsHand();
+        if (handFormatoString.Count() > 0)
+        {
+            int selectedCard = gameStructureInfo.view.AskPlayerToSelectACardToDiscard(handFormatoString, playerController.NameOfSuperStar(), playerController.NameOfSuperStar(), cardsToDiscardCount);
+            
+            if (selectedCard != -1)
+            {
+                CardController discardCardController = playerController.GetSpecificCardFromHand(selectedCard);
+                Player playerWhoDiscardCard = (playerController == gameStructureInfo.ControllerCurrentPlayer)? gameStructureInfo.GetCurrentPlayer(): gameStructureInfo.GetOpponentPlayer();
+            
+                gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingSide(playerWhoDiscardCard, discardCardController);
+            }
+        }
+    }
+
+    public void DiscardOpponentCardOfMyChoiceFromHand(PlayerController opponentPlayerController, PlayerController currentPlayerController, int cardsToDiscardCount)
+    {
+        List<string> handFormatoString = opponentPlayerController.StringCardsHand();
+        if (handFormatoString.Count() > 0)
+        {
+            int selectedCard = gameStructureInfo.view.AskPlayerToSelectACardToDiscard(handFormatoString, opponentPlayerController.NameOfSuperStar(), currentPlayerController.NameOfSuperStar(), cardsToDiscardCount);
+            
+            if (selectedCard != -1)
+            {
+                CardController discardCardController = opponentPlayerController.GetSpecificCardFromHand(selectedCard);
+                Player playerWhoDiscardCard = (opponentPlayerController == gameStructureInfo.ControllerCurrentPlayer)? gameStructureInfo.GetCurrentPlayer(): gameStructureInfo.GetOpponentPlayer();
+            
+                gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingSide(playerWhoDiscardCard, discardCardController);
+            }
+        } 
+    }
+
+    public void ColateralDamage(PlayerController controllerOpponentPlayer, Player player, int totalDamage = 1)
+    {
+        if (totalDamage > 0)
+        {   
+            gameStructureInfo.view.SayThatPlayerDamagedHimself(controllerOpponentPlayer.NameOfSuperStar(), totalDamage);
+            gameStructureInfo.view.SayThatSuperstarWillTakeSomeDamage(controllerOpponentPlayer.NameOfSuperStar(), totalDamage);
+            for (int currentDamage = 0; currentDamage < totalDamage; currentDamage++)
+            {
+                if (CheckCanReceiveDamage(controllerOpponentPlayer))
+                {
+                    string flippedCardString = ShowOneFaceDownCard(currentDamage + 1, totalDamage, player, controllerOpponentPlayer);
+                    gameStructureInfo.view.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
+                }
+                else
+                {
+                    gameStructureInfo.view.SayThatPlayerLostDueToSelfDamage(controllerOpponentPlayer.NameOfSuperStar());
+                    gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning(controllerOpponentPlayer);
+                }
+            }
+        }
+    }
+
+    public void GetBackDamage(PlayerController controllerPlayer, Player player, int recoveredDamage = 1)
+    {
+        List<string> ringAreaAsString = controllerPlayer.StringCardsRingSide();
+        int selectedCardIndex = gameStructureInfo.view.AskPlayerToSelectCardsToRecover(controllerPlayer.NameOfSuperStar(), recoveredDamage, ringAreaAsString);
+        CardController discardedCardController = controllerPlayer.GetSpecificCardFromRingSide(selectedCardIndex);
+        
+        gameStructureInfo.CardMovement.TransferChoosinCardFromRingSideToArsenal(player, discardedCardController, "Start");
+    }
+    
+    
     
     public void EndTurn()
     {

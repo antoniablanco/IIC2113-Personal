@@ -9,6 +9,7 @@ public class GetSetGameVariables
     public void SetVariableTrueBecauseTurnStarted()
     {   
         gameStructureInfo.IsTheTurnBeingPlayed = true;
+        gameStructureInfo.LastDamageComited = 0;
         gameStructureInfo.ControllerCurrentPlayer.TheTurnHasJustStartTheSuperStarHasNotUsedHisSuperAbility();
     }
     

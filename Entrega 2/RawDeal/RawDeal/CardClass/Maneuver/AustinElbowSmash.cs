@@ -8,4 +8,9 @@ public class AustinElbowSmash: Card
     {
          
     }
+    
+    public override bool CardCanBeReverted()
+    {
+        return false;
+    }
 }

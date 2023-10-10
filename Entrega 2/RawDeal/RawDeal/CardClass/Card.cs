@@ -78,5 +78,21 @@ public abstract class Card
     {
         
     }
+    
+    public virtual void ManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    {
+        
+    }
+    
+    public virtual int GetFortitude()
+    {
+        return int.Parse(Fortitude);
+    }
+
+    public virtual bool CardCanBeReverted()
+    {
+        return true;
+    }
+    
 
 }
