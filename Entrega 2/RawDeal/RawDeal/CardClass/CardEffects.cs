@@ -40,15 +40,23 @@ public class CardEffects
     }
 
     public void ProduceDamage(int totalDamage, PlayerController controllerOpponentPlayer, Player player)
-    {   
-        gameStructureInfo.view.SayThatSuperstarWillTakeSomeDamage(controllerOpponentPlayer.NameOfSuperStar(), totalDamage);
-        for (int currentDamage = 0; currentDamage < totalDamage; currentDamage++)
-        {   
-            if (CheckCanReceiveDamage(controllerOpponentPlayer))
-                ShowOneFaceDownCard(currentDamage + 1, totalDamage, player, controllerOpponentPlayer);
-            else
-                gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning();
+    {
+        if (totalDamage > 0)
+        {
+            gameStructureInfo.view.SayThatSuperstarWillTakeSomeDamage(controllerOpponentPlayer.NameOfSuperStar(), totalDamage);
+            for (int currentDamage = 0; currentDamage < totalDamage; currentDamage++)
+            {   
+                if (CheckCanReceiveDamage(controllerOpponentPlayer))
+                    ShowOneFaceDownCard(currentDamage + 1, totalDamage, player, controllerOpponentPlayer);
+                else
+                    gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning();
+            }
         }
+    }
+
+    public bool IsTheCardWeAreReversalMankindType(PlayerController playerController)
+    {
+        return playerController.IsTheSuperStarMankind();
     }
     
     private bool CheckCanReceiveDamage(PlayerController controllerOpponentPlayer)
@@ -63,10 +71,10 @@ public class CardEffects
         gameStructureInfo.view.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
     }
 
-    public int GetDamageProducedByReversalCardWithNotEspecificDamage(PlayerController opponentPlayerController)
+    public int GetDamageProducedByReversalCardWithNotEspecificDamage()
     {
         int totalDamage = gameStructureInfo.LastPlayedCard.GetDamageProducedByTheCard() + gameStructureInfo.bonusDamage*gameStructureInfo.IsJockeyingForPositionBonusDamage;
-        if (opponentPlayerController.IsTheSuperStarMankind())
+        if (gameStructureInfo.ControllerOpponentPlayer.IsTheSuperStarMankind() || gameStructureInfo.ControllerCurrentPlayer.IsTheSuperStarMankind())
             totalDamage -= 1;
         return totalDamage;
     }   

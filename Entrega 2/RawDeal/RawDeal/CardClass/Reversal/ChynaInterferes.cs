@@ -18,9 +18,12 @@ public class ChynaInterferes: Card
     
     public override void ReversalEffect(GameStructureInfo gameStructureInfo)
     {       
-        PlayerController damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
-        gameStructureInfo.CardEffects.ProduceDamage(int.Parse(Damage), damagedPlayerController,gameStructureInfo.GetCurrentPlayer());
         gameStructureInfo.CardEffects.StealCard(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer(), 2);
+        PlayerController damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
+        int damageProduce = int.Parse(Damage);
+        if (gameStructureInfo.CardEffects.IsTheCardWeAreReversalMankindType(gameStructureInfo.ControllerCurrentPlayer))
+            damageProduce -= 1;
+        gameStructureInfo.CardEffects.ProduceDamage(damageProduce, damagedPlayerController,gameStructureInfo.GetCurrentPlayer());
         gameStructureInfo.CardEffects.EndTurn();
     }
 }

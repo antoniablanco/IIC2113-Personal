@@ -20,7 +20,10 @@ public class ManagerInterferes: Card
     {   
         gameStructureInfo.CardEffects.StealCard(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer());
         PlayerController damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
-        gameStructureInfo.CardEffects.ProduceDamage(int.Parse(Damage), damagedPlayerController,gameStructureInfo.GetCurrentPlayer());
+        int damageProduce = int.Parse(Damage);
+        if (gameStructureInfo.CardEffects.IsTheCardWeAreReversalMankindType(gameStructureInfo.ControllerCurrentPlayer))
+            damageProduce -= 1;
+        gameStructureInfo.CardEffects.ProduceDamage(damageProduce, damagedPlayerController,gameStructureInfo.GetCurrentPlayer());
         gameStructureInfo.CardEffects.EndTurn();
     }
 }
