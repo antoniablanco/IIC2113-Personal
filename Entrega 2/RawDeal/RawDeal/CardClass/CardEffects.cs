@@ -131,11 +131,18 @@ public class CardEffects
 
     public void GetBackDamage(PlayerController controllerPlayer, Player player, int recoveredDamage = 1)
     {
-        List<string> ringAreaAsString = controllerPlayer.StringCardsRingSide();
-        int selectedCardIndex = gameStructureInfo.view.AskPlayerToSelectCardsToRecover(controllerPlayer.NameOfSuperStar(), recoveredDamage, ringAreaAsString);
-        CardController discardedCardController = controllerPlayer.GetSpecificCardFromRingSide(selectedCardIndex);
+        List<string> ringSideAsString = controllerPlayer.StringCardsRingSide();
+        if (ringSideAsString.Count() < recoveredDamage)
+            recoveredDamage = ringSideAsString.Count();
         
-        gameStructureInfo.CardMovement.TransferChoosinCardFromRingSideToArsenal(player, discardedCardController, "Start");
+        for (int currentDamage = 0; currentDamage < recoveredDamage; currentDamage++)
+        {
+            int selectedCardIndex = gameStructureInfo.view.AskPlayerToSelectCardsToRecover(controllerPlayer.NameOfSuperStar(), recoveredDamage-currentDamage, ringSideAsString);
+            CardController discardedCardController = controllerPlayer.GetSpecificCardFromRingSide(selectedCardIndex);
+        
+            gameStructureInfo.CardMovement.TransferChoosinCardFromRingSideToArsenal(player, discardedCardController, "Start");
+        }
+        
     }
     
     public void TakeDamage(PlayerController controllerPlayer, Player player, int totalDamage)

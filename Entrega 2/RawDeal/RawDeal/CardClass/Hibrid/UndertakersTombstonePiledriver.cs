@@ -19,6 +19,16 @@ public class UndertakersTombstonePiledriver: Card
             return int.Parse(Fortitude);
     }
     
+    public override int GetDamage(string type)
+    {   
+        if (type == "Maneuver")
+            return 0;
+        else if (type == "Action")
+            return 25;
+        else
+            return int.Parse(Damage);
+    }
+    
     public override void ManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
         gameStructureInfo.CardEffects.DiscardActionCardWithNoEfect(playedCardController, gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.GetCurrentPlayer());

@@ -168,4 +168,9 @@ public class CardController
     {
         _card.ActionEffect(gameStructureInfo, this);
     }
+
+    public bool CanThisCardBePlayed()
+    {
+        return _card.CardCanBePlayed(gameStructureInfo);
+    }
 }

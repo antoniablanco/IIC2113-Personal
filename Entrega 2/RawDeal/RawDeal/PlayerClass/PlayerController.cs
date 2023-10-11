@@ -55,7 +55,7 @@ public class PlayerController
     public List<CardController> CardsAvailableToPlay()
     {
         return player.cardsHand
-            .Where(card => card.GetCardFortitude(card.GetCardTypes()[0]) <= FortitudRating() && card.HasAnyTypeDifferentOfReversal())
+            .Where(card => card.GetCardFortitude(card.GetCardTypes()[0]) <= FortitudRating() && card.HasAnyTypeDifferentOfReversal() && card.CanThisCardBePlayed())
             .ToList();
     }
     

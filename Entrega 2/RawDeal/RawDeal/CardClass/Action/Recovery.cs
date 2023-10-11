@@ -11,6 +11,9 @@ public class Recovery: Card
     
     public override void ActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
-        
+        gameStructureInfo.CardEffects.GetBackDamage(gameStructureInfo.ControllerCurrentPlayer,
+            gameStructureInfo.GetCurrentPlayer(),2);
+        gameStructureInfo.CardEffects.StealCards(gameStructureInfo.ControllerCurrentPlayer,
+            gameStructureInfo.GetCurrentPlayer(), 1);
     }
 }

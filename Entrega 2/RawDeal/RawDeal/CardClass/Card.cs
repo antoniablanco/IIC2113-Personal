@@ -98,5 +98,10 @@ public abstract class Card
     {
         return true;
     }
+    
+    public virtual int GetDamage(string type)
+    {
+        return int.Parse(Damage);
+    }
 
 }
