@@ -169,6 +169,11 @@ public class CardController
         _card.ActionEffect(gameStructureInfo, this);
     }
 
+    public void ManeuverEffect(CardController playedCardController)
+    {
+        _card.ManeuverEffect(gameStructureInfo, playedCardController);
+    }
+    
     public bool CanThisCardBePlayed()
     {
         return _card.CardCanBePlayed(gameStructureInfo);

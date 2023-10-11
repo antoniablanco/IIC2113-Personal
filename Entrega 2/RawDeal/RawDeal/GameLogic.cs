@@ -20,12 +20,12 @@ public class GameLogic
         GetSetGameVariables.SetVariableTrueBecauseTurnStarted();
         GameStructureInfo.view.SayThatATurnBegins(GameStructureInfo.ControllerCurrentPlayer.NameOfSuperStar());
         TheSuperAbilityThatIsAtTheStartOfTheTurnIsUsed();
-        GameStructureInfo.ControllerCurrentPlayer.BlockinSuperAbilityBecauseIsJustAtTheStartOfTheTurn(GameStructureInfo);
+        GameStructureInfo.ControllerCurrentPlayer.BlockinSuperAbilityBecauseIsJustAtTheStartOfTheTurn();
     }
     
     private void TheSuperAbilityThatIsAtTheStartOfTheTurnIsUsed()
     {
-        GameStructureInfo.ControllerCurrentPlayer.UsingAutomaticSuperAbility(GameStructureInfo);
+        GameStructureInfo.ControllerCurrentPlayer.UsingAutomaticSuperAbility();
     }
     
     public void ThePlayerDrawTheirInitialsHands()
@@ -60,7 +60,7 @@ public class GameLogic
     public void ActionUseSuperAbility()
     {   
         GameStructureInfo.ContadorTurnosJokeyingForPosition += 1;
-        GameStructureInfo.ControllerCurrentPlayer.UsingElectiveSuperAbility(GameStructureInfo);
+        GameStructureInfo.ControllerCurrentPlayer.UsingElectiveSuperAbility();
     }
     
     public void SelectCardsToView()

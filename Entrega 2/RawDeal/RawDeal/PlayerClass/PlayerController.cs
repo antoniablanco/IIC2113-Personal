@@ -98,17 +98,17 @@ public class PlayerController
         return player.superestar.CanUseSuperAbility(currentPlayer);
     }
 
-    public void UsingElectiveSuperAbility(GameStructureInfo gameStructureInfo)
+    public void UsingElectiveSuperAbility()
     {
         player.superestar.UsingElectiveSuperAbility(gameStructureInfo);
     }
         
-    public void UsingAutomaticSuperAbility(GameStructureInfo gameStructureInfo)
+    public void UsingAutomaticSuperAbility()
     {
         player.superestar.UsingAutomaticSuperAbilityAtTheStartOfTheTurn(gameStructureInfo);
     }
     
-    public void BlockinSuperAbilityBecauseIsJustAtTheStartOfTheTurn(GameStructureInfo gameStructureInfo)
+    public void BlockinSuperAbilityBecauseIsJustAtTheStartOfTheTurn()
     {
         player.superestar.BlockinSuperAbilityBecauseIsJustAtTheStartOfTheTurn(gameStructureInfo);
     }
