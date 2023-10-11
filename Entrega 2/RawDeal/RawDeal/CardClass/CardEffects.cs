@@ -34,16 +34,15 @@ public class CardEffects
     
     public void DiscardCardOfMyChoiceFromHand(PlayerController opponentPlayerController, PlayerController currentPlayerController, int cardsToDiscardCount)
     {
-        List<string> handFormatoString = opponentPlayerController.StringCardsHand();
+        List<string> handFormatoString = opponentPlayerController.HandCardsButNotTheCardIsBeingPlayed(gameStructureInfo.LastPlayedCard).Item1;
         if (handFormatoString.Count() > 0)
         {
             int selectedCard = gameStructureInfo.view.AskPlayerToSelectACardToDiscard(handFormatoString, opponentPlayerController.NameOfSuperStar(), currentPlayerController.NameOfSuperStar(), cardsToDiscardCount);
             
             if (selectedCard != -1)
             {
-                CardController discardCardController = opponentPlayerController.GetSpecificCardFromHand(selectedCard);
+                CardController discardCardController = opponentPlayerController.HandCardsButNotTheCardIsBeingPlayed(gameStructureInfo.LastPlayedCard).Item2[selectedCard];
                 Player playerWhoDiscardCard = (opponentPlayerController == gameStructureInfo.ControllerCurrentPlayer)? gameStructureInfo.GetCurrentPlayer(): gameStructureInfo.GetOpponentPlayer();
-            
                 gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingSide(playerWhoDiscardCard, discardCardController);
             }
         } 

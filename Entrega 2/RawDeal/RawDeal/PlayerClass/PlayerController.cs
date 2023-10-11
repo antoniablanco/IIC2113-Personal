@@ -153,6 +153,13 @@ public class PlayerController
         List<String> stringCardSet = gameStructureInfo.VisualizeCards.CreateStringCardList(player.cardsHand);
         return stringCardSet;
     }
+
+    public (List<String>, List<CardController>) HandCardsButNotTheCardIsBeingPlayed(CardController cardController)
+    {
+        List<CardController> cardOptions = player.cardsHand.Where(card => card != cardController).ToList();
+        List<String> stringCardOptions = gameStructureInfo.VisualizeCards.CreateStringCardList(cardOptions);
+        return (stringCardOptions, cardOptions);
+    }
     
     public List<String> StringCardsRingArea()
     {
