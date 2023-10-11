@@ -100,7 +100,7 @@ public class PlayCard
     private List<string> GetPossibleCardsToPlayString()
     {
         List<CardController> possibleCardsToPlay = gameStructureInfo.ControllerCurrentPlayer.CardsAvailableToPlay();
-        List<string> cardsStrings = gameStructureInfo.VisualizeCards.CreateStringPlayedCardListForNotReversalType(possibleCardsToPlay);
+        List<string> cardsStrings = gameStructureInfo.VisualizeCards.CreateStringPlayedCardListForNotReversalType(possibleCardsToPlay, gameStructureInfo.ControllerCurrentPlayer);
         return cardsStrings;
     }
 

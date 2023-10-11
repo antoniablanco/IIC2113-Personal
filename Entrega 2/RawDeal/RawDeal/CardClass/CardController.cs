@@ -86,7 +86,7 @@ public class CardController
     }
     
     public int GetCardFortitude(string type)
-    {
+    {   
         return _card.GetFortitude(type);
     }
     
