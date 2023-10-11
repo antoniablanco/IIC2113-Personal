@@ -113,11 +113,10 @@ public class CardEffects
             gameStructureInfo.view.SayThatPlayerDamagedHimself(controllerOpponentPlayer.NameOfSuperStar(), totalDamage);
             gameStructureInfo.view.SayThatSuperstarWillTakeSomeDamage(controllerOpponentPlayer.NameOfSuperStar(), totalDamage);
             for (int currentDamage = 0; currentDamage < totalDamage; currentDamage++)
-            {
+            {   
                 if (CheckIfThePlayerCanReceiveDamage(controllerOpponentPlayer))
                 {
-                    string flippedCardString = ShowOneFaceDownCard(currentDamage + 1, totalDamage, player, controllerOpponentPlayer);
-                    gameStructureInfo.view.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
+                    ShowOneFaceDownCard(currentDamage + 1, totalDamage, player, controllerOpponentPlayer);
                 }
                 else
                 {
