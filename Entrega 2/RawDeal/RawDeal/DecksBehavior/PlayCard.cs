@@ -122,10 +122,13 @@ public class PlayCard
         {   
             if (CheckCanReceiveDamage(controllerOpponentPlayer) && !isUserReversalDeckCard)
                 ShowOneFaceDownCard(currentDamage + 1, totalDamage, player, controllerOpponentPlayer);
-            else if (isUserReversalDeckCard && gameStructureInfo.LastPlayedCard.TheCardHadStunValue() && !isStunValueUsed)
+            else if (isUserReversalDeckCard && gameStructureInfo.LastPlayedCard.TheCardHadStunValue() &&
+                     !isStunValueUsed)
+            {   
                 UseStunValueOpcion();
+            }
             else if (!CheckCanReceiveDamage(controllerOpponentPlayer))
-            {
+            {   
                 gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning(controllerOpponentPlayer);
                 break;
             }
@@ -157,6 +160,7 @@ public class PlayCard
         isUserReversalDeckCard = flippedCardController.CanUseThisReversalCard(controllerOpponentPlayer);
         if (isUserReversalDeckCard)
         {   
+            Console.WriteLine(gameStructureInfo.IsTheGameStillPlaying);
             gameStructureInfo.CardEffects.EndTurn();
             gameStructureInfo.view.SayThatCardWasReversedByDeck(controllerOpponentPlayer.NameOfSuperStar());
         }

@@ -21,6 +21,8 @@ public class GetSetGameVariables
     
     public bool ShouldWeContinueTheGame()
     {   
+        if ((!gameStructureInfo.ControllerPlayerOne.AreThereCardsLeftInTheArsenal() || !gameStructureInfo.ControllerPlayerTwo.AreThereCardsLeftInTheArsenal()) && gameStructureInfo.winnerPlayer == null)
+            gameStructureInfo.winnerPlayer = (gameStructureInfo.ControllerCurrentPlayer.HasCardsInArsenal()) ? gameStructureInfo.ControllerCurrentPlayer : gameStructureInfo.ControllerOpponentPlayer;
         return (gameStructureInfo.ControllerPlayerOne.AreThereCardsLeftInTheArsenal() && gameStructureInfo.ControllerPlayerTwo.AreThereCardsLeftInTheArsenal() && gameStructureInfo.IsTheGameStillPlaying);
     }
     
@@ -58,14 +60,14 @@ public class GetSetGameVariables
     }
     
     private void SetVariablesAfterLosing() 
-    {
+    {   
         gameStructureInfo.winnerPlayer = (gameStructureInfo.ControllerCurrentPlayer.HasCardsInArsenal()) ? gameStructureInfo.ControllerCurrentPlayer : gameStructureInfo.ControllerOpponentPlayer;
         gameStructureInfo.IsTheGameStillPlaying = false;
         DeclareEndOfTurn();
     }
 
     public void SetVariablesAfterGaveUp()
-    {
+    {   
         gameStructureInfo.winnerPlayer = (gameStructureInfo.ControllerCurrentPlayer == gameStructureInfo.ControllerPlayerOne) ? gameStructureInfo.ControllerPlayerTwo : gameStructureInfo.ControllerPlayerOne;
         gameStructureInfo.IsTheGameStillPlaying = false;
         DeclareEndOfTurn();
