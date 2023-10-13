@@ -109,9 +109,11 @@ public class PlayCard
         int totalDamage = GetDamageProduced(playedCardController);
         gameStructureInfo.LastDamageComited = totalDamage;
         playedCardController.ManeuverEffect(playedCardController);
-        if (totalDamage > 0)
+        if (totalDamage > 0 && gameStructureInfo.IsTheGameStillPlaying)
+        {
             SayThatTheyAreGoingToReceiveDamage(totalDamage);
-        CauseDamageActionPlayCard(totalDamage, gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer());
+            CauseDamageActionPlayCard(totalDamage, gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer());
+        }
     }
     
     public void CauseDamageActionPlayCard(int totalDamage, PlayerController controllerOpponentPlayer, Player player)
