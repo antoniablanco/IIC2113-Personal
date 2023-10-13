@@ -20,6 +20,6 @@ public class SpitAtOpponent: Card
     
     public override bool CardCanBePlayed(GameStructureInfo gameStructureInfo)
     {
-        return gameStructureInfo.ControllerOpponentPlayer.NumberOfCardsInTheHand() >= 2;
+        return gameStructureInfo.ControllerCurrentPlayer.NumberOfCardsInTheHand() >= 2;
     }
 }

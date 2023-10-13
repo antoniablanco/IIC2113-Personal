@@ -175,7 +175,7 @@ public class CardController
     }
     
     public bool CanThisCardBePlayed()
-    {
+    {   
         return _card.CardCanBePlayed(gameStructureInfo);
     }
 }
