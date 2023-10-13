@@ -139,10 +139,11 @@ public class CardEffects
             recoveredDamage = ringSideAsString.Count();
         
         for (int currentDamage = 0; currentDamage < recoveredDamage; currentDamage++)
-        {
+        {   
+            ringSideAsString = controllerPlayer.StringCardsRingSide();
             int selectedCardIndex = gameStructureInfo.view.AskPlayerToSelectCardsToRecover(controllerPlayer.NameOfSuperStar(), recoveredDamage-currentDamage, ringSideAsString);
             CardController discardedCardController = controllerPlayer.GetSpecificCardFromRingSide(selectedCardIndex);
-        
+            
             gameStructureInfo.CardMovement.TransferChoosinCardFromRingSideToArsenal(player, discardedCardController, "Start");
         }
         
