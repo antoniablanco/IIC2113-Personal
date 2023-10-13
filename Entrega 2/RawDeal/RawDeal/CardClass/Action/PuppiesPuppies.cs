@@ -15,5 +15,6 @@ public class PuppiesPuppies: Card
             gameStructureInfo.GetCurrentPlayer(),5);
         gameStructureInfo.CardEffects.StealCards(gameStructureInfo.ControllerCurrentPlayer,
             gameStructureInfo.GetCurrentPlayer(), 2);
+        gameStructureInfo.CardEffects.DiscardActionCardToRingAreButNotSaying(playedCardController, gameStructureInfo.GetCurrentPlayer());
     }
 }

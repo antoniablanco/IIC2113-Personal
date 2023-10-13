@@ -15,5 +15,6 @@ public class Recovery: Card
             gameStructureInfo.GetCurrentPlayer(),2);
         gameStructureInfo.CardEffects.StealCards(gameStructureInfo.ControllerCurrentPlayer,
             gameStructureInfo.GetCurrentPlayer(), 1);
+        gameStructureInfo.CardEffects.DiscardActionCardToRingAreButNotSaying(playedCardController, gameStructureInfo.GetCurrentPlayer());
     }
 }

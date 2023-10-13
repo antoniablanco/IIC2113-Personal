@@ -33,7 +33,7 @@ public class CardEffects
     }
     
     public void DiscardCardOfMyChoiceFromHand(PlayerController opponentPlayerController, PlayerController currentPlayerController, int cardsToDiscardCount)
-    {
+    {   
         List<string> handFormatoString = opponentPlayerController.HandCardsButNotTheCardIsBeingPlayed(gameStructureInfo.LastPlayedCard).Item1;
         if (handFormatoString.Count() > 0)
         {
@@ -52,6 +52,11 @@ public class CardEffects
     {   
         gameStructureInfo.view.SayThatPlayerMustDiscardThisCard(controllerCurrentPlayer.NameOfSuperStar(), playedCardController.GetCardTitle());
         gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingSide(player, playedCardController);
+    }
+    
+    public void DiscardActionCardToRingAreButNotSaying(CardController playedCardController, Player player)
+    {   
+        gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(player, playedCardController);
     }
     
     public void DiscardingCardsFromHandToArsenal(PlayerController playerController)

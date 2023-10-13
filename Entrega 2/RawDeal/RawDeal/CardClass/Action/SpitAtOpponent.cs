@@ -15,7 +15,7 @@ public class SpitAtOpponent: Card
             gameStructureInfo.ControllerCurrentPlayer, 1);
         gameStructureInfo.CardEffects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerOpponentPlayer,
             gameStructureInfo.ControllerOpponentPlayer, 4);
-        
+        gameStructureInfo.CardEffects.DiscardActionCardToRingAreButNotSaying(playedCardController, gameStructureInfo.GetCurrentPlayer());
     }
     
     public override bool CardCanBePlayed(GameStructureInfo gameStructureInfo)
