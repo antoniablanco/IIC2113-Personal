@@ -20,12 +20,13 @@ public class GameStructureInfo
     public PlayerController ControllerCurrentPlayer;
     public PlayerController ControllerOpponentPlayer;
     public PlayerController winnerPlayer;
+    public PlayerController HowActivateJockeyingForPosition;
     public GameLogic GameLogic;
     public GetSetGameVariables GetSetGameVariables;
     public Effects Effects;
+    public CardController LastPlayedCard;
     public bool IsTheGameStillPlaying = true;
     public bool IsTheTurnBeingPlayed = true;
-    public CardController LastPlayedCard;
     public string LastPlayedType;
     public int bonusFortitude = 8;
     public int bonusDamage = 4;
@@ -33,7 +34,6 @@ public class GameStructureInfo
     public int IsJockeyingForPositionBonusDamage = 0;
     public int ContadorTurnosJokeyingForPosition = 0;
     public int LastDamageComited = 0;
-    public PlayerController HowActivateJockeyingForPosition;
     
     public Player GetCurrentPlayer()
     {

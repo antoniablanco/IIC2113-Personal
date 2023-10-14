@@ -59,7 +59,7 @@ public class GetSetGameVariables
         gameStructureInfo.ControllerOpponentPlayer = (gameStructureInfo.ControllerOpponentPlayer == gameStructureInfo.ControllerPlayerOne) ? gameStructureInfo.ControllerPlayerTwo : gameStructureInfo.ControllerPlayerOne;
     }
     
-    private void SetVariablesAfterLosing() 
+    public void SetVariablesAfterLosing() 
     {   
         gameStructureInfo.winnerPlayer = (gameStructureInfo.ControllerCurrentPlayer.HasCardsInArsenal()) ? gameStructureInfo.ControllerCurrentPlayer : gameStructureInfo.ControllerOpponentPlayer;
         gameStructureInfo.IsTheGameStillPlaying = false;

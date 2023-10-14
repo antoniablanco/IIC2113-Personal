@@ -19,6 +19,7 @@ public class Game
     private PlayCard PlayCard = new PlayCard();
     public GameStructureInfo gameStructureInfo = new GameStructureInfo();
     public GetSetGameVariables GetSetGameVariables = new GetSetGameVariables();
+    public SuperAbilityInformation SuperAbilityInformation = new SuperAbilityInformation();
     public Effects Effects = new Effects();
     
     
@@ -29,7 +30,6 @@ public class Game
         _createSuperStart.view = _view;
         AssigningClassesToGameStructure();
         AssigningClassGameStructureToClasses();
-        _gameLogic.GetSetGameVariables = GetSetGameVariables;
     }
     
     private void AssigningClassesToGameStructure()
@@ -95,7 +95,7 @@ public class Game
         return (totalCards, totalSuperStars);
     }
     
-    private Player InitializePlayer(List<CardJson> totalCards,List<SuperStarJSON> totalSuperStars) 
+    private Player InitializePlayer(List<CardJson> totalCards, List<SuperStarJSON> totalSuperStars) 
     {
         string stringPlayer = _view.AskUserToSelectDeck(_deckFolder);
         List<CardController> playerCardList = _createCards.CreateDiferentTypesOfCard(stringPlayer, totalCards, _view);
@@ -146,7 +146,7 @@ public class Game
 
     private void OneTurnIsPlayed()
     {   
-        _gameLogic.SettingTurnStartInformation();
+        SettingTurnStartInformation();
 
         while (GetSetGameVariables.TheTurnIsBeingPlayed())
         {   
@@ -154,6 +154,15 @@ public class Game
             _gameLogic.DisplayPlayerInformation();
             PlayerSelectedAction();
         }
+    }
+    
+    public void SettingTurnStartInformation()
+    {
+        gameStructureInfo.ControllerCurrentPlayer.DrawCard();
+        gameStructureInfo.GetSetGameVariables.SetVariableTrueBecauseTurnStarted();
+        gameStructureInfo.view.SayThatATurnBegins(gameStructureInfo.ControllerCurrentPlayer.NameOfSuperStar());
+        SuperAbilityInformation.TheSuperAbilityThatIsAtTheStartOfTheTurnIsUsed(gameStructureInfo);
+        gameStructureInfo.ControllerCurrentPlayer.BlockinSuperAbilityBecauseIsJustAtTheStartOfTheTurn();
     }
 
     private void PlayerSelectedAction()
@@ -163,7 +172,7 @@ public class Game
         switch (activityToPerform)
         {
             case NextPlay.UseAbility:
-                _gameLogic.ActionUseSuperAbility();
+                SuperAbilityInformation.ActionUseSuperAbility(gameStructureInfo);
                 break;
             case NextPlay.ShowCards:
                 _gameLogic.SelectCardsToView();
@@ -186,7 +195,7 @@ public class Game
     {   
         NextPlay activityToPerform;
         
-        if (_gameLogic.PlayerCanUseSuperStarAbility())
+        if (SuperAbilityInformation.PlayerCanUseSuperStarAbility(gameStructureInfo))
             activityToPerform = _view.AskUserWhatToDoWhenUsingHisAbilityIsPossible();
         else
             activityToPerform = _view.AskUserWhatToDoWhenHeCannotUseHisAbility();

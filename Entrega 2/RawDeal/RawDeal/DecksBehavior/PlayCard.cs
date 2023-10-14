@@ -1,3 +1,4 @@
+using System.Data;
 using RawDeal.CardClass;
 using RawDeal.PlayerClass;
 
@@ -130,7 +131,7 @@ public class PlayCard
                 UseStunValueOpcion();
             }
             else if (!CheckCanReceiveDamage(controllerOpponentPlayer))
-            {   
+            {
                 gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning(controllerOpponentPlayer);
                 break;
             }
