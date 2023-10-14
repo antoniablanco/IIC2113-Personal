@@ -14,20 +14,17 @@ public class Game
     private View _view;
     private string _deckFolder;
     private GameLogic _gameLogic = new GameLogic();
-    private CreateCards _createCards = new CreateCards();
-    private CreateSuperStart _createSuperStart = new CreateSuperStart();
+    private GameStructureInfo gameStructureInfo = new GameStructureInfo();
+    private SuperAbilityInformation SuperAbilityInformation = new SuperAbilityInformation();
     private PlayCard PlayCard = new PlayCard();
-    public GameStructureInfo gameStructureInfo = new GameStructureInfo();
-    public GetSetGameVariables GetSetGameVariables = new GetSetGameVariables();
-    public SuperAbilityInformation SuperAbilityInformation = new SuperAbilityInformation();
-    public Effects Effects = new Effects();
+    private GetSetGameVariables GetSetGameVariables = new GetSetGameVariables();
+    private Effects Effects = new Effects();
     
     
     public Game(View view, string deckFolder)
     {
         _view = view;
         _deckFolder = deckFolder;
-        _createSuperStart.view = _view;
         AssigningClassesToGameStructure();
         AssigningClassGameStructureToClasses();
     }
@@ -43,19 +40,17 @@ public class Game
     
     private void AssigningClassGameStructureToClasses()
     {
-        
         _gameLogic.GameStructureInfo = gameStructureInfo;
         PlayCard.gameStructureInfo = gameStructureInfo;
         GetSetGameVariables.gameStructureInfo = gameStructureInfo;
         Effects.gameStructureInfo = gameStructureInfo;
-        _createCards.gameStructureInfo = gameStructureInfo;
     }
     
     public void Play() 
     {
         try
         {
-            CreatePlayers();
+            CreatePlayers createPlayers = new CreatePlayers(gameStructureInfo, _deckFolder);
             GameGivenThatTheDecksAreValid();
         }
         catch (InvalidDeckException e)
@@ -64,80 +59,9 @@ public class Game
         }
     }
     
-    private void CreatePlayers()
-    {
-        PlayerController playerUno = CreateOnePlayer();
-        PlayerController playerDos = CreateOnePlayer();
-        InitializeGameVariables(playerUno, playerDos);
-        InitializePlayerHands();
-    }
-    
-    private PlayerController CreateOnePlayer()
-    {
-        var (totalCards, totalSuperStars) = GetTotalCardsAndSuperStars();
-        Player player = InitializePlayer(totalCards, totalSuperStars);
-        ValidateDeck _validateDeck = new ValidateDeck(player);
-        
-        if (!_validateDeck.IsValidDeck())
-        {
-            throw new InvalidDeckException("The Deck Is Not Valid");
-        }
-
-        PlayerController playerController = InitializePlayerController(player);
-        return playerController;
-    }
-    
-    private (List<CardJson>, List<SuperStarJSON>) GetTotalCardsAndSuperStars() 
-    {
-        List<CardJson> totalCards = _createCards.DeserializeJsonCards();
-        List<SuperStarJSON> totalSuperStars = _createSuperStart.DeserializeJsonSuperStar();
-    
-        return (totalCards, totalSuperStars);
-    }
-    
-    private Player InitializePlayer(List<CardJson> totalCards, List<SuperStarJSON> totalSuperStars) 
-    {
-        string stringPlayer = _view.AskUserToSelectDeck(_deckFolder);
-        List<CardController> playerCardList = _createCards.CreateDiferentTypesOfCard(stringPlayer, totalCards, _view);
-        SuperStar? superStarPlayer = _createSuperStart.CreateSuperStar(stringPlayer, totalSuperStars);
-        
-        Player playerReturn = new Player(playerCardList, superStarPlayer);
-
-        SavePlayerInGameStructureInfo(playerReturn);
-        
-        return playerReturn;
-    }
-
-    private void SavePlayerInGameStructureInfo(Player player)
-    {
-        if (gameStructureInfo.playerOne == null)
-            gameStructureInfo.playerOne = player;
-        else
-            gameStructureInfo.playerTwo = player;
-    }
-
-    private PlayerController InitializePlayerController(Player player)
-    {
-        PlayerController playerController = new PlayerController(player, gameStructureInfo);
-        return playerController;
-    }
-    
-    private void InitializeGameVariables(PlayerController playerOne, PlayerController playerTwo) 
-    {
-        gameStructureInfo.ControllerPlayerOne = playerOne;
-        gameStructureInfo.ControllerPlayerTwo = playerTwo;
-        
-        GetSetGameVariables.CreatePlayerInitialOrder();
-    }
-
-    private void InitializePlayerHands()
-    {
-        _gameLogic.ThePlayerDrawTheirInitialsHands();
-    }
-    
     private void GameGivenThatTheDecksAreValid()
     {
-        while (GetSetGameVariables.ShouldWeContinueTheGame())
+        while (gameStructureInfo.GetSetGameVariables.ShouldWeContinueTheGame())
         {
             OneTurnIsPlayed();
         }
@@ -148,15 +72,15 @@ public class Game
     {   
         SettingTurnStartInformation();
 
-        while (GetSetGameVariables.TheTurnIsBeingPlayed())
+        while (gameStructureInfo.GetSetGameVariables.TheTurnIsBeingPlayed())
         {   
             gameStructureInfo.ContadorTurnosJokeyingForPosition -= 1;
             _gameLogic.DisplayPlayerInformation();
             PlayerSelectedAction();
         }
     }
-    
-    public void SettingTurnStartInformation()
+
+    private void SettingTurnStartInformation()
     {
         gameStructureInfo.ControllerCurrentPlayer.DrawCard();
         gameStructureInfo.GetSetGameVariables.SetVariableTrueBecauseTurnStarted();
@@ -181,10 +105,10 @@ public class Game
                 gameStructureInfo.PlayCard.ActionPlayCard();
                 break;
             case NextPlay.EndTurn:
-                GetSetGameVariables.UpdateVariablesAtEndOfTurn();
+                gameStructureInfo.GetSetGameVariables.UpdateVariablesAtEndOfTurn();
                 break;
             case NextPlay.GiveUp:
-                GetSetGameVariables.SetVariablesAfterGaveUp();
+                gameStructureInfo.GetSetGameVariables.SetVariablesAfterGaveUp();
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
