@@ -11,7 +11,7 @@ public class ReverseDDT: Card
     
     public override void ManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
-        gameStructureInfo.CardEffects.MayStealCards(gameStructureInfo.ControllerCurrentPlayer,
+        gameStructureInfo.Effects.MayStealCards(gameStructureInfo.ControllerCurrentPlayer,
             gameStructureInfo.GetCurrentPlayer(), 1);
     }
 }

@@ -18,12 +18,12 @@ public class ManagerInterferes: Card
     
     public override void ReversalEffect(GameStructureInfo gameStructureInfo)
     {   
-        gameStructureInfo.CardEffects.StealCards(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer());
+        gameStructureInfo.Effects.StealCards(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer());
         PlayerController damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
         int damageProduce = int.Parse(Damage);
-        if (gameStructureInfo.CardEffects.IsTheCardWeAreReversalOfMankindSuperStart(gameStructureInfo.ControllerCurrentPlayer))
+        if (gameStructureInfo.Effects.IsTheCardWeAreReversalOfMankindSuperStart(gameStructureInfo.ControllerCurrentPlayer))
             damageProduce -= 1;
-        gameStructureInfo.CardEffects.ProduceDamage(damageProduce, damagedPlayerController,gameStructureInfo.GetCurrentPlayer());
-        gameStructureInfo.CardEffects.EndTurn();
+        gameStructureInfo.Effects.ProduceDamage(damageProduce, damagedPlayerController,gameStructureInfo.GetCurrentPlayer());
+        gameStructureInfo.Effects.EndTurn();
     }
 }

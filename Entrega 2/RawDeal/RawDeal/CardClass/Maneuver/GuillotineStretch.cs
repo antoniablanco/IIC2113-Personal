@@ -11,9 +11,9 @@ public class GuillotineStretch: Card
     
     public override void ManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
-        gameStructureInfo.CardEffects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerOpponentPlayer,
+        gameStructureInfo.Effects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerOpponentPlayer,
             gameStructureInfo.ControllerOpponentPlayer, 1);
-        gameStructureInfo.CardEffects.MayStealCards(gameStructureInfo.ControllerCurrentPlayer,
+        gameStructureInfo.Effects.MayStealCards(gameStructureInfo.ControllerCurrentPlayer,
             gameStructureInfo.GetCurrentPlayer(), 1);
     }
 }

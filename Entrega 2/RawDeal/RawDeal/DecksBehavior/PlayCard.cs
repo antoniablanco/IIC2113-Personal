@@ -141,7 +141,7 @@ public class PlayCard
     {   
         isStunValueUsed = true;
         int numberOfCardsToSteal = gameStructureInfo.view.AskHowManyCardsToDrawBecauseOfStunValue(gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar(), gameStructureInfo.LastPlayedCard.GetCardStunValue());
-        gameStructureInfo.CardEffects.StealCards(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer(), numberOfCardsToSteal);
+        gameStructureInfo.Effects.StealCards(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer(), numberOfCardsToSteal);
     }
     
     private bool CheckCanReceiveDamage(PlayerController controllerOpponentPlayer)
@@ -163,7 +163,7 @@ public class PlayCard
         if (isUserReversalDeckCard)
         {   
             Console.WriteLine(gameStructureInfo.IsTheGameStillPlaying);
-            gameStructureInfo.CardEffects.EndTurn();
+            gameStructureInfo.Effects.EndTurn();
             gameStructureInfo.view.SayThatCardWasReversedByDeck(controllerOpponentPlayer.NameOfSuperStar());
         }
     }

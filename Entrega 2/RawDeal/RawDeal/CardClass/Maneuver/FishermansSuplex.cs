@@ -11,8 +11,8 @@ public class FishermansSuplex: Card
     
     public override void ManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
-        gameStructureInfo.CardEffects.ColateralDamage(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer());
-        gameStructureInfo.CardEffects.MayStealCards(gameStructureInfo.ControllerCurrentPlayer,
+        gameStructureInfo.Effects.ColateralDamage(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer());
+        gameStructureInfo.Effects.MayStealCards(gameStructureInfo.ControllerCurrentPlayer,
             gameStructureInfo.GetCurrentPlayer(), 1);
     }
 }

@@ -16,6 +16,6 @@ public class StepAside: Card
     
     public override void ReversalEffect(GameStructureInfo gameStructureInfo)
     {
-        gameStructureInfo.CardEffects.EndTurn();
+        gameStructureInfo.Effects.EndTurn();
     }
 }

@@ -11,10 +11,10 @@ public class PuppiesPuppies: Card
     
     public override void ActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
-        gameStructureInfo.CardEffects.GetBackDamage(gameStructureInfo.ControllerCurrentPlayer,
+        gameStructureInfo.Effects.GetBackDamage(gameStructureInfo.ControllerCurrentPlayer,
             gameStructureInfo.GetCurrentPlayer(),5);
-        gameStructureInfo.CardEffects.StealCards(gameStructureInfo.ControllerCurrentPlayer,
+        gameStructureInfo.Effects.StealCards(gameStructureInfo.ControllerCurrentPlayer,
             gameStructureInfo.GetCurrentPlayer(), 2);
-        gameStructureInfo.CardEffects.DiscardActionCardToRingAreButNotSaying(playedCardController, gameStructureInfo.GetCurrentPlayer());
+        gameStructureInfo.Effects.DiscardActionCardToRingAreButNotSaying(playedCardController, gameStructureInfo.GetCurrentPlayer());
     }
 }

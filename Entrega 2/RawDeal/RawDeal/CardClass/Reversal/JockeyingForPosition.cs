@@ -23,7 +23,7 @@ public class JockeyingForPosition: Card
         GetSelectedEffect(gameStructureInfo, effectToPerform);
         gameStructureInfo.HowActivateJockeyingForPosition = gameStructureInfo.ControllerOpponentPlayer;
         gameStructureInfo.ContadorTurnosJokeyingForPosition = 2;
-        gameStructureInfo.CardEffects.EndTurn();
+        gameStructureInfo.Effects.EndTurn();
     }
     
     public override void ActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)

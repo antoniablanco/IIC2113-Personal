@@ -162,7 +162,7 @@ public class CardController
     public bool DealsTheMaximumDamage(int maximumDamage)
     {
         int damage = int.Parse(_card.Damage) + gameStructureInfo.bonusDamage * gameStructureInfo.IsJockeyingForPositionBonusDamage;
-        if (gameStructureInfo.CardEffects.IsTheCardWeAreReversalOfMankindSuperStart(gameStructureInfo.ControllerOpponentPlayer))
+        if (gameStructureInfo.Effects.IsTheCardWeAreReversalOfMankindSuperStart(gameStructureInfo.ControllerOpponentPlayer))
             damage -= 1;
         return damage <= maximumDamage;
     }

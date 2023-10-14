@@ -19,8 +19,8 @@ public class RollingTakedown: Card
     public override void ReversalEffect(GameStructureInfo gameStructureInfo)
     {   
         PlayerController damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
-        int damage = gameStructureInfo.CardEffects.GetDamageProducedByReversalCardWithNotEspecificDamage();
-        gameStructureInfo.CardEffects.ProduceDamage(damage, damagedPlayerController,gameStructureInfo.GetCurrentPlayer()); 
-        gameStructureInfo.CardEffects.EndTurn();
+        int damage = gameStructureInfo.Effects.GetDamageProducedByReversalCardWithNotEspecificDamage();
+        gameStructureInfo.Effects.ProduceDamage(damage, damagedPlayerController,gameStructureInfo.GetCurrentPlayer()); 
+        gameStructureInfo.Effects.EndTurn();
     }
 }

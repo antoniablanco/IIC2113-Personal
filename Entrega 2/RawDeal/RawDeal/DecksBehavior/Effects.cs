@@ -1,8 +1,9 @@
+using RawDeal.CardClass;
 using RawDeal.PlayerClass;
 
-namespace RawDeal.CardClass;
+namespace RawDeal.DecksBehavior;
 
-public class CardEffects
+public class Effects
 {   
     public GameStructureInfo gameStructureInfo= new GameStructureInfo();
 

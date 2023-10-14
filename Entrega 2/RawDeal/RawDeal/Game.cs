@@ -19,7 +19,7 @@ public class Game
     private PlayCard PlayCard = new PlayCard();
     public GameStructureInfo gameStructureInfo = new GameStructureInfo();
     public GetSetGameVariables GetSetGameVariables = new GetSetGameVariables();
-    public CardEffects CardEffects = new CardEffects();
+    public Effects Effects = new Effects();
     
     
     public Game(View view, string deckFolder)
@@ -38,7 +38,7 @@ public class Game
         gameStructureInfo.GameLogic = _gameLogic;
         gameStructureInfo.PlayCard = PlayCard;
         gameStructureInfo.GetSetGameVariables = GetSetGameVariables;
-        gameStructureInfo.CardEffects = CardEffects;
+        gameStructureInfo.Effects = Effects;
     }
     
     private void AssigningClassGameStructureToClasses()
@@ -47,7 +47,7 @@ public class Game
         _gameLogic.GameStructureInfo = gameStructureInfo;
         PlayCard.gameStructureInfo = gameStructureInfo;
         GetSetGameVariables.gameStructureInfo = gameStructureInfo;
-        CardEffects.gameStructureInfo = gameStructureInfo;
+        Effects.gameStructureInfo = gameStructureInfo;
         _createCards.gameStructureInfo = gameStructureInfo;
     }
     

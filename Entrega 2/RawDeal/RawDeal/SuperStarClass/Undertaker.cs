@@ -15,8 +15,8 @@ public class Undertaker: SuperStar
     {
         gameStructureInfo.ControllerCurrentPlayer.TheSuperStarHasUsedHisSuperAbilityThisTurn();
         _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
-        gameStructureInfo.CardEffects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.ControllerCurrentPlayer,2);
-        gameStructureInfo.CardEffects.AddingCardFromRingSideToHand(gameStructureInfo.ControllerCurrentPlayer);
+        gameStructureInfo.Effects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.ControllerCurrentPlayer,2);
+        gameStructureInfo.Effects.AddingCardFromRingSideToHand(gameStructureInfo.ControllerCurrentPlayer);
     }
     
 
