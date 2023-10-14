@@ -1,3 +1,5 @@
+using RawDeal.GameClasses;
+
 namespace RawDeal.SuperStarClass;
 
 public class SuperAbilityInformation

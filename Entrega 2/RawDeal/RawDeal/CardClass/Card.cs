@@ -1,3 +1,5 @@
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClass;
 
 public abstract class Card

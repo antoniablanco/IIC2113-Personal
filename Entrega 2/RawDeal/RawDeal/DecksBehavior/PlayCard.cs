@@ -1,5 +1,6 @@
 using System.Data;
 using RawDeal.CardClass;
+using RawDeal.GameClasses;
 using RawDeal.PlayerClass;
 
 namespace RawDeal.DecksBehavior;

@@ -4,6 +4,7 @@ using RawDeal.CardClass.Hibrid;
 using RawDeal.CardClass.Reversal;
 using RawDeal.CardClass.Action;
 using RawDeal.CardClass.UnspecifiedType;
+using RawDeal.GameClasses;
 using RawDealView;
 
 namespace RawDeal.CardClass;

@@ -1,4 +1,5 @@
 ﻿using RawDeal;
+using RawDeal.GameClasses;
 using RawDealView;
 
 string folder = "02-InvalidDecks";

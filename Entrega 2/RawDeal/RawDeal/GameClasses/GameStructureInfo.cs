@@ -1,11 +1,9 @@
 using RawDeal.CardClass;
 using RawDeal.DecksBehavior;
 using RawDeal.PlayerClass;
-
-namespace RawDeal;
-using RawDeal.SuperStarClass;
 using RawDealView;
-using RawDealView.Options;
+
+namespace RawDeal.GameClasses;
 
 public class GameStructureInfo
 {

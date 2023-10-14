@@ -1,6 +1,6 @@
 using RawDeal.PlayerClass;
 
-namespace RawDeal;
+namespace RawDeal.GameClasses;
 
 public class GetSetGameVariables
 {   
@@ -58,8 +58,8 @@ public class GetSetGameVariables
         gameStructureInfo.ControllerCurrentPlayer = (gameStructureInfo.ControllerCurrentPlayer == gameStructureInfo.ControllerPlayerOne) ? gameStructureInfo.ControllerPlayerTwo : gameStructureInfo.ControllerPlayerOne;
         gameStructureInfo.ControllerOpponentPlayer = (gameStructureInfo.ControllerOpponentPlayer == gameStructureInfo.ControllerPlayerOne) ? gameStructureInfo.ControllerPlayerTwo : gameStructureInfo.ControllerPlayerOne;
     }
-    
-    public void SetVariablesAfterLosing() 
+
+    private void SetVariablesAfterLosing() 
     {   
         gameStructureInfo.winnerPlayer = (gameStructureInfo.ControllerCurrentPlayer.HasCardsInArsenal()) ? gameStructureInfo.ControllerCurrentPlayer : gameStructureInfo.ControllerOpponentPlayer;
         gameStructureInfo.IsTheGameStillPlaying = false;

@@ -1,3 +1,4 @@
+using RawDeal.GameClasses;
 using RawDealView.Options;
 
 namespace RawDeal.CardClass.Reversal;

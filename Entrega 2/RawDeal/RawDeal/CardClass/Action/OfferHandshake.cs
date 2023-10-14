@@ -1,3 +1,5 @@
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClass.Action;
 
 public class OfferHandshake: Card

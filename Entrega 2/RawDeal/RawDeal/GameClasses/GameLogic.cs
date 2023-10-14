@@ -1,12 +1,7 @@
-using RawDeal.CardClass;
-using RawDeal.PlayerClass;
-using RawDeal.SuperStarClass;
 using RawDealView;
 using RawDealView.Options;
 
-namespace RawDeal;
-using System.Text.Json ;
-
+namespace RawDeal.GameClasses;
 
 public class GameLogic
 {

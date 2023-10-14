@@ -1,13 +1,11 @@
-using System.ComponentModel.Design;
-using RawDealView;
-using RawDealView.Options;
-using RawDeal.SuperStarClass;
-using RawDeal.CardClass;
 using RawDeal.DecksBehavior;
 using RawDeal.Exceptions;
 using RawDeal.PlayerClass;
+using RawDeal.SuperStarClass;
+using RawDealView;
+using RawDealView.Options;
 
-namespace RawDeal;
+namespace RawDeal.GameClasses;
 
 public class Game
 {

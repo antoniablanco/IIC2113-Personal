@@ -1,3 +1,5 @@
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClass.Reversal;
 
 public class EscapeMove: Card

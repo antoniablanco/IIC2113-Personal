@@ -1,3 +1,5 @@
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClass.Maneuver;
 
 public class ChickenWing: Card

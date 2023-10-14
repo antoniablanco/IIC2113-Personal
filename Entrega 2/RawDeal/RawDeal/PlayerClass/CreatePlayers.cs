@@ -1,6 +1,7 @@
 using RawDeal.CardClass;
 using RawDeal.DecksBehavior;
 using RawDeal.Exceptions;
+using RawDeal.GameClasses;
 using RawDeal.PlayerClass;
 using RawDeal.SuperStarClass;
 

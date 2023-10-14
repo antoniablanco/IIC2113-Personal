@@ -1,3 +1,4 @@
+using RawDeal.GameClasses;
 using RawDeal.PlayerClass;
 
 namespace RawDeal.SuperStarClass;
