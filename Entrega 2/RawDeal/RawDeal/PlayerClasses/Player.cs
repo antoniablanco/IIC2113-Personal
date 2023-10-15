@@ -10,39 +10,39 @@ public class Player
     private List<CardController> _cardsHand = new List<CardController>();
     private List<CardController> _cardsRingSide = new List<CardController>();
     private List<CardController> _cardsRingArea = new List<CardController>();
-    public bool theHabilityHasBeenUsedThisTurn = false;
+    public bool TheHabilityHasBeenUsedThisTurn = false;
 
     public Player(List<CardController> cardsPlayer, SuperStar? superstar)
     {
-        superestar = superstar;
-        cardsArsenal.AddRange(cardsPlayer);
+        Superestar = superstar;
+        CardsArsenal.AddRange(cardsPlayer);
     }
 
-    public SuperStar? superestar
+    public SuperStar? Superestar
     {
         get => _superestar;
         set => _superestar = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public List<CardController> cardsArsenal
+    public List<CardController> CardsArsenal
     {
         get => _cardsArsenal;
         set => _cardsArsenal = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public List<CardController> cardsHand
+    public List<CardController> CardsHand
     {
         get => _cardsHand;
         set => _cardsHand = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public List<CardController> cardsRingSide
+    public List<CardController> CardsRingSide
     {
         get => _cardsRingSide;
         set => _cardsRingSide = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public List<CardController> cardsRingArea
+    public List<CardController> CardsRingArea
     {
         get => _cardsRingArea;
         set => _cardsRingArea = value ?? throw new ArgumentNullException(nameof(value));

@@ -15,7 +15,7 @@ public class StoneCold: SuperStar
     public override void UsingElectiveSuperAbility(GameStructureInfo gameStructureInfo)
     {
         gameStructureInfo.ControllerCurrentPlayer.TheSuperStarHasUsedHisSuperAbilityThisTurn();
-        _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
+        View.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
         
         gameStructureInfo.Effects.StealCards(gameStructureInfo.ControllerCurrentPlayer,
             gameStructureInfo.GetCurrentPlayer(), 1);

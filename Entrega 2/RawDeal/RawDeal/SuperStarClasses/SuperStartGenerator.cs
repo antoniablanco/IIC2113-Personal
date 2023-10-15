@@ -5,7 +5,7 @@ namespace RawDeal.SuperStarClasses;
 
 public class SuperStartGenerator
 {
-    public View view;
+    public View View;
     
     public List<SuperStarJSON> DeserializeJsonSuperStar()
     {
@@ -20,7 +20,7 @@ public class SuperStartGenerator
         Dictionary<SuperStarJSON, Type> superStarTypes = GetSuperStarTypesDictionary(totalSuperStars);
         
         foreach (var superstar in from super in superStarTypes where firstLineDeck.Contains(super.Key.Name) 
-                 select (SuperStar)Activator.CreateInstance(super.Value,super.Key.Name, super.Key.Logo, super.Key.HandSize, super.Key.SuperstarValue, super.Key.SuperstarAbility, view))
+                 select (SuperStar)Activator.CreateInstance(super.Value,super.Key.Name, super.Key.Logo, super.Key.HandSize, super.Key.SuperstarValue, super.Key.SuperstarAbility, View))
         {
             return superstar;
         }

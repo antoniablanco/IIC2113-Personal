@@ -41,7 +41,7 @@ public class JockeyingForPosition: Card
 
     private void GetSelectedEffectChosenByPlayer(GameStructureInfo gameStructureInfo, string nameOfSuperStar)
     {   
-        SelectedEffect effectToPerform = gameStructureInfo.view.AskUserToSelectAnEffectForJockeyForPosition(nameOfSuperStar);
+        SelectedEffect effectToPerform = gameStructureInfo.View.AskUserToSelectAnEffectForJockeyForPosition(nameOfSuperStar);
         switch (effectToPerform)
         {
             case SelectedEffect.NextGrappleIsPlus4D:

@@ -18,12 +18,12 @@ public class DeckValidator
     
     private bool DeckSizeComplies()
     {
-        return (player.cardsArsenal.Count() == 60);
+        return (player.CardsArsenal.Count() == 60);
     }
 
     private bool HasSuperStar()
     {   
-        return (player.superestar != null);
+        return (player.Superestar != null);
     }
 
     private bool MeetsSubtypeConditions()
@@ -39,7 +39,7 @@ public class DeckValidator
     {
         var dictionaryNumberByCards = new Dictionary<string, int>();
         
-        foreach (var card in player.cardsArsenal)
+        foreach (var card in player.CardsArsenal)
         {
             dictionaryNumberByCards.TryGetValue(card.GetCardTitle(), out int numberOfCardsOfThisTitle);
             dictionaryNumberByCards[card.GetCardTitle()] = numberOfCardsOfThisTitle + 1;
@@ -57,12 +57,12 @@ public class DeckValidator
     
     private bool DeckContainsSubType(string subType)
     {
-        return player.cardsArsenal.Any(card => card.ContainsSubtype(subType));
+        return player.CardsArsenal.Any(card => card.ContainsSubtype(subType));
     }
     
     private bool DeckSatisfiesSuperStarLogo()
     {
-        return player.cardsArsenal.All(card => ThisCardSatisfiesSuperStarLogo(card, player.superestar.Logo));
+        return player.CardsArsenal.All(card => ThisCardSatisfiesSuperStarLogo(card, player.Superestar.Logo));
     }
 
     private bool ThisCardSatisfiesSuperStarLogo(CardController cardController, string logoSuperStar)

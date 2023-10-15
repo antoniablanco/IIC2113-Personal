@@ -7,52 +7,52 @@ namespace RawDeal.SuperStarClasses;
 
 public abstract class SuperStar
 {
-    private string _Name;
-    private string _Logo;
-    private int _HandSize;
-    private int _SuperstarValue;
-    private string _SuperstarAbility;
-    public View _view;
+    private string name;
+    private string logo;
+    private int handSize;
+    private int superstarValue;
+    private string superstarAbility;
+    public View View;
     protected CardsVisualizor CardsVisualizor = new CardsVisualizor();
 
     public SuperStar(string name, string logo, int handSize, int superstarValue, string superstarAbility, View view)
     {
-        _Name = name;
-        _Logo = logo;
-        _HandSize = handSize;
-        _SuperstarValue = superstarValue;
-        _SuperstarAbility = superstarAbility;
-        _view = view;
+        this.name = name;
+        this.logo = logo;
+        this.handSize = handSize;
+        this.superstarValue = superstarValue;
+        this.superstarAbility = superstarAbility;
+        View = view;
     }
 
     public string Name
     {
-        get => _Name;
-        set => _Name = value ?? throw new ArgumentNullException(nameof(value));
+        get => name;
+        set => name = value ?? throw new ArgumentNullException(nameof(value));
     }
     
     public string Logo
     {
-        get => _Logo;
-        set => _Logo = value ?? throw new ArgumentNullException(nameof(value));
+        get => logo;
+        set => logo = value ?? throw new ArgumentNullException(nameof(value));
     }
     
     public int HandSize
     {
-        get => _HandSize;
-        set => _HandSize = value;
+        get => handSize;
+        set => handSize = value;
     }
     
     public int SuperstarValue
     {
-        get => _SuperstarValue;
-        set => _SuperstarValue = value;
+        get => superstarValue;
+        set => superstarValue = value;
     }
     
     public string SuperstarAbility
     {
-        get => _SuperstarAbility;
-        set => _SuperstarAbility = value ?? throw new ArgumentNullException(nameof(value));
+        get => superstarAbility;
+        set => superstarAbility = value ?? throw new ArgumentNullException(nameof(value));
     }
 
     public virtual bool CanUseSuperAbility(PlayerController currentPlayer)

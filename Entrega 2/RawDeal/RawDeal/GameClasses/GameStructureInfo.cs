@@ -7,17 +7,17 @@ namespace RawDeal.GameClasses;
 
 public class GameStructureInfo
 {
-    public View view;
+    public View View;
     public CardsVisualizor CardsVisualizor = new CardsVisualizor();
     public CardMovement CardMovement =new CardMovement();
     public PlayCard PlayCard;
-    public Player playerOne;
-    public Player playerTwo;
+    public Player PlayerOne;
+    public Player PlayerTwo;
     public PlayerController ControllerPlayerOne;
     public PlayerController ControllerPlayerTwo;
     public PlayerController ControllerCurrentPlayer;
     public PlayerController ControllerOpponentPlayer;
-    public PlayerController winnerPlayer;
+    public PlayerController WinnerPlayer;
     public PlayerController WhoActivateJockeyingForPosition;
     public GameLogic GameLogic;
     public GetSetGameVariables GetSetGameVariables;
@@ -26,8 +26,8 @@ public class GameStructureInfo
     public bool IsTheGameStillPlaying = true;
     public bool IsTheTurnBeingPlayed = true;
     public string LastPlayedType;
-    public int bonusFortitude = 8;
-    public int bonusDamage = 4;
+    public int BonusFortitude = 8;
+    public int BonusDamage = 4;
     public int IsJockeyingForPositionBonusFortitudActive = 0;
     public int IsJockeyingForPositionBonusDamageActive = 0;
     public int TurnCounterForJokeyingForPosition = 0;
@@ -35,13 +35,13 @@ public class GameStructureInfo
     
     public Player GetCurrentPlayer()
     {
-        Player player = (ControllerCurrentPlayer == ControllerPlayerOne) ? playerOne : playerTwo;
+        Player player = (ControllerCurrentPlayer == ControllerPlayerOne) ? PlayerOne : PlayerTwo;
         return player;
     }
     
     public Player GetOpponentPlayer()
     {
-        Player player = (ControllerCurrentPlayer == ControllerPlayerOne) ? playerTwo : playerOne;
+        Player player = (ControllerCurrentPlayer == ControllerPlayerOne) ? PlayerTwo : PlayerOne;
         return player;
     }
 }

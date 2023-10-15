@@ -8,14 +8,19 @@ namespace RawDeal.DecksBehavior;
 public class PlayCard
 {
 
-    public GameStructureInfo gameStructureInfo = new GameStructureInfo();
+    private GameStructureInfo gameStructureInfo = new GameStructureInfo();
     private PlayReversal PlayReversal = new PlayReversal();
-    public bool isUserReversalDeckCard = false;
-    public bool isStunValueUsed = false;
+    private bool isUserReversalDeckCard = false;
+    private bool isStunValueUsed = false;
 
+    public PlayCard(GameStructureInfo gameStructureInfo)
+    {
+        this.gameStructureInfo = gameStructureInfo;
+    }
+    
     public void ActionPlayCard()
     {
-        int selectedCard = gameStructureInfo.view.AskUserToSelectAPlay(GetPossibleCardsToPlayString());
+        int selectedCard = gameStructureInfo.View.AskUserToSelectAPlay(GetPossibleCardsToPlayString());
         if (IsValidIndexOfCard(selectedCard))
         {
             Tuple<CardController, int> playedCardController = GetCardPlayed(selectedCard);
@@ -60,7 +65,7 @@ public class PlayCard
         PlayReversal.gameStructureInfo = gameStructureInfo;
         if (!PlayReversal.IsUserUsingReversalCard())
         {   
-            gameStructureInfo.view.SayThatPlayerSuccessfullyPlayedACard();
+            gameStructureInfo.View.SayThatPlayerSuccessfullyPlayedACard();
             PlayCardByType(playedCardController);
         }
     }
@@ -145,7 +150,7 @@ public class PlayCard
     private void UseStunValueOpcion()
     {   
         isStunValueUsed = true;
-        int numberOfCardsToSteal = gameStructureInfo.view.AskHowManyCardsToDrawBecauseOfStunValue(gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar(), gameStructureInfo.LastPlayedCard.GetCardStunValue());
+        int numberOfCardsToSteal = gameStructureInfo.View.AskHowManyCardsToDrawBecauseOfStunValue(gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar(), gameStructureInfo.LastPlayedCard.GetCardStunValue());
         gameStructureInfo.Effects.StealCards(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer(), numberOfCardsToSteal);
     }
     
@@ -158,10 +163,9 @@ public class PlayCard
     {
         CardController flippedCardController = gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
         string flippedCardString = gameStructureInfo.CardsVisualizor.GetStringCardInfo(flippedCardController);
-        gameStructureInfo.view.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
+        gameStructureInfo.View.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
         DeckReversal(flippedCardController, controllerOpponentPlayer);
     }
-    
     
     private void DeckReversal(CardController flippedCardController, PlayerController controllerOpponentPlayer)
     {
@@ -170,7 +174,7 @@ public class PlayCard
         {   
             Console.WriteLine(gameStructureInfo.IsTheGameStillPlaying);
             gameStructureInfo.Effects.EndTurn();
-            gameStructureInfo.view.SayThatCardWasReversedByDeck(controllerOpponentPlayer.NameOfSuperStar());
+            gameStructureInfo.View.SayThatCardWasReversedByDeck(controllerOpponentPlayer.NameOfSuperStar());
         }
     }
     
@@ -178,12 +182,12 @@ public class PlayCard
     {
         string playedCardString = gameStructureInfo.CardsVisualizor.GetStringPlayedInfo(playedCardController, indexType);
         string nameSuperStar = gameStructureInfo.ControllerCurrentPlayer.NameOfSuperStar();
-        gameStructureInfo.view.SayThatPlayerIsTryingToPlayThisCard(nameSuperStar, playedCardString);
+        gameStructureInfo.View.SayThatPlayerIsTryingToPlayThisCard(nameSuperStar, playedCardString);
     }
 
     private int GetDamageProduced(CardController playedCardController)
     {   
-        int totalDamage = playedCardController.GetDamageProducedByTheCard() + gameStructureInfo.bonusDamage*gameStructureInfo.IsJockeyingForPositionBonusDamageActive;
+        int totalDamage = playedCardController.GetDamageProducedByTheCard() + gameStructureInfo.BonusDamage*gameStructureInfo.IsJockeyingForPositionBonusDamageActive;
         if (gameStructureInfo.ControllerOpponentPlayer.IsTheSuperStarMankind())
             totalDamage -= 1;
         return totalDamage;
@@ -192,7 +196,7 @@ public class PlayCard
     private void SayThatTheyAreGoingToReceiveDamage(int totalDamage)
     {
         string opposingSuperStarName = gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar();
-        gameStructureInfo.view.SayThatSuperstarWillTakeSomeDamage(opposingSuperStarName, totalDamage);
+        gameStructureInfo.View.SayThatSuperstarWillTakeSomeDamage(opposingSuperStarName, totalDamage);
     }
 
     private void PlayActionCard(CardController playedCardController)

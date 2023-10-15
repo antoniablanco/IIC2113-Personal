@@ -15,7 +15,7 @@ public class Undertaker: SuperStar
     public override void UsingElectiveSuperAbility(GameStructureInfo gameStructureInfo)
     {
         gameStructureInfo.ControllerCurrentPlayer.TheSuperStarHasUsedHisSuperAbilityThisTurn();
-        _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
+        View.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
         gameStructureInfo.Effects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.ControllerCurrentPlayer,2);
         gameStructureInfo.Effects.AddingCardFromRingSideToHand(gameStructureInfo.ControllerCurrentPlayer);
     }

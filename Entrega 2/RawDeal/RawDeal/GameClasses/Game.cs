@@ -9,51 +9,62 @@ namespace RawDeal.GameClasses;
 
 public class Game
 {
-    private View _view;
-    private string _deckFolder;
-    private GameLogic _gameLogic = new GameLogic();
+    private View view;
+    private string deckFolder;
     private GameStructureInfo gameStructureInfo = new GameStructureInfo();
-    private SuperAbilityInformation SuperAbilityInformation = new SuperAbilityInformation();
-    private PlayCard PlayCard = new PlayCard();
-    private GetSetGameVariables GetSetGameVariables = new GetSetGameVariables();
-    private Effects Effects = new Effects();
+    private SuperAbilityInformation superAbilityInformation = new SuperAbilityInformation();
     
     
     public Game(View view, string deckFolder)
     {
-        _view = view;
-        _deckFolder = deckFolder;
-        AssigningClassesToGameStructure();
-        AssigningClassGameStructureToClasses();
+        this.view = view;
+        this.deckFolder = deckFolder;
+        CreateClasses();
+    }
+
+    private void CreateClasses()
+    {
+        gameStructureInfo.View = view;
+        CreateGetSetGameVariablesClass();
+        CreatePlayCardClass();
+        CreateEffectsClass();
+        CreateGameLogicClass();
     }
     
-    private void AssigningClassesToGameStructure()
+    private void CreateGetSetGameVariablesClass()
     {
-        gameStructureInfo.view = _view;
-        gameStructureInfo.GameLogic = _gameLogic;
-        gameStructureInfo.PlayCard = PlayCard;
-        gameStructureInfo.GetSetGameVariables = GetSetGameVariables;
-        gameStructureInfo.Effects = Effects;
+        GetSetGameVariables getSetGameVariables = new GetSetGameVariables(gameStructureInfo);
+        gameStructureInfo.GetSetGameVariables = getSetGameVariables;
     }
-    
-    private void AssigningClassGameStructureToClasses()
+
+    private void CreatePlayCardClass()
     {
-        _gameLogic.GameStructureInfo = gameStructureInfo;
-        PlayCard.gameStructureInfo = gameStructureInfo;
-        GetSetGameVariables.gameStructureInfo = gameStructureInfo;
-        Effects.gameStructureInfo = gameStructureInfo;
+        PlayCard playCard = new PlayCard(gameStructureInfo);
+        gameStructureInfo.PlayCard = playCard;
+    }
+
+    private void CreateEffectsClass()
+    {
+        Effects effects = new Effects(gameStructureInfo);
+        gameStructureInfo.Effects = effects;
+    }
+
+    private void CreateGameLogicClass()
+    {
+        GameLogic gameLogic = new GameLogic(gameStructureInfo);
+        gameStructureInfo.GameLogic = gameLogic;
     }
     
     public void Play() 
     {
         try
         {
-            PlayersGenerator playersGenerator = new PlayersGenerator(gameStructureInfo, _deckFolder);
+            PlayersGenerator playersGenerator = new PlayersGenerator(gameStructureInfo, deckFolder);
             RunGameGivenThatTheDecksAreValid();
         }
         catch (InvalidDeckException e)
         {
-            _view.SayThatDeckIsInvalid();
+            view.SayThatDeckIsInvalid();
         }
     }
     
@@ -63,7 +74,7 @@ public class Game
         {
             PlayOneTurn();
         }
-        _view.CongratulateWinner(_gameLogic.GetWinnerSuperstarName());
+        view.CongratulateWinner(gameStructureInfo.GameLogic.GetWinnerSuperstarName());
     }
 
     private void PlayOneTurn()
@@ -73,7 +84,7 @@ public class Game
         while (gameStructureInfo.GetSetGameVariables.TheTurnIsBeingPlayed())
         {   
             gameStructureInfo.GetSetGameVariables.RemoveOneTurnFromJockeyingForPosition();
-            _gameLogic.DisplayPlayerInformation();
+            gameStructureInfo.GameLogic.DisplayPlayerInformation();
             PlayerSelectedAction();
         }
     }
@@ -82,8 +93,8 @@ public class Game
     {
         gameStructureInfo.ControllerCurrentPlayer.DrawCard();
         gameStructureInfo.GetSetGameVariables.SetVariableTrueBecauseTurnStarted();
-        gameStructureInfo.view.SayThatATurnBegins(gameStructureInfo.ControllerCurrentPlayer.NameOfSuperStar());
-        SuperAbilityInformation.TheSuperAbilityThatIsAtTheStartOfTheTurnIsUsed(gameStructureInfo);
+        view.SayThatATurnBegins(gameStructureInfo.ControllerCurrentPlayer.NameOfSuperStar());
+        superAbilityInformation.TheSuperAbilityThatIsAtTheStartOfTheTurnIsUsed(gameStructureInfo);
         gameStructureInfo.ControllerCurrentPlayer.BlockinSuperAbilityBecauseIsJustAtTheStartOfTheTurn();
     }
 
@@ -94,10 +105,10 @@ public class Game
         switch (activityToPerform)
         {
             case NextPlay.UseAbility:
-                SuperAbilityInformation.ActionUseSuperAbility(gameStructureInfo);
+                superAbilityInformation.ActionUseSuperAbility(gameStructureInfo);
                 break;
             case NextPlay.ShowCards:
-                _gameLogic.SelectCardsToView();
+                gameStructureInfo.GameLogic.SelectCardsToView();
                 break;
             case NextPlay.PlayCard:
                 gameStructureInfo.PlayCard.ActionPlayCard();
@@ -117,10 +128,10 @@ public class Game
     {   
         NextPlay activityToPerform;
         
-        if (SuperAbilityInformation.PlayerCanUseSuperStarAbility(gameStructureInfo))
-            activityToPerform = _view.AskUserWhatToDoWhenUsingHisAbilityIsPossible();
+        if (superAbilityInformation.PlayerCanUseSuperStarAbility(gameStructureInfo))
+            activityToPerform = view.AskUserWhatToDoWhenUsingHisAbilityIsPossible();
         else
-            activityToPerform = _view.AskUserWhatToDoWhenHeCannotUseHisAbility();
+            activityToPerform = view.AskUserWhatToDoWhenHeCannotUseHisAbility();
 
         return activityToPerform;
     }

@@ -114,7 +114,7 @@ public class CardController
 
     public bool CanUseThisReversalCard(PlayerController controllerPlayer)
     {
-        return ((GetCardFortitude(GetCardTypes()[0]) + gameStructureInfo.bonusFortitude*gameStructureInfo.IsJockeyingForPositionBonusFortitudActive <= controllerPlayer.FortitudRating()) && IsReversalType() && GetIfCardCanReversalPlayedCard());
+        return ((GetCardFortitude(GetCardTypes()[0]) + gameStructureInfo.BonusFortitude*gameStructureInfo.IsJockeyingForPositionBonusFortitudActive <= controllerPlayer.FortitudRating()) && IsReversalType() && GetIfCardCanReversalPlayedCard());
     }
     
     public void ReversalEffect()
@@ -140,7 +140,7 @@ public class CardController
     
     public bool DealsTheMaximumDamage(int maximumDamage)
     {
-        int damage = int.Parse(_card.Damage) + gameStructureInfo.bonusDamage * gameStructureInfo.IsJockeyingForPositionBonusDamageActive;
+        int damage = int.Parse(_card.Damage) + gameStructureInfo.BonusDamage * gameStructureInfo.IsJockeyingForPositionBonusDamageActive;
         if (gameStructureInfo.Effects.IsTheCardWeAreReversalOfMankindSuperStart(gameStructureInfo.ControllerOpponentPlayer))
             damage -= 1;
         return damage <= maximumDamage;

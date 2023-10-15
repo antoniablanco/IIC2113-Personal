@@ -16,17 +16,17 @@ public class PlayerController
     
     public void DrawCard()
     {   
-        gameStructureInfo.CardMovement.TransferOfUnselectedCard(player.cardsArsenal, player.cardsHand, false);
+        gameStructureInfo.CardMovement.TransferOfUnselectedCard(player.CardsArsenal, player.CardsHand, false);
     }
     
     public string NameOfSuperStar()
     {
-        return player.superestar.Name;
+        return player.Superestar.Name;
     }
 
     public void DrawInitialHandCards()
     {
-        for (var i = 0; i < player.superestar.HandSize; i++)
+        for (var i = 0; i < player.Superestar.HandSize; i++)
         {
             DrawCard();
         }
@@ -34,7 +34,7 @@ public class PlayerController
     
     public int FortitudRating()
     {
-        return player.cardsRingArea.Sum(card => card.GetDamageProducedByTheCard());
+        return player.CardsRingArea.Sum(card => card.GetDamageProducedByTheCard());
     }
 
     public bool IsTheSuperStarMankind()
@@ -44,17 +44,17 @@ public class PlayerController
 
     public int GetSuperStarValue()
     {
-        return player.superestar.SuperstarValue;
+        return player.Superestar.SuperstarValue;
     }
     
     public bool AreThereCardsLeftInTheArsenal()
     {
-        return player.cardsArsenal.Count() > 0;
+        return player.CardsArsenal.Count() > 0;
     }
     
     public List<CardController> CardsAvailableToPlay()
     {
-        return player.cardsHand
+        return player.CardsHand
             .Where(card => card.GetCardFortitude(card.GetCardTypes()[0]) <= FortitudRating() && card.HasAnyTypeDifferentOfReversal() && card.CanThisCardBePlayed())
             .ToList();
     }
@@ -81,8 +81,8 @@ public class PlayerController
     
     public List<CardController> CardsAvailableToReversal() 
     {
-        return player.cardsHand
-            .Where(card => card.GetCardFortitude(card.GetCardTypes()[0]) + gameStructureInfo.bonusFortitude*gameStructureInfo.IsJockeyingForPositionBonusFortitudActive <= FortitudRating() && card.IsReversalType() && CanReversalPlayedCard(card))
+        return player.CardsHand
+            .Where(card => card.GetCardFortitude(card.GetCardTypes()[0]) + gameStructureInfo.BonusFortitude*gameStructureInfo.IsJockeyingForPositionBonusFortitudActive <= FortitudRating() && card.IsReversalType() && CanReversalPlayedCard(card))
             .ToList();
     }
 
@@ -93,98 +93,92 @@ public class PlayerController
     
     public bool HasCardsInArsenal()
     {
-        return (player.cardsArsenal.Count > 0);
+        return (player.CardsArsenal.Count > 0);
     }
     
     public bool TheirSuperStarCanUseSuperAbility(PlayerController currentPlayer)
     {
-        return player.superestar.CanUseSuperAbility(currentPlayer);
+        return player.Superestar.CanUseSuperAbility(currentPlayer);
     }
 
     public void UsingElectiveSuperAbility()
     {
-        player.superestar.UsingElectiveSuperAbility(gameStructureInfo);
+        player.Superestar.UsingElectiveSuperAbility(gameStructureInfo);
     }
         
     public void UsingAutomaticSuperAbility()
     {
-        player.superestar.UsingAutomaticSuperAbilityAtTheStartOfTheTurn(gameStructureInfo);
+        player.Superestar.UsingAutomaticSuperAbilityAtTheStartOfTheTurn(gameStructureInfo);
     }
     
     public void BlockinSuperAbilityBecauseIsJustAtTheStartOfTheTurn()
     {
-        player.superestar.BlockinSuperAbilityBecauseIsJustAtTheStartOfTheTurn(gameStructureInfo);
+        player.Superestar.BlockinSuperAbilityBecauseIsJustAtTheStartOfTheTurn(gameStructureInfo);
     }
     
     public void TheSuperStarHasUsedHisSuperAbilityThisTurn()
     {
-        player.theHabilityHasBeenUsedThisTurn = true;
+        player.TheHabilityHasBeenUsedThisTurn = true;
     }
 
     public void TheTurnHasJustStartTheSuperStarHasNotUsedHisSuperAbility()
     {
-        player.theHabilityHasBeenUsedThisTurn = false;
+        player.TheHabilityHasBeenUsedThisTurn = false;
     }
 
     public int NumberOfCardsInTheArsenal()
     {
-        return player.cardsArsenal.Count();
+        return player.CardsArsenal.Count();
     }
     
     public int NumberOfCardsInTheHand()
     {
-        return player.cardsHand.Count();
+        return player.CardsHand.Count();
     }
     
     public int NumberOfCardsInRingSide()
     {
-        return player.cardsRingSide.Count();
+        return player.CardsRingSide.Count();
     }
     
     public CardController GetSpecificCardFromHand(int index)
     {
-        return player.cardsHand[index];
+        return player.CardsHand[index];
     }
     
     public CardController GetSpecificCardFromRingSide(int index)
     {
-        return player.cardsRingSide[index];
+        return player.CardsRingSide[index];
     }
     
     public List<String> StringCardsHand()
     {
-        List<String> stringCardSet = gameStructureInfo.CardsVisualizor.CreateStringCardList(player.cardsHand);
+        List<String> stringCardSet = gameStructureInfo.CardsVisualizor.CreateStringCardList(player.CardsHand);
         return stringCardSet;
     }
 
     public (List<String>, List<CardController>) HandCardsButNotTheCardIsBeingPlayed(CardController cardController)
     {
-        List<CardController> cardOptions = player.cardsHand.Where(card => card != cardController).ToList();
+        List<CardController> cardOptions = player.CardsHand.Where(card => card != cardController).ToList();
         List<String> stringCardOptions = gameStructureInfo.CardsVisualizor.CreateStringCardList(cardOptions);
         return (stringCardOptions, cardOptions);
     }
     
     public List<String> StringCardsRingArea()
     {
-        List<String> stringCardSet = gameStructureInfo.CardsVisualizor.CreateStringCardList(player.cardsRingArea);
+        List<String> stringCardSet = gameStructureInfo.CardsVisualizor.CreateStringCardList(player.CardsRingArea);
         return stringCardSet;
     }
     
     public List<String> StringCardsRingSide()
     {
-        List<String> stringCardSet = gameStructureInfo.CardsVisualizor.CreateStringCardList(player.cardsRingSide);
-        return stringCardSet;
-    }
-    
-    public List<String> StringCardsArsenal()
-    {
-        List<String> stringCardSet = gameStructureInfo.CardsVisualizor.CreateStringCardList(player.cardsArsenal);
+        List<String> stringCardSet = gameStructureInfo.CardsVisualizor.CreateStringCardList(player.CardsRingSide);
         return stringCardSet;
     }
 
     public bool HasTheSuperAbilityBeenUsedThisTurn()
     {
-        return player.theHabilityHasBeenUsedThisTurn;
+        return player.TheHabilityHasBeenUsedThisTurn;
     }
  
 }

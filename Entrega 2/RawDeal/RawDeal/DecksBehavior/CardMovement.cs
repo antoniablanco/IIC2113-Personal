@@ -30,43 +30,43 @@ public class CardMovement
     
     public CardController? TranferUnselectedCardFromArsenalToRingArea(Player player, bool moveToStart = false)
     {
-        return TransferOfUnselectedCard(player.cardsArsenal, player.cardsRingArea, moveToStart);
+        return TransferOfUnselectedCard(player.CardsArsenal, player.CardsRingArea, moveToStart);
     }
     
     public CardController? TranferUnselectedCardFromArsenalToHand(Player player, bool moveToStart = false)
     {
-        return TransferOfUnselectedCard(player.cardsArsenal, player.cardsHand, moveToStart);
+        return TransferOfUnselectedCard(player.CardsArsenal, player.CardsHand, moveToStart);
     }
     
     public CardController? TranferUnselectedCardFromArsenalToRingSide(Player player, bool moveToStart = false)
     {
-        return TransferOfUnselectedCard(player.cardsArsenal, player.cardsRingSide, moveToStart);
+        return TransferOfUnselectedCard(player.CardsArsenal, player.CardsRingSide, moveToStart);
     }
     
     
     public void TransferChoosinCardFromHandToRingArea(Player player, CardController cardController, string moveToStart = "End")
     {   
-        CardTransferChoosingWhichOneToChange(cardController, player.cardsHand, player.cardsRingArea, moveToStart);
+        CardTransferChoosingWhichOneToChange(cardController, player.CardsHand, player.CardsRingArea, moveToStart);
     }
     
     public void TransferChoosinCardFromHandToArsenal(Player player, CardController cardController, string moveToStart = "End")
     {
-        CardTransferChoosingWhichOneToChange(cardController, player.cardsHand, player.cardsArsenal, moveToStart);
+        CardTransferChoosingWhichOneToChange(cardController, player.CardsHand, player.CardsArsenal, moveToStart);
     }
     
     public void TransferChoosinCardFromHandToRingSide(Player player, CardController cardController, string moveToStart = "End")
     {
-        CardTransferChoosingWhichOneToChange(cardController, player.cardsHand, player.cardsRingSide, moveToStart);
+        CardTransferChoosingWhichOneToChange(cardController, player.CardsHand, player.CardsRingSide, moveToStart);
     }
     
     public void TransferChoosinCardFromRingSideToHand(Player player, CardController cardController, string moveToStart = "End")
     {
-        CardTransferChoosingWhichOneToChange(cardController, player.cardsRingSide, player.cardsHand, moveToStart);
+        CardTransferChoosingWhichOneToChange(cardController, player.CardsRingSide, player.CardsHand, moveToStart);
     }
     
     public void TransferChoosinCardFromRingSideToArsenal(Player player, CardController cardController, string moveToStart = "End")
     {
-        CardTransferChoosingWhichOneToChange(cardController, player.cardsRingSide, player.cardsArsenal, moveToStart);
+        CardTransferChoosingWhichOneToChange(cardController, player.CardsRingSide, player.CardsArsenal, moveToStart);
     }
     
     

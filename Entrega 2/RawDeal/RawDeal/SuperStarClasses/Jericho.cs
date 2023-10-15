@@ -14,7 +14,7 @@ public class Jericho: SuperStar
     
     public override void UsingElectiveSuperAbility(GameStructureInfo gameStructureInfo)
     {
-        _view.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
+        View.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
         gameStructureInfo.ControllerCurrentPlayer.TheSuperStarHasUsedHisSuperAbilityThisTurn();
         gameStructureInfo.Effects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.ControllerCurrentPlayer,1);
         gameStructureInfo.Effects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.ControllerOpponentPlayer,1);

@@ -17,12 +17,12 @@ public class PlayersGenerator
     {
         this.gameStructureInfo = gameStructureInfo;
         _deckFolder = deckFolder;
-        _superStartGenerator.view = gameStructureInfo.view;
+        _superStartGenerator.View = gameStructureInfo.View;
         _cardGenerator.gameStructureInfo = gameStructureInfo;
-        Create();
+        CreatePlayers();
     }
 
-    private void Create()
+    private void CreatePlayers()
     {
         PlayerController playerUno = CreateOnePlayer();
         PlayerController playerDos = CreateOnePlayer();
@@ -55,8 +55,8 @@ public class PlayersGenerator
     
     private Player InitializePlayer(List<CardJson> totalCards, List<SuperStarJSON> totalSuperStars) 
     {
-        string stringPlayer = gameStructureInfo.view.AskUserToSelectDeck(_deckFolder);
-        List<CardController> playerCardList = _cardGenerator.CreateDiferentTypesOfCard(stringPlayer, totalCards, gameStructureInfo.view);
+        string stringPlayer = gameStructureInfo.View.AskUserToSelectDeck(_deckFolder);
+        List<CardController> playerCardList = _cardGenerator.CreateDiferentTypesOfCard(stringPlayer, totalCards, gameStructureInfo.View);
         SuperStar? superStarPlayer = _superStartGenerator.CreateSuperStar(stringPlayer, totalSuperStars);
         
         Player playerReturn = new Player(playerCardList, superStarPlayer);
@@ -68,10 +68,10 @@ public class PlayersGenerator
 
     private void SavePlayerInGameStructureInfo(Player player)
     {
-        if (gameStructureInfo.playerOne == null)
-            gameStructureInfo.playerOne = player;
+        if (gameStructureInfo.PlayerOne == null)
+            gameStructureInfo.PlayerOne = player;
         else
-            gameStructureInfo.playerTwo = player;
+            gameStructureInfo.PlayerTwo = player;
     }
 
     private PlayerController InitializePlayerController(Player player)
