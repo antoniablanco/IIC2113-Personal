@@ -11,7 +11,7 @@ public class SpitAtOpponent: Card
          
     }
     
-    public override void ActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {   
         const int numberOfCardToDiscardCurrentPlayer = 1;
         gameStructureInfo.Effects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.ControllerCurrentPlayer, numberOfCardToDiscardCurrentPlayer);
@@ -22,7 +22,7 @@ public class SpitAtOpponent: Card
         gameStructureInfo.Effects.DiscardActionCardToRingAreButNotSaying(playedCardController, gameStructureInfo.GetCurrentPlayer());
     }
     
-    public override bool CardCanBePlayed(GameStructureInfo gameStructureInfo)
+    public override bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo)
     {
         return gameStructureInfo.ControllerCurrentPlayer.NumberOfCardsInTheHand() >= 2;
     }

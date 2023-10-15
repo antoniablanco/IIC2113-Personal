@@ -18,19 +18,19 @@ public class JockeyingForPosition: Card
         return playedCardController.GetCardTitle() == "Jockeying for Position";
     }
     
-    public override void ReversalEffect(GameStructureInfo gameStructureInfo)
+    public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
     {   
-        Effect(gameStructureInfo, gameStructureInfo.ControllerOpponentPlayer);
+        ApplyEffect(gameStructureInfo, gameStructureInfo.ControllerOpponentPlayer);
         gameStructureInfo.Effects.EndTurn();
     }
     
-    public override void ActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {   
-        Effect(gameStructureInfo, gameStructureInfo.ControllerCurrentPlayer);
+        ApplyEffect(gameStructureInfo, gameStructureInfo.ControllerCurrentPlayer);
         gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(gameStructureInfo.GetCurrentPlayer(), playedCardController);
     }
 
-    private void Effect(GameStructureInfo gameStructureInfo, PlayerController playerController)
+    private void ApplyEffect(GameStructureInfo gameStructureInfo, PlayerController playerController)
     {
         GetSelectedEffectChosenByPlayer(gameStructureInfo, playerController.NameOfSuperStar());
         gameStructureInfo.WhoActivateJockeyingForPosition = playerController;

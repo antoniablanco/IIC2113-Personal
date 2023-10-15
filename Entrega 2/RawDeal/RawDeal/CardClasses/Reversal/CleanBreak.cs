@@ -16,7 +16,7 @@ public class CleanBreak: Card
         return playedCardController.GetCardTitle() == "Jockeying for Position";
     }
     
-    public override void ReversalEffect(GameStructureInfo gameStructureInfo)
+    public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
     {   
         const int numberOfCardToDiscard = 4;
         gameStructureInfo.Effects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.ControllerCurrentPlayer,numberOfCardToDiscard);

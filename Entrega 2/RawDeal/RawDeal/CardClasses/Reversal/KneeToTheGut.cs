@@ -18,7 +18,7 @@ public class KneeToTheGut: Card
         return playedCardController.ContainsSubtype("Strike") && playedCardController.DealsTheMaximumDamage(maximumDamageProducedByPlayedCard) && playedCardController.HasAnyTypeDifferentOfReversal();
     }
     
-    public override void ReversalEffect(GameStructureInfo gameStructureInfo)
+    public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
     {   
         PlayerController damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
         int damage = gameStructureInfo.Effects.GetDamageProducedByReversalCardWithNotEspecificDamage();

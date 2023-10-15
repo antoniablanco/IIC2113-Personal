@@ -17,7 +17,7 @@ public class ChynaInterferes: Card
         return playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
     }
     
-    public override void ReversalEffect(GameStructureInfo gameStructureInfo)
+    public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
     {    
         const int numberOfCardsToSteal = 2;
         gameStructureInfo.Effects.StealCards(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer(), numberOfCardsToSteal);

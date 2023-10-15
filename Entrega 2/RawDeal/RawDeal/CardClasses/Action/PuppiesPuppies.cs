@@ -11,7 +11,7 @@ public class PuppiesPuppies: Card
          
     }
     
-    public override void ActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
         const int numberOfDamageToRecover = 5;
         gameStructureInfo.Effects.GetBackDamage(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(),numberOfDamageToRecover);

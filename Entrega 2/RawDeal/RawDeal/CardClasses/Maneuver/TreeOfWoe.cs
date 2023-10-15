@@ -11,12 +11,12 @@ public class TreeOfWoe: Card
          
     }
     
-    public override bool CardCanBeReverted()
+    public override bool CheckIfCardCanBeReverted()
     {
         return false;
     }
     
-    public override void ManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    public override void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {   
         const int numberOfCardToDiscard = 2;
         gameStructureInfo.Effects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerOpponentPlayer,

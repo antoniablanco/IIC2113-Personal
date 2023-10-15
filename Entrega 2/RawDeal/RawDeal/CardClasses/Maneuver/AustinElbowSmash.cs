@@ -11,17 +11,12 @@ public class AustinElbowSmash: Card
          
     }
     
-    public override bool CardCanBeReverted()
+    public override bool CheckIfCardCanBeReverted()
     {
         return false;
     }
     
-    public override void ManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
-    {
-        
-    }
-    
-    public override bool CardCanBePlayed(GameStructureInfo gameStructureInfo)
+    public override bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo)
     {
         return gameStructureInfo.LastDamageComited >= 5;
     }

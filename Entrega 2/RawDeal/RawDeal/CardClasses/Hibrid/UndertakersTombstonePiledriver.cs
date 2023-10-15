@@ -21,7 +21,7 @@ public class UndertakersTombstonePiledriver: Card
             return int.Parse(Fortitude);
     }
     
-    public override void ActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
         gameStructureInfo.Effects.DiscardActionCardWithNoEfect(playedCardController, gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.GetCurrentPlayer());
         gameStructureInfo.Effects.StealCards( gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.GetCurrentPlayer());

@@ -109,7 +109,7 @@ public class CardController
 
     public bool CanThisCardBeReversal()
     {
-        return _card.CardCanBeReverted();
+        return _card.CheckIfCardCanBeReverted();
     }
 
     public bool CanUseThisReversalCard(PlayerController controllerPlayer)
@@ -119,7 +119,7 @@ public class CardController
     
     public void ReversalEffect()
     {
-        _card.ReversalEffect(gameStructureInfo);
+        _card.ApplyReversalEffect(gameStructureInfo);
     }
     
     public bool ContainsSubtype(string subType)
@@ -146,18 +146,18 @@ public class CardController
         return damage <= maximumDamage;
     }
     
-    public void ActionEffect()
+    public void ApplyActionEffect()
     {
-        _card.ActionEffect(gameStructureInfo, this);
+        _card.ApplyActionEffect(gameStructureInfo, this);
     }
 
-    public void ManeuverEffect(CardController playedCardController)
+    public void ApplyManeuverEffect(CardController playedCardController)
     {
-        _card.ManeuverEffect(gameStructureInfo, playedCardController);
+        _card.ApplyManeuverEffect(gameStructureInfo, playedCardController);
     }
     
     public bool CanThisCardBePlayed()
     {   
-        return _card.CardCanBePlayed(gameStructureInfo);
+        return _card.CheckIfCardCanBePlayed(gameStructureInfo);
     }
 }

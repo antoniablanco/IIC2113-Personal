@@ -11,13 +11,13 @@ public class ArmBarTakedown: Card
          
     }
     
-    public override void ActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
         gameStructureInfo.Effects.DiscardActionCardWithNoEfect(playedCardController, gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.GetCurrentPlayer());
         gameStructureInfo.Effects.StealCards( gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.GetCurrentPlayer());
     }
     
-    public override void ManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    public override void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
         
     }

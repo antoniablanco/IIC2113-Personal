@@ -18,7 +18,7 @@ public class RollingTakedown: Card
         return playedCardController.ContainsSubtype("Grapple") && playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver") && playedCardController.DealsTheMaximumDamage(maximumDamageProducedByPlayedCard);
     }
     
-    public override void ReversalEffect(GameStructureInfo gameStructureInfo)
+    public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
     {   
         PlayerController damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
         int damage = gameStructureInfo.Effects.GetDamageProducedByReversalCardWithNotEspecificDamage();

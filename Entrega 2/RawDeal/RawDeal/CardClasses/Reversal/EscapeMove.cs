@@ -16,7 +16,7 @@ public class EscapeMove: Card
         return playedCardController.ContainsSubtype("Grapple") && playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
     }
     
-    public override void ReversalEffect(GameStructureInfo gameStructureInfo)
+    public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
     {
         gameStructureInfo.Effects.EndTurn();
     }

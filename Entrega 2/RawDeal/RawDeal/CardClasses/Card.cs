@@ -30,17 +30,17 @@ public abstract class Card
         return true;
     }
 
-    public virtual void ReversalEffect(GameStructureInfo gameStructureInfo)
+    public virtual void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
     {
         
     }
 
-    public virtual void ActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    public virtual void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
         
     }
     
-    public virtual void ManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    public virtual void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
         
     }
@@ -50,12 +50,12 @@ public abstract class Card
         return int.Parse(Fortitude);
     }
 
-    public virtual bool CardCanBeReverted()
+    public virtual bool CheckIfCardCanBeReverted()
     {
         return true;
     }
     
-    public virtual bool CardCanBePlayed(GameStructureInfo gameStructureInfo)
+    public virtual bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo)
     {
         return true;
     }
