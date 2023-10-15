@@ -12,14 +12,15 @@ public class ChynaInterferes: Card
          
     }
     
-    public override bool CanReversalThisCard(CardController playedCardController, string typePlayed)
+    public override bool CanReversalThisCard(CardController playedCardController)
     {
-        return playedCardController.VerifyIfTheCardIsOfThisType("Maneuver");
+        return playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
     }
     
     public override void ReversalEffect(GameStructureInfo gameStructureInfo)
-    {       
-        gameStructureInfo.Effects.StealCards(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer(), 2);
+    {    
+        const int numberOfCardsToSteal = 2;
+        gameStructureInfo.Effects.StealCards(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer(), numberOfCardsToSteal);
         PlayerController damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
         int damageProduce = int.Parse(Damage);
         if (gameStructureInfo.Effects.IsTheCardWeAreReversalOfMankindSuperStart(gameStructureInfo.ControllerCurrentPlayer))

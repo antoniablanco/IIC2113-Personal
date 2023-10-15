@@ -12,9 +12,10 @@ public class Lionsault: Card
     }
     
     public override void ManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
-    {
+    {   
+        const int numberOfCardToDiscard = 1;
         gameStructureInfo.Effects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerOpponentPlayer,
-            gameStructureInfo.ControllerOpponentPlayer, 1);
+            gameStructureInfo.ControllerOpponentPlayer, numberOfCardToDiscard);
     }
     
     public override bool CardCanBePlayed(GameStructureInfo gameStructureInfo)

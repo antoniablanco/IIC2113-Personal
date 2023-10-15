@@ -11,9 +11,9 @@ public class StepAside: Card
          
     }
     
-    public override bool CanReversalThisCard(CardController playedCardController, string typePlayed)
+    public override bool CanReversalThisCard(CardController playedCardController)
     {
-        return playedCardController.VerifyIfTheCardContainsThisSubtype("Strike") && playedCardController.VerifyIfTheCardIsOfThisType("Maneuver");
+        return playedCardController.ContainsSubtype("Strike") && playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
     }
     
     public override void ReversalEffect(GameStructureInfo gameStructureInfo)

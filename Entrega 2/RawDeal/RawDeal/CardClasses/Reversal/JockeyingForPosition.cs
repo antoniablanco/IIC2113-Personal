@@ -13,7 +13,7 @@ public class JockeyingForPosition: Card
          
     }
     
-    public override bool CanReversalThisCard(CardController playedCardController, string typePlayed)
+    public override bool CanReversalThisCard(CardController playedCardController)
     {
         return playedCardController.GetCardTitle() == "Jockeying for Position";
     }
@@ -33,7 +33,7 @@ public class JockeyingForPosition: Card
     private void Effect(GameStructureInfo gameStructureInfo, PlayerController playerController)
     {
         GetSelectedEffectChosenByPlayer(gameStructureInfo, playerController.NameOfSuperStar());
-        gameStructureInfo.HowActivateJockeyingForPosition = playerController;
+        gameStructureInfo.WhoActivateJockeyingForPosition = playerController;
         int turnsBeforeEffectExpires = 2;
         gameStructureInfo.TurnCounterForJokeyingForPosition = turnsBeforeEffectExpires;
     }
@@ -45,10 +45,10 @@ public class JockeyingForPosition: Card
         switch (effectToPerform)
         {
             case SelectedEffect.NextGrappleIsPlus4D:
-                gameStructureInfo.IsJockeyingForPositionBonusDamage = 1;
+                gameStructureInfo.IsJockeyingForPositionBonusDamageActive = 1;
                 break;
             case SelectedEffect.NextGrapplesReversalIsPlus8F:
-                gameStructureInfo.IsJockeyingForPositionBonusFortitud= 1;
+                gameStructureInfo.IsJockeyingForPositionBonusFortitudActive = 1;
                 break;
         }
     }

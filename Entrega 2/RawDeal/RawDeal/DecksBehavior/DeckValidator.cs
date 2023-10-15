@@ -28,8 +28,8 @@ public class DeckValidator
 
     private bool MeetsSubtypeConditions()
     {
-        bool isDeckHeel = DeckContainsIsHeel();
-        bool isDeckFace = DeckContainsIsFace();
+        bool isDeckHeel = DeckContainsSubType("Heel");
+        bool isDeckFace = DeckContainsSubType("Face");
         bool cardsMeetsQuantityCriteria = DeckMeetsQuantityCriteria();
 
         return (!(isDeckHeel && isDeckFace) && cardsMeetsQuantityCriteria);
@@ -41,30 +41,25 @@ public class DeckValidator
         
         foreach (var card in player.cardsArsenal)
         {
-            dictionaryNumberByCards.TryGetValue(card.GetCardTitle(), out int count);
-            dictionaryNumberByCards[card.GetCardTitle()] = count + 1;
+            dictionaryNumberByCards.TryGetValue(card.GetCardTitle(), out int numberOfCardsOfThisTitle);
+            dictionaryNumberByCards[card.GetCardTitle()] = numberOfCardsOfThisTitle + 1;
 
-            if (SatisfiedCount(card, count))
+            if (SatisfiedCount(card, numberOfCardsOfThisTitle))
                 return false;
         }
         return true;
     }
 
-    private bool SatisfiedCount(CardController card, int count)
+    private bool SatisfiedCount(CardController card, int numberOfCardsOfThisTitle)
     {
-        return (card.ContainsUniqueSubtype() && count > 0) || (!card.ContainsSetUpSubtype() && count > 2);
+        return (card.ContainsSubtype("Unique") && numberOfCardsOfThisTitle > 0) || (!card.ContainsSubtype("SetUp") && numberOfCardsOfThisTitle > 2);
     }
-
-    private bool DeckContainsIsHeel()
+    
+    private bool DeckContainsSubType(string subType)
     {
-        return player.cardsArsenal.Any(carta => carta.ContainsHeelSubtype());
+        return player.cardsArsenal.Any(card => card.ContainsSubtype(subType));
     }
-
-    private bool DeckContainsIsFace()
-    {
-        return player.cardsArsenal.Any(card => card.ContainsFaceSubtype());
-    }
-
+    
     private bool DeckSatisfiesSuperStarLogo()
     {
         return player.cardsArsenal.All(card => ThisCardSatisfiesSuperStarLogo(card, player.superestar.Logo));

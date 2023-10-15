@@ -12,11 +12,13 @@ public class Recovery: Card
     }
     
     public override void ActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
-    {
-        gameStructureInfo.Effects.GetBackDamage(gameStructureInfo.ControllerCurrentPlayer,
-            gameStructureInfo.GetCurrentPlayer(),2);
-        gameStructureInfo.Effects.StealCards(gameStructureInfo.ControllerCurrentPlayer,
-            gameStructureInfo.GetCurrentPlayer(), 1);
+    {   
+        const int numberOfDamageToRecover = 2;
+        gameStructureInfo.Effects.GetBackDamage(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(),numberOfDamageToRecover);
+        
+        const int numberOfCardsToSteal = 1;
+        gameStructureInfo.Effects.StealCards(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(), numberOfCardsToSteal);
+        
         gameStructureInfo.Effects.DiscardActionCardToRingAreButNotSaying(playedCardController, gameStructureInfo.GetCurrentPlayer());
     }
 }

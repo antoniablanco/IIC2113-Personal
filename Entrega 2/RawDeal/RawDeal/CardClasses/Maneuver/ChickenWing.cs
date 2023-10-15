@@ -12,8 +12,9 @@ public class ChickenWing: Card
     }
     
     public override void ManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
-    {
+    {   
+        const int numberOfDamageToRecover = 2;
         gameStructureInfo.Effects.GetBackDamage(gameStructureInfo.ControllerCurrentPlayer,
-            gameStructureInfo.GetCurrentPlayer(),2);
+            gameStructureInfo.GetCurrentPlayer(),numberOfDamageToRecover);
     }
 }

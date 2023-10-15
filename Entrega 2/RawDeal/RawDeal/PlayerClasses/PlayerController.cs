@@ -82,7 +82,7 @@ public class PlayerController
     public List<CardController> CardsAvailableToReversal() 
     {
         return player.cardsHand
-            .Where(card => card.GetCardFortitude(card.GetCardTypes()[0]) + gameStructureInfo.bonusFortitude*gameStructureInfo.IsJockeyingForPositionBonusFortitud <= FortitudRating() && card.IsReversalType() && CanReversalPlayedCard(card))
+            .Where(card => card.GetCardFortitude(card.GetCardTypes()[0]) + gameStructureInfo.bonusFortitude*gameStructureInfo.IsJockeyingForPositionBonusFortitudActive <= FortitudRating() && card.IsReversalType() && CanReversalPlayedCard(card))
             .ToList();
     }
 

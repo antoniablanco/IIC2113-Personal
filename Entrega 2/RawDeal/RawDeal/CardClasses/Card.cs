@@ -66,7 +66,7 @@ public abstract class Card
         set => _CardEffect = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public virtual bool CanReversalThisCard(CardController playedCardController, string typePlayed)
+    public virtual bool CanReversalThisCard(CardController playedCardController)
     {
         return true;
     }
@@ -100,10 +100,4 @@ public abstract class Card
     {
         return true;
     }
-    
-    public virtual int GetDamage(string type)
-    {
-        return int.Parse(Damage);
-    }
-
 }

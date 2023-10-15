@@ -19,27 +19,31 @@ public class PlayCard
         if (IsValidIndexOfCard(selectedCard))
         {
             Tuple<CardController, int> playedCardController = GetCardPlayed(selectedCard);
-            ShouldIDesactivateJockeyingForPositionEfectt(playedCardController.Item1);
+            CheckingJockeyForPosition(playedCardController.Item1);
             SetLastPlayedCardInfo(playedCardController);
             PlayReversal.gameStructureInfo = gameStructureInfo;
             VerifinIfIsUsedAReversalCard(playedCardController);
         }
         else
-        {
             gameStructureInfo.TurnCounterForJokeyingForPosition += 1;
-        }
     }
     
-    private void ShouldIDesactivateJockeyingForPositionEfectt(CardController cardController)
-    {   
-        if (!cardController.VerifyIfTheCardContainsThisSubtype("Grapple") || gameStructureInfo.TurnCounterForJokeyingForPosition <= 0 || (gameStructureInfo.HowActivateJockeyingForPosition != gameStructureInfo.ControllerCurrentPlayer && gameStructureInfo.HowActivateJockeyingForPosition != null))
-            DesactivatingJockeyForPositionEffect();
+    private void CheckingJockeyForPosition(CardController cardController)
+    {
+        if (JockeyingForPositionEffectShouldNotBeActive(cardController))
+            DesactivateJockeyForPositionEffect();
     }
 
-    private void DesactivatingJockeyForPositionEffect()
+    private bool JockeyingForPositionEffectShouldNotBeActive(CardController cardController)
     {
-        gameStructureInfo.IsJockeyingForPositionBonusDamage = 0;
-        gameStructureInfo.IsJockeyingForPositionBonusFortitud = 0;
+        return (!cardController.ContainsSubtype("Grapple") || gameStructureInfo.TurnCounterForJokeyingForPosition <= 0 || (gameStructureInfo.WhoActivateJockeyingForPosition != gameStructureInfo.ControllerCurrentPlayer && gameStructureInfo.WhoActivateJockeyingForPosition != null));
+    }
+    
+
+    private void DesactivateJockeyForPositionEffect()
+    {
+        gameStructureInfo.IsJockeyingForPositionBonusDamageActive = 0;
+        gameStructureInfo.IsJockeyingForPositionBonusFortitudActive = 0;
     }
     
     private Tuple<CardController, int> GetCardPlayed(int indexSelectedCard)
@@ -179,7 +183,7 @@ public class PlayCard
 
     private int GetDamageProduced(CardController playedCardController)
     {   
-        int totalDamage = playedCardController.GetDamageProducedByTheCard() + gameStructureInfo.bonusDamage*gameStructureInfo.IsJockeyingForPositionBonusDamage;
+        int totalDamage = playedCardController.GetDamageProducedByTheCard() + gameStructureInfo.bonusDamage*gameStructureInfo.IsJockeyingForPositionBonusDamageActive;
         if (gameStructureInfo.ControllerOpponentPlayer.IsTheSuperStarMankind())
             totalDamage -= 1;
         return totalDamage;

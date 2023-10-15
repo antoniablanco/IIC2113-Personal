@@ -11,9 +11,9 @@ public class EscapeMove: Card
          
     }
     
-    public override bool CanReversalThisCard(CardController playedCardController, string typePlayed)
+    public override bool CanReversalThisCard(CardController playedCardController)
     {   
-        return playedCardController.VerifyIfTheCardContainsThisSubtype("Grapple") && playedCardController.VerifyIfTheCardIsOfThisType("Maneuver");
+        return playedCardController.ContainsSubtype("Grapple") && playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
     }
     
     public override void ReversalEffect(GameStructureInfo gameStructureInfo)

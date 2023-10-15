@@ -18,7 +18,7 @@ public class GameStructureInfo
     public PlayerController ControllerCurrentPlayer;
     public PlayerController ControllerOpponentPlayer;
     public PlayerController winnerPlayer;
-    public PlayerController HowActivateJockeyingForPosition;
+    public PlayerController WhoActivateJockeyingForPosition;
     public GameLogic GameLogic;
     public GetSetGameVariables GetSetGameVariables;
     public Effects Effects;
@@ -28,8 +28,8 @@ public class GameStructureInfo
     public string LastPlayedType;
     public int bonusFortitude = 8;
     public int bonusDamage = 4;
-    public int IsJockeyingForPositionBonusFortitud = 0;
-    public int IsJockeyingForPositionBonusDamage = 0;
+    public int IsJockeyingForPositionBonusFortitudActive = 0;
+    public int IsJockeyingForPositionBonusDamageActive = 0;
     public int TurnCounterForJokeyingForPosition = 0;
     public int LastDamageComited = 0;
     

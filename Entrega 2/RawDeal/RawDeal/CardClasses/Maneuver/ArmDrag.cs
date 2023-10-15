@@ -13,7 +13,8 @@ public class ArmDrag: Card
     
     public override void ManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
+        const int numberOfCardToDiscard = 1;
         gameStructureInfo.Effects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerCurrentPlayer,
-            gameStructureInfo.ControllerCurrentPlayer, 1);
+            gameStructureInfo.ControllerCurrentPlayer, numberOfCardToDiscard);
     }
 }

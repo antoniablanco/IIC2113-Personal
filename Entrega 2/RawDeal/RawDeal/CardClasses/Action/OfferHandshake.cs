@@ -12,12 +12,13 @@ public class OfferHandshake: Card
     }
     
     public override void ActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
-    {   
-        gameStructureInfo.Effects.MayStealCards(gameStructureInfo.ControllerCurrentPlayer,
-            gameStructureInfo.GetCurrentPlayer(), 3);
+    {
+        const int maximumNumberOfCardsToDraw = 3;
+        gameStructureInfo.Effects.MayStealCards(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(), maximumNumberOfCardsToDraw);
         
-        gameStructureInfo.Effects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerCurrentPlayer,
-            gameStructureInfo.ControllerCurrentPlayer, 1);
+        const int numberOfCardToDiscard = 1;
+        gameStructureInfo.Effects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.ControllerCurrentPlayer, numberOfCardToDiscard);
+        
         gameStructureInfo.Effects.DiscardActionCardToRingAreButNotSaying(playedCardController, gameStructureInfo.GetCurrentPlayer());
 
     }

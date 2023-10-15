@@ -80,7 +80,7 @@ public class Effects
             for (int currentDamage = 0; currentDamage < totalDamage; currentDamage++)
             {   
                 if (CheckIfThePlayerCanReceiveDamage(controllerOpponentPlayer))
-                    ShowOneFaceDownCard(currentDamage + 1, totalDamage, player, controllerOpponentPlayer);
+                    ShowOneFaceDownCard(currentDamage + 1, totalDamage, player);
                 else
                     gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning(controllerOpponentPlayer);
             }
@@ -97,7 +97,7 @@ public class Effects
         return controllerOpponentPlayer.AreThereCardsLeftInTheArsenal();
     }
 
-    private string ShowOneFaceDownCard(int currentDamage, int totalDamage, Player player, PlayerController controllerOpponentPlayer)
+    private string ShowOneFaceDownCard(int currentDamage, int totalDamage, Player player)
     {
         CardController flippedCardController = gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
         string flippedCardString = gameStructureInfo.CardsVisualizor.GetStringCardInfo(flippedCardController);
@@ -107,7 +107,7 @@ public class Effects
 
     public int GetDamageProducedByReversalCardWithNotEspecificDamage()
     {
-        int totalDamage = gameStructureInfo.LastPlayedCard.GetDamageProducedByTheCard() + gameStructureInfo.bonusDamage*gameStructureInfo.IsJockeyingForPositionBonusDamage;
+        int totalDamage = gameStructureInfo.LastPlayedCard.GetDamageProducedByTheCard() + gameStructureInfo.bonusDamage*gameStructureInfo.IsJockeyingForPositionBonusDamageActive;
         if (gameStructureInfo.ControllerOpponentPlayer.IsTheSuperStarMankind() || gameStructureInfo.ControllerCurrentPlayer.IsTheSuperStarMankind())
             totalDamage -= 1;
         return totalDamage;
@@ -123,7 +123,7 @@ public class Effects
             {   
                 if (CheckIfThePlayerCanReceiveDamage(controllerOpponentPlayer))
                 {
-                    ShowOneFaceDownCard(currentDamage + 1, totalDamage, player, controllerOpponentPlayer);
+                    ShowOneFaceDownCard(currentDamage + 1, totalDamage, player);
                 }
                 else
                 {

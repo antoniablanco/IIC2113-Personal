@@ -13,9 +13,12 @@ public class Bulldog: Card
     
     public override void ManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
+        const int numberOfCardToDiscardCurrentPlayer = 1;
         gameStructureInfo.Effects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerCurrentPlayer,
-            gameStructureInfo.ControllerCurrentPlayer, 1);
+            gameStructureInfo.ControllerCurrentPlayer, numberOfCardToDiscardCurrentPlayer);
+        
+        const int numberOfCardToDiscardOpponentPlayer = 1;
         gameStructureInfo.Effects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerOpponentPlayer,
-            gameStructureInfo.ControllerCurrentPlayer, 1);
+            gameStructureInfo.ControllerCurrentPlayer, numberOfCardToDiscardOpponentPlayer);
     }
 }
