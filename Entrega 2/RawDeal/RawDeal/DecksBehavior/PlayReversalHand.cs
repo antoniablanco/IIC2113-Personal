@@ -3,10 +3,14 @@ using RawDeal.GameClasses;
 
 namespace RawDeal.DecksBehavior;
 
-public class PlayReversal
+public class PlayReversalHand
 {   
-    public GameStructureInfo gameStructureInfo = new GameStructureInfo();
+    private GameStructureInfo gameStructureInfo = new GameStructureInfo();
 
+    public PlayReversalHand(GameStructureInfo gameStructureInfo)
+    {
+        this.gameStructureInfo = gameStructureInfo;
+    }
     public bool IsUserUsingReversalCard()
     {   
         List<CardController> possibleReversals = gameStructureInfo.ControllerOpponentPlayer.CardsAvailableToReversal();

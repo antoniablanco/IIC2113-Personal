@@ -5,8 +5,6 @@ namespace RawDeal.SuperStarClasses;
 
 public class SuperStartGenerator
 {
-    public View View;
-    
     public List<SuperStarJSON> DeserializeJsonSuperStar()
     {
         string myJson = File.ReadAllText (Path.Combine("data","superstar.json")) ;
@@ -14,13 +12,13 @@ public class SuperStartGenerator
         return superstars;
     }
     
-    public SuperStar? CreateSuperStar(string deck, List<SuperStarJSON> totalSuperStars) 
+    public SuperStar? CreateSuperStar(string deck, List<SuperStarJSON> totalSuperStars, View view) 
     {
         string firstLineDeck = GetSuperStarName(deck);
         Dictionary<SuperStarJSON, Type> superStarTypes = GetSuperStarTypesDictionary(totalSuperStars);
         
         foreach (var superstar in from super in superStarTypes where firstLineDeck.Contains(super.Key.Name) 
-                 select (SuperStar)Activator.CreateInstance(super.Value,super.Key.Name, super.Key.Logo, super.Key.HandSize, super.Key.SuperstarValue, super.Key.SuperstarAbility, View))
+                 select (SuperStar)Activator.CreateInstance(super.Value,super.Key.Name, super.Key.Logo, super.Key.HandSize, super.Key.SuperstarValue, super.Key.SuperstarAbility, view))
         {
             return superstar;
         }

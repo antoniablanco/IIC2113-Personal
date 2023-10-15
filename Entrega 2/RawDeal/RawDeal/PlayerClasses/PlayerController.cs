@@ -66,14 +66,8 @@ public class PlayerController
         foreach (var cardController in cardsInSelectedSet)
         {
             int[] indexes = Enumerable.Range(0, cardController.GetCardTypes().Count()).ToArray();
-            foreach (var index in indexes)
-            {   
-                if (cardController.GetCardType(index) != "Reversal" &&
-                    cardController.GetCardFortitude(cardController.GetCardType(index)) <= FortitudRating())
-                {   
-                    allTypesForCard.Add(new Tuple<CardController, int>(cardController, index));
-                }
-            }
+            allTypesForCard.AddRange(from index in indexes where cardController.GetCardType(index) != "Reversal" && cardController.GetCardFortitude(cardController.GetCardType(index)) <= FortitudRating() 
+                select new Tuple<CardController, int>(cardController, index));
         }
 
         return allTypesForCard;

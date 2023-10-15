@@ -7,52 +7,22 @@ namespace RawDeal.SuperStarClasses;
 
 public abstract class SuperStar
 {
-    private string name;
-    private string logo;
-    private int handSize;
-    private int superstarValue;
-    private string superstarAbility;
-    public View View;
+    public string Name;
+    public string Logo;
+    public int HandSize;
+    public int SuperstarValue;
+    public string SuperstarAbility;
+    protected View View;
     protected CardsVisualizor CardsVisualizor = new CardsVisualizor();
 
     public SuperStar(string name, string logo, int handSize, int superstarValue, string superstarAbility, View view)
     {
-        this.name = name;
-        this.logo = logo;
-        this.handSize = handSize;
-        this.superstarValue = superstarValue;
-        this.superstarAbility = superstarAbility;
+        Name = name;
+        Logo = logo;
+        HandSize = handSize;
+        SuperstarValue = superstarValue;
+        SuperstarAbility = superstarAbility;
         View = view;
-    }
-
-    public string Name
-    {
-        get => name;
-        set => name = value ?? throw new ArgumentNullException(nameof(value));
-    }
-    
-    public string Logo
-    {
-        get => logo;
-        set => logo = value ?? throw new ArgumentNullException(nameof(value));
-    }
-    
-    public int HandSize
-    {
-        get => handSize;
-        set => handSize = value;
-    }
-    
-    public int SuperstarValue
-    {
-        get => superstarValue;
-        set => superstarValue = value;
-    }
-    
-    public string SuperstarAbility
-    {
-        get => superstarAbility;
-        set => superstarAbility = value ?? throw new ArgumentNullException(nameof(value));
     }
 
     public virtual bool CanUseSuperAbility(PlayerController currentPlayer)

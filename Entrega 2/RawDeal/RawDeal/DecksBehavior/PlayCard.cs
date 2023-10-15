@@ -9,7 +9,6 @@ public class PlayCard
 {
 
     private GameStructureInfo gameStructureInfo = new GameStructureInfo();
-    private PlayReversal PlayReversal = new PlayReversal();
     private bool isUserReversalDeckCard = false;
     private bool isStunValueUsed = false;
 
@@ -61,9 +60,9 @@ public class PlayCard
     }
     
     private void VerifinIfIsUsedAReversalCard(Tuple<CardController, int> playedCardController)
-    {   
-        PlayReversal.gameStructureInfo = gameStructureInfo;
-        if (!PlayReversal.IsUserUsingReversalCard())
+    {
+        PlayReversalHand playReversalHand = new PlayReversalHand(gameStructureInfo);
+        if (!playReversalHand.IsUserUsingReversalCard())
         {   
             gameStructureInfo.View.SayThatPlayerSuccessfullyPlayedACard();
             PlayCardByType(playedCardController);

@@ -17,8 +17,8 @@ public class CardMovement
     
         return cardControllerMoved;
     }
-    
-    public void CardTransferChoosingWhichOneToChange(CardController cardController, List<CardController> sourceList, List<CardController> destinationList, string moveToStart)
+
+    private void CardTransferChoosingWhichOneToChange(CardController cardController, List<CardController> sourceList, List<CardController> destinationList, string moveToStart)
     {   
         if (sourceList.Count > 0)
         {
@@ -26,11 +26,6 @@ public class CardMovement
             destinationList.Insert(index, cardController);
             sourceList.Remove(cardController);
         }
-    }
-    
-    public CardController? TranferUnselectedCardFromArsenalToRingArea(Player player, bool moveToStart = false)
-    {
-        return TransferOfUnselectedCard(player.CardsArsenal, player.CardsRingArea, moveToStart);
     }
     
     public CardController? TranferUnselectedCardFromArsenalToHand(Player player, bool moveToStart = false)

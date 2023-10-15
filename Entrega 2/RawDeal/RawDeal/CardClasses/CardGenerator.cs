@@ -11,7 +11,6 @@ namespace RawDeal.CardClass;
 
 public class CardGenerator
 {   
-    public GameStructureInfo gameStructureInfo;
     public List<CardJson> DeserializeJsonCards()
     {
         string myJson = File.ReadAllText (Path.Combine("data","cards.json")) ;
@@ -19,7 +18,7 @@ public class CardGenerator
         return cartas;
     }
     
-    public List<CardController> CreateDiferentTypesOfCard(string playerString, List<CardJson> totalCards, View view) 
+    public List<CardController> CreateDiferentTypesOfCard(string playerString, List<CardJson> totalCards, GameStructureInfo gameStructureInfo) 
     {
         string pathDeck = Path.Combine(playerString);
         string[] lines = File.ReadAllLines(pathDeck);
