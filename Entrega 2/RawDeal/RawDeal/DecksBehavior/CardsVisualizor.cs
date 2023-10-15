@@ -1,10 +1,10 @@
 using RawDeal.CardClass;
-using RawDeal.PlayerClass;
+using RawDeal.PlayerClasses;
 using RawDealView.Formatters;
 
 namespace RawDeal.DecksBehavior;
 
-public class VisualizeCards
+public class CardsVisualizor
 {
     public string GetStringCardInfo(CardController cardController)
     {   

@@ -1,13 +1,13 @@
 using RawDeal.CardClass;
-using RawDeal.PlayerClass;
+using RawDeal.PlayerClasses;
 
 namespace RawDeal.DecksBehavior;
 
-public class ValidateDeck
+public class DeckValidator
 {   
     private Player player;
     
-    public ValidateDeck(Player player)
+    public DeckValidator(Player player)
     {
         this.player = player;
     }

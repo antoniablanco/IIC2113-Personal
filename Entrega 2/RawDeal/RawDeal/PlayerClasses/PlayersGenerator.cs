@@ -2,24 +2,23 @@ using RawDeal.CardClass;
 using RawDeal.DecksBehavior;
 using RawDeal.Exceptions;
 using RawDeal.GameClasses;
-using RawDeal.PlayerClass;
-using RawDeal.SuperStarClass;
+using RawDeal.SuperStarClasses;
 
-namespace RawDeal.PlayerClass;
+namespace RawDeal.PlayerClasses;
 
-public class CreatePlayers
+public class PlayersGenerator
 {
     private GameStructureInfo gameStructureInfo;
     private string _deckFolder;
-    private CreateCards _createCards = new CreateCards();
+    private CardGenerator _cardGenerator = new CardGenerator();
     private CreateSuperStart _createSuperStart = new CreateSuperStart();
     
-    public CreatePlayers(GameStructureInfo gameStructureInfo, string deckFolder)
+    public PlayersGenerator(GameStructureInfo gameStructureInfo, string deckFolder)
     {
         this.gameStructureInfo = gameStructureInfo;
         _deckFolder = deckFolder;
         _createSuperStart.view = gameStructureInfo.view;
-        _createCards.gameStructureInfo = gameStructureInfo;
+        _cardGenerator.gameStructureInfo = gameStructureInfo;
         Create();
     }
 
@@ -35,9 +34,9 @@ public class CreatePlayers
     {
         var (totalCards, totalSuperStars) = GetTotalCardsAndSuperStars();
         Player player = InitializePlayer(totalCards, totalSuperStars);
-        ValidateDeck validateDeck = new ValidateDeck(player);
+        DeckValidator deckValidator = new DeckValidator(player);
         
-        if (!validateDeck.IsValidDeck())
+        if (!deckValidator.IsValidDeck())
         {
             throw new InvalidDeckException("The Deck Is Not Valid");
         }
@@ -48,7 +47,7 @@ public class CreatePlayers
     
     private (List<CardJson>, List<SuperStarJSON>) GetTotalCardsAndSuperStars() 
     {
-        List<CardJson> totalCards = _createCards.DeserializeJsonCards();
+        List<CardJson> totalCards = _cardGenerator.DeserializeJsonCards();
         List<SuperStarJSON> totalSuperStars = _createSuperStart.DeserializeJsonSuperStar();
     
         return (totalCards, totalSuperStars);
@@ -57,7 +56,7 @@ public class CreatePlayers
     private Player InitializePlayer(List<CardJson> totalCards, List<SuperStarJSON> totalSuperStars) 
     {
         string stringPlayer = gameStructureInfo.view.AskUserToSelectDeck(_deckFolder);
-        List<CardController> playerCardList = _createCards.CreateDiferentTypesOfCard(stringPlayer, totalCards, gameStructureInfo.view);
+        List<CardController> playerCardList = _cardGenerator.CreateDiferentTypesOfCard(stringPlayer, totalCards, gameStructureInfo.view);
         SuperStar? superStarPlayer = _createSuperStart.CreateSuperStar(stringPlayer, totalSuperStars);
         
         Player playerReturn = new Player(playerCardList, superStarPlayer);

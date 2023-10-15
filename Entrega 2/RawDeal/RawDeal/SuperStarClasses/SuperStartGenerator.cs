@@ -1,9 +1,9 @@
 using System.Text.Json;
 using RawDealView;
 
-namespace RawDeal.SuperStarClass;
+namespace RawDeal.SuperStarClasses;
 
-public class CreateSuperStart
+public class SuperStartGenerator
 {
     public View view;
     

@@ -9,7 +9,7 @@ using RawDealView;
 
 namespace RawDeal.CardClass;
 
-public class CreateCards
+public class CardGenerator
 {   
     public GameStructureInfo gameStructureInfo;
     public List<CardJson> DeserializeJsonCards()
