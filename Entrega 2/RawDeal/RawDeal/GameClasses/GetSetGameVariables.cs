@@ -72,5 +72,14 @@ public class GetSetGameVariables
         gameStructureInfo.IsTheGameStillPlaying = false;
         DeclareEndOfTurn();
     }
-
+    
+    public void AddingOneTurnJockeyingForPosition()
+    {
+        gameStructureInfo.TurnCounterForJokeyingForPosition += 1;
+    }
+    
+    public void RemoveOneTurnFromJockeyingForPosition()
+    {
+        gameStructureInfo.TurnCounterForJokeyingForPosition -= 1;
+    }
 }

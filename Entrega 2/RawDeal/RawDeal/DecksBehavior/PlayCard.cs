@@ -21,11 +21,10 @@ public class PlayCard
             Tuple<CardController, int> playedCardController = GetCardPlayed(selectedCard);
             CheckingJockeyForPosition(playedCardController.Item1);
             SetLastPlayedCardInfo(playedCardController);
-            PlayReversal.gameStructureInfo = gameStructureInfo;
             VerifinIfIsUsedAReversalCard(playedCardController);
         }
         else
-            gameStructureInfo.TurnCounterForJokeyingForPosition += 1;
+            gameStructureInfo.GetSetGameVariables.AddingOneTurnJockeyingForPosition();
     }
     
     private void CheckingJockeyForPosition(CardController cardController)
@@ -57,7 +56,8 @@ public class PlayCard
     }
     
     private void VerifinIfIsUsedAReversalCard(Tuple<CardController, int> playedCardController)
-    {
+    {   
+        PlayReversal.gameStructureInfo = gameStructureInfo;
         if (!PlayReversal.IsUserUsingReversalCard())
         {   
             gameStructureInfo.view.SayThatPlayerSuccessfullyPlayedACard();
@@ -74,17 +74,16 @@ public class PlayCard
     
     private void PlayCardByType(Tuple<CardController, int> playedCardController)
     {   
-        if (playedCardController.Item1.GetCardTypes()[playedCardController.Item2] == "Maneuver")
+        string typeCard = playedCardController.Item1.GetCardTypes()[playedCardController.Item2];
+        switch (typeCard)
         {
-            PlayManeuverCard(playedCardController.Item1);
+            case "Maneuver":
+                PlayManeuverCard(playedCardController.Item1);
+                break;
+            case "Action":
+                PlayActionCard(playedCardController.Item1);
+                break;
         }
-        else if (playedCardController.Item1.GetCardTypes()[playedCardController.Item2] == "Action")
-        {
-            PlayActionCard(playedCardController.Item1);
-        }
-        else
-            Console.WriteLine("No se encuentra el tipo de carta");
-        
     }
 
     private void PlayManeuverCard(CardController playedCardController)
@@ -162,6 +161,7 @@ public class PlayCard
         gameStructureInfo.view.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
         DeckReversal(flippedCardController, controllerOpponentPlayer);
     }
+    
     
     private void DeckReversal(CardController flippedCardController, PlayerController controllerOpponentPlayer)
     {

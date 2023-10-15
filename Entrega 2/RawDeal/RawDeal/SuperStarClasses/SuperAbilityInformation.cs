@@ -12,7 +12,7 @@ public class SuperAbilityInformation
     
     public void ActionUseSuperAbility(GameStructureInfo gameStructureInfo)
     {   
-        gameStructureInfo.TurnCounterForJokeyingForPosition += 1;
+        gameStructureInfo.GetSetGameVariables.AddingOneTurnJockeyingForPosition();
         gameStructureInfo.ControllerCurrentPlayer.UsingElectiveSuperAbility();
     }
     

@@ -72,7 +72,7 @@ public class Game
 
         while (gameStructureInfo.GetSetGameVariables.TheTurnIsBeingPlayed())
         {   
-            gameStructureInfo.TurnCounterForJokeyingForPosition -= 1;
+            gameStructureInfo.GetSetGameVariables.RemoveOneTurnFromJockeyingForPosition();
             _gameLogic.DisplayPlayerInformation();
             PlayerSelectedAction();
         }
