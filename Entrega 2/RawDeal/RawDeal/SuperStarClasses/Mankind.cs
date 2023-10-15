@@ -1,7 +1,7 @@
 using RawDeal.GameClasses;
-
-namespace RawDeal.SuperStarClass;
 using RawDealView;
+
+namespace RawDeal.SuperStarClasses;
 
 public class Mankind: SuperStar
 {

@@ -1,6 +1,6 @@
 using RawDeal.GameClasses;
 
-namespace RawDeal.SuperStarClass;
+namespace RawDeal.SuperStarClasses;
 
 public class SuperAbilityInformation
 {
@@ -12,7 +12,7 @@ public class SuperAbilityInformation
     
     public void ActionUseSuperAbility(GameStructureInfo gameStructureInfo)
     {   
-        gameStructureInfo.ContadorTurnosJokeyingForPosition += 1;
+        gameStructureInfo.TurnCounterForJokeyingForPosition += 1;
         gameStructureInfo.ControllerCurrentPlayer.UsingElectiveSuperAbility();
     }
     

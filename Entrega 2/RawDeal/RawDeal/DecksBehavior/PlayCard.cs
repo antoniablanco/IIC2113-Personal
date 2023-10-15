@@ -1,7 +1,7 @@
 using System.Data;
 using RawDeal.CardClass;
 using RawDeal.GameClasses;
-using RawDeal.PlayerClass;
+using RawDeal.PlayerClasses;
 
 namespace RawDeal.DecksBehavior;
 
@@ -26,13 +26,13 @@ public class PlayCard
         }
         else
         {
-            gameStructureInfo.ContadorTurnosJokeyingForPosition += 1;
+            gameStructureInfo.TurnCounterForJokeyingForPosition += 1;
         }
     }
     
     private void ShouldIDesactivateJockeyingForPositionEfectt(CardController cardController)
     {   
-        if (!cardController.VerifyIfTheCardContainsThisSubtype("Grapple") || gameStructureInfo.ContadorTurnosJokeyingForPosition <= 0 || (gameStructureInfo.HowActivateJockeyingForPosition != gameStructureInfo.ControllerCurrentPlayer && gameStructureInfo.HowActivateJockeyingForPosition != null))
+        if (!cardController.VerifyIfTheCardContainsThisSubtype("Grapple") || gameStructureInfo.TurnCounterForJokeyingForPosition <= 0 || (gameStructureInfo.HowActivateJockeyingForPosition != gameStructureInfo.ControllerCurrentPlayer && gameStructureInfo.HowActivateJockeyingForPosition != null))
             DesactivatingJockeyForPositionEffect();
     }
 
@@ -102,7 +102,7 @@ public class PlayCard
     private List<string> GetPossibleCardsToPlayString()
     {
         List<CardController> possibleCardsToPlay = gameStructureInfo.ControllerCurrentPlayer.CardsAvailableToPlay();
-        List<string> cardsStrings = gameStructureInfo.VisualizeCards.CreateStringPlayedCardListForNotReversalType(possibleCardsToPlay, gameStructureInfo.ControllerCurrentPlayer);
+        List<string> cardsStrings = gameStructureInfo.CardsVisualizor.CreateStringPlayedCardListForNotReversalType(possibleCardsToPlay, gameStructureInfo.ControllerCurrentPlayer);
         return cardsStrings;
     }
 
@@ -154,7 +154,7 @@ public class PlayCard
     private void ShowOneFaceDownCard(int currentDamage, int totalDamage, Player player, PlayerController controllerOpponentPlayer)
     {
         CardController flippedCardController = gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
-        string flippedCardString = gameStructureInfo.VisualizeCards.GetStringCardInfo(flippedCardController);
+        string flippedCardString = gameStructureInfo.CardsVisualizor.GetStringCardInfo(flippedCardController);
         gameStructureInfo.view.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
         DeckReversal(flippedCardController, controllerOpponentPlayer);
     }
@@ -172,7 +172,7 @@ public class PlayCard
     
     private void SayThatTheyAreGoingToPlayACard(CardController playedCardController, int indexType)
     {
-        string playedCardString = gameStructureInfo.VisualizeCards.GetStringPlayedInfo(playedCardController, indexType);
+        string playedCardString = gameStructureInfo.CardsVisualizor.GetStringPlayedInfo(playedCardController, indexType);
         string nameSuperStar = gameStructureInfo.ControllerCurrentPlayer.NameOfSuperStar();
         gameStructureInfo.view.SayThatPlayerIsTryingToPlayThisCard(nameSuperStar, playedCardString);
     }

@@ -1,9 +1,8 @@
-using RawDeal.CardClass;
 using RawDeal.GameClasses;
-using RawDeal.PlayerClass;
-
-namespace RawDeal.SuperStarClass;
+using RawDeal.PlayerClasses;
 using RawDealView;
+
+namespace RawDeal.SuperStarClasses;
 
 public class StoneCold: SuperStar
 {

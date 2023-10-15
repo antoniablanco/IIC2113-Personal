@@ -1,12 +1,9 @@
-using System.Reflection;
-using RawDeal.CardClass;
-using RawDealView.Formatters;
-using RawDealView;
 using RawDeal.DecksBehavior;
 using RawDeal.GameClasses;
-using RawDeal.PlayerClass;
+using RawDeal.PlayerClasses;
+using RawDealView;
 
-namespace RawDeal.SuperStarClass;
+namespace RawDeal.SuperStarClasses;
 
 public abstract class SuperStar
 {
@@ -16,7 +13,7 @@ public abstract class SuperStar
     private int _SuperstarValue;
     private string _SuperstarAbility;
     public View _view;
-    protected VisualizeCards VisualizeCards = new VisualizeCards();
+    protected CardsVisualizor CardsVisualizor = new CardsVisualizor();
 
     public SuperStar(string name, string logo, int handSize, int superstarValue, string superstarAbility, View view)
     {

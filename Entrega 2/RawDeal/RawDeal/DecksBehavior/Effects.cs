@@ -1,6 +1,6 @@
 using RawDeal.CardClass;
 using RawDeal.GameClasses;
-using RawDeal.PlayerClass;
+using RawDeal.PlayerClasses;
 
 namespace RawDeal.DecksBehavior;
 
@@ -100,7 +100,7 @@ public class Effects
     private string ShowOneFaceDownCard(int currentDamage, int totalDamage, Player player, PlayerController controllerOpponentPlayer)
     {
         CardController flippedCardController = gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
-        string flippedCardString = gameStructureInfo.VisualizeCards.GetStringCardInfo(flippedCardController);
+        string flippedCardString = gameStructureInfo.CardsVisualizor.GetStringCardInfo(flippedCardController);
         gameStructureInfo.view.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
         return flippedCardString;
     }
@@ -161,7 +161,7 @@ public class Effects
             {   
             
                 CardController flippedCardController = gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
-                string flippedCardString = gameStructureInfo.VisualizeCards.GetStringCardInfo(flippedCardController);
+                string flippedCardString = gameStructureInfo.CardsVisualizor.GetStringCardInfo(flippedCardController);
         
                 gameStructureInfo.view.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage+1, totalDamage);
             }

@@ -34,7 +34,7 @@ public class GameLogic
     
     public void SelectCardsToView()
     {   
-        GameStructureInfo.ContadorTurnosJokeyingForPosition += 1;
+        GameStructureInfo.TurnCounterForJokeyingForPosition += 1;
         var setCardsToView = GameStructureInfo.view.AskUserWhatSetOfCardsHeWantsToSee();
         switch (setCardsToView)
         {

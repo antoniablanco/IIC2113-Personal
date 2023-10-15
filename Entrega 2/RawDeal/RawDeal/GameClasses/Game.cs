@@ -1,7 +1,7 @@
 using RawDeal.DecksBehavior;
 using RawDeal.Exceptions;
-using RawDeal.PlayerClass;
-using RawDeal.SuperStarClass;
+using RawDeal.PlayerClasses;
+using RawDeal.SuperStarClasses;
 using RawDealView;
 using RawDealView.Options;
 
@@ -48,8 +48,8 @@ public class Game
     {
         try
         {
-            CreatePlayers createPlayers = new CreatePlayers(gameStructureInfo, _deckFolder);
-            GameGivenThatTheDecksAreValid();
+            PlayersGenerator playersGenerator = new PlayersGenerator(gameStructureInfo, _deckFolder);
+            RunGameGivenThatTheDecksAreValid();
         }
         catch (InvalidDeckException e)
         {
@@ -57,28 +57,28 @@ public class Game
         }
     }
     
-    private void GameGivenThatTheDecksAreValid()
+    private void RunGameGivenThatTheDecksAreValid()
     {
         while (gameStructureInfo.GetSetGameVariables.ShouldWeContinueTheGame())
         {
-            OneTurnIsPlayed();
+            PlayOneTurn();
         }
         _view.CongratulateWinner(_gameLogic.GetWinnerSuperstarName());
     }
 
-    private void OneTurnIsPlayed()
+    private void PlayOneTurn()
     {   
-        SettingTurnStartInformation();
+        SetTurnStartInformation();
 
         while (gameStructureInfo.GetSetGameVariables.TheTurnIsBeingPlayed())
         {   
-            gameStructureInfo.ContadorTurnosJokeyingForPosition -= 1;
+            gameStructureInfo.TurnCounterForJokeyingForPosition -= 1;
             _gameLogic.DisplayPlayerInformation();
             PlayerSelectedAction();
         }
     }
 
-    private void SettingTurnStartInformation()
+    private void SetTurnStartInformation()
     {
         gameStructureInfo.ControllerCurrentPlayer.DrawCard();
         gameStructureInfo.GetSetGameVariables.SetVariableTrueBecauseTurnStarted();

@@ -25,7 +25,7 @@ public class PlayReversal
     public int UserSelectReversalCard(List<CardController> possibleReversals)
     {
         List<String> possibleReversalsString =
-            gameStructureInfo.VisualizeCards.CreateStringPlayedCardListForReversalType(possibleReversals);
+            gameStructureInfo.CardsVisualizor.CreateStringPlayedCardListForReversalType(possibleReversals);
         int indexReversalCard = gameStructureInfo.view.AskUserToSelectAReversal(
             gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar(), possibleReversalsString);
         return indexReversalCard;
@@ -44,7 +44,7 @@ public class PlayReversal
     public void MoveAndPrintCardForReversal(CardController cardController)
     {
         int indexType = cardController.GetIndexForType("Reversal");
-        string reversalString = gameStructureInfo.VisualizeCards.GetStringPlayedInfo(cardController, indexType);
+        string reversalString = gameStructureInfo.CardsVisualizor.GetStringPlayedInfo(cardController, indexType);
         gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingSide(gameStructureInfo.GetCurrentPlayer(),gameStructureInfo.LastPlayedCard);
         gameStructureInfo.view.SayThatPlayerReversedTheCard(gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar(), reversalString);
         gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(gameStructureInfo.GetOpponentPlayer(), cardController);

@@ -1,7 +1,7 @@
 using RawDeal.CardClass;
-using RawDeal.SuperStarClass;
+using RawDeal.SuperStarClasses;
 
-namespace RawDeal.PlayerClass;
+namespace RawDeal.PlayerClasses;
 
 public class Player
 {

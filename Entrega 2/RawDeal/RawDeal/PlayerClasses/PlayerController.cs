@@ -1,8 +1,7 @@
 using RawDeal.CardClass;
-using RawDeal.DecksBehavior;
 using RawDeal.GameClasses;
 
-namespace RawDeal.PlayerClass;
+namespace RawDeal.PlayerClasses;
 
 public class PlayerController
 {
@@ -154,32 +153,32 @@ public class PlayerController
     
     public List<String> StringCardsHand()
     {
-        List<String> stringCardSet = gameStructureInfo.VisualizeCards.CreateStringCardList(player.cardsHand);
+        List<String> stringCardSet = gameStructureInfo.CardsVisualizor.CreateStringCardList(player.cardsHand);
         return stringCardSet;
     }
 
     public (List<String>, List<CardController>) HandCardsButNotTheCardIsBeingPlayed(CardController cardController)
     {
         List<CardController> cardOptions = player.cardsHand.Where(card => card != cardController).ToList();
-        List<String> stringCardOptions = gameStructureInfo.VisualizeCards.CreateStringCardList(cardOptions);
+        List<String> stringCardOptions = gameStructureInfo.CardsVisualizor.CreateStringCardList(cardOptions);
         return (stringCardOptions, cardOptions);
     }
     
     public List<String> StringCardsRingArea()
     {
-        List<String> stringCardSet = gameStructureInfo.VisualizeCards.CreateStringCardList(player.cardsRingArea);
+        List<String> stringCardSet = gameStructureInfo.CardsVisualizor.CreateStringCardList(player.cardsRingArea);
         return stringCardSet;
     }
     
     public List<String> StringCardsRingSide()
     {
-        List<String> stringCardSet = gameStructureInfo.VisualizeCards.CreateStringCardList(player.cardsRingSide);
+        List<String> stringCardSet = gameStructureInfo.CardsVisualizor.CreateStringCardList(player.cardsRingSide);
         return stringCardSet;
     }
     
     public List<String> StringCardsArsenal()
     {
-        List<String> stringCardSet = gameStructureInfo.VisualizeCards.CreateStringCardList(player.cardsArsenal);
+        List<String> stringCardSet = gameStructureInfo.CardsVisualizor.CreateStringCardList(player.cardsArsenal);
         return stringCardSet;
     }
 

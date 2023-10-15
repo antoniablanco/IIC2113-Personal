@@ -1,6 +1,6 @@
 using RawDeal.CardClass;
 using RawDeal.DecksBehavior;
-using RawDeal.PlayerClass;
+using RawDeal.PlayerClasses;
 using RawDealView;
 
 namespace RawDeal.GameClasses;
@@ -8,7 +8,7 @@ namespace RawDeal.GameClasses;
 public class GameStructureInfo
 {
     public View view;
-    public VisualizeCards VisualizeCards = new VisualizeCards();
+    public CardsVisualizor CardsVisualizor = new CardsVisualizor();
     public CardMovement CardMovement =new CardMovement();
     public PlayCard PlayCard;
     public Player playerOne;
@@ -30,7 +30,7 @@ public class GameStructureInfo
     public int bonusDamage = 4;
     public int IsJockeyingForPositionBonusFortitud = 0;
     public int IsJockeyingForPositionBonusDamage = 0;
-    public int ContadorTurnosJokeyingForPosition = 0;
+    public int TurnCounterForJokeyingForPosition = 0;
     public int LastDamageComited = 0;
     
     public Player GetCurrentPlayer()

@@ -1,4 +1,5 @@
 using RawDeal.GameClasses;
+using RawDeal.PlayerClasses;
 using RawDealView.Options;
 
 namespace RawDeal.CardClass.Reversal;
@@ -19,26 +20,28 @@ public class JockeyingForPosition: Card
     
     public override void ReversalEffect(GameStructureInfo gameStructureInfo)
     {   
-        SelectedEffect effectToPerform = gameStructureInfo.view.AskUserToSelectAnEffectForJockeyForPosition(gameStructureInfo.ControllerOpponentPlayer
-            .NameOfSuperStar());
-        GetSelectedEffect(gameStructureInfo, effectToPerform);
-        gameStructureInfo.HowActivateJockeyingForPosition = gameStructureInfo.ControllerOpponentPlayer;
-        gameStructureInfo.ContadorTurnosJokeyingForPosition = 2;
+        Effect(gameStructureInfo, gameStructureInfo.ControllerOpponentPlayer);
         gameStructureInfo.Effects.EndTurn();
     }
     
     public override void ActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {   
-        SelectedEffect effectToPerform = gameStructureInfo.view.AskUserToSelectAnEffectForJockeyForPosition(gameStructureInfo.ControllerCurrentPlayer
-            .NameOfSuperStar());
-        GetSelectedEffect(gameStructureInfo, effectToPerform);
-        gameStructureInfo.HowActivateJockeyingForPosition = gameStructureInfo.ControllerCurrentPlayer;
-        gameStructureInfo.ContadorTurnosJokeyingForPosition = 2;
+        Effect(gameStructureInfo, gameStructureInfo.ControllerCurrentPlayer);
         gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(gameStructureInfo.GetCurrentPlayer(), playedCardController);
     }
-    
-    public void GetSelectedEffect(GameStructureInfo gameStructureInfo, SelectedEffect effectToPerform)
+
+    private void Effect(GameStructureInfo gameStructureInfo, PlayerController playerController)
     {
+        GetSelectedEffectChosenByPlayer(gameStructureInfo, playerController.NameOfSuperStar());
+        gameStructureInfo.HowActivateJockeyingForPosition = playerController;
+        int turnsBeforeEffectExpires = 2;
+        gameStructureInfo.TurnCounterForJokeyingForPosition = turnsBeforeEffectExpires;
+    }
+
+
+    private void GetSelectedEffectChosenByPlayer(GameStructureInfo gameStructureInfo, string nameOfSuperStar)
+    {   
+        SelectedEffect effectToPerform = gameStructureInfo.view.AskUserToSelectAnEffectForJockeyForPosition(nameOfSuperStar);
         switch (effectToPerform)
         {
             case SelectedEffect.NextGrappleIsPlus4D:

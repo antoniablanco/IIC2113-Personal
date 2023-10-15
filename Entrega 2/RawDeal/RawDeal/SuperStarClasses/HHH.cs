@@ -1,5 +1,6 @@
-namespace RawDeal.SuperStarClass;
 using RawDealView;
+
+namespace RawDeal.SuperStarClasses;
 
 public class HHH: SuperStar
 {

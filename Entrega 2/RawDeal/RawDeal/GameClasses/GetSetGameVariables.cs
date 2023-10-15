@@ -1,4 +1,4 @@
-using RawDeal.PlayerClass;
+using RawDeal.PlayerClasses;
 
 namespace RawDeal.GameClasses;
 
