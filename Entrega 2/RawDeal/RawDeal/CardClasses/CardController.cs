@@ -141,9 +141,9 @@ public class CardController
     public bool DealsTheMaximumDamage(int maximumDamage)
     {
         int damage = int.Parse(_card.Damage) + gameStructureInfo.BonusDamage * gameStructureInfo.IsJockeyingForPositionBonusDamageActive;
-        if (gameStructureInfo.Effects.IsTheCardWeAreReversalOfMankindSuperStart(gameStructureInfo.ControllerOpponentPlayer))
-            damage -= 1;
-        return damage <= maximumDamage;
+        int totalDamage = gameStructureInfo.PlayCard.GetDamageProducedCheckingMankindSuperStarAbility(damage, gameStructureInfo.ControllerOpponentPlayer);
+        
+        return totalDamage <= maximumDamage;
     }
     
     public void ApplyActionEffect()

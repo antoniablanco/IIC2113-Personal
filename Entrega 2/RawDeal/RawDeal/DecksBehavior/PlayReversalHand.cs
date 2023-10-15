@@ -14,19 +14,18 @@ public class PlayReversalHand
     public bool IsUserUsingReversalCard()
     {   
         List<CardController> possibleReversals = gameStructureInfo.ControllerOpponentPlayer.CardsAvailableToReversal();
-        if (possibleReversals.Count() > 0)
+        if (possibleReversals.Count() <= 0 ) return false;
+        
+        int indexReversalCard = UserSelectReversalCard(possibleReversals);
+        if (indexReversalCard != -1)
         {
-            int indexReversalCard = UserSelectReversalCard(possibleReversals);
-            if (indexReversalCard != -1)
-            {
-                PlayingReversalCard(indexReversalCard, possibleReversals);
-                return true;
-            }
+            PlayingReversalCard(indexReversalCard, possibleReversals);
+            return true;
         }
         return false;
     }
 
-    public int UserSelectReversalCard(List<CardController> possibleReversals)
+    private int UserSelectReversalCard(List<CardController> possibleReversals)
     {
         List<String> possibleReversalsString =
             gameStructureInfo.CardsVisualizor.CreateStringPlayedCardListForReversalType(possibleReversals);
@@ -34,8 +33,8 @@ public class PlayReversalHand
             gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar(), possibleReversalsString);
         return indexReversalCard;
     }
-    
-    public void PlayingReversalCard(int indexReversalCard, List<CardController> possibleReversals) 
+
+    private void PlayingReversalCard(int indexReversalCard, List<CardController> possibleReversals) 
     {
         if (indexReversalCard != -1)
         {   
@@ -45,7 +44,7 @@ public class PlayReversalHand
         }
     }
 
-    public void MoveAndPrintCardForReversal(CardController cardController)
+    private void MoveAndPrintCardForReversal(CardController cardController)
     {
         int indexType = cardController.GetIndexForType("Reversal");
         string reversalString = gameStructureInfo.CardsVisualizor.GetStringPlayedInfo(cardController, indexType);

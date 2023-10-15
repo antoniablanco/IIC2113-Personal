@@ -79,16 +79,15 @@ public class Effects
     
     public void ProduceDamage(int totalDamage, PlayerController controllerOpponentPlayer, Player player)
     {
-        if (totalDamage > 0)
-        {
-            gameStructureInfo.View.SayThatSuperstarWillTakeSomeDamage(controllerOpponentPlayer.NameOfSuperStar(), totalDamage);
-            for (int currentDamage = 0; currentDamage < totalDamage; currentDamage++)
-            {   
-                if (CheckIfThePlayerCanReceiveDamage(controllerOpponentPlayer))
-                    ShowOneFaceDownCard(currentDamage + 1, totalDamage, player);
-                else
-                    gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning(controllerOpponentPlayer);
-            }
+        if (totalDamage <= 0) return;
+        
+        gameStructureInfo.View.SayThatSuperstarWillTakeSomeDamage(controllerOpponentPlayer.NameOfSuperStar(), totalDamage);
+        for (int currentDamage = 0; currentDamage < totalDamage; currentDamage++)
+        {   
+            if (CheckIfThePlayerCanReceiveDamage(controllerOpponentPlayer))
+                ShowOneFaceDownCard(currentDamage + 1, totalDamage, player);
+            else
+                gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning(controllerOpponentPlayer);
         }
     }
 
@@ -120,21 +119,20 @@ public class Effects
     
     public void ColateralDamage(PlayerController controllerOpponentPlayer, Player player, int totalDamage = 1)
     {
-        if (totalDamage > 0)
+        if (totalDamage <= 0) return;
+        
+        gameStructureInfo.View.SayThatPlayerDamagedHimself(controllerOpponentPlayer.NameOfSuperStar(), totalDamage);
+        gameStructureInfo.View.SayThatSuperstarWillTakeSomeDamage(controllerOpponentPlayer.NameOfSuperStar(), totalDamage);
+        for (int currentDamage = 0; currentDamage < totalDamage; currentDamage++)
         {   
-            gameStructureInfo.View.SayThatPlayerDamagedHimself(controllerOpponentPlayer.NameOfSuperStar(), totalDamage);
-            gameStructureInfo.View.SayThatSuperstarWillTakeSomeDamage(controllerOpponentPlayer.NameOfSuperStar(), totalDamage);
-            for (int currentDamage = 0; currentDamage < totalDamage; currentDamage++)
-            {   
-                if (CheckIfThePlayerCanReceiveDamage(controllerOpponentPlayer))
-                {
-                    ShowOneFaceDownCard(currentDamage + 1, totalDamage, player);
-                }
-                else
-                {
-                    gameStructureInfo.View.SayThatPlayerLostDueToSelfDamage(controllerOpponentPlayer.NameOfSuperStar());
-                    gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning(controllerOpponentPlayer);
-                }
+            if (CheckIfThePlayerCanReceiveDamage(controllerOpponentPlayer))
+            {
+                ShowOneFaceDownCard(currentDamage + 1, totalDamage, player);
+            }
+            else
+            {
+                gameStructureInfo.View.SayThatPlayerLostDueToSelfDamage(controllerOpponentPlayer.NameOfSuperStar());
+                gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning(controllerOpponentPlayer);
             }
         }
     }
@@ -158,19 +156,15 @@ public class Effects
     
     public void TakeDamage(PlayerController controllerPlayer, Player player, int totalDamage)
     {
-        if (totalDamage > 0)
-        {   
-            gameStructureInfo.View.SayThatSuperstarWillTakeSomeDamage(controllerPlayer.NameOfSuperStar(), totalDamage);
+        if (totalDamage <= 0) return;
+        gameStructureInfo.View.SayThatSuperstarWillTakeSomeDamage(controllerPlayer.NameOfSuperStar(), totalDamage);
             
-            for (int currentDamage = 0; currentDamage < totalDamage; currentDamage++)
-            {   
-            
-                CardController flippedCardController = gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
-                string flippedCardString = gameStructureInfo.CardsVisualizor.GetStringCardInfo(flippedCardController);
+        for (int currentDamage = 0; currentDamage < totalDamage; currentDamage++)
+        {
+            CardController flippedCardController = gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
+            string flippedCardString = gameStructureInfo.CardsVisualizor.GetStringCardInfo(flippedCardController);
         
-                gameStructureInfo.View.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage+1, totalDamage);
-            }
-            
+            gameStructureInfo.View.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage+1, totalDamage);
         }
     }
     

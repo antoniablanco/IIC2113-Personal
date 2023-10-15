@@ -202,4 +202,11 @@ public class PlayCard
     {   
         playedCardController.ApplyActionEffect();
     }
+    
+    public int GetDamageProducedCheckingMankindSuperStarAbility(int damage, PlayerController playerController)
+    {
+        if (gameStructureInfo.Effects.IsTheCardWeAreReversalOfMankindSuperStart(playerController))
+            damage -= 1;
+        return damage;
+    }
 }

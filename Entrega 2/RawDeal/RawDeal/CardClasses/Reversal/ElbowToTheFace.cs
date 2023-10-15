@@ -21,9 +21,8 @@ public class ElbowToTheFace: Card
     public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
     {   
         PlayerController damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
-        int damageProduce = int.Parse(Damage);
-        if (gameStructureInfo.Effects.IsTheCardWeAreReversalOfMankindSuperStart(gameStructureInfo.ControllerCurrentPlayer))
-            damageProduce -= 1;
+        int damageProduce = gameStructureInfo.PlayCard.GetDamageProducedCheckingMankindSuperStarAbility(int.Parse(Damage), damagedPlayerController);
+        
         gameStructureInfo.Effects.ProduceDamage(damageProduce, damagedPlayerController,gameStructureInfo.GetCurrentPlayer());
         gameStructureInfo.Effects.EndTurn();
     }

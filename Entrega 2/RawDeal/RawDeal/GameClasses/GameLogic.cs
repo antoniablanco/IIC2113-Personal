@@ -1,3 +1,4 @@
+using RawDeal.PlayerClasses;
 using RawDealView;
 using RawDealView.Options;
 

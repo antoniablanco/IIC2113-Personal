@@ -20,10 +20,10 @@ public class ManagerInterferes: Card
     public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
     {   
         gameStructureInfo.Effects.StealCards(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer());
+        
         PlayerController damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
-        int damageProduce = int.Parse(Damage);
-        if (gameStructureInfo.Effects.IsTheCardWeAreReversalOfMankindSuperStart(gameStructureInfo.ControllerCurrentPlayer))
-            damageProduce -= 1;
+        int damageProduce = gameStructureInfo.PlayCard.GetDamageProducedCheckingMankindSuperStarAbility(int.Parse(Damage), damagedPlayerController);
+        
         gameStructureInfo.Effects.ProduceDamage(damageProduce, damagedPlayerController,gameStructureInfo.GetCurrentPlayer());
         gameStructureInfo.Effects.EndTurn();
     }
