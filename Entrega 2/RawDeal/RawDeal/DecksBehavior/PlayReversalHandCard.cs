@@ -3,11 +3,11 @@ using RawDeal.GameClasses;
 
 namespace RawDeal.DecksBehavior;
 
-public class PlayReversalHand
+public class PlayReversalHandCard
 {   
     private GameStructureInfo gameStructureInfo = new GameStructureInfo();
 
-    public PlayReversalHand(GameStructureInfo gameStructureInfo)
+    public PlayReversalHandCard(GameStructureInfo gameStructureInfo)
     {
         this.gameStructureInfo = gameStructureInfo;
     }
