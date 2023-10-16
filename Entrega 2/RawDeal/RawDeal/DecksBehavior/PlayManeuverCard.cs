@@ -68,7 +68,7 @@ public class PlayManeuverCard
     
     private bool CheckCanReceiveDamage(PlayerController controllerOpponentPlayer)
     {
-        return controllerOpponentPlayer.AreThereCardsLeftInTheArsenal();
+        return controllerOpponentPlayer.HasCardsInArsenal();
     }
 
     private void ShowOneFaceDownCard(int currentDamage, int totalDamage, Player player, PlayerController controllerOpponentPlayer)

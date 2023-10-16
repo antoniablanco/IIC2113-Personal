@@ -1,3 +1,4 @@
+using RawDeal.CardClass;
 using RawDeal.PlayerClasses;
 using RawDealView;
 using RawDealView.Options;
@@ -26,8 +27,8 @@ public class GameLogic
     
     public void DisplayPlayerInformation() 
     {   
-        PlayerInfo playerUno = new PlayerInfo(gameStructureInfo.ControllerPlayerOne.NameOfSuperStar(), gameStructureInfo.ControllerPlayerOne.FortitudRating(), gameStructureInfo.ControllerPlayerOne.NumberOfCardsInTheHand(), gameStructureInfo.ControllerPlayerOne.NumberOfCardsInTheArsenal());
-        PlayerInfo playerDos = new PlayerInfo(gameStructureInfo.ControllerPlayerTwo.NameOfSuperStar(), gameStructureInfo.ControllerPlayerTwo.FortitudRating(), gameStructureInfo.ControllerPlayerTwo.NumberOfCardsInTheHand(), gameStructureInfo.ControllerPlayerTwo.NumberOfCardsInTheArsenal());
+        PlayerInfo playerUno = new PlayerInfo(gameStructureInfo.ControllerPlayerOne.NameOfSuperStar(), gameStructureInfo.ControllerPlayerOne.FortitudRating(), gameStructureInfo.ControllerPlayerOne.NumberOfCardIn("Hand"), gameStructureInfo.ControllerPlayerOne.NumberOfCardIn("Arsenal"));
+        PlayerInfo playerDos = new PlayerInfo(gameStructureInfo.ControllerPlayerTwo.NameOfSuperStar(), gameStructureInfo.ControllerPlayerTwo.FortitudRating(), gameStructureInfo.ControllerPlayerTwo.NumberOfCardIn("Hand"), gameStructureInfo.ControllerPlayerTwo.NumberOfCardIn("Arsenal"));
         
         List<PlayerInfo> playersListToPrint =  new List<PlayerInfo> { playerUno, playerDos };
         
@@ -44,19 +45,19 @@ public class GameLogic
         switch (setCardsToView)
         {
             case CardSet.Hand:
-                ActionSeeTotalCards(gameStructureInfo.ControllerCurrentPlayer.StringCardsHand());
+                ActionSeeTotalCards(gameStructureInfo.ControllerCurrentPlayer.StringCardsFrom("Hand"));
                 break;
             case CardSet.RingArea:
-                ActionSeeTotalCards(gameStructureInfo.ControllerCurrentPlayer.StringCardsRingArea());
+                ActionSeeTotalCards(gameStructureInfo.ControllerCurrentPlayer.StringCardsFrom("RingArea"));
                 break;
             case CardSet.RingsidePile:
-                ActionSeeTotalCards(gameStructureInfo.ControllerCurrentPlayer.StringCardsRingSide());
+                ActionSeeTotalCards(gameStructureInfo.ControllerCurrentPlayer.StringCardsFrom("RingSide"));
                 break;
             case CardSet.OpponentsRingArea:
-                ActionSeeTotalCards(gameStructureInfo.ControllerOpponentPlayer.StringCardsRingArea());
+                ActionSeeTotalCards(gameStructureInfo.ControllerOpponentPlayer.StringCardsFrom("RingArea"));
                 break;
             case CardSet.OpponentsRingsidePile:
-                ActionSeeTotalCards(gameStructureInfo.ControllerOpponentPlayer.StringCardsRingSide());
+                ActionSeeTotalCards(gameStructureInfo.ControllerOpponentPlayer.StringCardsFrom("RingSide"));
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

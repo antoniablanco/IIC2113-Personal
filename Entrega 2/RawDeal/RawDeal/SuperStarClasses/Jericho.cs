@@ -24,6 +24,6 @@ public class Jericho: SuperStar
     
     public override bool CanUseSuperAbility(PlayerController currentPlayer)
     {
-        return (currentPlayer.NumberOfCardsInTheHand() > 0 && !currentPlayer.HasTheSuperAbilityBeenUsedThisTurn());
+        return (currentPlayer.NumberOfCardIn("Hand") > 0 && !currentPlayer.HasTheSuperAbilityBeenUsedThisTurn());
     }
 }

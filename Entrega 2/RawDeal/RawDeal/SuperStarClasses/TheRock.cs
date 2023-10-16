@@ -27,7 +27,7 @@ public class TheRock: SuperStar
     
     public override bool CanUseSuperAbility(PlayerController currentPlayer)
     {
-        return currentPlayer.NumberOfCardsInRingSide() > 0 && !currentPlayer.HasTheSuperAbilityBeenUsedThisTurn();
+        return currentPlayer.NumberOfCardIn("RingSide") > 0 && !currentPlayer.HasTheSuperAbilityBeenUsedThisTurn();
     }
     
     public override void BlockSuperAbilityBecauseIsJustAtTheStartOfTheTurn(GameStructureInfo gameStructureInfo)

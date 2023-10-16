@@ -25,6 +25,6 @@ public class StoneCold: SuperStar
     
     public override bool CanUseSuperAbility(PlayerController currentPlayer)
     {
-        return (currentPlayer.NumberOfCardsInTheArsenal() > 0 && !currentPlayer.HasTheSuperAbilityBeenUsedThisTurn());
+        return (currentPlayer.NumberOfCardIn("Arsenal") > 0 && !currentPlayer.HasTheSuperAbilityBeenUsedThisTurn());
     }
 }

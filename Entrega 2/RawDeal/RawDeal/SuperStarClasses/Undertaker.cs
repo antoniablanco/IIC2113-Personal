@@ -25,6 +25,6 @@ public class Undertaker: SuperStar
 
     public override bool CanUseSuperAbility(PlayerController currentPlayer)
     {
-        return (currentPlayer.NumberOfCardsInTheHand() > 1 && !currentPlayer.HasTheSuperAbilityBeenUsedThisTurn());
+        return (currentPlayer.NumberOfCardIn("Hand") > 1 && !currentPlayer.HasTheSuperAbilityBeenUsedThisTurn());
     }
 }

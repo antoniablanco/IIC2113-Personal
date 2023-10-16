@@ -26,9 +26,9 @@ public class GetSetGameVariables
     
     public bool ShouldWeContinueTheGame()
     {   
-        if ((!gameStructureInfo.ControllerPlayerOne.AreThereCardsLeftInTheArsenal() || !gameStructureInfo.ControllerPlayerTwo.AreThereCardsLeftInTheArsenal()) && gameStructureInfo.WinnerPlayer == null)
+        if ((!gameStructureInfo.ControllerPlayerOne.HasCardsInArsenal() || !gameStructureInfo.ControllerPlayerTwo.HasCardsInArsenal()) && gameStructureInfo.WinnerPlayer == null)
             gameStructureInfo.WinnerPlayer = (gameStructureInfo.ControllerCurrentPlayer.HasCardsInArsenal()) ? gameStructureInfo.ControllerCurrentPlayer : gameStructureInfo.ControllerOpponentPlayer;
-        return (gameStructureInfo.ControllerPlayerOne.AreThereCardsLeftInTheArsenal() && gameStructureInfo.ControllerPlayerTwo.AreThereCardsLeftInTheArsenal() && gameStructureInfo.IsTheGameStillPlaying);
+        return (gameStructureInfo.ControllerPlayerOne.HasCardsInArsenal() && gameStructureInfo.ControllerPlayerTwo.HasCardsInArsenal() && gameStructureInfo.IsTheGameStillPlaying);
     }
     
     public bool TheTurnIsBeingPlayed()
