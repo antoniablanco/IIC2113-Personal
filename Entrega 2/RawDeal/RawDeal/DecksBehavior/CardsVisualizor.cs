@@ -6,13 +6,6 @@ namespace RawDeal.DecksBehavior;
 
 public class CardsVisualizor
 {
-    public string GetStringPlayedInfo(CardController cardController, int numType = 0)
-    {   
-        PlayInfoImplementation playInfoImplementation = cardController.CreateIViewablePlayedInfo(numType);
-        string formattedInfo = Formatter.PlayToString(playInfoImplementation);
-        return formattedInfo;
-    }
-    
     public List<string> CreateStringCardList(List<CardController> cardsInSelectedSet)
     {
         return cardsInSelectedSet.Select(cardController => cardController.GetStringCardInfo()).ToList();
@@ -37,7 +30,7 @@ public class CardsVisualizor
         foreach (var index in indexes)
         {   
             if (cardController.GetCardType(index) == "Reversal")
-                stringList.Add(GetStringPlayedInfo(cardController, index));
+                stringList.Add(cardController.GetStringPlayedInfo(index));
         }
 
         return stringList;
@@ -63,7 +56,7 @@ public class CardsVisualizor
         foreach (var index in indexes)
         {   
             if (cardController.GetCardType(index) != "Reversal" && cardController.GetCardFortitude(cardController.GetCardType(index)) <= controllerCurrentPlayer.FortitudRating())
-                stringList.Add(GetStringPlayedInfo(cardController, index));
+                stringList.Add(cardController.GetStringPlayedInfo(index));
         }
 
         return stringList;

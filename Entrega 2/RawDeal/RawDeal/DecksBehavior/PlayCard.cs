@@ -179,7 +179,7 @@ public class PlayCard
     
     private void SayThatTheyAreGoingToPlayACard(CardController playedCardController, int indexType)
     {
-        string playedCardString = gameStructureInfo.CardsVisualizor.GetStringPlayedInfo(playedCardController, indexType);
+        string playedCardString = playedCardController.GetStringPlayedInfo(indexType);
         string nameSuperStar = gameStructureInfo.ControllerCurrentPlayer.NameOfSuperStar();
         gameStructureInfo.View.SayThatPlayerIsTryingToPlayThisCard(nameSuperStar, playedCardString);
     }

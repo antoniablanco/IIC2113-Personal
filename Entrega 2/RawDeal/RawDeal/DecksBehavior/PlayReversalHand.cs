@@ -47,7 +47,7 @@ public class PlayReversalHand
     private void MoveAndPrintCardForReversal(CardController cardController)
     {
         int indexType = cardController.GetIndexForType("Reversal");
-        string reversalString = gameStructureInfo.CardsVisualizor.GetStringPlayedInfo(cardController, indexType);
+        string reversalString = cardController.GetStringPlayedInfo(indexType);
         gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingSide(gameStructureInfo.GetCurrentPlayer(),gameStructureInfo.LastPlayedCard);
         gameStructureInfo.View.SayThatPlayerReversedTheCard(gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar(), reversalString);
         gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(gameStructureInfo.GetOpponentPlayer(), cardController);

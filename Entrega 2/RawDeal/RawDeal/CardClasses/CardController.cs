@@ -86,11 +86,10 @@ public class CardController
     
     public string GetStringCardInfo()
     {   
-        string formattedInfo = Formatter.CardToString(_card);
-        return formattedInfo;
+        return Formatter.CardToString(_card);
     }
     
-    public PlayInfoImplementation CreateIViewablePlayedInfo(int playedAs)
+    public string GetStringPlayedInfo(int playedAs)
     {   
         var cardInfo = new PlayInfoImplementation(
             _card.Title,
@@ -103,7 +102,7 @@ public class CardController
             _card.Types[playedAs].ToUpper()  
             );
         
-        return cardInfo;
+        return Formatter.PlayToString(cardInfo);
     }
     
     public bool CanThisCardBePlayed()
