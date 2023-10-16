@@ -1,16 +1,17 @@
 using RawDeal.GameClasses;
+using RawDealView.Formatters;
 
 namespace RawDeal.CardClass;
 
-public abstract class Card
+public abstract class Card : IViewableCardInfo
 {
-    public string Title;
-    public List<string> Types = new List<string>();
-    public List<string> Subtypes = new List<string>();
-    public string Fortitude;
-    public string Damage;
-    public string StunValue;
-    public string CardEffect;
+    public string Title { get; set; }
+    public string Fortitude { get; set; }
+    public string Damage { get; set; }
+    public string StunValue { get; set; }
+    public List<string> Types { get; set; }
+    public List<string> Subtypes { get; set; }
+    public string CardEffect { get; set; }
 
     public Card(string title, List<string> types, List<string> subtypes, string fortitude, string damage,
         string stunValue, string cardEffect)

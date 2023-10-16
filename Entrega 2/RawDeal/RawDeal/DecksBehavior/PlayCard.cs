@@ -161,7 +161,7 @@ public class PlayCard
     private void ShowOneFaceDownCard(int currentDamage, int totalDamage, Player player, PlayerController controllerOpponentPlayer)
     {
         CardController flippedCardController = gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
-        string flippedCardString = gameStructureInfo.CardsVisualizor.GetStringCardInfo(flippedCardController);
+        string flippedCardString = flippedCardController.GetStringCardInfo();
         gameStructureInfo.View.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
         DeckReversal(flippedCardController, controllerOpponentPlayer);
     }
@@ -186,9 +186,8 @@ public class PlayCard
 
     private int GetDamageProduced(CardController playedCardController)
     {   
-        int totalDamage = playedCardController.GetDamageProducedByTheCard() + gameStructureInfo.BonusDamage*gameStructureInfo.IsJockeyingForPositionBonusDamageActive;
-        if (gameStructureInfo.ControllerOpponentPlayer.IsTheSuperStarMankind())
-            totalDamage -= 1;
+        int damage = playedCardController.GetDamageProducedByTheCard() + gameStructureInfo.BonusDamage*gameStructureInfo.IsJockeyingForPositionBonusDamageActive;
+        int totalDamage = gameStructureInfo.PlayCard.GetDamageProducedCheckingMankindSuperStarAbility(damage, gameStructureInfo.ControllerOpponentPlayer);
         return totalDamage;
     }
 

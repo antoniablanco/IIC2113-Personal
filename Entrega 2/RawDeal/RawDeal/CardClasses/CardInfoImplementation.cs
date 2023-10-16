@@ -2,6 +2,7 @@ using RawDealView.Formatters;
 
 namespace RawDeal.CardClass;
 
+
 public class CardInfoImplementation : IViewableCardInfo
 {
     public string Title { get; set; }

@@ -6,13 +6,6 @@ namespace RawDeal.DecksBehavior;
 
 public class CardsVisualizor
 {
-    public string GetStringCardInfo(CardController cardController)
-    {   
-        CardInfoImplementation cardInfoImplementation = cardController.CreateIViewableCardInfo();
-        string formattedInfo = Formatter.CardToString(cardInfoImplementation);
-        return formattedInfo;
-    }
-
     public string GetStringPlayedInfo(CardController cardController, int numType = 0)
     {   
         PlayInfoImplementation playInfoImplementation = cardController.CreateIViewablePlayedInfo(numType);
@@ -22,7 +15,7 @@ public class CardsVisualizor
     
     public List<string> CreateStringCardList(List<CardController> cardsInSelectedSet)
     {
-        return cardsInSelectedSet.Select(cardController => GetStringCardInfo(cardController)).ToList();
+        return cardsInSelectedSet.Select(cardController => cardController.GetStringCardInfo()).ToList();
     }
 
     public List<string> CreateStringPlayedCardListForReversalType(List<CardController> cardsInSelectedSet)

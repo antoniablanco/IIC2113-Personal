@@ -14,8 +14,8 @@ public class CardGenerator
     public List<CardJson> DeserializeJsonCards()
     {
         string myJson = File.ReadAllText (Path.Combine("data","cards.json")) ;
-        var cartas = JsonSerializer.Deserialize<List<CardJson>>(myJson) ;
-        return cartas;
+        var cards = JsonSerializer.Deserialize<List<CardJson>>(myJson) ;
+        return cards;
     }
     
     public List<CardController> CreateDiferentTypesOfCard(string playerString, List<CardJson> totalCards, GameStructureInfo gameStructureInfo) 
@@ -23,11 +23,7 @@ public class CardGenerator
         string pathDeck = Path.Combine(playerString);
         string[] lines = File.ReadAllLines(pathDeck);
 
-        var matchingCards = (from line in lines
-            from card in totalCards
-            where line.Trim() == card.Title 
-            select FindCard(card.Title, card)).ToList();
-
+        var matchingCards = (from line in lines from card in totalCards where line.Trim() == card.Title select FindCard(card.Title, card)).ToList();
         var cardControllers = matchingCards.Select(card => new CardController(card, gameStructureInfo)).ToList();
 
         return cardControllers;

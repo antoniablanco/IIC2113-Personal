@@ -1,6 +1,7 @@
 using RawDeal.GameClasses;
 using RawDeal.PlayerClasses;
 using RawDealView;
+using RawDealView.Formatters;
 
 namespace RawDeal.CardClass;
 
@@ -50,6 +51,11 @@ public class CardController
     {
         return _card.Types[index];
     }
+    
+    public bool ContainsSubtype(string subType)
+    {
+        return _card.Subtypes.Contains(subType);
+    }
 
     public int GetIndexForType(string type)
     {
@@ -73,17 +79,15 @@ public class CardController
         return int.Parse(_card.StunValue);
     }
     
-    public CardInfoImplementation CreateIViewableCardInfo()
+    public bool TheCardHadStunValue()
     {
-        var cardInfo = new CardInfoImplementation(
-            _card.Title,
-            _card.Fortitude,
-            _card.Damage,
-            _card.StunValue,
-            _card.Types,
-            _card.Subtypes,
-            _card.CardEffect);
-        return cardInfo;
+        return int.Parse(_card.StunValue) > 0;
+    }
+    
+    public string GetStringCardInfo()
+    {   
+        string formattedInfo = Formatter.CardToString(_card);
+        return formattedInfo;
     }
     
     public PlayInfoImplementation CreateIViewablePlayedInfo(int playedAs)
@@ -101,13 +105,18 @@ public class CardController
         
         return cardInfo;
     }
+    
+    public bool CanThisCardBePlayed()
+    {   
+        return _card.CheckIfCardCanBePlayed(gameStructureInfo);
+    }
 
     public bool GetIfCardCanReversalPlayedCard()
     {
         return _card.CanReversalThisCard(gameStructureInfo.LastPlayedCard) && gameStructureInfo.LastPlayedCard.CanThisCardBeReversal();
     }
 
-    public bool CanThisCardBeReversal()
+    private bool CanThisCardBeReversal()
     {
         return _card.CheckIfCardCanBeReverted();
     }
@@ -117,33 +126,22 @@ public class CardController
         return ((GetCardFortitude(GetCardTypes()[0]) + gameStructureInfo.BonusFortitude*gameStructureInfo.IsJockeyingForPositionBonusFortitudActive <= controllerPlayer.FortitudRating()) && IsReversalType() && GetIfCardCanReversalPlayedCard());
     }
     
-    public void ReversalEffect()
-    {
-        _card.ApplyReversalEffect(gameStructureInfo);
-    }
-    
-    public bool ContainsSubtype(string subType)
-    {
-        return _card.Subtypes.Contains(subType);
-    }
-    
     public bool VerifyIfTheLastPlayedTypeIs(string type)
     {
         return gameStructureInfo.LastPlayedType == type;
     }
     
-
-    public bool TheCardHadStunValue()
-    {
-        return int.Parse(_card.StunValue) > 0;
-    }
-    
     public bool DealsTheMaximumDamage(int maximumDamage)
     {
-        int damage = int.Parse(_card.Damage) + gameStructureInfo.BonusDamage * gameStructureInfo.IsJockeyingForPositionBonusDamageActive;
+        int damage = GetDamageProducedByTheCard() + gameStructureInfo.BonusDamage * gameStructureInfo.IsJockeyingForPositionBonusDamageActive;
         int totalDamage = gameStructureInfo.PlayCard.GetDamageProducedCheckingMankindSuperStarAbility(damage, gameStructureInfo.ControllerOpponentPlayer);
         
         return totalDamage <= maximumDamage;
+    }
+    
+    public void ApplyReversalEffect()
+    {
+        _card.ApplyReversalEffect(gameStructureInfo);
     }
     
     public void ApplyActionEffect()
@@ -156,8 +154,4 @@ public class CardController
         _card.ApplyManeuverEffect(gameStructureInfo, playedCardController);
     }
     
-    public bool CanThisCardBePlayed()
-    {   
-        return _card.CheckIfCardCanBePlayed(gameStructureInfo);
-    }
 }

@@ -40,7 +40,7 @@ public class PlayReversalHand
         {   
             CardController cardController = possibleReversals[indexReversalCard];
             MoveAndPrintCardForReversal(cardController);
-            cardController.ReversalEffect();
+            cardController.ApplyReversalEffect();
         }
     }
 

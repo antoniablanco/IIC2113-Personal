@@ -104,7 +104,7 @@ public class Effects
     private string ShowOneFaceDownCard(int currentDamage, int totalDamage, Player player)
     {
         CardController flippedCardController = gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
-        string flippedCardString = gameStructureInfo.CardsVisualizor.GetStringCardInfo(flippedCardController);
+        string flippedCardString = flippedCardController.GetStringCardInfo();
         gameStructureInfo.View.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
         return flippedCardString;
     }
@@ -162,7 +162,8 @@ public class Effects
         for (int currentDamage = 0; currentDamage < totalDamage; currentDamage++)
         {
             CardController flippedCardController = gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
-            string flippedCardString = gameStructureInfo.CardsVisualizor.GetStringCardInfo(flippedCardController);
+            //string flippedCardString = gameStructureInfo.CardsVisualizor.GetStringCardInfo(flippedCardController);
+            string flippedCardString = flippedCardController.GetStringCardInfo();
         
             gameStructureInfo.View.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage+1, totalDamage);
         }
