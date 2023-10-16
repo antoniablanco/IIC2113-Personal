@@ -38,7 +38,7 @@ public class PlayCard
 
     private void StartPlayCardAction(int selectedCard)
     {
-        Tuple<CardController, int> playedCardController = GetCardPlayed(selectedCard);
+        System.Tuple<CardController, int> playedCardController = GetCardPlayed(selectedCard);
         CheckingJockeyForPosition(playedCardController.Item1);
         SetLastPlayedCardInfo(playedCardController);
         SayThatTheyAreGoingToPlayACard(playedCardController.Item1, playedCardController.Item2);

@@ -105,9 +105,9 @@ public class PlayerController
         player.Superestar.UsingAutomaticSuperAbilityAtTheStartOfTheTurn(gameStructureInfo);
     }
     
-    public void BlockinSuperAbilityBecauseIsJustAtTheStartOfTheTurn()
+    public void BlockSuperAbilityBecauseIsJustAtTheStartOfTheTurn()
     {
-        player.Superestar.BlockinSuperAbilityBecauseIsJustAtTheStartOfTheTurn(gameStructureInfo);
+        player.Superestar.BlockSuperAbilityBecauseIsJustAtTheStartOfTheTurn(gameStructureInfo);
     }
     
     public void TheSuperStarHasUsedHisSuperAbilityThisTurn()

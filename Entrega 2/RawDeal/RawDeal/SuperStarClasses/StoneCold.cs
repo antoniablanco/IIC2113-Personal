@@ -17,8 +17,8 @@ public class StoneCold: SuperStar
         gameStructureInfo.ControllerCurrentPlayer.TheSuperStarHasUsedHisSuperAbilityThisTurn();
         View.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
         
-        gameStructureInfo.Effects.StealCards(gameStructureInfo.ControllerCurrentPlayer,
-            gameStructureInfo.GetCurrentPlayer(), 1);
+        const int numberOfCardsToSteal = 1;
+        gameStructureInfo.Effects.StealCards(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(), numberOfCardsToSteal);
         gameStructureInfo.Effects.DiscardingCardsFromHandToArsenal(gameStructureInfo.ControllerCurrentPlayer);
     }
 

@@ -40,7 +40,7 @@ public abstract class SuperStar
         
     }
     
-    public virtual void BlockinSuperAbilityBecauseIsJustAtTheStartOfTheTurn(GameStructureInfo gameStructureInfo)
+    public virtual void BlockSuperAbilityBecauseIsJustAtTheStartOfTheTurn(GameStructureInfo gameStructureInfo)
     {
         
     }
