@@ -17,31 +17,16 @@ public class PlayersGenerator
     {
         this.gameStructureInfo = gameStructureInfo;
         _deckFolder = deckFolder;
-        //_cardGenerator.gameStructureInfo = gameStructureInfo;
         CreatePlayers();
     }
 
     private void CreatePlayers()
-    {
-        PlayerController playerUno = CreateOnePlayer();
-        PlayerController playerDos = CreateOnePlayer();
+    {   
+        var (totalCards, totalSuperStars) = GetTotalCardsAndSuperStars();
+        PlayerController playerUno = CreateOnePlayer(totalCards, totalSuperStars);
+        PlayerController playerDos = CreateOnePlayer(totalCards, totalSuperStars);
         InitializeGameVariables(playerUno, playerDos);
         InitializePlayerHands();
-    }
-    
-    private PlayerController CreateOnePlayer()
-    {
-        var (totalCards, totalSuperStars) = GetTotalCardsAndSuperStars();
-        Player player = InitializePlayer(totalCards, totalSuperStars);
-        DeckValidator deckValidator = new DeckValidator(player);
-        
-        if (!deckValidator.IsValidDeck())
-        {
-            throw new InvalidDeckException("The Deck Is Not Valid");
-        }
-
-        PlayerController playerController = InitializePlayerController(player);
-        return playerController;
     }
     
     private (List<CardJson>, List<SuperStarJSON>) GetTotalCardsAndSuperStars() 
@@ -52,6 +37,17 @@ public class PlayersGenerator
         return (totalCards, totalSuperStars);
     }
     
+    private PlayerController CreateOnePlayer(List<CardJson> totalCards, List<SuperStarJSON> totalSuperStars)
+    {
+        Player player = InitializePlayer(totalCards, totalSuperStars);
+        DeckValidator deckValidator = new DeckValidator(player);
+        
+        if (!deckValidator.IsValidDeck())
+            throw new InvalidDeckException("The Deck Is Not Valid");
+
+        return InitializePlayerController(player);
+    }
+    
     private Player InitializePlayer(List<CardJson> totalCards, List<SuperStarJSON> totalSuperStars) 
     {
         string stringPlayer = gameStructureInfo.View.AskUserToSelectDeck(_deckFolder);
@@ -59,7 +55,6 @@ public class PlayersGenerator
         SuperStar? superStarPlayer = _superStartGenerator.CreateSuperStar(stringPlayer, totalSuperStars, gameStructureInfo.View);
         
         Player playerReturn = new Player(playerCardList, superStarPlayer);
-
         SavePlayerInGameStructureInfo(playerReturn);
         
         return playerReturn;
