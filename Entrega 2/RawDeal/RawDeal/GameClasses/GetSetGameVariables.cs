@@ -97,4 +97,35 @@ public class GetSetGameVariables
     {   
         return gameStructureInfo.WinnerPlayer.NameOfSuperStar();
     }
+
+    public void ActivateJockeyingForPositionBonusFortitud()
+    {
+        gameStructureInfo.IsJockeyingForPositionBonusFortitudActive = 1;
+    }
+    
+    public void ActivateJockeyingForPositionBonusDamage()
+    {
+        gameStructureInfo.IsJockeyingForPositionBonusDamageActive = 1;
+    }
+    
+    public void DesactivateJockeyingForPositionBonusFortitud()
+    {
+        gameStructureInfo.IsJockeyingForPositionBonusFortitudActive = 0;
+    }
+    
+    public void DesactivateJockeyingForPositionBonusDamage()
+    {
+        gameStructureInfo.IsJockeyingForPositionBonusDamageActive = 0;
+    }
+
+    public int AddBonusFortitud()
+    {
+        return gameStructureInfo.BonusFortitude * gameStructureInfo.IsJockeyingForPositionBonusFortitudActive;
+    }
+
+    public int AddBonusDamage()
+    {
+        return gameStructureInfo.BonusDamage * gameStructureInfo.IsJockeyingForPositionBonusDamageActive;
+    }
+    
 }

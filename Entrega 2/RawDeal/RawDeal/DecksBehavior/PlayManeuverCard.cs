@@ -92,7 +92,7 @@ public class PlayManeuverCard
     
     private int GetDamageProduced(CardController playedCardController)
     {   
-        int damage = playedCardController.GetDamageProducedByTheCard() + gameStructureInfo.BonusDamage*gameStructureInfo.IsJockeyingForPositionBonusDamageActive;
+        int damage = playedCardController.GetDamageProducedByTheCard() + gameStructureInfo.GetSetGameVariables.AddBonusDamage();
         int totalDamage = gameStructureInfo.PlayCard.GetDamageProducedCheckingMankindSuperStarAbility(damage, gameStructureInfo.ControllerOpponentPlayer);
         return totalDamage;
     }

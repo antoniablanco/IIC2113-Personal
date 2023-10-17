@@ -111,7 +111,7 @@ public class Effects
 
     public int GetDamageProducedByReversalCardWithNotEspecificDamage()
     {
-        int totalDamage = gameStructureInfo.LastPlayedCard.GetDamageProducedByTheCard() + gameStructureInfo.BonusDamage*gameStructureInfo.IsJockeyingForPositionBonusDamageActive;
+        int totalDamage = gameStructureInfo.LastPlayedCard.GetDamageProducedByTheCard() + gameStructureInfo.GetSetGameVariables.AddBonusDamage();
         if (IsTheSuperStarMankind(gameStructureInfo.ControllerOpponentPlayer) || IsTheSuperStarMankind(gameStructureInfo.ControllerCurrentPlayer))
             totalDamage -= 1;
         return totalDamage;
