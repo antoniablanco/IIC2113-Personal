@@ -21,7 +21,8 @@ public class SuperStartGenerator
                  select (SuperStar)Activator.CreateInstance(super.Value,super.Key.Name, super.Key.Logo, super.Key.HandSize, super.Key.SuperstarValue, super.Key.SuperstarAbility, view))
             return superstar;
 
-        return null;
+        throw new InvalidOperationException("SuperStar especifico no encontrado.");
+
     }
 
     private string GetSuperStarName(string deck)

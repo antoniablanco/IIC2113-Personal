@@ -61,8 +61,8 @@ public class PlayersGenerator
     }
 
     private void SavePlayerInGameStructureInfo(Player player)
-    {
-        if (gameStructureInfo.PlayerOne == null)
+    {   
+        if (gameStructureInfo.PlayerOne is null)
             gameStructureInfo.PlayerOne = player;
         else
             gameStructureInfo.PlayerTwo = player;

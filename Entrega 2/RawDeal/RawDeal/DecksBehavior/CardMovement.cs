@@ -7,19 +7,22 @@ public class CardMovement
 {
     public CardController? TransferOfUnselectedCard(List<CardController> sourceList, List<CardController> destinationList, bool moveToStart)
     {
-        if (sourceList.Count == 0) return null;
-    
-        int index = moveToStart ? 0 : sourceList.Count - 1;
-        CardController cardControllerMoved = sourceList[index];
-    
-        sourceList.RemoveAt(index);
-        destinationList.Insert(moveToStart ? 0 : destinationList.Count, cardControllerMoved);
-    
-        return cardControllerMoved;
+        if (sourceList.Count > 0)
+        {
+            int index = moveToStart ? 0 : sourceList.Count - 1;
+            CardController cardControllerMoved = sourceList[index];
+
+            sourceList.RemoveAt(index);
+            destinationList.Insert(moveToStart ? 0 : destinationList.Count, cardControllerMoved);
+
+            return cardControllerMoved;
+        }
+
+        throw new InvalidOperationException("No se puede transferir una tarjeta porque la lista de origen está vacía.");
     }
 
     private void CardTransferChoosingWhichOneToChange(CardController cardController, List<CardController> sourceList, List<CardController> destinationList, string moveToStart)
-    {   
+    {
         if (sourceList.Count > 0)
         {
             int index = (moveToStart == "Start") ? 0 : destinationList.Count;
@@ -37,7 +40,6 @@ public class CardMovement
     {
         return TransferOfUnselectedCard(player.CardsArsenal, player.CardsRingSide, moveToStart);
     }
-    
     
     public void TransferChoosinCardFromHandToRingArea(Player player, CardController cardController, string moveToStart = "End")
     {   
