@@ -107,7 +107,7 @@ public class Game
                 gameStructureInfo.PlayCard.ActionPlayCard();
                 break;
             case NextPlay.EndTurn:
-                gameStructureInfo.GetSetGameVariables.UpdateVariablesAtEndOfTurn();
+                gameStructureInfo.EndTurnManager.UpdateVariablesAtEndOfTurn();
                 break;
             case NextPlay.GiveUp:
                 gameStructureInfo.GetSetGameVariables.SetVariablesAfterGaveUp();

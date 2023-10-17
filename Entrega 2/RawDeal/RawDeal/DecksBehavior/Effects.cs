@@ -195,6 +195,6 @@ public class Effects
     
     public void EndTurn()
     {
-        gameStructureInfo.GetSetGameVariables.UpdateVariablesAtEndOfTurn();
+        gameStructureInfo.EndTurnManager.UpdateVariablesAtEndOfTurn();
     }
 }

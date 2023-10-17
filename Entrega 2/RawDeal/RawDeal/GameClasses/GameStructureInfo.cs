@@ -8,6 +8,7 @@ namespace RawDeal.GameClasses;
 public class GameStructureInfo
 {
     public View View;
+    public GetSetGameVariables GetSetGameVariables;
     public CardsVisualizor CardsVisualizor = new CardsVisualizor();
     public CardMovement CardMovement =new CardMovement();
     public PlayCard PlayCard;
@@ -19,11 +20,11 @@ public class GameStructureInfo
     public PlayerController ControllerOpponentPlayer;
     public PlayerController WinnerPlayer;
     public PlayerController WhoActivateJockeyingForPosition;
-    public GetSetGameVariables GetSetGameVariables;
     public Effects Effects;
     public CardController LastPlayedCard;
     public ViewDecks ViewDecks;
     public BonusManager BonusManager;
+    public EndTurnManager EndTurnManager;
     public bool IsTheGameStillPlaying = true;
     public bool IsTheTurnBeingPlayed = true;
     public string LastPlayedType;

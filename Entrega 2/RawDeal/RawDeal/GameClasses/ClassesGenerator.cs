@@ -20,6 +20,7 @@ public class ClassesGenerator
         CreateEffectsClass();
         CreateViewDecksClass();
         CreateBonusManagerClass();
+        CreateEndTurnManagerClass();
     }
     
     private void CreateGetSetGameVariablesClass()
@@ -52,4 +53,9 @@ public class ClassesGenerator
         gameStructureInfo.BonusManager = bonusManager;
     }
 
+    private void CreateEndTurnManagerClass()
+    {
+        EndTurnManager endTurnManager = new EndTurnManager(gameStructureInfo);
+        gameStructureInfo.EndTurnManager = endTurnManager;
+    }
 }
