@@ -25,9 +25,10 @@ public class PlayCard
     }
     
     private List<string> GetPossibleCardsToPlayString()
-    {
+    {   
         List<CardController> possibleCardsToPlay = gameStructureInfo.ControllerCurrentPlayer.CardsAvailableToPlay();
-        List<string> cardsStrings = gameStructureInfo.CardsVisualizor.CreateStringPlayedCardListForNotReversalType(possibleCardsToPlay, gameStructureInfo.ControllerCurrentPlayer);
+        List<Tuple<CardController, int>> possibleCardsAndTheirTypes = gameStructureInfo.ControllerCurrentPlayer.GetPosiblesCardsToPlayAndTheirTypeIndex(possibleCardsToPlay);
+        List<string> cardsStrings = gameStructureInfo.CardsVisualizor.GetStringCardsForNotReversalType(possibleCardsAndTheirTypes);
         return cardsStrings;
     }
     

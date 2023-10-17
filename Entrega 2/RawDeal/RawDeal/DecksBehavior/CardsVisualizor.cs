@@ -26,41 +26,19 @@ public class CardsVisualizor
     private List<String> GetStringPlayedCardForReversalType(CardController cardController)
     {
         int[] indexes = Enumerable.Range(0, cardController.GetCardTypes().Count()).ToArray();
-        List<string> stringList = new List<string>();
-        foreach (var index in indexes)
-        {   
-            if (cardController.GetCardType(index) == "Reversal")
-                stringList.Add(cardController.GetStringPlayedInfo(index));
-        }
 
-        return stringList;
+        return (from index in indexes where cardController.GetCardType(index) == "Reversal" 
+            select cardController.GetStringPlayedInfo(index)).ToList();
 
     }
     
-    public List<string> CreateStringPlayedCardListForNotReversalType(List<CardController> cardsInSelectedSet, PlayerController controllerCurrentPlayer)
+    public List<String> GetStringCardsForNotReversalType(List<Tuple<CardController, int>> cardsInSelectedSet)
     {
         List<string> stringList = new List<string>();
 
-        foreach (var cardController in cardsInSelectedSet)
-        {
-            stringList.AddRange(GetStringPlayedCardForNotReversalType(cardController, controllerCurrentPlayer));
-        }
+        foreach (var card in cardsInSelectedSet)
+            stringList.Add(card.Item1.GetStringPlayedInfo(card.Item2));
 
         return stringList;
     }
-
-    private List<String> GetStringPlayedCardForNotReversalType(CardController cardController, PlayerController controllerCurrentPlayer)
-    {
-        int[] indexes = Enumerable.Range(0, cardController.GetCardTypes().Count()).ToArray();
-        List<string> stringList = new List<string>();
-        foreach (var index in indexes)
-        {   
-            if (cardController.GetCardType(index) != "Reversal" && cardController.GetCardFortitude(cardController.GetCardType(index)) <= controllerCurrentPlayer.FortitudRating())
-                stringList.Add(cardController.GetStringPlayedInfo(index));
-        }
-
-        return stringList;
-    }
-    
-    
 }
