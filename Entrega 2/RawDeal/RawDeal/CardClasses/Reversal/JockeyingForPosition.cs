@@ -45,10 +45,10 @@ public class JockeyingForPosition: Card
         switch (effectToPerform)
         {
             case SelectedEffect.NextGrappleIsPlus4D:
-                gameStructureInfo.BonusManager.ActivateJockeyingForPositionBonusDamage();
+                gameStructureInfo.BonusManager.ActivateBonus("JockeyingDamage");
                 break;
             case SelectedEffect.NextGrapplesReversalIsPlus8F:
-                gameStructureInfo.BonusManager.ActivateJockeyingForPositionBonusFortitud();
+                gameStructureInfo.BonusManager.ActivateBonus("JockeyingFortitud");
                 break;
         }
     }

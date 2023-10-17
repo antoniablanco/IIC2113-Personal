@@ -10,34 +10,40 @@ public class BonusManager
         this.gameStructureInfo = gameStructureInfo;
     }
     
-    public void ActivateJockeyingForPositionBonusFortitud()
+    public void ActivateBonus(string type)
     {
-        gameStructureInfo.IsJockeyingForPositionBonusFortitudActive = 1;
+        switch (type)
+        {
+            case "JockeyingFortitud":
+                gameStructureInfo.IsJockeyingForPositionBonusFortitudActive = 1;
+                break;
+            case "JockeyingDamage":
+                gameStructureInfo.IsJockeyingForPositionBonusDamageActive = 1;
+                break;
+        }
     }
     
-    public void ActivateJockeyingForPositionBonusDamage()
+    public void DeactivateBonus(string type)
     {
-        gameStructureInfo.IsJockeyingForPositionBonusDamageActive = 1;
+        switch (type)
+        {
+            case "JockeyingFortitud":
+                gameStructureInfo.IsJockeyingForPositionBonusFortitudActive = 0;
+                break;
+            case "JockeyingDamage":
+                gameStructureInfo.IsJockeyingForPositionBonusDamageActive = 0;
+                break;
+        }
     }
     
-    public void DesactivateJockeyingForPositionBonusFortitud()
+    public int AddBonus(string type)
     {
-        gameStructureInfo.IsJockeyingForPositionBonusFortitudActive = 0;
-    }
-    
-    public void DesactivateJockeyingForPositionBonusDamage()
-    {
-        gameStructureInfo.IsJockeyingForPositionBonusDamageActive = 0;
-    }
-
-    public int AddBonusFortitud()
-    {
-        return gameStructureInfo.BonusFortitude * gameStructureInfo.IsJockeyingForPositionBonusFortitudActive;
-    }
-
-    public int AddBonusDamage()
-    {
-        return gameStructureInfo.BonusDamage * gameStructureInfo.IsJockeyingForPositionBonusDamageActive;
+        return type switch 
+        {
+            "JockeyingFortitud" => gameStructureInfo.BonusFortitude * gameStructureInfo.IsJockeyingForPositionBonusFortitudActive,
+            "JockeyingDamage" => gameStructureInfo.BonusDamage * gameStructureInfo.IsJockeyingForPositionBonusDamageActive,
+            _ => 0
+        };
     }
     
     public void AddingOneTurnJockeyingForPosition()

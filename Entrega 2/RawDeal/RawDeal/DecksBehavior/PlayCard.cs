@@ -70,8 +70,8 @@ public class PlayCard
     
     private void DesactivateJockeyForPositionEffect()
     {
-        gameStructureInfo.BonusManager.DesactivateJockeyingForPositionBonusDamage();
-        gameStructureInfo.BonusManager.DesactivateJockeyingForPositionBonusFortitud();
+        gameStructureInfo.BonusManager.DeactivateBonus("JockeyingFortitud");
+        gameStructureInfo.BonusManager.DeactivateBonus("JockeyingDamage");
     }
     
     private void SetLastPlayedCardInfo(Tuple<CardController, int> playedCardController)
