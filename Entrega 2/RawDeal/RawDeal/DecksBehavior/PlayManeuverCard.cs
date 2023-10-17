@@ -52,7 +52,7 @@ public class PlayManeuverCard
                 UseStunValueOpcion();
             }
             else if (!CheckCanReceiveDamage(controllerOpponentPlayer))
-            {
+            {   
                 gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning(controllerOpponentPlayer);
                 break;
             }

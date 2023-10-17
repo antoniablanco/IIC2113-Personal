@@ -29,28 +29,22 @@ public class GetSetGameVariables
         return gameStructureInfo.IsTheTurnBeingPlayed;
     }
     
-    public void SetVariablesAfterWinning(PlayerController loserPlayer)
-    {   
-        gameStructureInfo.WinnerPlayer =(gameStructureInfo.ControllerCurrentPlayer == loserPlayer) ?  gameStructureInfo.ControllerOpponentPlayer : gameStructureInfo.ControllerCurrentPlayer;
-        gameStructureInfo.IsTheGameStillPlaying = false;
-        DeclareEndOfTurn();
-    }
-
-    private void DeclareEndOfTurn()
-    {
-        gameStructureInfo.IsTheTurnBeingPlayed = false;
-    }
-    
     public void UpdateVariablesAtEndOfTurn()
     {   
         DeclareEndOfTurn();
         if (!CheckIfPlayersHasCardsInArsenalToContinuePlaying())
         {   
-            SetVariablesAfterLosing();
+            PlayerController loserPlayer = (gameStructureInfo.ControllerCurrentPlayer.HasCardsInArsenal()) ? gameStructureInfo.ControllerOpponentPlayer : gameStructureInfo.ControllerCurrentPlayer;
+            SetVariablesAfterWinning(loserPlayer);
         }
         UpdateNumberOfPlayers();
     }
-
+    
+    private void DeclareEndOfTurn()
+    {
+        gameStructureInfo.IsTheTurnBeingPlayed = false;
+    }
+    
     private bool CheckIfPlayersHasCardsInArsenalToContinuePlaying()
     {   
         return gameStructureInfo.ControllerCurrentPlayer.HasCardsInArsenal() && gameStructureInfo.ControllerOpponentPlayer.HasCardsInArsenal();
@@ -61,10 +55,10 @@ public class GetSetGameVariables
         gameStructureInfo.ControllerCurrentPlayer = (gameStructureInfo.ControllerCurrentPlayer == gameStructureInfo.ControllerPlayerOne) ? gameStructureInfo.ControllerPlayerTwo : gameStructureInfo.ControllerPlayerOne;
         gameStructureInfo.ControllerOpponentPlayer = (gameStructureInfo.ControllerOpponentPlayer == gameStructureInfo.ControllerPlayerOne) ? gameStructureInfo.ControllerPlayerTwo : gameStructureInfo.ControllerPlayerOne;
     }
-
-    private void SetVariablesAfterLosing() 
+    
+    public void SetVariablesAfterWinning(PlayerController loserPlayer)
     {   
-        gameStructureInfo.WinnerPlayer = (gameStructureInfo.ControllerCurrentPlayer.HasCardsInArsenal()) ? gameStructureInfo.ControllerCurrentPlayer : gameStructureInfo.ControllerOpponentPlayer;
+        gameStructureInfo.WinnerPlayer =(gameStructureInfo.ControllerCurrentPlayer == loserPlayer) ?  gameStructureInfo.ControllerOpponentPlayer : gameStructureInfo.ControllerCurrentPlayer;
         gameStructureInfo.IsTheGameStillPlaying = false;
         DeclareEndOfTurn();
     }
@@ -80,48 +74,5 @@ public class GetSetGameVariables
     {   
         return gameStructureInfo.WinnerPlayer.NameOfSuperStar();
     }
-    
-    /*
-    public void ActivateJockeyingForPositionBonusFortitud()
-    {
-        gameStructureInfo.IsJockeyingForPositionBonusFortitudActive = 1;
-    }
-    
-    public void ActivateJockeyingForPositionBonusDamage()
-    {
-        gameStructureInfo.IsJockeyingForPositionBonusDamageActive = 1;
-    }
-    
-    public void DesactivateJockeyingForPositionBonusFortitud()
-    {
-        gameStructureInfo.IsJockeyingForPositionBonusFortitudActive = 0;
-    }
-    
-    public void DesactivateJockeyingForPositionBonusDamage()
-    {
-        gameStructureInfo.IsJockeyingForPositionBonusDamageActive = 0;
-    }
-
-    public int AddBonusFortitud()
-    {
-        return gameStructureInfo.BonusFortitude * gameStructureInfo.IsJockeyingForPositionBonusFortitudActive;
-    }
-
-    public int AddBonusDamage()
-    {
-        return gameStructureInfo.BonusDamage * gameStructureInfo.IsJockeyingForPositionBonusDamageActive;
-    }
-    
-    public void AddingOneTurnJockeyingForPosition()
-    {
-        gameStructureInfo.TurnCounterForJokeyingForPosition += 1;
-    }
-    
-    public void RemoveOneTurnFromJockeyingForPosition()
-    {
-        gameStructureInfo.TurnCounterForJokeyingForPosition -= 1;
-    }
-    */
-
     
 }
