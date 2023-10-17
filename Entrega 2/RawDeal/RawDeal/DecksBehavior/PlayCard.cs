@@ -18,7 +18,7 @@ public class PlayCard
     public void PlayCardAction()
     {
         int selectedCard = gameStructureInfo.View.AskUserToSelectAPlay(GetPossibleCardsToPlayString());
-        if (IsValidIndexOfCard(selectedCard))
+        if (HasSelectedAValidCard(selectedCard))
             StartPlayCardAction(selectedCard);
         else
             gameStructureInfo.BonusManager.AddingOneTurnJockeyingForPosition();
@@ -32,7 +32,7 @@ public class PlayCard
         return cardsStrings;
     }
     
-    private bool IsValidIndexOfCard(int selectedCard)
+    public bool HasSelectedAValidCard(int selectedCard)
     {
         return selectedCard != -1;
     }
