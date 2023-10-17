@@ -69,6 +69,21 @@ public class PlayerController
 
         return allTypesForCard;
     }
+
+    public List<Tuple<CardController, int>> GetPosiblesCardsForReveralAndTheirReversalTypeIndex(List<CardController> cardsInSelectedSet)
+    {
+        List<Tuple<CardController, int>> allTypesForCard = new List<Tuple<CardController, int>>();
+        
+        foreach (var cardController in cardsInSelectedSet)
+        {
+            int[] indexes = Enumerable.Range(0, cardController.GetCardTypes().Count()).ToArray();
+            allTypesForCard.AddRange(from index in indexes where cardController.GetCardType(index) == "Reversal" 
+                select new Tuple<CardController, int>(cardController, index));
+        }
+
+        return allTypesForCard;
+        
+    }
     
     public int FortitudRating()
     {
