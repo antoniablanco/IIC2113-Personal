@@ -84,6 +84,8 @@ public class PlayersGenerator
 
     private void InitializePlayerHands()
     {
-        gameStructureInfo.GameLogic.ThePlayerDrawTheirInitialsHands();
+        gameStructureInfo.ControllerPlayerOne.DrawInitialHandCards();
+        gameStructureInfo.ControllerPlayerTwo.DrawInitialHandCards();
     }
+    
 }

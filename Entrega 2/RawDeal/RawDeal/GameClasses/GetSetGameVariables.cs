@@ -51,11 +51,16 @@ public class GetSetGameVariables
     public void UpdateVariablesAtEndOfTurn()
     {   
         DeclareEndOfTurn();
-        if (!gameStructureInfo.GameLogic.CheckIfPlayersHasCardsInArsenalToContinuePlaying())
+        if (!CheckIfPlayersHasCardsInArsenalToContinuePlaying())
         {   
             SetVariablesAfterLosing();
         }
         UpdateNumberOfPlayers();
+    }
+
+    private bool CheckIfPlayersHasCardsInArsenalToContinuePlaying()
+    {   
+        return gameStructureInfo.ControllerCurrentPlayer.HasCardsInArsenal() && gameStructureInfo.ControllerOpponentPlayer.HasCardsInArsenal();
     }
     
     private void UpdateNumberOfPlayers()
@@ -86,5 +91,10 @@ public class GetSetGameVariables
     public void RemoveOneTurnFromJockeyingForPosition()
     {
         gameStructureInfo.TurnCounterForJokeyingForPosition -= 1;
+    }
+    
+    public string GetWinnerSuperstarName() 
+    {   
+        return gameStructureInfo.WinnerPlayer.NameOfSuperStar();
     }
 }

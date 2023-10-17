@@ -47,7 +47,7 @@ public class Game
         {
             PlayOneTurn();
         }
-        view.CongratulateWinner(gameStructureInfo.GameLogic.GetWinnerSuperstarName());
+        view.CongratulateWinner(gameStructureInfo.GetSetGameVariables.GetWinnerSuperstarName());
     }
 
     private void PlayOneTurn()
@@ -57,7 +57,7 @@ public class Game
         while (gameStructureInfo.GetSetGameVariables.TheTurnIsBeingPlayed())
         {   
             gameStructureInfo.GetSetGameVariables.RemoveOneTurnFromJockeyingForPosition();
-            gameStructureInfo.GameLogic.DisplayPlayerInformation();
+            DisplayPlayerInformation();
             PlayerSelectedAction();
         }
     }
@@ -71,6 +71,19 @@ public class Game
         gameStructureInfo.ControllerCurrentPlayer.BlockSuperAbilityBecauseIsJustAtTheStartOfTheTurn();
     }
 
+    private void DisplayPlayerInformation() 
+    {   
+        PlayerInfo playerUno = new PlayerInfo(gameStructureInfo.ControllerPlayerOne.NameOfSuperStar(), gameStructureInfo.ControllerPlayerOne.FortitudRating(), gameStructureInfo.ControllerPlayerOne.NumberOfCardIn("Hand"), gameStructureInfo.ControllerPlayerOne.NumberOfCardIn("Arsenal"));
+        PlayerInfo playerDos = new PlayerInfo(gameStructureInfo.ControllerPlayerTwo.NameOfSuperStar(), gameStructureInfo.ControllerPlayerTwo.FortitudRating(), gameStructureInfo.ControllerPlayerTwo.NumberOfCardIn("Hand"), gameStructureInfo.ControllerPlayerTwo.NumberOfCardIn("Arsenal"));
+        
+        List<PlayerInfo> playersListToPrint =  new List<PlayerInfo> { playerUno, playerDos };
+        
+        int numCurrentPlayer = gameStructureInfo.ControllerCurrentPlayer == gameStructureInfo.ControllerPlayerOne ? 0 : 1;
+        int numOppositePlayer = gameStructureInfo.ControllerOpponentPlayer == gameStructureInfo.ControllerPlayerOne ? 0 : 1;
+
+        gameStructureInfo.View.ShowGameInfo(playersListToPrint[numCurrentPlayer], playersListToPrint[numOppositePlayer]);
+    }
+    
     private void PlayerSelectedAction()
     {
         var activityToPerform = GetNextMove();
@@ -81,7 +94,7 @@ public class Game
                 superAbilityInformation.ActionUseSuperAbility(gameStructureInfo);
                 break;
             case NextPlay.ShowCards:
-                gameStructureInfo.GameLogic.SelectCardsToView();
+                gameStructureInfo.ViewDecks.SelectCardsToView();
                 break;
             case NextPlay.PlayCard:
                 gameStructureInfo.PlayCard.ActionPlayCard();

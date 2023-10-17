@@ -18,7 +18,7 @@ public class CreateClasses
         CreateGetSetGameVariablesClass();
         CreatePlayCardClass();
         CreateEffectsClass();
-        CreateGameLogicClass();
+        CreateViewDecksClass();
     }
     
     private void CreateGetSetGameVariablesClass()
@@ -38,11 +38,11 @@ public class CreateClasses
         Effects effects = new Effects(gameStructureInfo);
         gameStructureInfo.Effects = effects;
     }
-
-    private void CreateGameLogicClass()
+    
+    private void CreateViewDecksClass()
     {
-        GameLogic gameLogic = new GameLogic(gameStructureInfo);
-        gameStructureInfo.GameLogic = gameLogic;
+        ViewDecks viewDecks = new ViewDecks(gameStructureInfo);
+        gameStructureInfo.ViewDecks = viewDecks;
     }
 
 }

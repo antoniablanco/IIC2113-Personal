@@ -19,10 +19,10 @@ public class GameStructureInfo
     public PlayerController ControllerOpponentPlayer;
     public PlayerController WinnerPlayer;
     public PlayerController WhoActivateJockeyingForPosition;
-    public GameLogic GameLogic;
     public GetSetGameVariables GetSetGameVariables;
     public Effects Effects;
     public CardController LastPlayedCard;
+    public ViewDecks ViewDecks;
     public bool IsTheGameStillPlaying = true;
     public bool IsTheTurnBeingPlayed = true;
     public string LastPlayedType;
