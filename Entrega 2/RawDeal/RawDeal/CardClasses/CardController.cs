@@ -122,7 +122,7 @@ public class CardController
 
     public bool CanUseThisReversalCard(PlayerController controllerPlayer)
     {
-        return ((GetCardFortitude(GetCardTypes()[0]) + gameStructureInfo.GetSetGameVariables.AddBonusFortitud() <= controllerPlayer.FortitudRating()) && IsReversalType() && GetIfCardCanReversalPlayedCard());
+        return ((GetCardFortitude(GetCardTypes()[0]) + gameStructureInfo.BonusManager.AddBonusFortitud() <= controllerPlayer.FortitudRating()) && IsReversalType() && GetIfCardCanReversalPlayedCard());
     }
     
     public bool VerifyIfTheLastPlayedTypeIs(string type)
@@ -132,7 +132,7 @@ public class CardController
     
     public bool DealsTheMaximumDamage(int maximumDamage)
     {
-        int damage = GetDamageProducedByTheCard() + gameStructureInfo.GetSetGameVariables.AddBonusDamage();
+        int damage = GetDamageProducedByTheCard() + gameStructureInfo.BonusManager.AddBonusDamage();
         int totalDamage = gameStructureInfo.PlayCard.GetDamageProducedCheckingMankindSuperStarAbility(damage, gameStructureInfo.ControllerOpponentPlayer);
         
         return totalDamage <= maximumDamage;

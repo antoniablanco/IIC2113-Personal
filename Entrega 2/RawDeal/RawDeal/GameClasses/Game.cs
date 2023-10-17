@@ -25,7 +25,7 @@ public class Game
     private void CreateClasses()
     {   
         gameStructureInfo.View = view;
-        new CreateClasses(gameStructureInfo);
+        new ClassesGenerator(gameStructureInfo);
     }
     
     public void Play() 
@@ -56,7 +56,7 @@ public class Game
 
         while (gameStructureInfo.GetSetGameVariables.TheTurnIsBeingPlayed())
         {   
-            gameStructureInfo.GetSetGameVariables.RemoveOneTurnFromJockeyingForPosition();
+            gameStructureInfo.BonusManager.RemoveOneTurnFromJockeyingForPosition();
             DisplayPlayerInformation();
             PlayerSelectedAction();
         }
@@ -65,10 +65,17 @@ public class Game
     private void SetTurnStartInformation()
     {
         gameStructureInfo.ControllerCurrentPlayer.DrawCard();
-        gameStructureInfo.GetSetGameVariables.SetVariableTrueBecauseTurnStarted();
+        SetVariableTrueBecauseTurnStarted();
         view.SayThatATurnBegins(gameStructureInfo.ControllerCurrentPlayer.NameOfSuperStar());
         superAbilityInformation.TheSuperAbilityThatIsAtTheStartOfTheTurnIsUsed(gameStructureInfo);
         gameStructureInfo.ControllerCurrentPlayer.BlockSuperAbilityBecauseIsJustAtTheStartOfTheTurn();
+    }
+
+    private void SetVariableTrueBecauseTurnStarted()
+    {   
+        gameStructureInfo.IsTheTurnBeingPlayed = true;
+        gameStructureInfo.LastDamageComited = 0;
+        gameStructureInfo.ControllerCurrentPlayer.TheTurnHasJustStartTheSuperStarHasNotUsedHisSuperAbility();
     }
 
     private void DisplayPlayerInformation() 

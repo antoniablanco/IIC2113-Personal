@@ -2,12 +2,12 @@ using RawDeal.DecksBehavior;
 
 namespace RawDeal.GameClasses;
 
-public class CreateClasses
+public class ClassesGenerator
 {
     
     private GameStructureInfo gameStructureInfo;
     
-    public CreateClasses(GameStructureInfo gameStructureInfo)
+    public ClassesGenerator(GameStructureInfo gameStructureInfo)
     {
         this.gameStructureInfo = gameStructureInfo;
         Create();
@@ -19,6 +19,7 @@ public class CreateClasses
         CreatePlayCardClass();
         CreateEffectsClass();
         CreateViewDecksClass();
+        CreateBonusManagerClass();
     }
     
     private void CreateGetSetGameVariablesClass()
@@ -43,6 +44,12 @@ public class CreateClasses
     {
         ViewDecks viewDecks = new ViewDecks(gameStructureInfo);
         gameStructureInfo.ViewDecks = viewDecks;
+    }
+
+    private void CreateBonusManagerClass()
+    {
+        BonusManager bonusManager = new BonusManager(gameStructureInfo);
+        gameStructureInfo.BonusManager = bonusManager;
     }
 
 }

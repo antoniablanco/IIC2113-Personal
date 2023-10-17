@@ -21,7 +21,7 @@ public class PlayCard
         if (IsValidIndexOfCard(selectedCard))
             StartPlayCardAction(selectedCard);
         else
-            gameStructureInfo.GetSetGameVariables.AddingOneTurnJockeyingForPosition();
+            gameStructureInfo.BonusManager.AddingOneTurnJockeyingForPosition();
     }
     
     private List<string> GetPossibleCardsToPlayString()
@@ -70,8 +70,8 @@ public class PlayCard
     
     private void DesactivateJockeyForPositionEffect()
     {
-        gameStructureInfo.GetSetGameVariables.DesactivateJockeyingForPositionBonusDamage();
-        gameStructureInfo.GetSetGameVariables.DesactivateJockeyingForPositionBonusFortitud();
+        gameStructureInfo.BonusManager.DesactivateJockeyingForPositionBonusDamage();
+        gameStructureInfo.BonusManager.DesactivateJockeyingForPositionBonusFortitud();
     }
     
     private void SetLastPlayedCardInfo(Tuple<CardController, int> playedCardController)

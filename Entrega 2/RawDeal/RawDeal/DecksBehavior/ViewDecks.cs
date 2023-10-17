@@ -14,7 +14,7 @@ public class ViewDecks
     
     public void SelectCardsToView()
     {   
-        gameStructureInfo.GetSetGameVariables.AddingOneTurnJockeyingForPosition();
+        gameStructureInfo.BonusManager.AddingOneTurnJockeyingForPosition();
         var setCardsToView = gameStructureInfo.View.AskUserWhatSetOfCardsHeWantsToSee();
         switch (setCardsToView)
         {

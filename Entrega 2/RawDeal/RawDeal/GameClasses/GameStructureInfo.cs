@@ -23,6 +23,7 @@ public class GameStructureInfo
     public Effects Effects;
     public CardController LastPlayedCard;
     public ViewDecks ViewDecks;
+    public BonusManager BonusManager;
     public bool IsTheGameStillPlaying = true;
     public bool IsTheTurnBeingPlayed = true;
     public string LastPlayedType;

@@ -11,13 +11,6 @@ public class GetSetGameVariables
         this.gameStructureInfo = gameStructureInfo;
     }
     
-    public void SetVariableTrueBecauseTurnStarted()
-    {   
-        gameStructureInfo.IsTheTurnBeingPlayed = true;
-        gameStructureInfo.LastDamageComited = 0;
-        gameStructureInfo.ControllerCurrentPlayer.TheTurnHasJustStartTheSuperStarHasNotUsedHisSuperAbility();
-    }
-    
     public void CreatePlayerInitialOrder()
     {
         gameStructureInfo.ControllerCurrentPlayer = (gameStructureInfo.ControllerPlayerOne.GetSuperStarValue() < gameStructureInfo.ControllerPlayerTwo.GetSuperStarValue()) ? gameStructureInfo.ControllerPlayerTwo : gameStructureInfo.ControllerPlayerOne;
@@ -83,21 +76,12 @@ public class GetSetGameVariables
         DeclareEndOfTurn();
     }
     
-    public void AddingOneTurnJockeyingForPosition()
-    {
-        gameStructureInfo.TurnCounterForJokeyingForPosition += 1;
-    }
-    
-    public void RemoveOneTurnFromJockeyingForPosition()
-    {
-        gameStructureInfo.TurnCounterForJokeyingForPosition -= 1;
-    }
-    
     public string GetWinnerSuperstarName() 
     {   
         return gameStructureInfo.WinnerPlayer.NameOfSuperStar();
     }
-
+    
+    /*
     public void ActivateJockeyingForPositionBonusFortitud()
     {
         gameStructureInfo.IsJockeyingForPositionBonusFortitudActive = 1;
@@ -127,5 +111,17 @@ public class GetSetGameVariables
     {
         return gameStructureInfo.BonusDamage * gameStructureInfo.IsJockeyingForPositionBonusDamageActive;
     }
+    
+    public void AddingOneTurnJockeyingForPosition()
+    {
+        gameStructureInfo.TurnCounterForJokeyingForPosition += 1;
+    }
+    
+    public void RemoveOneTurnFromJockeyingForPosition()
+    {
+        gameStructureInfo.TurnCounterForJokeyingForPosition -= 1;
+    }
+    */
+
     
 }
