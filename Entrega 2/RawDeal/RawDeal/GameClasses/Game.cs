@@ -98,13 +98,13 @@ public class Game
         switch (activityToPerform)
         {
             case NextPlay.UseAbility:
-                superAbilityInformation.ActionUseSuperAbility(gameStructureInfo);
+                superAbilityInformation.UseSuperAbilityAction(gameStructureInfo);
                 break;
             case NextPlay.ShowCards:
-                gameStructureInfo.ViewDecks.SelectCardsToView();
+                gameStructureInfo.ViewDecks.SelectCardsToViewAction();
                 break;
             case NextPlay.PlayCard:
-                gameStructureInfo.PlayCard.ActionPlayCard();
+                gameStructureInfo.PlayCard.PlayCardAction();
                 break;
             case NextPlay.EndTurn:
                 gameStructureInfo.EndTurnManager.UpdateVariablesAtEndOfTurn();

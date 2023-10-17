@@ -15,7 +15,7 @@ public class PlayCard
         this.gameStructureInfo = gameStructureInfo;
     }
     
-    public void ActionPlayCard()
+    public void PlayCardAction()
     {
         int selectedCard = gameStructureInfo.View.AskUserToSelectAPlay(GetPossibleCardsToPlayString());
         if (IsValidIndexOfCard(selectedCard))

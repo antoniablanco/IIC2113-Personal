@@ -10,7 +10,7 @@ public class SuperAbilityInformation
         gameStructureInfo.ControllerCurrentPlayer.UsingAutomaticSuperAbility();
     }
     
-    public void ActionUseSuperAbility(GameStructureInfo gameStructureInfo)
+    public void UseSuperAbilityAction(GameStructureInfo gameStructureInfo)
     {   
         gameStructureInfo.BonusManager.AddingOneTurnJockeyingForPosition();
         gameStructureInfo.ControllerCurrentPlayer.UsingElectiveSuperAbility();

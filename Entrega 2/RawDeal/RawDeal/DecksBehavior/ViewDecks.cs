@@ -11,10 +11,15 @@ public class ViewDecks
     {
         this.gameStructureInfo = gameStructureInfo;
     }
-    
-    public void SelectCardsToView()
-    {   
+
+    public void SelectCardsToViewAction()
+    {
         gameStructureInfo.BonusManager.AddingOneTurnJockeyingForPosition();
+        SelectCardsToView();
+    }
+    
+    private void SelectCardsToView()
+    {   
         var setCardsToView = gameStructureInfo.View.AskUserWhatSetOfCardsHeWantsToSee();
         switch (setCardsToView)
         {

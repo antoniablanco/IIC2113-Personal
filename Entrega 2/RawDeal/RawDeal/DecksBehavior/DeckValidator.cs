@@ -34,7 +34,12 @@ public class DeckValidator
 
         return (!(isDeckHeel && isDeckFace) && cardsMeetsQuantityCriteria);
     }
-
+    
+    private bool DeckContainsSubType(string subType)
+    {
+        return player.CardsArsenal.Any(card => card.ContainsSubtype(subType));
+    }
+    
     private bool DeckMeetsQuantityCriteria()
     {
         var dictionaryNumberByCards = new Dictionary<string, int>();
@@ -44,21 +49,17 @@ public class DeckValidator
             dictionaryNumberByCards.TryGetValue(card.GetCardTitle(), out int numberOfCardsOfThisTitle);
             dictionaryNumberByCards[card.GetCardTitle()] = numberOfCardsOfThisTitle + 1;
 
-            if (SatisfiedCount(card, numberOfCardsOfThisTitle))
+            if (ExceedsMaximumSubtypeQuantity(card, numberOfCardsOfThisTitle))
                 return false;
         }
         return true;
     }
-
-    private bool SatisfiedCount(CardController card, int numberOfCardsOfThisTitle)
+    
+    private bool ExceedsMaximumSubtypeQuantity(CardController card, int numberOfCardsOfThisTitle)
     {
         return (card.ContainsSubtype("Unique") && numberOfCardsOfThisTitle > 0) || (!card.ContainsSubtype("SetUp") && numberOfCardsOfThisTitle > 2);
     }
     
-    private bool DeckContainsSubType(string subType)
-    {
-        return player.CardsArsenal.Any(card => card.ContainsSubtype(subType));
-    }
     
     private bool DeckSatisfiesSuperStarLogo()
     {
