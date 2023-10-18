@@ -20,7 +20,7 @@ public class TheRock: SuperStar
             if (View.DoesPlayerWantToUseHisAbility(Name))
             {
                 View.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
-                gameStructureInfo.Effects.AddingCardFromRingSideToArsenal(gameStructureInfo.ControllerCurrentPlayer);
+                gameStructureInfo.Effects.AddingChoosingCardFromRingSideToArsenal(gameStructureInfo.ControllerCurrentPlayer);
             }
         }
     }

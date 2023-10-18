@@ -19,7 +19,7 @@ public class Undertaker: SuperStar
         
         const int numberOfCardsToDiscard = 2;
         gameStructureInfo.Effects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.ControllerCurrentPlayer, numberOfCardsToDiscard);
-        gameStructureInfo.Effects.AddingCardFromRingSideToHand(gameStructureInfo.ControllerCurrentPlayer);
+        gameStructureInfo.Effects.AddingChoosingCardFromRingSideToHand(gameStructureInfo.ControllerCurrentPlayer);
     }
     
 
