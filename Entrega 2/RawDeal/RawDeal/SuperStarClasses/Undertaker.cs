@@ -11,7 +11,7 @@ public class Undertaker: SuperStar
     {
         // Constructor de la clase base
     }
-    
+
     public override void UsingElectiveSuperAbility(GameStructureInfo gameStructureInfo)
     {
         gameStructureInfo.ControllerCurrentPlayer.TheSuperStarHasUsedHisSuperAbilityThisTurn();
@@ -21,7 +21,7 @@ public class Undertaker: SuperStar
         gameStructureInfo.Effects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.ControllerCurrentPlayer, numberOfCardsToDiscard);
         gameStructureInfo.Effects.AddingChoosingCardFromRingSideToHand(gameStructureInfo.ControllerCurrentPlayer);
     }
-    
+
 
     public override bool CanUseSuperAbility(PlayerController currentPlayer)
     {

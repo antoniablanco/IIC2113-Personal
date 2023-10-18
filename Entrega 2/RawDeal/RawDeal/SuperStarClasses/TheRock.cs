@@ -11,7 +11,7 @@ public class TheRock: SuperStar
     {
         // Constructor de la clase base
     }
-    
+
     public override void UsingAutomaticSuperAbilityAtTheStartOfTheTurn(GameStructureInfo gameStructureInfo)
     {  
         if (CanUseSuperAbility(gameStructureInfo.ControllerCurrentPlayer))
@@ -24,12 +24,12 @@ public class TheRock: SuperStar
             }
         }
     }
-    
+
     public override bool CanUseSuperAbility(PlayerController currentPlayer)
     {
         return currentPlayer.NumberOfCardIn("RingSide") > 0 && !currentPlayer.HasTheSuperAbilityBeenUsedThisTurn();
     }
-    
+
     public override void BlockSuperAbilityBecauseIsJustAtTheStartOfTheTurn(GameStructureInfo gameStructureInfo)
     {
         gameStructureInfo.ControllerCurrentPlayer.TheSuperStarHasUsedHisSuperAbilityThisTurn();

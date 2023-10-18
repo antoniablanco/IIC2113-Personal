@@ -5,7 +5,7 @@ namespace RawDeal.DecksBehavior;
 
 public class ViewDecks
 {
-    private GameStructureInfo gameStructureInfo;
+    private readonly GameStructureInfo gameStructureInfo;
 
     public ViewDecks(GameStructureInfo gameStructureInfo)
     {
@@ -17,9 +17,9 @@ public class ViewDecks
         gameStructureInfo.BonusManager.AddingOneTurnJockeyingForPosition();
         SelectCardsToView();
     }
-    
+
     private void SelectCardsToView()
-    {   
+    {
         var setCardsToView = gameStructureInfo.View.AskUserWhatSetOfCardsHeWantsToSee();
         switch (setCardsToView)
         {
@@ -43,8 +43,8 @@ public class ViewDecks
         }
     }
 
-    private void ActionSeeTotalCards(List<String> stringCardSet)
-    {   
+    private void ActionSeeTotalCards(List<string> stringCardSet)
+    {
         gameStructureInfo.View.ShowCards(stringCardSet);
     }
 }

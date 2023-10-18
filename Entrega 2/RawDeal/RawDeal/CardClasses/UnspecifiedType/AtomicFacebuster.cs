@@ -1,4 +1,4 @@
-namespace RawDeal.CardClass.UnspecifiedType;
+namespace RawDeal.CardClasses.UnspecifiedType;
 
 public class AtomicFacebuster: Card
 {

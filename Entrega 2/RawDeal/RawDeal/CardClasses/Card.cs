@@ -1,18 +1,10 @@
 using RawDeal.GameClasses;
 using RawDealView.Formatters;
 
-namespace RawDeal.CardClass;
+namespace RawDeal.CardClasses;
 
 public abstract class Card : IViewableCardInfo
 {
-    public string Title { get; set; }
-    public string Fortitude { get; set; }
-    public string Damage { get; set; }
-    public string StunValue { get; set; }
-    public List<string> Types { get; set; }
-    public List<string> Subtypes { get; set; }
-    public string CardEffect { get; set; }
-
     public Card(string title, List<string> types, List<string> subtypes, string fortitude, string damage,
         string stunValue, string cardEffect)
     {
@@ -24,7 +16,15 @@ public abstract class Card : IViewableCardInfo
         StunValue = stunValue;
         CardEffect = cardEffect;
     }
-    
+
+    public string Title { get; set; }
+    public string Fortitude { get; set; }
+    public string Damage { get; set; }
+    public string StunValue { get; set; }
+    public List<string> Types { get; set; }
+    public List<string> Subtypes { get; set; }
+    public string CardEffect { get; set; }
+
 
     public virtual bool CanReversalThisCard(CardController playedCardController)
     {
@@ -33,19 +33,16 @@ public abstract class Card : IViewableCardInfo
 
     public virtual void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
     {
-        
     }
 
     public virtual void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
-        
     }
-    
+
     public virtual void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
-        
     }
-    
+
     public virtual int GetFortitude(string type)
     {
         return int.Parse(Fortitude);
@@ -55,7 +52,7 @@ public abstract class Card : IViewableCardInfo
     {
         return true;
     }
-    
+
     public virtual bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo)
     {
         return true;

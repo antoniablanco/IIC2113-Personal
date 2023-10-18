@@ -1,19 +1,19 @@
-using RawDeal.CardClass;
+using RawDeal.CardClasses;
 using RawDeal.GameClasses;
 
 namespace RawDeal.PlayerClasses;
 
 public class PlayerController
 {
-    private Player player;
     private GameStructureInfo gameStructureInfo;
-    
+    private Player player;
+
     public PlayerController(Player player, GameStructureInfo gameStructureInfo)
     {
         this.player = player;
         this.gameStructureInfo = gameStructureInfo;
     }
-    
+
     public void DrawInitialHandCards()
     {
         for (var i = 0; i < player.Superestar.HandSize; i++)
@@ -21,22 +21,22 @@ public class PlayerController
             DrawCard();
         }
     }
-    
+
     public void DrawCard()
     {   
         gameStructureInfo.CardMovement.TransferOfUnselectedCard(player.CardsArsenal, player.CardsHand, false);
     }
-    
+
     public string NameOfSuperStar()
     {
         return player.Superestar.Name;
     }
-    
+
     public int GetSuperStarValue()
     {
         return player.Superestar.SuperstarValue;
     }
-    
+
     public bool HasCardsInArsenal()
     {
         return (player.CardsArsenal.Count > 0);
@@ -48,14 +48,14 @@ public class PlayerController
             .Where(card => card.GetCardFortitude(card.GetCardTypes()[0]) <= FortitudRating() && card.HasAnyTypeDifferentOfReversal() && card.CanThisCardBePlayed())
             .ToList();
     }
-    
+
     public List<CardController> CardsAvailableToReversal() 
     {
         return player.CardsHand
             .Where(card => card.GetCardFortitude(card.GetCardTypes()[0]) + gameStructureInfo.BonusManager.AddBonus("JockeyingFortitud") <= FortitudRating() && card.IsReversalType() && CanReversalPlayedCard(card))
             .ToList();
     }
-    
+
     public List<Tuple<CardController, int>> GetPosiblesCardsToPlayWithTheirTypeIndex()
     {   
         List<Tuple<CardController, int>> allTypesForCard = new List<Tuple<CardController, int>>();
@@ -84,17 +84,17 @@ public class PlayerController
         return allTypesForCard;
         
     }
-    
+
     public int FortitudRating()
     {
         return player.CardsRingArea.Sum(card => card.GetDamageProducedByTheCard());
     }
-    
+
     private bool CanReversalPlayedCard(CardController card) 
     {   
         return card.GetIfCardCanReversalPlayedCard();
     }
-    
+
     public bool TheirSuperStarCanUseSuperAbility(PlayerController currentPlayer)
     {
         return player.Superestar.CanUseSuperAbility(currentPlayer);
@@ -104,22 +104,22 @@ public class PlayerController
     {
         player.Superestar.UsingElectiveSuperAbility(gameStructureInfo);
     }
-        
+
     public void UsingAutomaticSuperAbility()
     {
         player.Superestar.UsingAutomaticSuperAbilityAtTheStartOfTheTurn(gameStructureInfo);
     }
-    
+
     public void BlockSuperAbilityBecauseIsJustAtTheStartOfTheTurn()
     {
         player.Superestar.BlockSuperAbilityBecauseIsJustAtTheStartOfTheTurn(gameStructureInfo);
     }
-    
+
     public bool HasTheSuperAbilityBeenUsedThisTurn()
     {
         return player.TheHabilityHasBeenUsedThisTurn;
     }
-    
+
     public void TheSuperStarHasUsedHisSuperAbilityThisTurn()
     {
         player.TheHabilityHasBeenUsedThisTurn = true;
@@ -129,7 +129,7 @@ public class PlayerController
     {
         player.TheHabilityHasBeenUsedThisTurn = false;
     }
-    
+
     public int NumberOfCardIn(string deck)
     {
         return deck switch
@@ -140,7 +140,7 @@ public class PlayerController
             _ => player.CardsHand.Count()
         };
     }
-    
+
     public CardController GetSpecificCardFrom(string deck, int index)
     {
         return deck switch
@@ -168,5 +168,4 @@ public class PlayerController
         List<String> stringCardOptions = gameStructureInfo.CardsVisualizor.CreateStringCardList(cardOptions);
         return (stringCardOptions, cardOptions);
     }
- 
 }

@@ -9,5 +9,4 @@ public class HHH: SuperStar
     {
         // Constructor de la clase base
     }
-    
 }

@@ -7,13 +7,13 @@ namespace RawDeal.SuperStarClasses;
 
 public abstract class SuperStar
 {
-    public string Name;
-    public string Logo;
-    public int HandSize;
-    public int SuperstarValue;
-    public string SuperstarAbility;
-    protected View View;
     protected CardsVisualizor CardsVisualizor = new CardsVisualizor();
+    public int HandSize;
+    public string Logo;
+    public string Name;
+    public string SuperstarAbility;
+    public int SuperstarValue;
+    protected View View;
 
     public SuperStar(string name, string logo, int handSize, int superstarValue, string superstarAbility, View view)
     {
@@ -34,15 +34,14 @@ public abstract class SuperStar
     {
         
     }
-    
+
     public virtual void UsingAutomaticSuperAbilityAtTheStartOfTheTurn(GameStructureInfo gameStructureInfo)
     {
         
     }
-    
+
     public virtual void BlockSuperAbilityBecauseIsJustAtTheStartOfTheTurn(GameStructureInfo gameStructureInfo)
     {
         
     }
-    
 }

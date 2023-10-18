@@ -1,15 +1,14 @@
 namespace RawDeal.GameClasses;
 
 public class BonusManager
-{   
-    
+{
     private GameStructureInfo gameStructureInfo = new GameStructureInfo();
 
     public BonusManager(GameStructureInfo gameStructureInfo)
     {
         this.gameStructureInfo = gameStructureInfo;
     }
-    
+
     public void ActivateBonus(string type)
     {
         switch (type)
@@ -22,7 +21,7 @@ public class BonusManager
                 break;
         }
     }
-    
+
     public void DeactivateBonus(string type)
     {
         switch (type)
@@ -35,7 +34,7 @@ public class BonusManager
                 break;
         }
     }
-    
+
     public int AddBonus(string type)
     {
         return type switch 
@@ -45,15 +44,14 @@ public class BonusManager
             _ => 0
         };
     }
-    
+
     public void AddingOneTurnJockeyingForPosition()
     {
         gameStructureInfo.TurnCounterForJokeyingForPosition += 1;
     }
-    
+
     public void RemoveOneTurnFromJockeyingForPosition()
     {
         gameStructureInfo.TurnCounterForJokeyingForPosition -= 1;
     }
-
 }

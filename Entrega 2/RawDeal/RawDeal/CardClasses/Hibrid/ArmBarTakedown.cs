@@ -1,6 +1,6 @@
 using RawDeal.GameClasses;
 
-namespace RawDeal.CardClass.Hibrid;
+namespace RawDeal.CardClasses.Hibrid;
 
 public class ArmBarTakedown: Card
 {
@@ -13,8 +13,10 @@ public class ArmBarTakedown: Card
     
     public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
-        gameStructureInfo.Effects.DiscardCardFromHandNotifying(playedCardController, gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.GetCurrentPlayer());
-        gameStructureInfo.Effects.StealCards( gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.GetCurrentPlayer());
+        gameStructureInfo.Effects.DiscardCardFromHandNotifying(playedCardController,
+            gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.GetCurrentPlayer());
+        gameStructureInfo.Effects.StealCards(gameStructureInfo.ControllerCurrentPlayer,
+            gameStructureInfo.GetCurrentPlayer());
     }
     
     public override void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)

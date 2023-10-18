@@ -1,6 +1,6 @@
 using RawDealView.Formatters;
 
-namespace RawDeal.CardClass;
+namespace RawDeal.CardClasses;
 
 public class CardJson: IViewableCardInfo
 {

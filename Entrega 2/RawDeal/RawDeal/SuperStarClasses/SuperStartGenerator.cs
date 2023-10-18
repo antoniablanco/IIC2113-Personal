@@ -11,7 +11,7 @@ public class SuperStartGenerator
         var superstars = JsonSerializer.Deserialize<List<SuperStarJSON>>(myJson) ;
         return superstars;
     }
-    
+
     public SuperStar? CreateSuperStar(string deck, List<SuperStarJSON> totalSuperStars, View view) 
     {
         string firstLineDeck = GetSuperStarName(deck);
@@ -65,5 +65,4 @@ public class SuperStartGenerator
 
         return superStarTypes;
     }
-
 }

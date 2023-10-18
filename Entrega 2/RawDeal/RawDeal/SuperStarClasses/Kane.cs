@@ -11,11 +11,11 @@ public class Kane: SuperStar
     {
         // Constructor de la clase base
     }
-    
+
     public override void UsingAutomaticSuperAbilityAtTheStartOfTheTurn(GameStructureInfo gameStructureInfo)
     {   
         Player player = gameStructureInfo.GetOpponentPlayer();
         View.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
-        gameStructureInfo.Effects.TakeDamage(gameStructureInfo.ControllerOpponentPlayer, player,1);
+        gameStructureInfo.DamageEffects.TakeDamage(gameStructureInfo.ControllerOpponentPlayer, player,1);
     }
 }

@@ -1,4 +1,4 @@
-using RawDeal.CardClass;
+using RawDeal.CardClasses;
 using RawDeal.DecksBehavior;
 using RawDeal.Exceptions;
 using RawDeal.GameClasses;
@@ -8,11 +8,11 @@ namespace RawDeal.PlayerClasses;
 
 public class PlayersGenerator
 {
-    private GameStructureInfo gameStructureInfo;
-    private string _deckFolder;
     private CardGenerator _cardGenerator = new CardGenerator();
+    private string _deckFolder;
     private SuperStartGenerator _superStartGenerator = new SuperStartGenerator();
-    
+    private GameStructureInfo gameStructureInfo;
+
     public PlayersGenerator(GameStructureInfo gameStructureInfo, string deckFolder)
     {
         this.gameStructureInfo = gameStructureInfo;
@@ -28,7 +28,7 @@ public class PlayersGenerator
         InitializeGameVariables(playerUno, playerDos);
         InitializePlayerHands();
     }
-    
+
     private (List<CardJson>, List<SuperStarJSON>) GetTotalCardsAndSuperStars() 
     {
         List<CardJson> totalCards = _cardGenerator.DeserializeJsonCards();
@@ -36,7 +36,7 @@ public class PlayersGenerator
     
         return (totalCards, totalSuperStars);
     }
-    
+
     private PlayerController CreateOnePlayer(List<CardJson> totalCards, List<SuperStarJSON> totalSuperStars)
     {
         Player player = InitializePlayer(totalCards, totalSuperStars);
@@ -47,7 +47,7 @@ public class PlayersGenerator
 
         return InitializePlayerController(player);
     }
-    
+
     private Player InitializePlayer(List<CardJson> totalCards, List<SuperStarJSON> totalSuperStars) 
     {
         string stringPlayer = gameStructureInfo.View.AskUserToSelectDeck(_deckFolder);
@@ -73,7 +73,7 @@ public class PlayersGenerator
         PlayerController playerController = new PlayerController(player, gameStructureInfo);
         return playerController;
     }
-    
+
     private void InitializeGameVariables(PlayerController playerOne, PlayerController playerTwo) 
     {
         gameStructureInfo.ControllerPlayerOne = playerOne;
@@ -87,5 +87,4 @@ public class PlayersGenerator
         gameStructureInfo.ControllerPlayerOne.DrawInitialHandCards();
         gameStructureInfo.ControllerPlayerTwo.DrawInitialHandCards();
     }
-    
 }

@@ -9,25 +9,25 @@ namespace RawDeal.GameClasses;
 
 public class Game
 {
-    private View view;
     private string deckFolder;
     private GameStructureInfo gameStructureInfo = new GameStructureInfo();
     private SuperAbilityInformation superAbilityInformation = new SuperAbilityInformation();
-    
-    
+    private View view;
+
+
     public Game(View view, string deckFolder)
     {
         this.view = view;
         this.deckFolder = deckFolder;
         CreateClasses();
     }
-    
+
     private void CreateClasses()
     {   
         gameStructureInfo.View = view;
         new ClassesGenerator(gameStructureInfo);
     }
-    
+
     public void Play() 
     {
         try
@@ -40,7 +40,7 @@ public class Game
             view.SayThatDeckIsInvalid();
         }
     }
-    
+
     private void RunGameGivenThatTheDecksAreValid()
     {
         while (gameStructureInfo.GetSetGameVariables.ShouldWeContinueTheGame())
@@ -90,7 +90,7 @@ public class Game
 
         gameStructureInfo.View.ShowGameInfo(playersListToPrint[numCurrentPlayer], playersListToPrint[numOppositePlayer]);
     }
-    
+
     private void PlayerSelectedAction()
     {
         var activityToPerform = GetNextMove();
@@ -128,5 +128,4 @@ public class Game
 
         return activityToPerform;
     }
-    
 }

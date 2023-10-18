@@ -1,4 +1,4 @@
-using RawDeal.CardClass;
+using RawDeal.CardClasses;
 using RawDeal.GameClasses;
 using RawDeal.PlayerClasses;
 
@@ -6,60 +6,62 @@ namespace RawDeal.DecksBehavior;
 
 public class PlayManeuverCard
 {
-    private GameStructureInfo gameStructureInfo;
-    private bool theReversalCardIsUsed = false;
-    private bool isStunValueUsed = false;
-    
+    private readonly GameStructureInfo gameStructureInfo;
+    private bool isStunValueUsed;
+    private bool theReversalCardIsUsed;
+
     public PlayManeuverCard(GameStructureInfo gameStructureInfo)
     {
         this.gameStructureInfo = gameStructureInfo;
     }
-    
+
     public void PlayCard(CardController playedCardController)
-    {   
+    {
         playedCardController.ApplyManeuverEffect(playedCardController);
         StartDamageProduceByTheCard(playedCardController);
         MoveCardHasBeenUsedToRingArea(playedCardController);
     }
-    
+
     private void StartDamageProduceByTheCard(CardController playedCardController)
     {
-        int totalDamage = GetDamageProduced(playedCardController);
-        
+        var totalDamage = GetDamageProduced(playedCardController);
+
         if (CanThePlayerReceiveDamage(totalDamage))
         {
             SayThatTheyAreGoingToReceiveDamage(totalDamage);
-            CauseDamageActionPlayCard(totalDamage, gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer());
+            CauseDamageActionPlayCard(totalDamage, gameStructureInfo.ControllerOpponentPlayer,
+                gameStructureInfo.GetOpponentPlayer());
         }
     }
-    
+
     private int GetDamageProduced(CardController playedCardController)
-    {   
-        int damage = playedCardController.GetDamageProducedByTheCard() + gameStructureInfo.BonusManager.AddBonus("JockeyingDamage");
-        int totalDamage = gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(damage, gameStructureInfo.ControllerOpponentPlayer);
+    {
+        var damage = playedCardController.GetDamageProducedByTheCard() +
+                     gameStructureInfo.BonusManager.AddBonus("JockeyingDamage");
+        var totalDamage =
+            gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(damage,
+                gameStructureInfo.ControllerOpponentPlayer);
         gameStructureInfo.LastDamageComited = totalDamage;
         return totalDamage;
     }
-    
+
     private bool CanThePlayerReceiveDamage(int totalDamage)
     {
         return totalDamage > 0 && gameStructureInfo.IsTheGameStillPlaying;
     }
-    
+
     private void SayThatTheyAreGoingToReceiveDamage(int totalDamage)
     {
-        string opposingSuperStarName = gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar();
+        var opposingSuperStarName = gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar();
         gameStructureInfo.View.SayThatSuperstarWillTakeSomeDamage(opposingSuperStarName, totalDamage);
     }
-    
+
     private void CauseDamageActionPlayCard(int totalDamage, PlayerController controllerOpponentPlayer, Player player)
     {
         DeclaresWithoutUseVariablesForReversalDeck();
-        
-        for (int currentDamage = 0; currentDamage < totalDamage; currentDamage++)
-        {
+
+        for (var currentDamage = 0; currentDamage < totalDamage; currentDamage++)
             HandleDifferentOptionsForDamage(currentDamage, totalDamage, controllerOpponentPlayer, player);
-        }
     }
 
     private void DeclaresWithoutUseVariablesForReversalDeck()
@@ -68,7 +70,8 @@ public class PlayManeuverCard
         isStunValueUsed = false;
     }
 
-    private void HandleDifferentOptionsForDamage(int currentDamage, int totalDamage, PlayerController controllerOpponentPlayer, Player player)
+    private void HandleDifferentOptionsForDamage(int currentDamage, int totalDamage,
+        PlayerController controllerOpponentPlayer, Player player)
     {
         if (CheckShouldReceiveDamage(controllerOpponentPlayer))
             ShowOneFaceDownCard(currentDamage + 1, totalDamage, player, controllerOpponentPlayer);
@@ -77,20 +80,21 @@ public class PlayManeuverCard
         else if (PlayerLostDueToLackOfCardsToReceiveDamage(controllerOpponentPlayer))
             gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning(controllerOpponentPlayer);
     }
-    
+
     private bool CheckShouldReceiveDamage(PlayerController controllerOpponentPlayer)
     {
-        return (controllerOpponentPlayer.HasCardsInArsenal() && !theReversalCardIsUsed);
+        return controllerOpponentPlayer.HasCardsInArsenal() && !theReversalCardIsUsed;
     }
-    
-    private void ShowOneFaceDownCard(int currentDamage, int totalDamage, Player player, PlayerController controllerOpponentPlayer)
+
+    private void ShowOneFaceDownCard(int currentDamage, int totalDamage, Player player,
+        PlayerController controllerOpponentPlayer)
     {
-        CardController flippedCardController = gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
-        string flippedCardString = flippedCardController.GetStringCardInfo();
+        var flippedCardController = gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
+        var flippedCardString = flippedCardController.GetStringCardInfo();
         gameStructureInfo.View.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
         DeckReversal(flippedCardController, controllerOpponentPlayer);
     }
-    
+
     private void DeckReversal(CardController flippedCardController, PlayerController controllerOpponentPlayer)
     {
         theReversalCardIsUsed = flippedCardController.CanUseThisReversalCard(controllerOpponentPlayer);
@@ -101,30 +105,34 @@ public class PlayManeuverCard
             gameStructureInfo.View.SayThatCardWasReversedByDeck(controllerOpponentPlayer.NameOfSuperStar());
         }
     }
-    
+
     private bool CheckIfShouldApplyStunValue()
     {
-        return (theReversalCardIsUsed && gameStructureInfo.LastPlayedCard.TheCardHadStunValue() && !isStunValueUsed);
+        return theReversalCardIsUsed && gameStructureInfo.LastPlayedCard.TheCardHadStunValue() && !isStunValueUsed;
     }
-    
+
     private void UseStunValueOpcion()
-    {   
+    {
         isStunValueUsed = true;
-        int numberOfCardsToSteal = gameStructureInfo.View.AskHowManyCardsToDrawBecauseOfStunValue(gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar(), gameStructureInfo.LastPlayedCard.GetCardStunValue());
-        gameStructureInfo.Effects.StealCards(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer(), numberOfCardsToSteal);
+        var numberOfCardsToSteal = gameStructureInfo.View.AskHowManyCardsToDrawBecauseOfStunValue(
+            gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar(),
+            gameStructureInfo.LastPlayedCard.GetCardStunValue());
+        gameStructureInfo.Effects.StealCards(gameStructureInfo.ControllerOpponentPlayer,
+            gameStructureInfo.GetOpponentPlayer(), numberOfCardsToSteal);
     }
-    
+
     private bool PlayerLostDueToLackOfCardsToReceiveDamage(PlayerController controllerOpponentPlayer)
     {
-        return (!controllerOpponentPlayer.HasCardsInArsenal());
+        return !controllerOpponentPlayer.HasCardsInArsenal();
     }
-    
+
     private void MoveCardHasBeenUsedToRingArea(CardController playedCardController)
     {
         if (!theReversalCardIsUsed)
-            gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(gameStructureInfo.GetCurrentPlayer(), playedCardController);
+            gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(gameStructureInfo.GetCurrentPlayer(),
+                playedCardController);
         else
-            gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(gameStructureInfo.GetOpponentPlayer(), playedCardController);
+            gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(gameStructureInfo.GetOpponentPlayer(),
+                playedCardController);
     }
-
 }

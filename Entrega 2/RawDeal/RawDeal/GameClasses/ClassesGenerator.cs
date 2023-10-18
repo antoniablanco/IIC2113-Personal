@@ -1,28 +1,29 @@
 using RawDeal.DecksBehavior;
+using RawDeal.EffectsClasses;
 
 namespace RawDeal.GameClasses;
 
 public class ClassesGenerator
 {
-    
     private GameStructureInfo gameStructureInfo;
-    
+
     public ClassesGenerator(GameStructureInfo gameStructureInfo)
     {
         this.gameStructureInfo = gameStructureInfo;
         Create();
     }
-    
+
     private void Create()
     {
         CreateGetSetGameVariablesClass();
         CreatePlayCardClass();
         CreateEffectsClass();
+        CreateDamageEffectsClass();
         CreateViewDecksClass();
         CreateBonusManagerClass();
         CreateEndTurnManagerClass();
     }
-    
+
     private void CreateGetSetGameVariablesClass()
     {
         GetSetGameVariables getSetGameVariables = new GetSetGameVariables(gameStructureInfo);
@@ -39,6 +40,12 @@ public class ClassesGenerator
     {
         Effects effects = new Effects(gameStructureInfo);
         gameStructureInfo.Effects = effects;
+    }
+    
+    private void CreateDamageEffectsClass()
+    {
+        DamageEffects damageffects = new DamageEffects(gameStructureInfo);
+        gameStructureInfo.DamageEffects = damageffects;
     }
     
     private void CreateViewDecksClass()

@@ -1,6 +1,4 @@
-using RawDeal.CardClass;
-using RawDeal.PlayerClasses;
-using RawDealView.Formatters;
+using RawDeal.CardClasses;
 
 namespace RawDeal.DecksBehavior;
 
@@ -10,10 +8,10 @@ public class CardsVisualizor
     {
         return cardsInSelectedSet.Select(cardController => cardController.GetStringCardInfo()).ToList();
     }
-    
-    public List<String> GetStringCardsForSpecificType(List<Tuple<CardController, int>> cardsInSelectedSet)
+
+    public List<string> GetStringCardsForSpecificType(List<Tuple<CardController, int>> cardsInSelectedSet)
     {
-        List<string> stringList = new List<string>();
+        var stringList = new List<string>();
 
         foreach (var card in cardsInSelectedSet)
             stringList.Add(card.Item1.GetStringPlayedInfo(card.Item2));

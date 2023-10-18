@@ -10,7 +10,7 @@ public class Mankind: SuperStar
     {
         // Constructor de la clase base
     }
-    
+
     public override void UsingAutomaticSuperAbilityAtTheStartOfTheTurn(GameStructureInfo gameStructureInfo)
     {
         if (gameStructureInfo.ControllerCurrentPlayer.NumberOfCardIn("Arsenal") > 0) 
