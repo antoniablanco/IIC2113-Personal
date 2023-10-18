@@ -24,7 +24,7 @@ public class ManagerInterferes: Card
         PlayerController damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
         int damageProduce = gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(int.Parse(Damage), damagedPlayerController);
         
-        gameStructureInfo.Effects.ProduceDamage(damageProduce, damagedPlayerController,gameStructureInfo.GetCurrentPlayer());
+        gameStructureInfo.Effects.ProduceSeveralDamage(damageProduce, damagedPlayerController,gameStructureInfo.GetCurrentPlayer());
         gameStructureInfo.Effects.EndTurn();
     }
 }

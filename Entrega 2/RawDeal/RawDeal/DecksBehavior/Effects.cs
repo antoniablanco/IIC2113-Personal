@@ -77,18 +77,28 @@ public class Effects
         gameStructureInfo.CardMovement.TransferChoosinCardFromHandToArsenal(player, discardedCardController, "Start");
     }
     
-    public void ProduceDamage(int totalDamage, PlayerController controllerOpponentPlayer, Player player)
+    public void ProduceSeveralDamage(int totalDamage, PlayerController controllerOpponentPlayer, Player player)
     {
-        if (totalDamage <= 0) return;
+        if (totalDamage > 0)
+        {
+            gameStructureInfo.View.SayThatSuperstarWillTakeSomeDamage(controllerOpponentPlayer.NameOfSuperStar(), totalDamage);
         
-        gameStructureInfo.View.SayThatSuperstarWillTakeSomeDamage(controllerOpponentPlayer.NameOfSuperStar(), totalDamage);
-        for (int currentDamage = 0; currentDamage < totalDamage; currentDamage++)
-        {   
-            if (CheckIfThePlayerCanReceiveDamage(controllerOpponentPlayer))
-                ShowOneFaceDownCard(currentDamage + 1, totalDamage, player);
-            else
-                gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning(controllerOpponentPlayer);
+            for (int currentDamage = 0; currentDamage < totalDamage; currentDamage++)
+                InflictADamage(totalDamage, currentDamage, controllerOpponentPlayer, player);
         }
+    }
+
+    private bool InflictADamage(int totalDamage, int currentDamage, PlayerController controllerOpponentPlayer, Player player)
+    {
+        if (CheckIfThePlayerCanReceiveDamage(controllerOpponentPlayer))
+            ShowOneFaceDownCard(currentDamage + 1, totalDamage, player);
+        else
+        {   
+            gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning(controllerOpponentPlayer);
+            return false;
+        }
+
+        return true;
     }
     
     private bool CheckIfThePlayerCanReceiveDamage(PlayerController controllerOpponentPlayer)
@@ -124,22 +134,13 @@ public class Effects
     
     public void ColateralDamage(PlayerController controllerOpponentPlayer, Player player, int totalDamage = 1)
     {
-        if (totalDamage <= 0) return;
-        
         gameStructureInfo.View.SayThatPlayerDamagedHimself(controllerOpponentPlayer.NameOfSuperStar(), totalDamage);
         gameStructureInfo.View.SayThatSuperstarWillTakeSomeDamage(controllerOpponentPlayer.NameOfSuperStar(), totalDamage);
+        
         for (int currentDamage = 0; currentDamage < totalDamage; currentDamage++)
         {   
-            if (CheckIfThePlayerCanReceiveDamage(controllerOpponentPlayer))
-            {
-                ShowOneFaceDownCard(currentDamage + 1, totalDamage, player);
-            }
-            else
-            {
+            if (!InflictADamage(totalDamage, currentDamage, controllerOpponentPlayer, player))
                 gameStructureInfo.View.SayThatPlayerLostDueToSelfDamage(controllerOpponentPlayer.NameOfSuperStar());
-                gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning(controllerOpponentPlayer);
-                
-            }
         }
     }
 

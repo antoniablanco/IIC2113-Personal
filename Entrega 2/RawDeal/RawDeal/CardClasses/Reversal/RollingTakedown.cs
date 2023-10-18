@@ -22,7 +22,7 @@ public class RollingTakedown: Card
     {   
         PlayerController damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
         int damage = gameStructureInfo.Effects.GetDamageProducedByReversalCardWithNotEspecificDamage();
-        gameStructureInfo.Effects.ProduceDamage(damage, damagedPlayerController,gameStructureInfo.GetCurrentPlayer()); 
+        gameStructureInfo.Effects.ProduceSeveralDamage(damage, damagedPlayerController,gameStructureInfo.GetCurrentPlayer()); 
         gameStructureInfo.Effects.EndTurn();
     }
 }
