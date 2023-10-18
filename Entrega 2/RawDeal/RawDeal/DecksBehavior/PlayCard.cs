@@ -19,15 +19,14 @@ public class PlayCard
     {
         int selectedCard = gameStructureInfo.View.AskUserToSelectAPlay(GetPossibleCardsToPlayString());
         if (HasSelectedAValidCard(selectedCard))
-            StartPlayCardAction(selectedCard);
+            StartToPlayACardAction(selectedCard);
         else
             gameStructureInfo.BonusManager.AddingOneTurnJockeyingForPosition();
     }
     
     private List<string> GetPossibleCardsToPlayString()
     {   
-        List<CardController> possibleCardsToPlay = gameStructureInfo.ControllerCurrentPlayer.CardsAvailableToPlay();
-        List<Tuple<CardController, int>> possibleCardsAndTheirTypes = gameStructureInfo.ControllerCurrentPlayer.GetPosiblesCardsToPlayAndTheirTypeIndex(possibleCardsToPlay);
+        List<Tuple<CardController, int>> possibleCardsAndTheirTypes = gameStructureInfo.ControllerCurrentPlayer.GetPosiblesCardsToPlayWithTheyTypeIndex();
         List<string> cardsStrings = gameStructureInfo.CardsVisualizor.GetStringCardsForSpecificType(possibleCardsAndTheirTypes);
         return cardsStrings;
     }
@@ -37,7 +36,7 @@ public class PlayCard
         return selectedCard != -1;
     }
 
-    private void StartPlayCardAction(int selectedCard)
+    private void StartToPlayACardAction(int selectedCard)
     {
         System.Tuple<CardController, int> playedCardController = GetCardPlayed(selectedCard);
         CheckingJockeyForPosition(playedCardController.Item1);
@@ -48,9 +47,8 @@ public class PlayCard
     
     private Tuple<CardController, int> GetCardPlayed(int indexSelectedCard)
     {
-        List<CardController> possibleCardsToPlay = gameStructureInfo.ControllerCurrentPlayer.CardsAvailableToPlay();
-        List<Tuple<CardController, int>> allCardsAndTheirTypes = gameStructureInfo.ControllerCurrentPlayer.GetPosiblesCardsToPlayAndTheirTypeIndex(possibleCardsToPlay);
-
+        List<Tuple<CardController, int>> allCardsAndTheirTypes = gameStructureInfo.ControllerCurrentPlayer.GetPosiblesCardsToPlayWithTheyTypeIndex();
+        
         return allCardsAndTheirTypes[indexSelectedCard];
 
     }

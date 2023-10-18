@@ -41,8 +41,8 @@ public class PlayerController
     {
         return (player.CardsArsenal.Count > 0);
     }
-    
-    public List<CardController> CardsAvailableToPlay()
+
+    private List<CardController> CardsAvailableToPlay()
     {
         return player.CardsHand
             .Where(card => card.GetCardFortitude(card.GetCardTypes()[0]) <= FortitudRating() && card.HasAnyTypeDifferentOfReversal() && card.CanThisCardBePlayed())
@@ -56,11 +56,11 @@ public class PlayerController
             .ToList();
     }
     
-    public List<Tuple<CardController, int>> GetPosiblesCardsToPlayAndTheirTypeIndex(List<CardController> cardsInSelectedSet)
+    public List<Tuple<CardController, int>> GetPosiblesCardsToPlayWithTheyTypeIndex()
     {   
         List<Tuple<CardController, int>> allTypesForCard = new List<Tuple<CardController, int>>();
 
-        foreach (var cardController in cardsInSelectedSet)
+        foreach (var cardController in CardsAvailableToPlay())
         {
             int[] indexes = Enumerable.Range(0, cardController.GetCardTypes().Count()).ToArray();
             allTypesForCard.AddRange(from index in indexes where cardController.GetCardType(index) != "Reversal" && cardController.GetCardFortitude(cardController.GetCardType(index)) <= FortitudRating() && cardController.CanThisCardBePlayed()
@@ -70,11 +70,11 @@ public class PlayerController
         return allTypesForCard;
     }
 
-    public List<Tuple<CardController, int>> GetPosiblesCardsForReveralAndTheirReversalTypeIndex(List<CardController> cardsInSelectedSet)
-    {
+    public List<Tuple<CardController, int>> GetPosiblesCardsForReveralAndTheirReversalTypeIndex()
+    {   
         List<Tuple<CardController, int>> allTypesForCard = new List<Tuple<CardController, int>>();
         
-        foreach (var cardController in cardsInSelectedSet)
+        foreach (var cardController in CardsAvailableToReversal())
         {
             int[] indexes = Enumerable.Range(0, cardController.GetCardTypes().Count()).ToArray();
             allTypesForCard.AddRange(from index in indexes where cardController.GetCardType(index) == "Reversal" 

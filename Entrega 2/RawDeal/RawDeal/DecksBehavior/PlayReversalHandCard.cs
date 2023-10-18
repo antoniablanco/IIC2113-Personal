@@ -25,7 +25,7 @@ public class PlayReversalHandCard
 
     private bool AskWhichReversalCardWantsToUse(List<CardController> possibleReversals)
     {
-        int indexReversalCard = UserSelectReversalCard(possibleReversals);
+        int indexReversalCard = UserSelectReversalCard();
         if (gameStructureInfo.PlayCard.HasSelectedAValidCard(indexReversalCard))
         {
             PlayingReversalCard(indexReversalCard, possibleReversals);
@@ -34,9 +34,9 @@ public class PlayReversalHandCard
         return false;
     }
     
-    private int UserSelectReversalCard(List<CardController> possibleReversals)
+    private int UserSelectReversalCard()
     {   
-        List<Tuple<CardController, int>> possibleCardsAndTheirTypes = gameStructureInfo.ControllerCurrentPlayer.GetPosiblesCardsForReveralAndTheirReversalTypeIndex(possibleReversals);
+        List<Tuple<CardController, int>> possibleCardsAndTheirTypes = gameStructureInfo.ControllerOpponentPlayer.GetPosiblesCardsForReveralAndTheirReversalTypeIndex();
         List<string> possibleReversalsString = gameStructureInfo.CardsVisualizor.GetStringCardsForSpecificType(possibleCardsAndTheirTypes);
         int indexReversalCard = gameStructureInfo.View.AskUserToSelectAReversal(gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar(), possibleReversalsString);
         return indexReversalCard;
