@@ -36,23 +36,24 @@ public class Effects
     public void DiscardCardsFromHandToRingSide(PlayerController opponentPlayerController, PlayerController currentPlayerController, int cardsToDiscardCount)
     {
         for (int currentDamage = 0; currentDamage < cardsToDiscardCount; currentDamage++)
-            DiscardACardOfMyChoiceFromHandNotNotifying(opponentPlayerController,currentPlayerController, cardsToDiscardCount-currentDamage);
+        {
+            List<string> handFormatoString = opponentPlayerController.HandCardsButNotTheCardIsBeingPlayed(gameStructureInfo.LastPlayedCard).Item1;
+        
+            if (HasDamageToApply(handFormatoString.Count()))
+                DiscardACardOfMyChoiceFromHandNotNotifying(opponentPlayerController,currentPlayerController, cardsToDiscardCount-currentDamage, handFormatoString);
+        }
     }
 
-    private void DiscardACardOfMyChoiceFromHandNotNotifying(PlayerController opponentPlayerController, PlayerController currentPlayerController, int cardsToDiscardCount)
+    private void DiscardACardOfMyChoiceFromHandNotNotifying(PlayerController opponentPlayerController, PlayerController currentPlayerController, int cardsToDiscardCount, List<string> handFormatoString)
     {   
-        List<string> handFormatoString = opponentPlayerController.HandCardsButNotTheCardIsBeingPlayed(gameStructureInfo.LastPlayedCard).Item1;
-        if (handFormatoString.Count() > 0)
+        int selectedCard = gameStructureInfo.View.AskPlayerToSelectACardToDiscard(handFormatoString, opponentPlayerController.NameOfSuperStar(), currentPlayerController.NameOfSuperStar(), cardsToDiscardCount);
+        
+        if (gameStructureInfo.PlayCard.HasSelectedAValidCard(selectedCard))
         {
-            int selectedCard = gameStructureInfo.View.AskPlayerToSelectACardToDiscard(handFormatoString, opponentPlayerController.NameOfSuperStar(), currentPlayerController.NameOfSuperStar(), cardsToDiscardCount);
-            
-            if (gameStructureInfo.PlayCard.HasSelectedAValidCard(selectedCard))
-            {
-                CardController discardCardController = opponentPlayerController.HandCardsButNotTheCardIsBeingPlayed(gameStructureInfo.LastPlayedCard).Item2[selectedCard];
-                Player playerWhoDiscardCard = (opponentPlayerController == gameStructureInfo.ControllerCurrentPlayer)? gameStructureInfo.GetCurrentPlayer(): gameStructureInfo.GetOpponentPlayer();
-                gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingSide(playerWhoDiscardCard, discardCardController);
-            }
-        } 
+            CardController discardCardController = opponentPlayerController.HandCardsButNotTheCardIsBeingPlayed(gameStructureInfo.LastPlayedCard).Item2[selectedCard];
+            Player playerWhoDiscardCard = (opponentPlayerController == gameStructureInfo.ControllerCurrentPlayer)? gameStructureInfo.GetCurrentPlayer(): gameStructureInfo.GetOpponentPlayer();
+            gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingSide(playerWhoDiscardCard, discardCardController);
+        }
     }
     
     public void DiscardCardFromHandNotifying(CardController playedCardController, PlayerController controllerCurrentPlayer, Player player)
