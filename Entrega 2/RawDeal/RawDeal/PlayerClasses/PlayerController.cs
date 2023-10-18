@@ -56,7 +56,7 @@ public class PlayerController
             .ToList();
     }
     
-    public List<Tuple<CardController, int>> GetPosiblesCardsToPlayWithTheyTypeIndex()
+    public List<Tuple<CardController, int>> GetPosiblesCardsToPlayWithTheirTypeIndex()
     {   
         List<Tuple<CardController, int>> allTypesForCard = new List<Tuple<CardController, int>>();
 
@@ -70,7 +70,7 @@ public class PlayerController
         return allTypesForCard;
     }
 
-    public List<Tuple<CardController, int>> GetPosiblesCardsForReveralAndTheirReversalTypeIndex()
+    public List<Tuple<CardController, int>> GetPosiblesCardsForReveralWithTheirReversalTypeIndex()
     {   
         List<Tuple<CardController, int>> allTypesForCard = new List<Tuple<CardController, int>>();
         

@@ -26,7 +26,7 @@ public class PlayCard
     
     private List<string> GetPossibleCardsToPlayString()
     {   
-        List<Tuple<CardController, int>> possibleCardsAndTheirTypes = gameStructureInfo.ControllerCurrentPlayer.GetPosiblesCardsToPlayWithTheyTypeIndex();
+        List<Tuple<CardController, int>> possibleCardsAndTheirTypes = gameStructureInfo.ControllerCurrentPlayer.GetPosiblesCardsToPlayWithTheirTypeIndex();
         List<string> cardsStrings = gameStructureInfo.CardsVisualizor.GetStringCardsForSpecificType(possibleCardsAndTheirTypes);
         return cardsStrings;
     }
@@ -47,8 +47,7 @@ public class PlayCard
     
     private Tuple<CardController, int> GetCardPlayed(int indexSelectedCard)
     {
-        List<Tuple<CardController, int>> allCardsAndTheirTypes = gameStructureInfo.ControllerCurrentPlayer.GetPosiblesCardsToPlayWithTheyTypeIndex();
-        
+        List<Tuple<CardController, int>> allCardsAndTheirTypes = gameStructureInfo.ControllerCurrentPlayer.GetPosiblesCardsToPlayWithTheirTypeIndex();
         return allCardsAndTheirTypes[indexSelectedCard];
 
     }
@@ -56,7 +55,7 @@ public class PlayCard
     private void CheckingJockeyForPosition(CardController cardController)
     {
         if (JockeyingForPositionEffectShouldNotBeActive(cardController))
-            DesactivateJockeyForPositionEffect();
+            DeactivateJockeyForPositionEffect();
     }
 
     private bool JockeyingForPositionEffectShouldNotBeActive(CardController cardController)
@@ -67,7 +66,7 @@ public class PlayCard
                  gameStructureInfo.WhoActivateJockeyingForPosition != null));
     }
     
-    private void DesactivateJockeyForPositionEffect()
+    private void DeactivateJockeyForPositionEffect()
     {
         gameStructureInfo.BonusManager.DeactivateBonus("JockeyingFortitud");
         gameStructureInfo.BonusManager.DeactivateBonus("JockeyingDamage");
@@ -122,7 +121,7 @@ public class PlayCard
         playActionCard.PlayCard(playedCardController);
     }
     
-    public int GetDamageProducedCheckingMankindSuperStarAbility(int damage, PlayerController playerController)
+    public int ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(int damage, PlayerController playerController)
     {
         if (gameStructureInfo.Effects.IsTheCardWeAreReversalOfMankindSuperStart(playerController))
             damage -= 1;

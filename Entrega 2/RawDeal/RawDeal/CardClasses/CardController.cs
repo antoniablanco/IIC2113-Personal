@@ -133,7 +133,7 @@ public class CardController
     public bool DealsTheMaximumDamage(int maximumDamage)
     {
         int damage = GetDamageProducedByTheCard() + gameStructureInfo.BonusManager.AddBonus("JockeyingDamage");
-        int totalDamage = gameStructureInfo.PlayCard.GetDamageProducedCheckingMankindSuperStarAbility(damage, gameStructureInfo.ControllerOpponentPlayer);
+        int totalDamage = gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(damage, gameStructureInfo.ControllerOpponentPlayer);
         
         return totalDamage <= maximumDamage;
     }
