@@ -15,7 +15,7 @@ public class Effects
 
     public void MayStealCards(PlayerController controllerCurrentPlayer, Player player, int maximumNumberOfcardToDraw)
     {
-        if (controllerCurrentPlayer.HasCardsInArsenal())
+        if (CheckIfThePlayerCanReceiveDamage(controllerCurrentPlayer))
         {
             int numberOfcardToDraw = gameStructureInfo.View.AskHowManyCardsToDrawBecauseOfACardEffect(controllerCurrentPlayer.NameOfSuperStar(), maximumNumberOfcardToDraw);
             if (controllerCurrentPlayer.NumberOfCardIn("Arsenal") < numberOfcardToDraw)
@@ -79,7 +79,7 @@ public class Effects
     
     public void ProduceSeveralDamage(int totalDamage, PlayerController controllerOpponentPlayer, Player player)
     {
-        if (totalDamage > 0)
+        if (HasDamageToApply(totalDamage))
         {
             gameStructureInfo.View.SayThatSuperstarWillTakeSomeDamage(controllerOpponentPlayer.NameOfSuperStar(), totalDamage);
         
@@ -101,9 +101,9 @@ public class Effects
         return true;
     }
     
-    private bool CheckIfThePlayerCanReceiveDamage(PlayerController controllerOpponentPlayer)
+    private bool CheckIfThePlayerCanReceiveDamage(PlayerController controllerPlayer)
     {
-        return controllerOpponentPlayer.HasCardsInArsenal();
+        return controllerPlayer.HasCardsInArsenal();
     }
     
     private string ShowOneFaceDownCard(int currentDamage, int totalDamage, Player player)
@@ -147,9 +147,22 @@ public class Effects
     public void GetBackDamage(PlayerController controllerPlayer, Player player, int recoveredDamage = 1)
     {
         List<string> ringSideAsString = controllerPlayer.StringCardsFrom("RingSide");
+        
+        recoveredDamage = LimitRecoveryToAvailableDamage(recoveredDamage, ringSideAsString);
+
+        RecoverDamageFromRingSide(controllerPlayer, player, recoveredDamage, ringSideAsString);
+    }
+
+    private int LimitRecoveryToAvailableDamage(int recoveredDamage, List<string> ringSideAsString)
+    {
         if (ringSideAsString.Count() < recoveredDamage)
             recoveredDamage = ringSideAsString.Count();
         
+        return recoveredDamage;
+    }
+
+    private void RecoverDamageFromRingSide(PlayerController controllerPlayer, Player player, int recoveredDamage, List<string> ringSideAsString)
+    {
         for (int currentDamage = 0; currentDamage < recoveredDamage; currentDamage++)
         {   
             ringSideAsString = controllerPlayer.StringCardsFrom("RingSide");
@@ -158,18 +171,27 @@ public class Effects
             
             gameStructureInfo.CardMovement.TransferChoosinCardFromRingSideToArsenal(player, discardedCardController, "Start");
         }
-        
     }
     
     public void TakeDamage(PlayerController controllerPlayer, Player player, int totalDamage)
     {
-        if (totalDamage <= 0) return;
-        gameStructureInfo.View.SayThatSuperstarWillTakeSomeDamage(controllerPlayer.NameOfSuperStar(), totalDamage);
-            
+        if (HasDamageToApply(totalDamage))
+        {
+            gameStructureInfo.View.SayThatSuperstarWillTakeSomeDamage(controllerPlayer.NameOfSuperStar(), totalDamage);
+            ApplyDamageToPlayer(player, totalDamage);
+        }
+    }
+
+    private bool HasDamageToApply(int totalDamage)
+    {
+        return totalDamage > 0;
+    }
+
+    private void ApplyDamageToPlayer(Player player, int totalDamage)
+    {
         for (int currentDamage = 0; currentDamage < totalDamage; currentDamage++)
         {
             CardController flippedCardController = gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
-            //string flippedCardString = gameStructureInfo.CardsVisualizor.GetStringCardInfo(flippedCardController);
             string flippedCardString = flippedCardController.GetStringCardInfo();
         
             gameStructureInfo.View.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage+1, totalDamage);
