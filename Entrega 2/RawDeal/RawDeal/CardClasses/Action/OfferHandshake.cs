@@ -19,8 +19,8 @@ public class OfferHandshake: Card
             gameStructureInfo).MayStealCards(maximumNumberOfCardsToSteal);
         
         const int numberOfCardToDiscard = 1;
-        gameStructureInfo.EffectsUtils.DiscardCardsFromHandToRingSide(
-            gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.ControllerCurrentPlayer, numberOfCardToDiscard);
+        new DiscardCardsFromHandToRingSideEffect(gameStructureInfo.ControllerCurrentPlayer,
+            gameStructureInfo.ControllerCurrentPlayer, numberOfCardToDiscard, gameStructureInfo);
         
         gameStructureInfo.EffectsUtils.DiscardActionCardToRingAreButNotSaying(playedCardController,
             gameStructureInfo.GetCurrentPlayer());

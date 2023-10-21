@@ -20,7 +20,7 @@ public class ProduceDamageEffectUtils: EffectsUtils
 
     private void ProduceSeveralDamage()
     {
-        if (HasDamageToApply(totalDamage))
+        if (IsPositive(totalDamage))
         {
             gameStructureInfo.View.SayThatSuperstarWillTakeSomeDamage(controllerPlayer.NameOfSuperStar(),
                 totalDamage);

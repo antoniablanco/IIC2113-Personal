@@ -1,3 +1,4 @@
+using RawDeal.EffectsClasses;
 using RawDeal.GameClasses;
 
 namespace RawDeal.CardClasses.Maneuver;
@@ -13,11 +14,11 @@ public class Bulldog : Card
     public override void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
         const int numberOfCardToDiscardCurrentPlayer = 1;
-        gameStructureInfo.EffectsUtils.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerCurrentPlayer,
-            gameStructureInfo.ControllerCurrentPlayer, numberOfCardToDiscardCurrentPlayer);
+        new DiscardCardsFromHandToRingSideEffect(gameStructureInfo.ControllerCurrentPlayer,
+            gameStructureInfo.ControllerCurrentPlayer, numberOfCardToDiscardCurrentPlayer, gameStructureInfo);
 
         const int numberOfCardToDiscardOpponentPlayer = 1;
-        gameStructureInfo.EffectsUtils.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerOpponentPlayer,
-            gameStructureInfo.ControllerCurrentPlayer, numberOfCardToDiscardOpponentPlayer);
+        new DiscardCardsFromHandToRingSideEffect(gameStructureInfo.ControllerOpponentPlayer,
+            gameStructureInfo.ControllerCurrentPlayer, numberOfCardToDiscardOpponentPlayer, gameStructureInfo);
     }
 }

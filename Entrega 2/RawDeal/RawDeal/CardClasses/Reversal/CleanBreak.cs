@@ -19,8 +19,8 @@ public class CleanBreak : Card
     public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
     {
         const int numberOfCardToDiscard = 4;
-        gameStructureInfo.EffectsUtils.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerCurrentPlayer,
-            gameStructureInfo.ControllerCurrentPlayer, numberOfCardToDiscard);
+        new DiscardCardsFromHandToRingSideEffect(gameStructureInfo.ControllerCurrentPlayer,
+            gameStructureInfo.ControllerCurrentPlayer, numberOfCardToDiscard, gameStructureInfo);
 
         const int numberOfCardsToSteal = 1;
         

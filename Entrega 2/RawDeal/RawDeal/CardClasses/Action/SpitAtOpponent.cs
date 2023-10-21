@@ -1,3 +1,4 @@
+using RawDeal.EffectsClasses;
 using RawDeal.GameClasses;
 
 namespace RawDeal.CardClasses.Action;
@@ -14,12 +15,12 @@ public class SpitAtOpponent: Card
     public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
         const int numberOfCardToDiscardCurrentPlayer = 1;
-        gameStructureInfo.EffectsUtils.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerCurrentPlayer,
-            gameStructureInfo.ControllerCurrentPlayer, numberOfCardToDiscardCurrentPlayer);
+        new DiscardCardsFromHandToRingSideEffect(gameStructureInfo.ControllerCurrentPlayer,
+            gameStructureInfo.ControllerCurrentPlayer, numberOfCardToDiscardCurrentPlayer, gameStructureInfo);
 
         const int numberOfCardToDiscardOpponentPlayer = 4;
-        gameStructureInfo.EffectsUtils.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerOpponentPlayer,
-            gameStructureInfo.ControllerOpponentPlayer, numberOfCardToDiscardOpponentPlayer);
+        new DiscardCardsFromHandToRingSideEffect(gameStructureInfo.ControllerOpponentPlayer, 
+            gameStructureInfo.ControllerOpponentPlayer, numberOfCardToDiscardOpponentPlayer, gameStructureInfo);
 
         gameStructureInfo.EffectsUtils.DiscardActionCardToRingAreButNotSaying(playedCardController,
             gameStructureInfo.GetCurrentPlayer());

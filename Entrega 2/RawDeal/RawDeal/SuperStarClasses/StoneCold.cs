@@ -21,12 +21,21 @@ public class StoneCold: SuperStar
         const int numberOfCardsToSteal = 1;
         new StealCardEffect(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(), 
             gameStructureInfo).StealCards(numberOfCardsToSteal);
-        gameStructureInfo.EffectsUtils.DiscardingCardsFromHandToArsenal(gameStructureInfo.ControllerCurrentPlayer);
+        
+        new DiscardCardsFromHandToArsenalEffect(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo);
     }
 
 
     public override bool CanUseSuperAbility(PlayerController currentPlayer)
     {
         return (currentPlayer.NumberOfCardIn("Arsenal") > 0 && !currentPlayer.HasTheSuperAbilityBeenUsedThisTurn());
+    }
+}
+
+public class DiscardingCardsFromHandToArsenalEffect
+{
+    public DiscardingCardsFromHandToArsenalEffect(PlayerController controllerCurrentPlayer, GameStructureInfo gameStructureInfo)
+    {
+        throw new NotImplementedException();
     }
 }

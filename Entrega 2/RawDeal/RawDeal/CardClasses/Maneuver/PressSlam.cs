@@ -17,7 +17,7 @@ public class PressSlam : Card
             gameStructureInfo);
 
         const int numberOfCardToDiscard = 2;
-        gameStructureInfo.EffectsUtils.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerOpponentPlayer,
-            gameStructureInfo.ControllerOpponentPlayer, numberOfCardToDiscard);
+        new DiscardCardsFromHandToRingSideEffect(gameStructureInfo.ControllerOpponentPlayer,
+            gameStructureInfo.ControllerOpponentPlayer, numberOfCardToDiscard, gameStructureInfo);
     }
 }

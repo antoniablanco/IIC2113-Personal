@@ -19,7 +19,8 @@ public class Undertaker: SuperStar
         View.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
         
         const int numberOfCardsToDiscard = 2;
-        gameStructureInfo.EffectsUtils.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.ControllerCurrentPlayer, numberOfCardsToDiscard);
+        new DiscardCardsFromHandToRingSideEffect(gameStructureInfo.ControllerCurrentPlayer, 
+            gameStructureInfo.ControllerCurrentPlayer, numberOfCardsToDiscard, gameStructureInfo);
 
         new AddingChoosingCardFromRingSideToHandEffectUtils(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo);
     }
