@@ -1,3 +1,4 @@
+using RawDeal.EffectsClasses;
 using RawDeal.GameClasses;
 
 namespace RawDeal.CardClasses.Maneuver;
@@ -13,7 +14,7 @@ public class ChickenWing : Card
     public override void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
         const int numberOfDamageToRecover = 2;
-        gameStructureInfo.DamageEffects.GetBackDamage(gameStructureInfo.ControllerCurrentPlayer,
-            gameStructureInfo.GetCurrentPlayer(), numberOfDamageToRecover);
+        new GetBackDamageEffectUtils(gameStructureInfo.ControllerCurrentPlayer,
+            gameStructureInfo.GetCurrentPlayer(), gameStructureInfo, numberOfDamageToRecover);
     }
 }

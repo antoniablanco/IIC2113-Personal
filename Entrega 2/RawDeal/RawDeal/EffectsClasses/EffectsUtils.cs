@@ -4,33 +4,15 @@ using RawDeal.PlayerClasses;
 
 namespace RawDeal.EffectsClasses;
 
-public class Effects
+public class EffectsUtils
 {
-    private readonly GameStructureInfo gameStructureInfo = new();
-
-    public Effects(GameStructureInfo gameStructureInfo)
+    protected readonly GameStructureInfo gameStructureInfo = new();
+    
+    public EffectsUtils(GameStructureInfo gameStructureInfo)
     {
         this.gameStructureInfo = gameStructureInfo;
     }
 
-    public void MayStealCards(PlayerController controllerCurrentPlayer, Player player, int maximumNumberOfcardToDraw)
-    {
-        if (CheckIfThePlayerCanStealCards(controllerCurrentPlayer))
-        {
-            var numberOfcardToDraw = gameStructureInfo.View.AskHowManyCardsToDrawBecauseOfACardEffect(
-                controllerCurrentPlayer.NameOfSuperStar(), maximumNumberOfcardToDraw);
-            if (controllerCurrentPlayer.NumberOfCardIn("Arsenal") < numberOfcardToDraw)
-                numberOfcardToDraw = controllerCurrentPlayer.NumberOfCardIn("Arsenal");
-            StealCards(controllerCurrentPlayer, player, numberOfcardToDraw);
-        }
-    }
-
-    public void StealCards(PlayerController controllerCurrentPlayer, Player player, int numberOfcardToDraw = 1)
-    {
-        gameStructureInfo.View.SayThatPlayerDrawCards(controllerCurrentPlayer.NameOfSuperStar(), numberOfcardToDraw);
-        for (var i = 0; i < numberOfcardToDraw; i++)
-            gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToHand(player);
-    }
 
     public void DiscardCardsFromHandToRingSide(PlayerController opponentPlayerController,
         PlayerController currentPlayerController, int cardsToDiscardCount)
@@ -90,10 +72,10 @@ public class Effects
         var player = gameStructureInfo.GetCurrentPlayer();
         gameStructureInfo.CardMovement.TransferChoosinCardFromHandToArsenal(player, discardedCardController, "Start");
     }
-
-    public bool IsTheCardWeAreReversalOfMankindSuperStart(PlayerController playerController)
+    
+    public bool IsTheSuperStarMankind(PlayerController playerController)
     {
-        return IsTheSuperStarMankind(playerController);
+        return playerController.NameOfSuperStar() == "MANKIND";
     }
 
     public int GetDamageProducedByReversalCardWithNotEspecificDamage()
@@ -105,49 +87,26 @@ public class Effects
             totalDamage -= 1;
         return totalDamage;
     }
-
-    private bool IsTheSuperStarMankind(PlayerController playerController)
-    {
-        return playerController.NameOfSuperStar() == "MANKIND";
-    }
     
     private bool HasCardsToDiscard(int numberofCards)
     {
         return numberofCards > 0;
     }
     
-    private bool CheckIfThePlayerCanStealCards(PlayerController controllerPlayer)
+    protected bool HasDamageToApply(int totalDamage)
+    {
+        return totalDamage > 0;
+    }
+    
+    protected bool CheckIfThePlayerHasCardInArsenal(PlayerController controllerPlayer)
     {
         return controllerPlayer.HasCardsInArsenal();
     }
     
-    public void AddingChoosingCardFromRingSideToHand(PlayerController player)
-    {
-        var ringSideAsString = player.StringCardsFrom("RingSide");
-        var selectedCard =
-            gameStructureInfo.View.AskPlayerToSelectCardsToPutInHisHand(player.NameOfSuperStar(), 1, ringSideAsString);
-
-        var addedCardController = player.GetSpecificCardFrom("RingSide", selectedCard);
-        var playerWhoDiscardCard = player == gameStructureInfo.ControllerCurrentPlayer
-            ? gameStructureInfo.GetCurrentPlayer()
-            : gameStructureInfo.GetOpponentPlayer();
-        gameStructureInfo.CardMovement.TransferChoosinCardFromRingSideToHand(playerWhoDiscardCard, addedCardController);
-    }
-
-    public void AddingChoosingCardFromRingSideToArsenal(PlayerController playerController)
-    {
-        var ringAreaAsString = gameStructureInfo.ControllerCurrentPlayer.StringCardsFrom("RingSide");
-        var selectedCardIndex =
-            gameStructureInfo.View.AskPlayerToSelectCardsToRecover(playerController.NameOfSuperStar(), 1,
-                ringAreaAsString);
-        var discardedCardController =
-            gameStructureInfo.ControllerCurrentPlayer.GetSpecificCardFrom("RingSide", selectedCardIndex);
-        gameStructureInfo.CardMovement.TransferChoosinCardFromRingSideToArsenal(gameStructureInfo.GetCurrentPlayer(),
-            discardedCardController, "Start");
-    }
-
     public void EndTurn()
     {
         gameStructureInfo.EndTurnManager.UpdateVariablesAtEndOfTurn();
     }
+    
+    
 }

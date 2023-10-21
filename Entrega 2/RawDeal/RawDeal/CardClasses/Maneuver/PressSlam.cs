@@ -1,3 +1,4 @@
+using RawDeal.EffectsClasses;
 using RawDeal.GameClasses;
 
 namespace RawDeal.CardClasses.Maneuver;
@@ -12,11 +13,11 @@ public class PressSlam : Card
 
     public override void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
-        gameStructureInfo.DamageEffects.ColateralDamage(gameStructureInfo.ControllerCurrentPlayer,
-            gameStructureInfo.GetCurrentPlayer());
+        new ColateralDamageEffectUtils(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.GetCurrentPlayer(), 
+            gameStructureInfo);
 
         const int numberOfCardToDiscard = 2;
-        gameStructureInfo.Effects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerOpponentPlayer,
+        gameStructureInfo.EffectsUtils.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerOpponentPlayer,
             gameStructureInfo.ControllerOpponentPlayer, numberOfCardToDiscard);
     }
 }

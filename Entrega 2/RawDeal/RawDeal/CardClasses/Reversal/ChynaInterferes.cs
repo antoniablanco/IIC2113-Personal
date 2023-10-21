@@ -1,3 +1,4 @@
+using RawDeal.EffectsClasses;
 using RawDeal.GameClasses;
 
 namespace RawDeal.CardClasses.Reversal;
@@ -18,16 +19,18 @@ public class ChynaInterferes : Card
     public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
     {
         const int numberOfCardsToSteal = 2;
-        gameStructureInfo.Effects.StealCards(gameStructureInfo.ControllerOpponentPlayer,
-            gameStructureInfo.GetOpponentPlayer(), numberOfCardsToSteal);
+        
+        new StealCardEffect(gameStructureInfo.ControllerOpponentPlayer,gameStructureInfo.GetOpponentPlayer(), 
+            gameStructureInfo).StealCards(numberOfCardsToSteal);
 
         var damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
         var damageProduce =
             gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(int.Parse(Damage),
                 damagedPlayerController);
 
-        gameStructureInfo.DamageEffects.ProduceSeveralDamage(damageProduce, damagedPlayerController,
-            gameStructureInfo.GetCurrentPlayer());
-        gameStructureInfo.Effects.EndTurn();
+        new ProduceDamageEffectUtils(damageProduce, damagedPlayerController, gameStructureInfo.GetCurrentPlayer(),
+            gameStructureInfo);
+        
+        gameStructureInfo.EffectsUtils.EndTurn();
     }
 }

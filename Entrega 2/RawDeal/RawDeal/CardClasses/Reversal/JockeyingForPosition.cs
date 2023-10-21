@@ -21,7 +21,7 @@ public class JockeyingForPosition : Card
     public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
     {
         ApplyEffect(gameStructureInfo, gameStructureInfo.ControllerOpponentPlayer);
-        gameStructureInfo.Effects.EndTurn();
+        gameStructureInfo.EffectsUtils.EndTurn();
     }
 
     public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)

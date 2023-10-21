@@ -1,3 +1,4 @@
+using RawDeal.EffectsClasses;
 using RawDeal.GameClasses;
 
 namespace RawDeal.CardClasses.Action;
@@ -14,11 +15,12 @@ public class Recovery: Card
     public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {   
         const int numberOfDamageToRecover = 2;
-        gameStructureInfo.DamageEffects.GetBackDamage(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(), numberOfDamageToRecover);
+        new GetBackDamageEffectUtils(gameStructureInfo.ControllerCurrentPlayer,
+            gameStructureInfo.GetCurrentPlayer(), gameStructureInfo, numberOfDamageToRecover);
         
-        const int numberOfCardsToSteal = 1;
-        gameStructureInfo.Effects.StealCards(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(), numberOfCardsToSteal);
+        new StealCardEffect(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(), 
+            gameStructureInfo).StealCards();
         
-        gameStructureInfo.Effects.DiscardActionCardToRingAreButNotSaying(playedCardController, gameStructureInfo.GetCurrentPlayer());
+        gameStructureInfo.EffectsUtils.DiscardActionCardToRingAreButNotSaying(playedCardController, gameStructureInfo.GetCurrentPlayer());
     }
 }

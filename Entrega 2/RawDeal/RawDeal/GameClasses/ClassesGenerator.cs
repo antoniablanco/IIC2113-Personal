@@ -18,7 +18,6 @@ public class ClassesGenerator
         CreateGetSetGameVariablesClass();
         CreatePlayCardClass();
         CreateEffectsClass();
-        CreateDamageEffectsClass();
         CreateViewDecksClass();
         CreateBonusManagerClass();
         CreateEndTurnManagerClass();
@@ -38,14 +37,8 @@ public class ClassesGenerator
 
     private void CreateEffectsClass()
     {
-        Effects effects = new Effects(gameStructureInfo);
-        gameStructureInfo.Effects = effects;
-    }
-    
-    private void CreateDamageEffectsClass()
-    {
-        DamageEffects damageffects = new DamageEffects(gameStructureInfo);
-        gameStructureInfo.DamageEffects = damageffects;
+        EffectsUtils effectsUtils = new EffectsUtils(gameStructureInfo);
+        gameStructureInfo.EffectsUtils = effectsUtils;
     }
     
     private void CreateViewDecksClass()

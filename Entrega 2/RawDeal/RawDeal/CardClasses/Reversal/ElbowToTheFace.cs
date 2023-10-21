@@ -1,3 +1,4 @@
+using RawDeal.EffectsClasses;
 using RawDeal.GameClasses;
 
 namespace RawDeal.CardClasses.Reversal;
@@ -23,9 +24,9 @@ public class ElbowToTheFace : Card
         var damageProduce =
             gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(int.Parse(Damage),
                 damagedPlayerController);
-
-        gameStructureInfo.DamageEffects.ProduceSeveralDamage(damageProduce, damagedPlayerController,
-            gameStructureInfo.GetCurrentPlayer());
-        gameStructureInfo.Effects.EndTurn();
+        
+        new ProduceDamageEffectUtils(damageProduce, damagedPlayerController, gameStructureInfo.GetCurrentPlayer(),
+            gameStructureInfo);
+        gameStructureInfo.EffectsUtils.EndTurn();
     }
 }

@@ -1,3 +1,4 @@
+using RawDeal.EffectsClasses;
 using RawDeal.GameClasses;
 using RawDeal.PlayerClasses;
 using RawDealView;
@@ -16,6 +17,8 @@ public class Kane: SuperStar
     {   
         Player player = gameStructureInfo.GetOpponentPlayer();
         View.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
-        gameStructureInfo.DamageEffects.TakeDamage(gameStructureInfo.ControllerOpponentPlayer, player,1);
+        
+        const int totalDamage = 1;
+        new TakeDamageEffectUtils(gameStructureInfo.ControllerOpponentPlayer, player, totalDamage, gameStructureInfo);
     }
 }

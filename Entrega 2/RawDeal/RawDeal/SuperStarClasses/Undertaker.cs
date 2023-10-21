@@ -1,3 +1,4 @@
+using RawDeal.EffectsClasses;
 using RawDeal.GameClasses;
 using RawDeal.PlayerClasses;
 using RawDealView;
@@ -18,8 +19,9 @@ public class Undertaker: SuperStar
         View.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
         
         const int numberOfCardsToDiscard = 2;
-        gameStructureInfo.Effects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.ControllerCurrentPlayer, numberOfCardsToDiscard);
-        gameStructureInfo.Effects.AddingChoosingCardFromRingSideToHand(gameStructureInfo.ControllerCurrentPlayer);
+        gameStructureInfo.EffectsUtils.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.ControllerCurrentPlayer, numberOfCardsToDiscard);
+
+        new AddingChoosingCardFromRingSideToHandEffectUtils(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo);
     }
 
 

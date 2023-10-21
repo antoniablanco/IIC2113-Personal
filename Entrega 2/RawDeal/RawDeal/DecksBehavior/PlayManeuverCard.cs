@@ -1,4 +1,5 @@
 using RawDeal.CardClasses;
+using RawDeal.EffectsClasses;
 using RawDeal.GameClasses;
 using RawDeal.PlayerClasses;
 
@@ -101,7 +102,7 @@ public class PlayManeuverCard
         if (theReversalCardIsUsed)
         {
             Console.WriteLine(gameStructureInfo.IsTheGameStillPlaying);
-            gameStructureInfo.Effects.EndTurn();
+            gameStructureInfo.EffectsUtils.EndTurn();
             gameStructureInfo.View.SayThatCardWasReversedByDeck(controllerOpponentPlayer.NameOfSuperStar());
         }
     }
@@ -117,8 +118,9 @@ public class PlayManeuverCard
         var numberOfCardsToSteal = gameStructureInfo.View.AskHowManyCardsToDrawBecauseOfStunValue(
             gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar(),
             gameStructureInfo.LastPlayedCard.GetCardStunValue());
-        gameStructureInfo.Effects.StealCards(gameStructureInfo.ControllerOpponentPlayer,
-            gameStructureInfo.GetOpponentPlayer(), numberOfCardsToSteal);
+        
+        new StealCardEffect(gameStructureInfo.ControllerOpponentPlayer,gameStructureInfo.GetOpponentPlayer(), 
+            gameStructureInfo).StealCards(numberOfCardsToSteal);
     }
 
     private bool PlayerLostDueToLackOfCardsToReceiveDamage(PlayerController controllerOpponentPlayer)

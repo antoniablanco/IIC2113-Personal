@@ -13,7 +13,7 @@ public class SpinningHeelKick : Card
     public override void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
         const int numberOfCardToDiscard = 1;
-        gameStructureInfo.Effects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerOpponentPlayer,
+        gameStructureInfo.EffectsUtils.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerOpponentPlayer,
             gameStructureInfo.ControllerOpponentPlayer, numberOfCardToDiscard);
     }
 }

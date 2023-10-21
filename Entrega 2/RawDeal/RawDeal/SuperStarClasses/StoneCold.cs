@@ -1,3 +1,4 @@
+using RawDeal.EffectsClasses;
 using RawDeal.GameClasses;
 using RawDeal.PlayerClasses;
 using RawDealView;
@@ -18,8 +19,9 @@ public class StoneCold: SuperStar
         View.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
         
         const int numberOfCardsToSteal = 1;
-        gameStructureInfo.Effects.StealCards(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(), numberOfCardsToSteal);
-        gameStructureInfo.Effects.DiscardingCardsFromHandToArsenal(gameStructureInfo.ControllerCurrentPlayer);
+        new StealCardEffect(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(), 
+            gameStructureInfo).StealCards(numberOfCardsToSteal);
+        gameStructureInfo.EffectsUtils.DiscardingCardsFromHandToArsenal(gameStructureInfo.ControllerCurrentPlayer);
     }
 
 

@@ -1,3 +1,4 @@
+using RawDeal.EffectsClasses;
 using RawDeal.GameClasses;
 
 namespace RawDeal.CardClasses.Maneuver;
@@ -12,11 +13,11 @@ public class FishermansSuplex : Card
 
     public override void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
-        gameStructureInfo.DamageEffects.ColateralDamage(gameStructureInfo.ControllerCurrentPlayer,
-            gameStructureInfo.GetCurrentPlayer());
+        new ColateralDamageEffectUtils(gameStructureInfo.ControllerCurrentPlayer,
+            gameStructureInfo.GetCurrentPlayer(), gameStructureInfo);
 
         const int maximumNumberOfCardsToSteal = 1;
-        gameStructureInfo.Effects.MayStealCards(gameStructureInfo.ControllerCurrentPlayer,
-            gameStructureInfo.GetCurrentPlayer(), maximumNumberOfCardsToSteal);
+        new StealCardEffect(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(), 
+            gameStructureInfo).MayStealCards(maximumNumberOfCardsToSteal);
     }
 }

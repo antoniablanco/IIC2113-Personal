@@ -13,7 +13,7 @@ public class HeadButt : Card
     public override void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
         const int numberOfCardToDiscard = 1;
-        gameStructureInfo.Effects.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerCurrentPlayer,
+        gameStructureInfo.EffectsUtils.DiscardCardsFromHandToRingSide(gameStructureInfo.ControllerCurrentPlayer,
             gameStructureInfo.ControllerCurrentPlayer, numberOfCardToDiscard);
     }
 }

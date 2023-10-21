@@ -1,3 +1,4 @@
+using RawDeal.EffectsClasses;
 using RawDeal.GameClasses;
 
 namespace RawDeal.CardClasses.Maneuver;
@@ -13,7 +14,7 @@ public class HeadlockTakedown : Card
     public override void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
         const int numberOfCardsToSteal = 1;
-        gameStructureInfo.Effects.StealCards(gameStructureInfo.ControllerOpponentPlayer,
-            gameStructureInfo.GetOpponentPlayer());
+        new StealCardEffect(gameStructureInfo.ControllerOpponentPlayer,gameStructureInfo.GetOpponentPlayer(), 
+            gameStructureInfo).StealCards(numberOfCardsToSteal);
     }
 }

@@ -1,3 +1,4 @@
+using RawDeal.EffectsClasses;
 using RawDeal.GameClasses;
 
 namespace RawDeal.CardClasses.Reversal;
@@ -17,16 +18,16 @@ public class ManagerInterferes : Card
 
     public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
     {
-        gameStructureInfo.Effects.StealCards(gameStructureInfo.ControllerOpponentPlayer,
-            gameStructureInfo.GetOpponentPlayer());
+        new StealCardEffect(gameStructureInfo.ControllerOpponentPlayer,gameStructureInfo.GetOpponentPlayer(), 
+            gameStructureInfo).StealCards();
 
         var damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
         var damageProduce =
             gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(int.Parse(Damage),
                 damagedPlayerController);
-
-        gameStructureInfo.DamageEffects.ProduceSeveralDamage(damageProduce, damagedPlayerController,
-            gameStructureInfo.GetCurrentPlayer());
-        gameStructureInfo.Effects.EndTurn();
+        
+        new ProduceDamageEffectUtils(damageProduce, damagedPlayerController, gameStructureInfo.GetCurrentPlayer(),
+            gameStructureInfo);
+        gameStructureInfo.EffectsUtils.EndTurn();
     }
 }

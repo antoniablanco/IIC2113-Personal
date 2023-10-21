@@ -1,3 +1,4 @@
+using RawDeal.EffectsClasses;
 using RawDeal.GameClasses;
 
 namespace RawDeal.CardClasses.Action;
@@ -14,14 +15,14 @@ public class OfferHandshake: Card
     public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
         const int maximumNumberOfCardsToSteal = 3;
-        gameStructureInfo.Effects.MayStealCards(
-            gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(), maximumNumberOfCardsToSteal);
+        new StealCardEffect(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(), 
+            gameStructureInfo).MayStealCards(maximumNumberOfCardsToSteal);
         
         const int numberOfCardToDiscard = 1;
-        gameStructureInfo.Effects.DiscardCardsFromHandToRingSide(
+        gameStructureInfo.EffectsUtils.DiscardCardsFromHandToRingSide(
             gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.ControllerCurrentPlayer, numberOfCardToDiscard);
         
-        gameStructureInfo.Effects.DiscardActionCardToRingAreButNotSaying(playedCardController,
+        gameStructureInfo.EffectsUtils.DiscardActionCardToRingAreButNotSaying(playedCardController,
             gameStructureInfo.GetCurrentPlayer());
     }
 }

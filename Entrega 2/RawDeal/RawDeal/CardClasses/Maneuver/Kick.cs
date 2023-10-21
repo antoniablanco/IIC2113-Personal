@@ -1,3 +1,4 @@
+using RawDeal.EffectsClasses;
 using RawDeal.GameClasses;
 
 namespace RawDeal.CardClasses.Maneuver;
@@ -12,7 +13,7 @@ public class Kick : Card
 
     public override void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
-        gameStructureInfo.DamageEffects.ColateralDamage(gameStructureInfo.ControllerCurrentPlayer,
-            gameStructureInfo.GetCurrentPlayer());
+        new ColateralDamageEffectUtils(gameStructureInfo.ControllerCurrentPlayer,
+            gameStructureInfo.GetCurrentPlayer(), gameStructureInfo);
     }
 }

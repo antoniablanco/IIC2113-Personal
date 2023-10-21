@@ -1,3 +1,4 @@
+using RawDeal.EffectsClasses;
 using RawDeal.GameClasses;
 
 namespace RawDeal.CardClasses.Maneuver;
@@ -13,7 +14,7 @@ public class DoubleLegTakedown : Card
     public override void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
         const int maximumNumberOfCardsToSteal = 1;
-        gameStructureInfo.Effects.MayStealCards(gameStructureInfo.ControllerCurrentPlayer,
-            gameStructureInfo.GetCurrentPlayer(), maximumNumberOfCardsToSteal);
+        new StealCardEffect(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(), 
+            gameStructureInfo).MayStealCards(maximumNumberOfCardsToSteal);
     }
 }

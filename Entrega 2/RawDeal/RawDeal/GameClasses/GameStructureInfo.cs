@@ -17,8 +17,7 @@ public class GameStructureInfo
     public PlayerController ControllerOpponentPlayer;
     public PlayerController ControllerPlayerOne;
     public PlayerController ControllerPlayerTwo;
-    public DamageEffects DamageEffects;
-    public Effects Effects;
+    public EffectsUtils EffectsUtils;
     public EndTurnManager EndTurnManager;
     public GetSetGameVariables GetSetGameVariables;
     public int IsJockeyingForPositionBonusDamageActive = 0;

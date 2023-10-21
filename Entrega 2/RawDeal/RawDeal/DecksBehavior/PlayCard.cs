@@ -122,7 +122,7 @@ public class PlayCard
 
     public int ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(int damage, PlayerController playerController)
     {
-        if (gameStructureInfo.Effects.IsTheCardWeAreReversalOfMankindSuperStart(playerController))
+        if (gameStructureInfo.EffectsUtils.IsTheSuperStarMankind(playerController))
             damage -= 1;
         return damage;
     }

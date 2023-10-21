@@ -1,3 +1,4 @@
+using RawDeal.EffectsClasses;
 using RawDeal.GameClasses;
 using RawDeal.PlayerClasses;
 using RawDealView;
@@ -20,7 +21,7 @@ public class TheRock: SuperStar
             if (View.DoesPlayerWantToUseHisAbility(Name))
             {
                 View.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
-                gameStructureInfo.Effects.AddingChoosingCardFromRingSideToArsenal(gameStructureInfo.ControllerCurrentPlayer);
+                new AddingChoosingCardFromRingSideToArsenalEffectUtils(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo);
             }
         }
     }

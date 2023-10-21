@@ -1,3 +1,4 @@
+using RawDeal.EffectsClasses;
 using RawDeal.GameClasses;
 
 namespace RawDeal.CardClasses.Hibrid;
@@ -23,9 +24,10 @@ public class UndertakersTombstonePiledriver: Card
 
     public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
-        gameStructureInfo.Effects.DiscardCardFromHandNotifying(playedCardController,
+        gameStructureInfo.EffectsUtils.DiscardCardFromHandNotifying(playedCardController,
             gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.GetCurrentPlayer());
-        gameStructureInfo.Effects.StealCards(gameStructureInfo.ControllerCurrentPlayer,
-            gameStructureInfo.GetCurrentPlayer());
+        
+        new StealCardEffect(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(), 
+            gameStructureInfo).StealCards();
     }
 }
