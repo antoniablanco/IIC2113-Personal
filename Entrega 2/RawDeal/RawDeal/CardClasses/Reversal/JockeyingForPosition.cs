@@ -36,7 +36,7 @@ public class JockeyingForPosition : Card
         GetSelectedEffectChosenByPlayer(gameStructureInfo, playerController.NameOfSuperStar());
         gameStructureInfo.WhoActivateJockeyingForPosition = playerController;
         var turnsBeforeEffectExpires = 2;
-        gameStructureInfo.TurnCounterForJokeyingForPosition = turnsBeforeEffectExpires;
+        gameStructureInfo.BonusStructureInfo.TurnCounterForJokeyingForPosition = turnsBeforeEffectExpires;
     }
 
 

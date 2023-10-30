@@ -49,7 +49,7 @@ public class ClassesGenerator
 
     private void CreateBonusManagerClass()
     {
-        BonusManager bonusManager = new BonusManager(gameStructureInfo);
+        BonusManager bonusManager = new BonusManager(gameStructureInfo.BonusStructureInfo);
         gameStructureInfo.BonusManager = bonusManager;
     }
 

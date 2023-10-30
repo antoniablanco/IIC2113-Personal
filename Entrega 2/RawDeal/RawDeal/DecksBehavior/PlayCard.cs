@@ -60,7 +60,7 @@ public class PlayCard
     private bool JockeyingForPositionEffectShouldNotBeActive(CardController cardController)
     {
         return !cardController.ContainsSubtype("Grapple") ||
-               gameStructureInfo.TurnCounterForJokeyingForPosition <= 0 ||
+               gameStructureInfo.BonusManager.GetTurnCounterForJokeyingForPosition() <= 0 ||
                (gameStructureInfo.WhoActivateJockeyingForPosition != gameStructureInfo.ControllerCurrentPlayer &&
                 gameStructureInfo.WhoActivateJockeyingForPosition != null);
     }

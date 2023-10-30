@@ -2,11 +2,11 @@ namespace RawDeal.GameClasses;
 
 public class BonusManager
 {
-    private GameStructureInfo gameStructureInfo = new GameStructureInfo();
+    private BonusStructureInfo bonusStructureInfo;
 
-    public BonusManager(GameStructureInfo gameStructureInfo)
+    public BonusManager(BonusStructureInfo bonusStructureInfo)
     {
-        this.gameStructureInfo = gameStructureInfo;
+        this.bonusStructureInfo = bonusStructureInfo;
     }
 
     public void ActivateBonus(string type)
@@ -14,10 +14,10 @@ public class BonusManager
         switch (type)
         {
             case "JockeyingFortitud":
-                gameStructureInfo.IsJockeyingForPositionBonusFortitudActive = 1;
+                bonusStructureInfo.IsJockeyingForPositionBonusFortitudActive = 1;
                 break;
             case "JockeyingDamage":
-                gameStructureInfo.IsJockeyingForPositionBonusDamageActive = 1;
+                bonusStructureInfo.IsJockeyingForPositionBonusDamageActive = 1;
                 break;
         }
     }
@@ -27,10 +27,10 @@ public class BonusManager
         switch (type)
         {
             case "JockeyingFortitud":
-                gameStructureInfo.IsJockeyingForPositionBonusFortitudActive = 0;
+                bonusStructureInfo.IsJockeyingForPositionBonusFortitudActive = 0;
                 break;
             case "JockeyingDamage":
-                gameStructureInfo.IsJockeyingForPositionBonusDamageActive = 0;
+                bonusStructureInfo.IsJockeyingForPositionBonusDamageActive = 0;
                 break;
         }
     }
@@ -39,19 +39,24 @@ public class BonusManager
     {
         return type switch 
         {
-            "JockeyingFortitud" => gameStructureInfo.BonusFortitude * gameStructureInfo.IsJockeyingForPositionBonusFortitudActive,
-            "JockeyingDamage" => gameStructureInfo.BonusDamage * gameStructureInfo.IsJockeyingForPositionBonusDamageActive,
+            "JockeyingFortitud" => bonusStructureInfo.BonusFortitude * bonusStructureInfo.IsJockeyingForPositionBonusFortitudActive,
+            "JockeyingDamage" => bonusStructureInfo.BonusDamage * bonusStructureInfo.IsJockeyingForPositionBonusDamageActive,
             _ => 0
         };
     }
 
     public void AddingOneTurnJockeyingForPosition()
     {
-        gameStructureInfo.TurnCounterForJokeyingForPosition += 1;
+        bonusStructureInfo.TurnCounterForJokeyingForPosition += 1;
     }
 
     public void RemoveOneTurnFromJockeyingForPosition()
     {
-        gameStructureInfo.TurnCounterForJokeyingForPosition -= 1;
+        bonusStructureInfo.TurnCounterForJokeyingForPosition -= 1;
+    }
+
+    public int GetTurnCounterForJokeyingForPosition()
+    {
+        return bonusStructureInfo.TurnCounterForJokeyingForPosition;
     }
 }
