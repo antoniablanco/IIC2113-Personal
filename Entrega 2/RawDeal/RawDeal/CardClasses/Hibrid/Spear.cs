@@ -1,3 +1,5 @@
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClasses.UnspecifiedType;
 
 public class Spear: Card
@@ -7,5 +9,10 @@ public class Spear: Card
         :base(title, types, subtypes, fortitude, damage, stunValue, cardEffect)
     {
          
+    }
+    
+    public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, string reverseBy)
+    {
+        return gameStructureInfo.LastPlayedCard.GetCardTitle() == "Irish Whip";
     }
 }

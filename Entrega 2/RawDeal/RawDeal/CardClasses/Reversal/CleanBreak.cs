@@ -11,7 +11,7 @@ public class CleanBreak : Card
     {
     }
 
-    public override bool CanReversalThisCard(CardController playedCardController)
+    public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, string reverseBy)
     {
         return playedCardController.GetCardTitle() == "Jockeying for Position";
     }
@@ -24,7 +24,7 @@ public class CleanBreak : Card
 
         const int numberOfCardsToSteal = 1;
         
-        new StealCardEffect(gameStructureInfo.ControllerOpponentPlayer,gameStructureInfo.GetOpponentPlayer(), 
+        new DrawCardEffect(gameStructureInfo.ControllerOpponentPlayer,gameStructureInfo.GetOpponentPlayer(), 
             gameStructureInfo).StealCards(numberOfCardsToSteal);
         gameStructureInfo.EffectsUtils.EndTurn();
     }

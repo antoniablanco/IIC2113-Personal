@@ -15,7 +15,7 @@ public class OfferHandshake: Card
     public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
         const int maximumNumberOfCardsToSteal = 3;
-        new StealCardEffect(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(), 
+        new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(), 
             gameStructureInfo).MayStealCards(maximumNumberOfCardsToSteal);
         
         const int numberOfCardToDiscard = 1;

@@ -14,7 +14,7 @@ public class Reverse : Card
     public override void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
         const int maximumNumberOfCardsToSteal = 2;
-        new StealCardEffect(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(), 
+        new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(), 
             gameStructureInfo).MayStealCards(maximumNumberOfCardsToSteal);
     }
 }

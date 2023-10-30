@@ -1,3 +1,5 @@
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClasses.UnspecifiedType;
 
 public class BellyToBellySuplex: Card
@@ -7,5 +9,11 @@ public class BellyToBellySuplex: Card
         :base(title, types, subtypes, fortitude, damage, stunValue, cardEffect)
     {
          
+    }
+    
+    public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, string reverseBy)
+    {
+        return playedCardController.GetCardTitle() == "Belly to Belly Suplex" && 
+               playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
     }
 }

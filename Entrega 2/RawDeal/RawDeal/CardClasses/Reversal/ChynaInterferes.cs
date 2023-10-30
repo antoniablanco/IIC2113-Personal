@@ -11,7 +11,7 @@ public class ChynaInterferes : Card
     {
     }
 
-    public override bool CanReversalThisCard(CardController playedCardController)
+    public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, string reverseBy)
     {
         return playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
     }
@@ -20,7 +20,7 @@ public class ChynaInterferes : Card
     {
         const int numberOfCardsToSteal = 2;
         
-        new StealCardEffect(gameStructureInfo.ControllerOpponentPlayer,gameStructureInfo.GetOpponentPlayer(), 
+        new DrawCardEffect(gameStructureInfo.ControllerOpponentPlayer,gameStructureInfo.GetOpponentPlayer(), 
             gameStructureInfo).StealCards(numberOfCardsToSteal);
 
         var damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;

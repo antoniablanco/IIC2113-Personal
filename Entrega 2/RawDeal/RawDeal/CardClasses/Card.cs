@@ -26,7 +26,7 @@ public abstract class Card : IViewableCardInfo
     public string CardEffect { get; set; }
 
 
-    public virtual bool CanReversalThisCard(CardController playedCardController)
+    public virtual bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, string reverseBy)
     {
         return true;
     }

@@ -106,10 +106,10 @@ public class CardController
         return _card.CheckIfCardCanBePlayed(gameStructureInfo);
     }
 
-    public bool GetIfCardCanReversalPlayedCard()
+    public bool GetIfCardCanReversalPlayedCard(string reverseBy)
     {
-        return _card.CanReversalThisCard(gameStructureInfo.LastPlayedCard) &&
-               gameStructureInfo.LastPlayedCard.CanThisCardBeReversal();
+        return _card.CanReversalThisCard(gameStructureInfo.CardBeingPlayed, gameStructureInfo, reverseBy) &&
+               gameStructureInfo.CardBeingPlayed.CanThisCardBeReversal();
     }
 
     private bool CanThisCardBeReversal()
@@ -117,10 +117,10 @@ public class CardController
         return _card.CheckIfCardCanBeReverted();
     }
 
-    public bool CanUseThisReversalCard(PlayerController controllerPlayer)
+    public bool CanUseThisReversalCard(PlayerController controllerPlayer, string reverseBy)
     {
         return GetCardFortitude(GetCardTypes()[0]) + gameStructureInfo.BonusManager.AddBonus("JockeyingFortitud") <=
-            controllerPlayer.FortitudRating() && IsReversalType() && GetIfCardCanReversalPlayedCard();
+            controllerPlayer.FortitudRating() && IsReversalType() && GetIfCardCanReversalPlayedCard(reverseBy);
     }
 
     public bool VerifyIfTheLastPlayedTypeIs(string type)

@@ -1,3 +1,5 @@
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClasses.UnspecifiedType;
 
 public class VerticalSuplex: Card
@@ -7,5 +9,10 @@ public class VerticalSuplex: Card
         :base(title, types, subtypes, fortitude, damage, stunValue, cardEffect)
     {
          
+    }
+    public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, string reverseBy)
+    {
+        return playedCardController.GetCardTitle() == "Vertical Suplex" && 
+               playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
     }
 }

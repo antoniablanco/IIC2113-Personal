@@ -1,3 +1,6 @@
+using RawDeal.EffectsClasses;
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClasses.UnspecifiedType;
 
 public class Y2J: Card
@@ -7,5 +10,13 @@ public class Y2J: Card
         :base(title, types, subtypes, fortitude, damage, stunValue, cardEffect)
     {
          
+    }
+    
+    public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    {   
+        const int maximumNumberOfCardsToSteal = 5;
+        const int maximumNumberOfCardsToDiscard = 5;
+        new DrawOrForceToDiscardEffect(gameStructureInfo, maximumNumberOfCardsToSteal, 
+            maximumNumberOfCardsToDiscard);
     }
 }

@@ -13,7 +13,7 @@ public class JockeyingForPosition : Card
     {
     }
 
-    public override bool CanReversalThisCard(CardController playedCardController)
+    public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, string reverseBy)
     {
         return playedCardController.GetCardTitle() == "Jockeying for Position";
     }

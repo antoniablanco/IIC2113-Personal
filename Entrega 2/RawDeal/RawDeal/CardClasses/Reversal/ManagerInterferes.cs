@@ -11,14 +11,14 @@ public class ManagerInterferes : Card
     {
     }
 
-    public override bool CanReversalThisCard(CardController playedCardController)
+    public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, string reverseBy)
     {
         return playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
     }
 
     public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
     {
-        new StealCardEffect(gameStructureInfo.ControllerOpponentPlayer,gameStructureInfo.GetOpponentPlayer(), 
+        new DrawCardEffect(gameStructureInfo.ControllerOpponentPlayer,gameStructureInfo.GetOpponentPlayer(), 
             gameStructureInfo).StealCards();
 
         var damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;

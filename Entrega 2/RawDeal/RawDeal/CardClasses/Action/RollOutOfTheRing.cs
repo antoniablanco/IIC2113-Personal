@@ -1,3 +1,6 @@
+using RawDeal.EffectsClasses;
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClasses.UnspecifiedType;
 
 public class RollOutOfTheRing: Card
@@ -7,5 +10,12 @@ public class RollOutOfTheRing: Card
         :base(title, types, subtypes, fortitude, damage, stunValue, cardEffect)
     {
          
+    }
+    
+    public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    {   
+        const int maxNumberOfCardsToDiscard = 2;
+        new DiscardToObtainRingSideCardsEffect(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo,
+            maxNumberOfCardsToDiscard);
     }
 }

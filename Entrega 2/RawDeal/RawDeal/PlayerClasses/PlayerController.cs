@@ -45,14 +45,17 @@ public class PlayerController
     private List<CardController> CardsAvailableToPlay()
     {
         return player.CardsHand
-            .Where(card => card.GetCardFortitude(card.GetCardTypes()[0]) <= FortitudRating() && card.HasAnyTypeDifferentOfReversal() && card.CanThisCardBePlayed())
+            .Where(card => card.GetCardFortitude(card.GetCardTypes()[0]) <= FortitudRating() 
+                           && card.HasAnyTypeDifferentOfReversal() && card.CanThisCardBePlayed())
             .ToList();
     }
 
     public List<CardController> CardsAvailableToReversal() 
     {
         return player.CardsHand
-            .Where(card => card.GetCardFortitude(card.GetCardTypes()[0]) + gameStructureInfo.BonusManager.AddBonus("JockeyingFortitud") <= FortitudRating() && card.IsReversalType() && CanReversalPlayedCard(card))
+            .Where(card => card.GetCardFortitude(card.GetCardTypes()[0]) + 
+                gameStructureInfo.BonusManager.AddBonus("JockeyingFortitud") <= FortitudRating() 
+                && card.IsReversalType() && CanReversalPlayedCard(card, "Hand"))
             .ToList();
     }
 
@@ -63,7 +66,9 @@ public class PlayerController
         foreach (var cardController in CardsAvailableToPlay())
         {
             int[] indexes = Enumerable.Range(0, cardController.GetCardTypes().Count()).ToArray();
-            allTypesForCard.AddRange(from index in indexes where cardController.GetCardType(index) != "Reversal" && cardController.GetCardFortitude(cardController.GetCardType(index)) <= FortitudRating() && cardController.CanThisCardBePlayed()
+            allTypesForCard.AddRange(from index in indexes where cardController.GetCardType(index) 
+                    != "Reversal" && cardController.GetCardFortitude(cardController.GetCardType(index)) 
+                    <= FortitudRating() && cardController.CanThisCardBePlayed()
                 select new Tuple<CardController, int>(cardController, index));
         }
 
@@ -90,9 +95,9 @@ public class PlayerController
         return player.CardsRingArea.Sum(card => card.GetDamageProducedByTheCard());
     }
 
-    private bool CanReversalPlayedCard(CardController card) 
+    private bool CanReversalPlayedCard(CardController card, string reverseBy) 
     {   
-        return card.GetIfCardCanReversalPlayedCard();
+        return card.GetIfCardCanReversalPlayedCard(reverseBy);
     }
 
     public bool TheirSuperStarCanUseSuperAbility(PlayerController currentPlayer)

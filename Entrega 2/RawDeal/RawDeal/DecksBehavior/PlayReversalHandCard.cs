@@ -66,7 +66,7 @@ public class PlayReversalHandCard
     private void MoveCardsImplicateInReversal(CardController cardController)
     {
         gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingSide(gameStructureInfo.GetCurrentPlayer(),
-            gameStructureInfo.LastPlayedCard);
+            gameStructureInfo.CardBeingPlayed);
         gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(gameStructureInfo.GetOpponentPlayer(),
             cardController);
     }

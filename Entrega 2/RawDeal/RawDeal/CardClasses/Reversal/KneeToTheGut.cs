@@ -11,7 +11,7 @@ public class KneeToTheGut : Card
     {
     }
 
-    public override bool CanReversalThisCard(CardController playedCardController)
+    public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, string reverseBy)
     {
         const int maximumDamageProducedByPlayedCard = 7;
         return playedCardController.ContainsSubtype("Strike") &&

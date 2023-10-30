@@ -3,12 +3,12 @@ using RawDeal.PlayerClasses;
 
 namespace RawDeal.EffectsClasses;
 
-public class StealCardEffect: EffectsUtils
+public class DrawCardEffect: EffectsUtils
 {
     private PlayerController controllerPlayer;
     private Player player;
     
-    public StealCardEffect(PlayerController controllerPlayer, Player player, GameStructureInfo gameStructureInfo)
+    public DrawCardEffect(PlayerController controllerPlayer, Player player, GameStructureInfo gameStructureInfo)
         : base(gameStructureInfo)
     {
         this.controllerPlayer = controllerPlayer;

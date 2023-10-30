@@ -1,3 +1,5 @@
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClasses.UnspecifiedType;
 
 public class BellyToBackSuplex: Card
@@ -8,4 +10,11 @@ public class BellyToBackSuplex: Card
     {
          
     }
+    
+    public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, string reverseBy)
+    {
+        return playedCardController.GetCardTitle() == "Belly to Back Suplex" && 
+               playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
+    }
+    
 }

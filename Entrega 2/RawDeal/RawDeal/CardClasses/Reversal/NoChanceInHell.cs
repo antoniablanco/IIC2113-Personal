@@ -10,7 +10,7 @@ public class NoChanceInHell : Card
     {
     }
 
-    public override bool CanReversalThisCard(CardController playedCardController)
+    public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, string reverseBy)
     {
         return playedCardController.VerifyIfTheLastPlayedTypeIs("Action");
     }

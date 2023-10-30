@@ -1,3 +1,6 @@
+using RawDeal.EffectsClasses;
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClasses.UnspecifiedType;
 
 public class IAmTheGame: Card
@@ -7,5 +10,14 @@ public class IAmTheGame: Card
         :base(title, types, subtypes, fortitude, damage, stunValue, cardEffect)
     {
          
+    }
+    
+    public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    {   
+        const int maximumNumberOfCardsToSteal = 2;
+        const int maximumNumberOfCardsToDiscard = 2;
+        const bool shouldAsk = true;
+        new DrawOrForceToDiscardEffect(gameStructureInfo, maximumNumberOfCardsToSteal, 
+            maximumNumberOfCardsToDiscard, shouldAsk);
     }
 }

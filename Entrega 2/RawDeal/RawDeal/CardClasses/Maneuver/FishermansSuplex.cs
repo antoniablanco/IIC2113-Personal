@@ -17,7 +17,7 @@ public class FishermansSuplex : Card
             gameStructureInfo.GetCurrentPlayer(), gameStructureInfo);
 
         const int maximumNumberOfCardsToSteal = 1;
-        new StealCardEffect(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(), 
+        new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(), 
             gameStructureInfo).MayStealCards(maximumNumberOfCardsToSteal);
     }
 }

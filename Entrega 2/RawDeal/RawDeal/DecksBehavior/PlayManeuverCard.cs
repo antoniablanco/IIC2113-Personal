@@ -98,7 +98,7 @@ public class PlayManeuverCard
 
     private void DeckReversal(CardController flippedCardController, PlayerController controllerOpponentPlayer)
     {
-        theReversalCardIsUsed = flippedCardController.CanUseThisReversalCard(controllerOpponentPlayer);
+        theReversalCardIsUsed = flippedCardController.CanUseThisReversalCard(controllerOpponentPlayer, "Deck");
         if (theReversalCardIsUsed)
         {
             Console.WriteLine(gameStructureInfo.IsTheGameStillPlaying);
@@ -109,7 +109,7 @@ public class PlayManeuverCard
 
     private bool CheckIfShouldApplyStunValue()
     {
-        return theReversalCardIsUsed && gameStructureInfo.LastPlayedCard.TheCardHadStunValue() && !isStunValueUsed;
+        return theReversalCardIsUsed && gameStructureInfo.CardBeingPlayed.TheCardHadStunValue() && !isStunValueUsed;
     }
 
     private void UseStunValueOpcion()
@@ -117,9 +117,9 @@ public class PlayManeuverCard
         isStunValueUsed = true;
         var numberOfCardsToSteal = gameStructureInfo.View.AskHowManyCardsToDrawBecauseOfStunValue(
             gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar(),
-            gameStructureInfo.LastPlayedCard.GetCardStunValue());
+            gameStructureInfo.CardBeingPlayed.GetCardStunValue());
         
-        new StealCardEffect(gameStructureInfo.ControllerOpponentPlayer,gameStructureInfo.GetOpponentPlayer(), 
+        new DrawCardEffect(gameStructureInfo.ControllerOpponentPlayer,gameStructureInfo.GetOpponentPlayer(), 
             gameStructureInfo).StealCards(numberOfCardsToSteal);
     }
 
