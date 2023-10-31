@@ -6,19 +6,31 @@ namespace RawDeal.EffectsClasses;
 public class AddingChoosingCardFromRingSideToHandEffectUtils: EffectsUtils
 {
     private PlayerController controllerPlayer;
+    private int numberOfCardToRecover;
     
-    public AddingChoosingCardFromRingSideToHandEffectUtils(PlayerController controllerPlayer, GameStructureInfo gameStructureInfo)
+    public AddingChoosingCardFromRingSideToHandEffectUtils(PlayerController controllerPlayer, 
+        GameStructureInfo gameStructureInfo, int numberOfCardToRecover=1)
         : base(gameStructureInfo)
     {
         this.controllerPlayer = controllerPlayer;
+        this.numberOfCardToRecover = numberOfCardToRecover;
         Apply();
     }
     
     private void Apply()
+    {   
+        for (int currentNumberOfCard = 0; currentNumberOfCard < numberOfCardToRecover; currentNumberOfCard++)
+        {
+            DiscardCard(numberOfCardToRecover-currentNumberOfCard);
+        }
+        
+    }
+
+    private void DiscardCard(int currentNumberOfCard)
     {
         var ringSideAsString = controllerPlayer.StringCardsFrom("RingSide");
-        var selectedCard =
-            gameStructureInfo.View.AskPlayerToSelectCardsToPutInHisHand(controllerPlayer.NameOfSuperStar(), 1, ringSideAsString);
+        var selectedCard = gameStructureInfo.View.AskPlayerToSelectCardsToPutInHisHand(
+            controllerPlayer.NameOfSuperStar(), currentNumberOfCard, ringSideAsString);
 
         var addedCardController = controllerPlayer.GetSpecificCardFrom("RingSide", selectedCard);
         var playerWhoDiscardCard = GetPlayerWhoDiscard();

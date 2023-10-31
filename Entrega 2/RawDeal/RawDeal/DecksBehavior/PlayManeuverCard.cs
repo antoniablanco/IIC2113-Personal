@@ -102,7 +102,6 @@ public class PlayManeuverCard
         theReversalCardIsUsed = flippedCardController.CanUseThisReversalCard(controllerOpponentPlayer, "Deck");
         if (theReversalCardIsUsed)
         {
-            Console.WriteLine(gameStructureInfo.IsTheGameStillPlaying);
             gameStructureInfo.EffectsUtils.EndTurn();
             gameStructureInfo.View.SayThatCardWasReversedByDeck(controllerOpponentPlayer.NameOfSuperStar());
         }

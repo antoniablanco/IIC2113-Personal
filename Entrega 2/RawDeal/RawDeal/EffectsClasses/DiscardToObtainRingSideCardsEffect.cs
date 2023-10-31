@@ -18,9 +18,10 @@ public class DiscardToObtainRingSideCardsEffect: EffectsUtils
     }
 
     private void Apply()
-    {
-        maximumNumberOfCardsToDiscard =
-            Math.Min(maximumNumberOfCardsToDiscard, currentPlayerController.NumberOfCardIn("Hand"));
+    {   
+        int numberOfCardInHand = currentPlayerController.HandCardsButNotTheCardIsBeingPlayed(gameStructureInfo.CardBeingPlayed).Item1.Count();
+        maximumNumberOfCardsToDiscard = Math.Min(maximumNumberOfCardsToDiscard, numberOfCardInHand);
+
         if (IsPositive(maximumNumberOfCardsToDiscard))
             AskHowManyCardsWantsToChange();
     }
@@ -32,7 +33,6 @@ public class DiscardToObtainRingSideCardsEffect: EffectsUtils
         new DiscardCardsFromHandToRingSideEffect(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo.ControllerCurrentPlayer, numberOfCardsToDiscard, gameStructureInfo);
             
-        for (int i = 0; i < numberOfCardsToDiscard; i++)
-            new AddingChoosingCardFromRingSideToHandEffectUtils(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo);
+        new AddingChoosingCardFromRingSideToHandEffectUtils(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo, numberOfCardsToDiscard);
     }
 }

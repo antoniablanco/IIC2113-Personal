@@ -61,7 +61,6 @@ public class PlayCard
     {   
         if (gameStructureInfo.CardBeingPlayed != null)
             gameStructureInfo.LastCardBeingPlayedTitle = gameStructureInfo.CardBeingPlayed.GetCardTitle();
-        Console.WriteLine(gameStructureInfo.CardBeingPlayed == null);
         gameStructureInfo.CardBeingPlayed = playedCardController.Item1;
         gameStructureInfo.CardBeingPlayedType = playedCardController.Item1.GetCardTypes()[playedCardController.Item2];
     }
