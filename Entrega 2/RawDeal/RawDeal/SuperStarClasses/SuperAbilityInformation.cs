@@ -11,7 +11,7 @@ public class SuperAbilityInformation
 
     public void UseSuperAbilityAction(GameStructureInfo gameStructureInfo)
     {   
-        gameStructureInfo.BonusManager.AddingOneTurnJockeyingForPosition();
+        gameStructureInfo.BonusManager.AddingOneTurnFromBonusCounter();
         gameStructureInfo.ControllerCurrentPlayer.UsingElectiveSuperAbility();
     }
 

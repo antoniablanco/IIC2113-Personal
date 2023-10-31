@@ -1,3 +1,5 @@
+using RawDeal.PlayerClasses;
+
 namespace RawDeal.GameClasses;
 
 public class BonusStructureInfo
@@ -7,5 +9,6 @@ public class BonusStructureInfo
     public int BonusDamage = 4;
     public int BonusFortitude = 8;
     public int turnsLeftForBonusCounter = 0;
+    public PlayerController WhoActivateNextPlayedCardBonusEffect;
     
 }

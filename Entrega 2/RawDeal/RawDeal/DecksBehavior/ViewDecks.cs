@@ -14,7 +14,7 @@ public class ViewDecks
 
     public void SelectCardsToViewAction()
     {
-        gameStructureInfo.BonusManager.AddingOneTurnJockeyingForPosition();
+        gameStructureInfo.BonusManager.AddingOneTurnFromBonusCounter();
         SelectCardsToView();
     }
 

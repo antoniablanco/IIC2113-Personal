@@ -56,7 +56,7 @@ public class Game
 
         while (gameStructureInfo.GetSetGameVariables.TheTurnIsBeingPlayed())
         {   
-            gameStructureInfo.BonusManager.RemoveOneTurnFromJockeyingForPosition();
+            gameStructureInfo.BonusManager.RemoveOneTurnFromBonusCounter();
             DisplayPlayerInformation();
             PlayerSelectedAction();
         }

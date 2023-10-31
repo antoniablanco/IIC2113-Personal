@@ -125,7 +125,7 @@ public class CardController
 
     public bool VerifyIfTheLastPlayedTypeIs(string type)
     {
-        return gameStructureInfo.LastPlayedType == type;
+        return gameStructureInfo.CardBeingPlayedType == type;
     }
 
     public bool DealsTheMaximumDamage(int maximumDamage)

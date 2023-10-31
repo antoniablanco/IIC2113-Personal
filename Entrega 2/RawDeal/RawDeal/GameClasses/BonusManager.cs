@@ -1,3 +1,7 @@
+using System.Diagnostics;
+using RawDeal.CardClasses;
+using RawDeal.PlayerClasses;
+
 namespace RawDeal.GameClasses;
 
 public class BonusManager
@@ -40,8 +44,14 @@ public class BonusManager
                 break;
         }
     }
+    
+    public void DeactivateNextPlayedCardBonusEffect()
+    {
+        DeactivateBonus("JockeyingFortitud");
+        DeactivateBonus("JockeyingDamage");
+    }
 
-    public void DeactivateBonus(string type)
+    private void DeactivateBonus(string type)
     {
         switch (type)
         {
@@ -68,17 +78,17 @@ public class BonusManager
         return 0;
     }
 
-    public void AddingOneTurnJockeyingForPosition()
+    public void AddingOneTurnFromBonusCounter()
     {
         bonusStructureInfo.turnsLeftForBonusCounter += 1;
     }
 
-    public void RemoveOneTurnFromJockeyingForPosition()
+    public void RemoveOneTurnFromBonusCounter()
     {
         bonusStructureInfo.turnsLeftForBonusCounter -= 1;
     }
 
-    public int GetTurnCounterForJokeyingForPosition()
+    private int GetTurnCounterForBonus()
     {
         return bonusStructureInfo.turnsLeftForBonusCounter;
     }
@@ -87,4 +97,30 @@ public class BonusManager
     {
         bonusStructureInfo.turnsLeftForBonusCounter = turnsBeforeEffectExpires;
     }
+
+    private PlayerController GetWhoActivateNextPlayedCardBonusEffect()
+    {
+        return bonusStructureInfo.WhoActivateNextPlayedCardBonusEffect;
+    }
+    
+    public void SetWhoActivateNextPlayedCardBonusEffect(PlayerController playerController)
+    {
+        bonusStructureInfo.WhoActivateNextPlayedCardBonusEffect = playerController;
+    }
+    
+    public bool CheckNextPlayCardBonusConditions(PlayerController controllerCurrentPlayer, CardController cardController)
+    {
+        return CheckSpecificBonusConditions(cardController) ||
+               GetTurnCounterForBonus() <= 0 ||
+               (GetWhoActivateNextPlayedCardBonusEffect() != controllerCurrentPlayer &&
+                GetWhoActivateNextPlayedCardBonusEffect() != null);
+    }
+
+    private bool CheckSpecificBonusConditions(CardController cardController)
+    {   if (bonusStructureInfo.IsJockeyingForPositionBonusDamageActive==1 ||
+            bonusStructureInfo.IsJockeyingForPositionBonusFortitudActive==1)
+            return !cardController.ContainsSubtype("Grapple");
+        return false;
+    }
+
 }

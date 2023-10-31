@@ -19,7 +19,7 @@ public class PlayCard
         if (HasSelectedAValidCard(selectedCard))
             StartToPlayACardAction(selectedCard);
         else
-            gameStructureInfo.BonusManager.AddingOneTurnJockeyingForPosition();
+            gameStructureInfo.BonusManager.AddingOneTurnFromBonusCounter();
     }
 
     private List<string> GetPossibleCardsToPlayString()
@@ -38,7 +38,7 @@ public class PlayCard
     private void StartToPlayACardAction(int selectedCard)
     {
         var playedCardController = GetCardPlayed(selectedCard);
-        CheckingJockeyForPosition(playedCardController.Item1);
+        CheckIfBonusesShouldBeActive(playedCardController.Item1);
         SetLastPlayedCardInfo(playedCardController);
         SayThatTheyAreGoingToPlayACard(playedCardController.Item1, playedCardController.Item2);
         VerifyIfIsUsedAReversalCard(playedCardController);
@@ -51,31 +51,23 @@ public class PlayCard
         return allCardsAndTheirTypes[indexSelectedCard];
     }
 
-    private void CheckingJockeyForPosition(CardController cardController)
+    private void CheckIfBonusesShouldBeActive(CardController cardController)
     {
-        if (JockeyingForPositionEffectShouldNotBeActive(cardController))
-            DeactivateJockeyForPositionEffect();
+        if (NextPlayedCardBonusEffectShouldNotBeActive(cardController))
+            gameStructureInfo.BonusManager.DeactivateNextPlayedCardBonusEffect();
     }
 
-    private bool JockeyingForPositionEffectShouldNotBeActive(CardController cardController)
+    private bool NextPlayedCardBonusEffectShouldNotBeActive(CardController cardController)
     {
-        return !cardController.ContainsSubtype("Grapple") ||
-               gameStructureInfo.BonusManager.GetTurnCounterForJokeyingForPosition() <= 0 ||
-               (gameStructureInfo.WhoActivateJockeyingForPosition != gameStructureInfo.ControllerCurrentPlayer &&
-                gameStructureInfo.WhoActivateJockeyingForPosition != null);
+        return gameStructureInfo.BonusManager.CheckNextPlayCardBonusConditions(
+            gameStructureInfo.ControllerCurrentPlayer, cardController);
     }
-
-    private void DeactivateJockeyForPositionEffect()
-    {
-        gameStructureInfo.BonusManager.DeactivateBonus("JockeyingFortitud");
-        gameStructureInfo.BonusManager.DeactivateBonus("JockeyingDamage");
-    }
-
+    
     private void SetLastPlayedCardInfo(Tuple<CardController, int> playedCardController)
     {   
         gameStructureInfo.LastPlayedCard = gameStructureInfo.CardBeingPlayed;
         gameStructureInfo.CardBeingPlayed = playedCardController.Item1;
-        gameStructureInfo.LastPlayedType = playedCardController.Item1.GetCardTypes()[playedCardController.Item2];
+        gameStructureInfo.CardBeingPlayedType = playedCardController.Item1.GetCardTypes()[playedCardController.Item2];
     }
 
     private void SayThatTheyAreGoingToPlayACard(CardController playedCardController, int indexType)

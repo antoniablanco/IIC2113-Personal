@@ -23,13 +23,12 @@ public class GameStructureInfo
     public int LastDamageComited = 0;
     public CardController CardBeingPlayed;
     public CardController LastPlayedCard;
-    public string LastPlayedType;
+    public string CardBeingPlayedType;
     public PlayCard PlayCard;
     public Player PlayerOne;
     public Player PlayerTwo;
     public View View;
     public ViewDecks ViewDecks;
-    public PlayerController WhoActivateJockeyingForPosition;
     public PlayerController WinnerPlayer;
     public BonusStructureInfo BonusStructureInfo = new BonusStructureInfo();
 
