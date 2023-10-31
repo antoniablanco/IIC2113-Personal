@@ -2,7 +2,7 @@
 using RawDeal.GameClasses;
 using RawDealView;
 
-string folder = "02-InvalidDecks";
+string folder = "10-EffectsPart2";
 
 // Esta vista permite verificar el comportamiento de un test particular.
 // El texto en consola saldrá azúl cuando el output sea el esperado y rojo cuando no lo sea. 

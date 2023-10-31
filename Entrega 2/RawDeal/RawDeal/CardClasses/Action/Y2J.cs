@@ -18,5 +18,9 @@ public class Y2J: Card
         const int maximumNumberOfCardsToDiscard = 5;
         new DrawOrForceToDiscardEffect(gameStructureInfo, maximumNumberOfCardsToSteal, 
             maximumNumberOfCardsToDiscard);
+        
+        gameStructureInfo.EffectsUtils.DiscardActionCardToRingAreButNotSaying(playedCardController,
+            gameStructureInfo.GetCurrentPlayer());
     }
+    
 }

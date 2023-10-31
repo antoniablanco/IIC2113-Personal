@@ -6,5 +6,6 @@ public class BonusStructureInfo
     public int IsJockeyingForPositionBonusFortitudActive = 0;
     public int BonusDamage = 4;
     public int BonusFortitude = 8;
-    public int TurnCounterForJokeyingForPosition = 0;
+    public int turnsLeftForBonusCounter = 0;
+    
 }

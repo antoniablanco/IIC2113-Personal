@@ -19,5 +19,9 @@ public class IAmTheGame: Card
         const bool shouldAsk = true;
         new DrawOrForceToDiscardEffect(gameStructureInfo, maximumNumberOfCardsToSteal, 
             maximumNumberOfCardsToDiscard, shouldAsk);
+        
+        gameStructureInfo.EffectsUtils.DiscardActionCardToRingAreButNotSaying(playedCardController,
+            gameStructureInfo.GetCurrentPlayer());
     }
+    
 }

@@ -1,3 +1,5 @@
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClasses.UnspecifiedType;
 
 public class AyatollahOfRocknRoll: Card
@@ -8,4 +10,5 @@ public class AyatollahOfRocknRoll: Card
     {
          
     }
+    
 }

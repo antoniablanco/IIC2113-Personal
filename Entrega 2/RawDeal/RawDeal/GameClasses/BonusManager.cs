@@ -9,7 +9,26 @@ public class BonusManager
         this.bonusStructureInfo = bonusStructureInfo;
     }
 
-    public void ActivateBonus(string type)
+    public void ApplyBonusEffect(string typeName, int bonusValue, string bonusType)
+    {
+        SetBonus(bonusType, bonusValue);
+        ActivateBonus(typeName);
+    }
+
+    private void SetBonus(string type, int bonus)
+    {
+        switch (type)
+        {
+            case "Fortitud":
+                bonusStructureInfo.BonusFortitude = bonus;
+                break;
+            case "Damage":
+                bonusStructureInfo.BonusDamage = bonus;
+                break;
+        }
+    }
+
+    private void ActivateBonus(string type)
     {
         switch (type)
         {
@@ -35,28 +54,37 @@ public class BonusManager
         }
     }
 
-    public int AddBonus(string type)
+    public int GetDamageBonus()
     {
-        return type switch 
-        {
-            "JockeyingFortitud" => bonusStructureInfo.BonusFortitude * bonusStructureInfo.IsJockeyingForPositionBonusFortitudActive,
-            "JockeyingDamage" => bonusStructureInfo.BonusDamage * bonusStructureInfo.IsJockeyingForPositionBonusDamageActive,
-            _ => 0
-        };
+        if (bonusStructureInfo.IsJockeyingForPositionBonusDamageActive==1)
+            return bonusStructureInfo.BonusDamage;
+        return 0;
+    }
+
+    public int GetFortitudBonus()
+    {
+        if (bonusStructureInfo.IsJockeyingForPositionBonusFortitudActive==1)
+            return bonusStructureInfo.BonusFortitude;
+        return 0;
     }
 
     public void AddingOneTurnJockeyingForPosition()
     {
-        bonusStructureInfo.TurnCounterForJokeyingForPosition += 1;
+        bonusStructureInfo.turnsLeftForBonusCounter += 1;
     }
 
     public void RemoveOneTurnFromJockeyingForPosition()
     {
-        bonusStructureInfo.TurnCounterForJokeyingForPosition -= 1;
+        bonusStructureInfo.turnsLeftForBonusCounter -= 1;
     }
 
     public int GetTurnCounterForJokeyingForPosition()
     {
-        return bonusStructureInfo.TurnCounterForJokeyingForPosition;
+        return bonusStructureInfo.turnsLeftForBonusCounter;
+    }
+
+    public void SetTurnsLeftForBonusCounter(int turnsBeforeEffectExpires)
+    {
+        bonusStructureInfo.turnsLeftForBonusCounter = turnsBeforeEffectExpires;
     }
 }

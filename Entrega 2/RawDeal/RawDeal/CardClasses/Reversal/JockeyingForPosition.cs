@@ -36,7 +36,7 @@ public class JockeyingForPosition : Card
         GetSelectedEffectChosenByPlayer(gameStructureInfo, playerController.NameOfSuperStar());
         gameStructureInfo.WhoActivateJockeyingForPosition = playerController;
         var turnsBeforeEffectExpires = 2;
-        gameStructureInfo.BonusStructureInfo.TurnCounterForJokeyingForPosition = turnsBeforeEffectExpires;
+        gameStructureInfo.BonusManager.SetTurnsLeftForBonusCounter(turnsBeforeEffectExpires);
     }
 
 
@@ -46,10 +46,10 @@ public class JockeyingForPosition : Card
         switch (effectToPerform)
         {
             case SelectedEffect.NextGrappleIsPlus4D:
-                gameStructureInfo.BonusManager.ActivateBonus("JockeyingDamage");
+                gameStructureInfo.BonusManager.ApplyBonusEffect("JockeyingDamage", bonusValue:4, "Damage");
                 break;
             case SelectedEffect.NextGrapplesReversalIsPlus8F:
-                gameStructureInfo.BonusManager.ActivateBonus("JockeyingFortitud");
+                gameStructureInfo.BonusManager.ApplyBonusEffect("JockeyingFortitud", bonusValue:8, "Fortitude");
                 break;
         }
     }

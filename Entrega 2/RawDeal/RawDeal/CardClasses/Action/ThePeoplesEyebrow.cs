@@ -1,3 +1,5 @@
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClasses.UnspecifiedType;
 
 public class ThePeoplesEyebrow: Card
@@ -8,4 +10,5 @@ public class ThePeoplesEyebrow: Card
     {
          
     }
+    
 }

@@ -15,4 +15,10 @@ public class IrishWhip: Card
     {
         return playedCardController.GetCardTitle() == "Irish Whip";
     }
+    
+    public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    {
+        gameStructureInfo.EffectsUtils.DiscardActionCardToRingAreButNotSaying(playedCardController,
+            gameStructureInfo.GetCurrentPlayer());
+    }
 }
