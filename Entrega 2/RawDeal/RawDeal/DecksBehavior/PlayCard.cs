@@ -23,7 +23,7 @@ public class PlayCard
     }
 
     private List<string> GetPossibleCardsToPlayString()
-    {
+    {   
         var possibleCardsAndTheirTypes =
             gameStructureInfo.ControllerCurrentPlayer.GetPosiblesCardsToPlayWithTheirTypeIndex();
         var cardsStrings = gameStructureInfo.CardsVisualizor.GetStringCardsForSpecificType(possibleCardsAndTheirTypes);

@@ -100,6 +100,11 @@ public class BonusManager
         bonusStructureInfo.WhoActivateNextPlayedCardBonusEffect = playerController;
     }
     
+    public PlayerController GetWhoActivateNextPlayedCardBonusEffect()
+    {
+        return bonusStructureInfo.WhoActivateNextPlayedCardBonusEffect;
+    }
+    
     public void CheckIfBonusesShouldBeActive(PlayerController controllerCurrentPlayer, CardController cardController)
     {
         if (CheckNextPlayCardBonusConditions(controllerCurrentPlayer, cardController))
@@ -123,14 +128,9 @@ public class BonusManager
         return false;
     }
     
-    private int GetTurnCounterForBonus()
+    public int GetTurnCounterForBonus()
     {
         return bonusStructureInfo.turnsLeftForBonusCounter;
-    }
-
-    private PlayerController GetWhoActivateNextPlayedCardBonusEffect()
-    {
-        return bonusStructureInfo.WhoActivateNextPlayedCardBonusEffect;
     }
 
     private void DeactivateNextPlayedCardBonusEffect()
