@@ -20,7 +20,7 @@ public class Facebuster: Card
     public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
     {  
         const int maximumNumberOfCardsToSteal = 2;
-        new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.GetOpponentPlayer(),
+        new DrawCardEffect(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo.GetOpponentPlayer(),
             gameStructureInfo).MayStealCards(maximumNumberOfCardsToSteal);
         
         var damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;

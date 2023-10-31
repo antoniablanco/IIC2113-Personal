@@ -1,3 +1,4 @@
+using RawDeal.EffectsClasses;
 using RawDeal.GameClasses;
 
 namespace RawDeal.CardClasses.UnspecifiedType;
@@ -12,7 +13,26 @@ public class CrossBodyBlock: Card
     }
     
     public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, string reverseBy)
-    {
+    {   
         return gameStructureInfo.LastCardBeingPlayedTitle == "Irish Whip" && playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
+    }
+    
+    public override bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo)
+    {   
+        if (gameStructureInfo.CardBeingPlayed == null)
+            return false;
+        return gameStructureInfo.CardBeingPlayed.GetCardTitle() == "Irish Whip";
+    }
+    
+    public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
+    {
+        var damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
+        var damageProduce =
+            gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(int.Parse(Damage),
+                damagedPlayerController);
+        
+        new ProduceDamageEffectUtils(damageProduce, damagedPlayerController, gameStructureInfo.GetCurrentPlayer(),
+            gameStructureInfo);
+        gameStructureInfo.EffectsUtils.EndTurn();
     }
 }

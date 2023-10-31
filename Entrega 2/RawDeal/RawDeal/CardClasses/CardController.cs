@@ -113,7 +113,7 @@ public class CardController
     }
 
     private bool CanThisCardBeReversal()
-    {
+    {   
         return _card.CheckIfCardCanBeReverted();
     }
 

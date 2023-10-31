@@ -54,7 +54,7 @@ public abstract class Card : IViewableCardInfo
     }
 
     public virtual bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo)
-    {
+    { 
         return true;
     }
 }
