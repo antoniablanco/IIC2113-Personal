@@ -53,14 +53,8 @@ public class PlayCard
 
     private void CheckIfBonusesShouldBeActive(CardController cardController)
     {
-        if (NextPlayedCardBonusEffectShouldNotBeActive(cardController))
-            gameStructureInfo.BonusManager.DeactivateNextPlayedCardBonusEffect();
-    }
-
-    private bool NextPlayedCardBonusEffectShouldNotBeActive(CardController cardController)
-    {
-        return gameStructureInfo.BonusManager.CheckNextPlayCardBonusConditions(
-            gameStructureInfo.ControllerCurrentPlayer, cardController);
+        gameStructureInfo.BonusManager.CheckIfBonusesShouldBeActive(gameStructureInfo.ControllerCurrentPlayer,
+            cardController);
     }
     
     private void SetLastPlayedCardInfo(Tuple<CardController, int> playedCardController)

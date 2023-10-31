@@ -45,25 +45,6 @@ public class BonusManager
         }
     }
     
-    public void DeactivateNextPlayedCardBonusEffect()
-    {
-        DeactivateBonus("JockeyingFortitud");
-        DeactivateBonus("JockeyingDamage");
-    }
-
-    private void DeactivateBonus(string type)
-    {
-        switch (type)
-        {
-            case "JockeyingFortitud":
-                bonusStructureInfo.IsJockeyingForPositionBonusFortitudActive = 0;
-                break;
-            case "JockeyingDamage":
-                bonusStructureInfo.IsJockeyingForPositionBonusDamageActive = 0;
-                break;
-        }
-    }
-
     public int GetDamageBonus()
     {
         if (bonusStructureInfo.IsJockeyingForPositionBonusDamageActive==1)
@@ -87,20 +68,10 @@ public class BonusManager
     {
         bonusStructureInfo.turnsLeftForBonusCounter -= 1;
     }
-
-    private int GetTurnCounterForBonus()
-    {
-        return bonusStructureInfo.turnsLeftForBonusCounter;
-    }
-
+    
     public void SetTurnsLeftForBonusCounter(int turnsBeforeEffectExpires)
     {
         bonusStructureInfo.turnsLeftForBonusCounter = turnsBeforeEffectExpires;
-    }
-
-    private PlayerController GetWhoActivateNextPlayedCardBonusEffect()
-    {
-        return bonusStructureInfo.WhoActivateNextPlayedCardBonusEffect;
     }
     
     public void SetWhoActivateNextPlayedCardBonusEffect(PlayerController playerController)
@@ -108,7 +79,13 @@ public class BonusManager
         bonusStructureInfo.WhoActivateNextPlayedCardBonusEffect = playerController;
     }
     
-    public bool CheckNextPlayCardBonusConditions(PlayerController controllerCurrentPlayer, CardController cardController)
+    public void CheckIfBonusesShouldBeActive(PlayerController controllerCurrentPlayer, CardController cardController)
+    {
+        if (CheckNextPlayCardBonusConditions(controllerCurrentPlayer, cardController))
+            DeactivateNextPlayedCardBonusEffect();
+    }
+
+    private bool CheckNextPlayCardBonusConditions(PlayerController controllerCurrentPlayer, CardController cardController)
     {
         return CheckSpecificBonusConditions(cardController) ||
                GetTurnCounterForBonus() <= 0 ||
@@ -122,5 +99,34 @@ public class BonusManager
             return !cardController.ContainsSubtype("Grapple");
         return false;
     }
+    
+    private int GetTurnCounterForBonus()
+    {
+        return bonusStructureInfo.turnsLeftForBonusCounter;
+    }
 
+    private PlayerController GetWhoActivateNextPlayedCardBonusEffect()
+    {
+        return bonusStructureInfo.WhoActivateNextPlayedCardBonusEffect;
+    }
+
+    private void DeactivateNextPlayedCardBonusEffect()
+    {
+        DeactivateBonus("JockeyingFortitud");
+        DeactivateBonus("JockeyingDamage");
+    }
+    
+    private void DeactivateBonus(string type)
+    {
+        switch (type)
+        {
+            case "JockeyingFortitud":
+                bonusStructureInfo.IsJockeyingForPositionBonusFortitudActive = 0;
+                break;
+            case "JockeyingDamage":
+                bonusStructureInfo.IsJockeyingForPositionBonusDamageActive = 0;
+                break;
+        }
+    }
+    
 }
