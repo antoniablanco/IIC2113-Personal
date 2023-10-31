@@ -130,7 +130,8 @@ public class CardController
 
     public bool DealsTheMaximumDamage(int maximumDamage)
     {
-        var damage = GetDamageProducedByTheCard() + gameStructureInfo.BonusManager.GetNexPlayCardDamageBonus() + gameStructureInfo.BonusManager.GetTurnDamageBonus(this);
+        var damage = GetDamageProducedByTheCard() + gameStructureInfo.BonusManager.GetNexPlayCardDamageBonus() + 
+                     gameStructureInfo.BonusManager.GetTurnDamageBonus(this);
         var totalDamage =
             gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(damage,
                 gameStructureInfo.ControllerOpponentPlayer);

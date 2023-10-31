@@ -9,6 +9,7 @@ public class BonusStructureInfo
     public bool IsIrishWhipBonusActive = false;
     
     public int IAmTheGameBonus = 0;
+    public int HaymakerBonus = 0;
     
     public int BonusDamage = 4;
     public int BonusFortitude = 8;

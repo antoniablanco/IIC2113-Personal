@@ -18,7 +18,10 @@ public class BonusManager
         switch (typeName)
         {
             case "IAmTheGame":
-                bonusStructureInfo.IAmTheGameBonus = bonusValue;
+                bonusStructureInfo.IAmTheGameBonus += bonusValue;
+                break;
+            case "Haymaker":
+                bonusStructureInfo.HaymakerBonus += bonusValue;
                 break;
         }
     }
@@ -72,6 +75,14 @@ public class BonusManager
             damage += bonusStructureInfo.IAmTheGameBonus;
         return damage;
     }
+    
+    public int GetDamageForSuccessfulManeuver(CardController cardController)
+    {   
+        int damage = 0;
+        if (cardController.VerifyIfTheLastPlayedTypeIs("Maneuver") && cardController.ContainsSubtype("Strike"))
+            damage += bonusStructureInfo.HaymakerBonus;
+        return damage;
+    }
 
     public int GetFortitudBonus()
     {
@@ -93,6 +104,11 @@ public class BonusManager
     public void SetTurnsLeftForBonusCounter(int turnsBeforeEffectExpires)
     {
         bonusStructureInfo.turnsLeftForBonusCounter = turnsBeforeEffectExpires;
+    }
+    
+    public int GetTurnCounterForBonus()
+    {
+        return bonusStructureInfo.turnsLeftForBonusCounter;
     }
     
     public void SetWhoActivateNextPlayedCardBonusEffect(PlayerController playerController)
@@ -127,11 +143,6 @@ public class BonusManager
             return !cardController.ContainsSubtype("Strike");
         return false;
     }
-    
-    public int GetTurnCounterForBonus()
-    {
-        return bonusStructureInfo.turnsLeftForBonusCounter;
-    }
 
     private void DeactivateNextPlayedCardBonusEffect()
     {
@@ -143,6 +154,7 @@ public class BonusManager
     public void DeactivateTurnBonus()
     {
         bonusStructureInfo.IAmTheGameBonus = 0;
+        bonusStructureInfo.HaymakerBonus = 0;
     }
     
     private void DeactivateBonus(string type)

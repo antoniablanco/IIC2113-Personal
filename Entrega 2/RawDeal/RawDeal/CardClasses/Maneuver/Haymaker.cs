@@ -1,3 +1,5 @@
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClasses.UnspecifiedType;
 
 public class Haymaker: Card
@@ -7,5 +9,10 @@ public class Haymaker: Card
         :base(title, types, subtypes, fortitude, damage, stunValue, cardEffect)
     {
          
+    }
+    
+    public override void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    {   
+        gameStructureInfo.BonusManager.ApplyTurnBonusEffect("Haymaker", 1);
     }
 }
