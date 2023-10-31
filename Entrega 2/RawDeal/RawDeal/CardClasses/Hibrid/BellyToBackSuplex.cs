@@ -1,3 +1,4 @@
+using RawDeal.EffectsClasses;
 using RawDeal.GameClasses;
 
 namespace RawDeal.CardClasses.UnspecifiedType;
@@ -15,6 +16,18 @@ public class BellyToBackSuplex: Card
     {
         return playedCardController.GetCardTitle() == "Belly to Back Suplex" && 
                playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
+    }
+    
+    public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
+    {
+        var damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
+        var damageProduce =
+            gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(int.Parse(Damage),
+                damagedPlayerController);
+        
+        new ProduceDamageEffectUtils(damageProduce, damagedPlayerController, gameStructureInfo.GetCurrentPlayer(),
+            gameStructureInfo);
+        gameStructureInfo.EffectsUtils.EndTurn();
     }
     
 }

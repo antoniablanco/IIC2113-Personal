@@ -1,3 +1,4 @@
+using RawDeal.EffectsClasses;
 using RawDeal.GameClasses;
 
 namespace RawDeal.CardClasses.UnspecifiedType;
@@ -14,5 +15,17 @@ public class VerticalSuplex: Card
     {
         return playedCardController.GetCardTitle() == "Vertical Suplex" && 
                playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
+    }
+    
+    public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
+    {
+        var damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
+        var damageProduce =
+            gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(int.Parse(Damage),
+                damagedPlayerController);
+        
+        new ProduceDamageEffectUtils(damageProduce, damagedPlayerController, gameStructureInfo.GetCurrentPlayer(),
+            gameStructureInfo);
+        gameStructureInfo.EffectsUtils.EndTurn();
     }
 }
