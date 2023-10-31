@@ -21,7 +21,8 @@ public class BackBodyDrop: Card
     }
     
     public override bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo)
-    {
-        return gameStructureInfo.LastPlayedCard.GetCardTitle() == "Irish Whip";
+    {   
+        Console.WriteLine(gameStructureInfo.CardBeingPlayed.GetCardTitle());
+        return gameStructureInfo.CardBeingPlayed.GetCardTitle() == "Irish Whip";
     }
 }

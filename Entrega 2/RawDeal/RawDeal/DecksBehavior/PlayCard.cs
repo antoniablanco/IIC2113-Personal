@@ -39,8 +39,8 @@ public class PlayCard
     {
         var playedCardController = GetCardPlayed(selectedCard);
         CheckIfBonusesShouldBeActive(playedCardController.Item1);
-        SetLastPlayedCardInfo(playedCardController);
         SayThatTheyAreGoingToPlayACard(playedCardController.Item1, playedCardController.Item2);
+        SetLastPlayedCardInfo(playedCardController);
         VerifyIfIsUsedAReversalCard(playedCardController);
     }
 
@@ -59,7 +59,6 @@ public class PlayCard
     
     private void SetLastPlayedCardInfo(Tuple<CardController, int> playedCardController)
     {   
-        gameStructureInfo.LastPlayedCard = gameStructureInfo.CardBeingPlayed;
         gameStructureInfo.CardBeingPlayed = playedCardController.Item1;
         gameStructureInfo.CardBeingPlayedType = playedCardController.Item1.GetCardTypes()[playedCardController.Item2];
     }

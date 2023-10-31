@@ -22,7 +22,6 @@ public class GameStructureInfo
     public bool IsTheTurnBeingPlayed = true;
     public int LastDamageComited = 0;
     public CardController CardBeingPlayed;
-    public CardController LastPlayedCard;
     public string CardBeingPlayedType;
     public PlayCard PlayCard;
     public Player PlayerOne;

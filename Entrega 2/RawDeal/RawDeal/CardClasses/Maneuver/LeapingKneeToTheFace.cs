@@ -27,6 +27,6 @@ public class LeapingKneeToTheFace: Card
     // CASO BORDE A REVISAR, QUE PASA SI LA ULTIMA CARTA DEL JUGADOR a ES irish whip Y LA PRIMERA DEL JUGADOR B LA NECESITA
     public override bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo)
     {
-        return gameStructureInfo.LastPlayedCard.GetCardTitle() == "Irish Whip";
+        return gameStructureInfo.CardBeingPlayed.GetCardTitle() == "Irish Whip";
     }
 }

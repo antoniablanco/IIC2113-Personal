@@ -13,6 +13,6 @@ public class CrossBodyBlock: Card
     
     public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, string reverseBy)
     {
-        return gameStructureInfo.LastPlayedCard.GetCardTitle() == "Irish Whip";
+        return gameStructureInfo.CardBeingPlayed.GetCardTitle() == "Irish Whip" && playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
     }
 }

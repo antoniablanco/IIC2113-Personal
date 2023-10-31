@@ -14,7 +14,7 @@ public class LouTheszPress: Card
     
     public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, string reverseBy)
     {
-        return gameStructureInfo.LastPlayedCard.GetCardTitle() == "Irish Whip" && reverseBy == "Hand";
+        return gameStructureInfo.CardBeingPlayed.GetCardTitle() == "Irish Whip" && reverseBy == "Hand" && playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
     }
     
     public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
