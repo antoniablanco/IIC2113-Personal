@@ -16,7 +16,7 @@ public class AustinElbowSmash : Card
     }
 
     public override bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo)
-    {
-        return gameStructureInfo.LastDamageComited >= 5;
+    {   
+        return gameStructureInfo.LastDamageComited >= 5 && gameStructureInfo.CardBeingPlayedType == "Maneuver";
     }
 }

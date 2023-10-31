@@ -15,6 +15,7 @@ public class KneeToTheGut : Card
     {
         const int maximumDamageProducedByPlayedCard = 7;
         return playedCardController.ContainsSubtype("Strike") &&
+               playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver") &&
                playedCardController.DealsTheMaximumDamage(maximumDamageProducedByPlayedCard) &&
                playedCardController.HasAnyTypeDifferentOfReversal();
     }
