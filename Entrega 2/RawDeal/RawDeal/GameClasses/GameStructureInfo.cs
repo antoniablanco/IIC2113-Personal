@@ -23,6 +23,7 @@ public class GameStructureInfo
     public int LastDamageComited = 0;
     public CardController CardBeingPlayed;
     public string CardBeingPlayedType;
+    public string LastCardBeingPlayedTitle;
     public PlayCard PlayCard;
     public Player PlayerOne;
     public Player PlayerTwo;

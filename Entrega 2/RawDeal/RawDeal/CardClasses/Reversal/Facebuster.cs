@@ -14,14 +14,23 @@ public class Facebuster: Card
     
     public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, string reverseBy)
     {
-        return gameStructureInfo.CardBeingPlayed.GetCardTitle() == "Irish Whip" && reverseBy == "Hand" && playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
+        return gameStructureInfo.LastCardBeingPlayedTitle == "Irish Whip" && reverseBy == "Hand" && playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
     }
 
     public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
-    {
+    {  
         const int maximumNumberOfCardsToSteal = 2;
         new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.GetOpponentPlayer(),
             gameStructureInfo).MayStealCards(maximumNumberOfCardsToSteal);
+        
+        var damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
+        var damageProduce =
+            gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(int.Parse(Damage),
+                damagedPlayerController);
+        
+        new ProduceDamageEffectUtils(damageProduce, damagedPlayerController, gameStructureInfo.GetCurrentPlayer(),
+            gameStructureInfo);
+        
         gameStructureInfo.EffectsUtils.EndTurn();
     }
 }

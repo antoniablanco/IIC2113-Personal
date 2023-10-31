@@ -59,6 +59,8 @@ public class PlayCard
     
     private void SetLastPlayedCardInfo(Tuple<CardController, int> playedCardController)
     {   
+        if (gameStructureInfo.CardBeingPlayed != null)
+            gameStructureInfo.LastCardBeingPlayedTitle = gameStructureInfo.CardBeingPlayed.GetCardTitle();
         gameStructureInfo.CardBeingPlayed = playedCardController.Item1;
         gameStructureInfo.CardBeingPlayedType = playedCardController.Item1.GetCardTypes()[playedCardController.Item2];
     }
