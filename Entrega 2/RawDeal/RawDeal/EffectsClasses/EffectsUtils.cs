@@ -34,7 +34,8 @@ public class EffectsUtils
     public int GetDamageProducedByReversalCardWithNotEspecificDamage()
     {
         var totalDamage = gameStructureInfo.CardBeingPlayed.GetDamageProducedByTheCard() +
-                          gameStructureInfo.BonusManager.GetDamageBonus();
+                          gameStructureInfo.BonusManager.GetNexPlayCardDamageBonus() + 
+                          gameStructureInfo.BonusManager.GetTurnDamageBonus(gameStructureInfo.CardBeingPlayed);
         if (IsTheSuperStarMankind(gameStructureInfo.ControllerOpponentPlayer) ||
             IsTheSuperStarMankind(gameStructureInfo.ControllerCurrentPlayer))
             totalDamage -= 1;

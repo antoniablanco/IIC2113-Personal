@@ -16,9 +16,8 @@ public class BackBodyDrop: Card
     {   
         const int maximumNumberOfCardsToSteal = 2;
         const int maximumNumberOfCardsToDiscard = 2;
-        const bool shouldAsk = true;
         new DrawOrForceToDiscardEffect(gameStructureInfo, maximumNumberOfCardsToSteal, 
-            maximumNumberOfCardsToDiscard, shouldAsk);
+            maximumNumberOfCardsToDiscard);
     }
     
     public override bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo)

@@ -8,9 +8,10 @@ public class BonusStructureInfo
     public bool IsJockeyingForPositionBonusFortitudActive = false;
     public bool IsIrishWhipBonusActive = false;
     
+    public int IAmTheGameBonus = 0;
+    
     public int BonusDamage = 4;
     public int BonusFortitude = 8;
     public int turnsLeftForBonusCounter = 0;
     public PlayerController WhoActivateNextPlayedCardBonusEffect;
-    
 }

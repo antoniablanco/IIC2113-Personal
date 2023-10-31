@@ -33,7 +33,7 @@ public class IrishWhip: Card
     
     private void ApplyEffect(GameStructureInfo gameStructureInfo, PlayerController playerController)
     {   
-        gameStructureInfo.BonusManager.ApplyBonusEffect("IrishWhip", bonusValue:5, "Damage");
+        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect("IrishWhip", bonusValue:5, "Damage");
         gameStructureInfo.BonusManager.SetWhoActivateNextPlayedCardBonusEffect(playerController);
         var turnsBeforeEffectExpires = 2;
         gameStructureInfo.BonusManager.SetTurnsLeftForBonusCounter(turnsBeforeEffectExpires);

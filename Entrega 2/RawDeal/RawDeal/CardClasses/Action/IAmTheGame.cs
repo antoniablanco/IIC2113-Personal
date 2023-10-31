@@ -16,9 +16,10 @@ public class IAmTheGame: Card
     {   
         const int maximumNumberOfCardsToSteal = 2;
         const int maximumNumberOfCardsToDiscard = 2;
-        const bool shouldAsk = true;
         new DrawOrForceToDiscardEffect(gameStructureInfo, maximumNumberOfCardsToSteal, 
-            maximumNumberOfCardsToDiscard, shouldAsk);
+            maximumNumberOfCardsToDiscard);
+
+        gameStructureInfo.BonusManager.ApplyTurnBonusEffect("IAmTheGame", 3);
         
         gameStructureInfo.EffectsUtils.DiscardActionCardToRingAreButNotSaying(playedCardController,
             gameStructureInfo.GetCurrentPlayer());

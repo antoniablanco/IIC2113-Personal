@@ -13,12 +13,22 @@ public class BonusManager
         this.bonusStructureInfo = bonusStructureInfo;
     }
 
-    public void ApplyBonusEffect(string typeName, int bonusValue, string bonusType)
+    public void ApplyTurnBonusEffect(string typeName, int bonusValue)
+    {
+        switch (typeName)
+        {
+            case "IAmTheGame":
+                bonusStructureInfo.IAmTheGameBonus = bonusValue;
+                break;
+        }
+    }
+    
+    public void ApplyNextPlayedCardBonusEffect(string typeName, int bonusValue, string bonusType)
     {
         SetBonus(bonusType, bonusValue);
         ActivateBonus(typeName);
     }
-
+    
     private void SetBonus(string type, int bonus)
     {
         switch (type)
@@ -31,7 +41,7 @@ public class BonusManager
                 break;
         }
     }
-
+    
     private void ActivateBonus(string type)
     {
         switch (type)
@@ -48,11 +58,19 @@ public class BonusManager
         }
     }
     
-    public int GetDamageBonus()
+    public int GetNexPlayCardDamageBonus()
     {
         if (bonusStructureInfo.IsJockeyingForPositionBonusDamageActive || bonusStructureInfo.IsIrishWhipBonusActive)
             return bonusStructureInfo.BonusDamage;
         return 0;
+    }
+
+    public int GetTurnDamageBonus(CardController cardController)
+    {
+        int damage = 0;
+        if (cardController.VerifyIfTheLastPlayedTypeIs("Maneuver"))
+            damage += bonusStructureInfo.IAmTheGameBonus;
+        return damage;
     }
 
     public int GetFortitudBonus()
@@ -120,6 +138,11 @@ public class BonusManager
         DeactivateBonus("JockeyingFortitud");
         DeactivateBonus("JockeyingDamage");
         DeactivateBonus("IrishWhip");
+    }
+
+    public void DeactivateTurnBonus()
+    {
+        bonusStructureInfo.IAmTheGameBonus = 0;
     }
     
     private void DeactivateBonus(string type)
