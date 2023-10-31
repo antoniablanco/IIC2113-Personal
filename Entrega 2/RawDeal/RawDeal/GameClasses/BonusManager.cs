@@ -37,24 +37,27 @@ public class BonusManager
         switch (type)
         {
             case "JockeyingFortitud":
-                bonusStructureInfo.IsJockeyingForPositionBonusFortitudActive = 1;
+                bonusStructureInfo.IsJockeyingForPositionBonusFortitudActive = true;
                 break;
             case "JockeyingDamage":
-                bonusStructureInfo.IsJockeyingForPositionBonusDamageActive = 1;
+                bonusStructureInfo.IsJockeyingForPositionBonusDamageActive = true;
+                break;
+            case "IrishWhip":
+                bonusStructureInfo.IsIrishWhipBonusActive = true;
                 break;
         }
     }
     
     public int GetDamageBonus()
     {
-        if (bonusStructureInfo.IsJockeyingForPositionBonusDamageActive==1)
+        if (bonusStructureInfo.IsJockeyingForPositionBonusDamageActive || bonusStructureInfo.IsIrishWhipBonusActive)
             return bonusStructureInfo.BonusDamage;
         return 0;
     }
 
     public int GetFortitudBonus()
     {
-        if (bonusStructureInfo.IsJockeyingForPositionBonusFortitudActive==1)
+        if (bonusStructureInfo.IsJockeyingForPositionBonusFortitudActive)
             return bonusStructureInfo.BonusFortitude;
         return 0;
     }
@@ -94,9 +97,11 @@ public class BonusManager
     }
 
     private bool CheckSpecificBonusConditions(CardController cardController)
-    {   if (bonusStructureInfo.IsJockeyingForPositionBonusDamageActive==1 ||
-            bonusStructureInfo.IsJockeyingForPositionBonusFortitudActive==1)
+    {   if (bonusStructureInfo.IsJockeyingForPositionBonusDamageActive ||
+            bonusStructureInfo.IsJockeyingForPositionBonusFortitudActive)
             return !cardController.ContainsSubtype("Grapple");
+        if (bonusStructureInfo.IsIrishWhipBonusActive)
+            return !cardController.ContainsSubtype("Strike");
         return false;
     }
     
@@ -114,6 +119,7 @@ public class BonusManager
     {
         DeactivateBonus("JockeyingFortitud");
         DeactivateBonus("JockeyingDamage");
+        DeactivateBonus("IrishWhip");
     }
     
     private void DeactivateBonus(string type)
@@ -121,10 +127,13 @@ public class BonusManager
         switch (type)
         {
             case "JockeyingFortitud":
-                bonusStructureInfo.IsJockeyingForPositionBonusFortitudActive = 0;
+                bonusStructureInfo.IsJockeyingForPositionBonusFortitudActive = false;
                 break;
             case "JockeyingDamage":
-                bonusStructureInfo.IsJockeyingForPositionBonusDamageActive = 0;
+                bonusStructureInfo.IsJockeyingForPositionBonusDamageActive = false;
+                break;
+            case "IrishWhip":
+                bonusStructureInfo.IsIrishWhipBonusActive = false;
                 break;
         }
     }
