@@ -74,12 +74,23 @@ public class PlayCard
 
     private void VerifyIfIsUsedAReversalCard(Tuple<CardController, int> playedCardController, int lastDamageComited)
     {
-        var playReversalHandCard = new PlayReversalHandCard(gameStructureInfo);
+        var playReversalHandCard = new PlayReversalHandCard(gameStructureInfo, GetDamageProduced(playedCardController.Item1));
         if (!playReversalHandCard.IsUserUsingReversalCard())
         {
             gameStructureInfo.View.SayThatPlayerSuccessfullyPlayedACard();
             PlayCardByType(playedCardController, lastDamageComited);
         }
+    }
+    
+    private int GetDamageProduced(CardController playedCardController)
+    {   
+        var damage = playedCardController.GetDamageProducedByTheCard() +
+                     gameStructureInfo.BonusManager.GetNexPlayCardDamageBonus() +
+                     gameStructureInfo.BonusManager.GetTurnDamageBonus(playedCardController);
+        var totalDamage =
+            gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(damage,
+                gameStructureInfo.ControllerOpponentPlayer);
+        return totalDamage;
     }
 
     private void PlayCardByType(Tuple<CardController, int> playedCardController,  int lastDamageComited)

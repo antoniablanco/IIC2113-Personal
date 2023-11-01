@@ -81,7 +81,6 @@ public class BonusManager
     
     public int GetNexPlayCardDamageBonus()
     {   
-        Console.WriteLine(bonusStructureInfo.IsIrishWhipBonusActive);
         bool isAnyNextPlayCardBonusActive = bonusStructureInfo.IsJockeyingForPositionBonusDamageActive
                                          || bonusStructureInfo.IsIrishWhipBonusActive
                                          || bonusStructureInfo.ClotheslineBonusActive

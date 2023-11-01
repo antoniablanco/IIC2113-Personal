@@ -111,9 +111,9 @@ public class CardController
         return _card.CheckIfCardCanBePlayed(gameStructureInfo);
     }
 
-    public bool GetIfCardCanReversalPlayedCard(string reverseBy, int damageForSuccessfulManeuver=0)
+    public bool GetIfCardCanReversalPlayedCard(string reverseBy, int totaldamage, int damageForSuccessfulManeuver=0)
     {
-        return _card.CanReversalThisCard(gameStructureInfo.CardBeingPlayed, gameStructureInfo, reverseBy, damageForSuccessfulManeuver) &&
+        return _card.CanReversalThisCard(gameStructureInfo.CardBeingPlayed, gameStructureInfo, reverseBy, totaldamage, damageForSuccessfulManeuver) &&
                gameStructureInfo.CardBeingPlayed.CanThisCardBeReversal();
     }
 
@@ -122,10 +122,10 @@ public class CardController
         return _card.CheckIfCardCanBeReverted();
     }
 
-    public bool CanUseThisReversalCard(PlayerController controllerPlayer, string reverseBy, int damageForSuccessfulManeuver=0)
+    public bool CanUseThisReversalCard(PlayerController controllerPlayer, string reverseBy, int totaldamage, int damageForSuccessfulManeuver=0)
     {
         return GetCardFortitude(GetCardTypes()[0]) + gameStructureInfo.BonusManager.GetFortitudBonus() <=
-            controllerPlayer.FortitudRating() && IsReversalType() && GetIfCardCanReversalPlayedCard(reverseBy, damageForSuccessfulManeuver);
+            controllerPlayer.FortitudRating() && IsReversalType() && GetIfCardCanReversalPlayedCard(reverseBy, totaldamage, damageForSuccessfulManeuver);
     }
 
     public bool VerifyIfTheLastPlayedTypeIs(string type)
@@ -141,7 +141,7 @@ public class CardController
         var totalDamage =
             gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(damage,
                 gameStructureInfo.ControllerOpponentPlayer);
-
+        
         return totalDamage <= maximumDamage;
     }
 

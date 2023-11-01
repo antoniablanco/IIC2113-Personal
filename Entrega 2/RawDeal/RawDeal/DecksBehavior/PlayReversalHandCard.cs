@@ -6,16 +6,18 @@ namespace RawDeal.DecksBehavior;
 public class PlayReversalHandCard
 {
     private readonly GameStructureInfo gameStructureInfo = new();
+    private int totaldamage;
 
-    public PlayReversalHandCard(GameStructureInfo gameStructureInfo)
+    public PlayReversalHandCard(GameStructureInfo gameStructureInfo, int totaldamage)
     {
         this.gameStructureInfo = gameStructureInfo;
+        this.totaldamage = totaldamage;
     }
 
 
     public bool IsUserUsingReversalCard()
     {
-        var possibleReversals = gameStructureInfo.ControllerOpponentPlayer.CardsAvailableToReversal();
+        var possibleReversals = gameStructureInfo.ControllerOpponentPlayer.CardsAvailableToReversal(totaldamage);
 
         if (possibleReversals.Count > 0)
             return AskWhichReversalCardWantsToUse(possibleReversals);
@@ -34,11 +36,12 @@ public class PlayReversalHandCard
 
         return false;
     }
+    
 
     private int UserSelectReversalCard()
     {
         var possibleCardsAndTheirTypes = gameStructureInfo.ControllerOpponentPlayer
-            .GetPosiblesCardsForReveralWithTheirReversalTypeIndex();
+            .GetPosiblesCardsForReveralWithTheirReversalTypeIndex(totaldamage);
         var possibleReversalsString =
             gameStructureInfo.CardsVisualizor.GetStringCardsForSpecificType(possibleCardsAndTheirTypes);
         var indexReversalCard =

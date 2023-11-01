@@ -98,14 +98,15 @@ public class PlayManeuverCard
         var flippedCardController = gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
         var flippedCardString = flippedCardController.GetStringCardInfo();
         gameStructureInfo.View.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
-        DeckReversal(flippedCardController, controllerOpponentPlayer, lastDamageComited);
+        DeckReversal(flippedCardController, controllerOpponentPlayer, lastDamageComited, totalDamage);
     }
 
-    private void DeckReversal(CardController flippedCardController, PlayerController controllerOpponentPlayer, int lastDamageComited)
+    private void DeckReversal(CardController flippedCardController, PlayerController controllerOpponentPlayer, 
+        int lastDamageComited, int totalDamage)
     {   
         int extraDamage = gameStructureInfo.BonusManager.GetDamageForSuccessfulManeuver(gameStructureInfo.CardBeingPlayed, lastDamageComited);
 
-        theReversalCardIsUsed = flippedCardController.CanUseThisReversalCard(controllerOpponentPlayer, "Deck", extraDamage);
+        theReversalCardIsUsed = flippedCardController.CanUseThisReversalCard(controllerOpponentPlayer, "Deck",  totalDamage, extraDamage);
         if (theReversalCardIsUsed)
         {
             gameStructureInfo.EffectsUtils.EndTurn();

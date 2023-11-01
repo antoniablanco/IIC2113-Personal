@@ -13,7 +13,7 @@ public class Ensugiri: Card
     }
     
     public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, 
-        string reverseBy, int damageBonusForSuccessfulManeuver = 0)
+        string reverseBy, int totaldamage, int damageBonusForSuccessfulManeuver = 0)
     {
         return playedCardController.GetCardTitle() == "Kick" && 
                playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
