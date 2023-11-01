@@ -30,10 +30,11 @@ public class PlayManeuverCard
         int extraDamage = gameStructureInfo.BonusManager.GetDamageForSuccessfulManeuver(playedCardController, lastDamageComited);
 
         if (CanThePlayerReceiveDamage(totalDamage))
-        {
+        {   
+            int ultimoDaño = gameStructureInfo.LastDamageComited;
             SayThatTheyAreGoingToReceiveDamage(totalDamage + extraDamage);
             CauseDamageActionPlayCard(totalDamage+ extraDamage, gameStructureInfo.ControllerOpponentPlayer,
-                gameStructureInfo.GetOpponentPlayer());
+                gameStructureInfo.GetOpponentPlayer(), ultimoDaño);
         }
     }
 
@@ -60,12 +61,13 @@ public class PlayManeuverCard
         gameStructureInfo.View.SayThatSuperstarWillTakeSomeDamage(opposingSuperStarName, totalDamage);
     }
 
-    private void CauseDamageActionPlayCard(int totalDamage, PlayerController controllerOpponentPlayer, Player player)
+    private void CauseDamageActionPlayCard(int totalDamage, PlayerController controllerOpponentPlayer, 
+        Player player, int lastDamageComited)
     {
         DeclaresWithoutUseVariablesForReversalDeck();
-    
         for (var currentDamage = 0; currentDamage < totalDamage; currentDamage++)
-            HandleDifferentOptionsForDamage(currentDamage, totalDamage, controllerOpponentPlayer, player);
+            HandleDifferentOptionsForDamage(currentDamage, totalDamage, 
+                controllerOpponentPlayer, player, lastDamageComited);
     }
 
     private void DeclaresWithoutUseVariablesForReversalDeck()
@@ -75,10 +77,10 @@ public class PlayManeuverCard
     }
 
     private void HandleDifferentOptionsForDamage(int currentDamage, int totalDamage,
-        PlayerController controllerOpponentPlayer, Player player)
+        PlayerController controllerOpponentPlayer, Player player, int lastDamageComited)
     {
         if (CheckShouldReceiveDamage(controllerOpponentPlayer))
-            ShowOneFaceDownCard(currentDamage + 1, totalDamage, player, controllerOpponentPlayer);
+            ShowOneFaceDownCard(currentDamage + 1, totalDamage, player, controllerOpponentPlayer, lastDamageComited);
         else if (CheckIfShouldApplyStunValue())
             UseStunValueOpcion();
         else if (PlayerLostDueToLackOfCardsToReceiveDamage(controllerOpponentPlayer))
@@ -91,17 +93,17 @@ public class PlayManeuverCard
     }
 
     private void ShowOneFaceDownCard(int currentDamage, int totalDamage, Player player,
-        PlayerController controllerOpponentPlayer)
+        PlayerController controllerOpponentPlayer, int lastDamageComited)
     {
         var flippedCardController = gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
         var flippedCardString = flippedCardController.GetStringCardInfo();
         gameStructureInfo.View.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
-        DeckReversal(flippedCardController, controllerOpponentPlayer);
+        DeckReversal(flippedCardController, controllerOpponentPlayer, lastDamageComited);
     }
 
-    private void DeckReversal(CardController flippedCardController, PlayerController controllerOpponentPlayer)
-    {
-        int extraDamage = gameStructureInfo.BonusManager.GetDamageForSuccessfulManeuver(gameStructureInfo.CardBeingPlayed, gameStructureInfo.LastDamageComited);
+    private void DeckReversal(CardController flippedCardController, PlayerController controllerOpponentPlayer, int lastDamageComited)
+    {   
+        int extraDamage = gameStructureInfo.BonusManager.GetDamageForSuccessfulManeuver(gameStructureInfo.CardBeingPlayed, lastDamageComited);
         theReversalCardIsUsed = flippedCardController.CanUseThisReversalCard(controllerOpponentPlayer, "Deck", extraDamage);
         if (theReversalCardIsUsed)
         {
