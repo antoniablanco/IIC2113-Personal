@@ -54,6 +54,11 @@ public class CardController
     {
         return _card.Subtypes.Contains(subType);
     }
+    
+    public bool ContainType(string type)
+    {
+        return _card.Types.Contains(type);
+    }
 
     public int GetIndexForType(string type)
     {
@@ -106,9 +111,9 @@ public class CardController
         return _card.CheckIfCardCanBePlayed(gameStructureInfo);
     }
 
-    public bool GetIfCardCanReversalPlayedCard(string reverseBy)
+    public bool GetIfCardCanReversalPlayedCard(string reverseBy, int damageForSuccessfulManeuver=0)
     {
-        return _card.CanReversalThisCard(gameStructureInfo.CardBeingPlayed, gameStructureInfo, reverseBy) &&
+        return _card.CanReversalThisCard(gameStructureInfo.CardBeingPlayed, gameStructureInfo, reverseBy, damageForSuccessfulManeuver) &&
                gameStructureInfo.CardBeingPlayed.CanThisCardBeReversal();
     }
 
@@ -117,10 +122,10 @@ public class CardController
         return _card.CheckIfCardCanBeReverted();
     }
 
-    public bool CanUseThisReversalCard(PlayerController controllerPlayer, string reverseBy)
+    public bool CanUseThisReversalCard(PlayerController controllerPlayer, string reverseBy, int damageForSuccessfulManeuver=0)
     {
         return GetCardFortitude(GetCardTypes()[0]) + gameStructureInfo.BonusManager.GetFortitudBonus() <=
-            controllerPlayer.FortitudRating() && IsReversalType() && GetIfCardCanReversalPlayedCard(reverseBy);
+            controllerPlayer.FortitudRating() && IsReversalType() && GetIfCardCanReversalPlayedCard(reverseBy, damageForSuccessfulManeuver);
     }
 
     public bool VerifyIfTheLastPlayedTypeIs(string type)
@@ -128,10 +133,11 @@ public class CardController
         return gameStructureInfo.CardBeingPlayedType == type;
     }
 
-    public bool DealsTheMaximumDamage(int maximumDamage)
-    {
+    public bool DealsTheMaximumDamage(int maximumDamage, int damageForSuccessfulManeuver)
+    {   
         var damage = GetDamageProducedByTheCard() + gameStructureInfo.BonusManager.GetNexPlayCardDamageBonus() + 
-                     gameStructureInfo.BonusManager.GetTurnDamageBonus(this) + gameStructureInfo.BonusManager.GetDamageForSuccessfulManeuver(this);
+                     gameStructureInfo.BonusManager.GetTurnDamageBonus(this) + 
+                     damageForSuccessfulManeuver;
         var totalDamage =
             gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(damage,
                 gameStructureInfo.ControllerOpponentPlayer);
@@ -152,5 +158,10 @@ public class CardController
     public void ApplyManeuverEffect(CardController playedCardController)
     {
         _card.ApplyManeuverEffect(gameStructureInfo, playedCardController);
+    }
+
+    public void ApplyBonusEffect()
+    {
+        _card.ApplyBonusEffect(gameStructureInfo);
     }
 }

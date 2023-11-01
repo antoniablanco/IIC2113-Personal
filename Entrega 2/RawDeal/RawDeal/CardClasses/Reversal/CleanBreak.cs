@@ -11,7 +11,8 @@ public class CleanBreak : Card
     {
     }
 
-    public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, string reverseBy)
+    public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, 
+        string reverseBy, int damageBonusForSuccessfulManeuver = 0)
     {
         return playedCardController.GetCardTitle() == "Jockeying for Position";
     }

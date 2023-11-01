@@ -36,7 +36,7 @@ public class EffectsUtils
         var totalDamage = gameStructureInfo.CardBeingPlayed.GetDamageProducedByTheCard() +
                           gameStructureInfo.BonusManager.GetNexPlayCardDamageBonus() + 
                           gameStructureInfo.BonusManager.GetTurnDamageBonus(gameStructureInfo.CardBeingPlayed) +
-                          gameStructureInfo.BonusManager.GetDamageForSuccessfulManeuver(gameStructureInfo.CardBeingPlayed);
+                          gameStructureInfo.BonusManager.GetDamageForSuccessfulManeuver(gameStructureInfo.CardBeingPlayed, gameStructureInfo.LastDamageComited);
         if (IsTheSuperStarMankind(gameStructureInfo.ControllerOpponentPlayer) ||
             IsTheSuperStarMankind(gameStructureInfo.ControllerCurrentPlayer))
             totalDamage -= 1;

@@ -38,10 +38,10 @@ public class PlayCard
     private void StartToPlayACardAction(int selectedCard)
     {
         var playedCardController = GetCardPlayed(selectedCard);
-        CheckIfBonusesShouldBeActive(playedCardController.Item1);
+        CheckIfBonusesShouldBeActive(playedCardController.Item1, playedCardController.Item1.GetCardTypes()[playedCardController.Item2]);
         SayThatTheyAreGoingToPlayACard(playedCardController.Item1, playedCardController.Item2);
         SetLastPlayedCardInfo(playedCardController);
-        VerifyIfIsUsedAReversalCard(playedCardController);
+        VerifyIfIsUsedAReversalCard(playedCardController, gameStructureInfo.LastDamageComited);
     }
 
     private Tuple<CardController, int> GetCardPlayed(int indexSelectedCard)
@@ -51,10 +51,10 @@ public class PlayCard
         return allCardsAndTheirTypes[indexSelectedCard];
     }
 
-    private void CheckIfBonusesShouldBeActive(CardController cardController)
+    private void CheckIfBonusesShouldBeActive(CardController cardController, string type)
     {
         gameStructureInfo.BonusManager.CheckIfBonusesShouldBeActive(gameStructureInfo.ControllerCurrentPlayer,
-            cardController);
+            cardController, type );
     }
     
     private void SetLastPlayedCardInfo(Tuple<CardController, int> playedCardController)
@@ -72,23 +72,23 @@ public class PlayCard
         gameStructureInfo.View.SayThatPlayerIsTryingToPlayThisCard(nameSuperStar, playedCardString);
     }
 
-    private void VerifyIfIsUsedAReversalCard(Tuple<CardController, int> playedCardController)
+    private void VerifyIfIsUsedAReversalCard(Tuple<CardController, int> playedCardController, int lastDamageComited)
     {
         var playReversalHandCard = new PlayReversalHandCard(gameStructureInfo);
         if (!playReversalHandCard.IsUserUsingReversalCard())
         {
             gameStructureInfo.View.SayThatPlayerSuccessfullyPlayedACard();
-            PlayCardByType(playedCardController);
+            PlayCardByType(playedCardController, lastDamageComited);
         }
     }
 
-    private void PlayCardByType(Tuple<CardController, int> playedCardController)
+    private void PlayCardByType(Tuple<CardController, int> playedCardController,  int lastDamageComited)
     {
         var typeCard = playedCardController.Item1.GetCardTypes()[playedCardController.Item2];
         switch (typeCard)
         {
             case "Maneuver":
-                PlayManeuverCard(playedCardController.Item1);
+                PlayManeuverCard(playedCardController.Item1, lastDamageComited);
                 break;
             case "Action":
                 PlayActionCard(playedCardController.Item1);
@@ -96,10 +96,10 @@ public class PlayCard
         }
     }
 
-    private void PlayManeuverCard(CardController playedCardController)
+    private void PlayManeuverCard(CardController playedCardController,  int lastDamageComited)
     {
         var playManeuverCard = new PlayManeuverCard(gameStructureInfo);
-        playManeuverCard.PlayCard(playedCardController);
+        playManeuverCard.PlayCard(playedCardController, lastDamageComited);
     }
 
     private void PlayActionCard(CardController playedCardController)

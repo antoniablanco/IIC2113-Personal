@@ -95,9 +95,11 @@ public class PlayerController
         return player.CardsRingArea.Sum(card => card.GetDamageProducedByTheCard());
     }
 
-    private bool CanReversalPlayedCard(CardController card, string reverseBy) 
+    private bool CanReversalPlayedCard(CardController card, string reverseBy)
     {   
-        return card.GetIfCardCanReversalPlayedCard(reverseBy);
+        int damageForSuccessfulManeuver = gameStructureInfo.BonusManager.GetDamageForSuccessfulManeuver(gameStructureInfo.CardBeingPlayed, gameStructureInfo.LastDamageComited);
+        Console.WriteLine(damageForSuccessfulManeuver);
+        return card.GetIfCardCanReversalPlayedCard(reverseBy, damageForSuccessfulManeuver);
     }
 
     public bool TheirSuperStarCanUseSuperAbility(PlayerController currentPlayer)

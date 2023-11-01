@@ -1,3 +1,5 @@
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClasses.UnspecifiedType;
 
 public class Clothesline: Card
@@ -7,5 +9,13 @@ public class Clothesline: Card
         :base(title, types, subtypes, fortitude, damage, stunValue, cardEffect)
     {
          
+    }
+    
+    public override void ApplyBonusEffect(GameStructureInfo gameStructureInfo)
+    {
+        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect("Clothesline", bonusValue:2, "Damage");
+        gameStructureInfo.BonusManager.SetWhoActivateNextPlayedCardBonusEffect(gameStructureInfo.ControllerCurrentPlayer);
+        var turnsBeforeEffectExpires = 2;
+        gameStructureInfo.BonusManager.SetTurnsLeftForBonusCounter(turnsBeforeEffectExpires);
     }
 }

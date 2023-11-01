@@ -25,12 +25,13 @@ public abstract class Card : IViewableCardInfo
     public List<string> Subtypes { get; set; }
     public string CardEffect { get; set; }
 
-
-    public virtual bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, string reverseBy)
+    
+    
+    public virtual bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, string reverseBy, int damageBonusForSuccessfulManeuver = 0)
     {
         return true;
     }
-
+    
     public virtual void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
     {
     }
@@ -56,5 +57,10 @@ public abstract class Card : IViewableCardInfo
     public virtual bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo)
     { 
         return true;
+    }
+
+    public virtual void ApplyBonusEffect(GameStructureInfo gameStructureInfo)
+    {
+        
     }
 }

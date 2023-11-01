@@ -13,6 +13,11 @@ public class BonusManager
         this.bonusStructureInfo = bonusStructureInfo;
     }
 
+    public void SetBonusCardActivator(CardController cardController)
+    {
+        bonusStructureInfo.BonusCardActivator = cardController;
+    }
+    
     public void ApplyTurnBonusEffect(string typeName, int bonusValue)
     {
         switch (typeName)
@@ -27,7 +32,8 @@ public class BonusManager
     }
     
     public void ApplyNextPlayedCardBonusEffect(string typeName, int bonusValue, string bonusType)
-    {
+    {   
+        DeactivateNextPlayedCardBonusEffect();
         SetBonus(bonusType, bonusValue);
         ActivateBonus(typeName);
     }
@@ -58,29 +64,57 @@ public class BonusManager
             case "IrishWhip":
                 bonusStructureInfo.IsIrishWhipBonusActive = true;
                 break;
+            case "Superkick":
+                SpecialCaseSuperkick();
+                break;
+            case "Clothesline":
+                bonusStructureInfo.ClotheslineBonusActive = true;
+                break;
+            case "AtomicDrop":
+                bonusStructureInfo.AtomicDropBonusActive = true;
+                break;
+            case "SnapMare":
+                bonusStructureInfo.SnapMareBonusActive = true;
+                break;
         }
+    }
+
+    private void SpecialCaseSuperkick()
+    {
+        if (bonusStructureInfo.SuperkickBonusActive)
+            bonusStructureInfo.SuperkickDobleActivada = true;
+        bonusStructureInfo.SuperkickBonusActive = true;
     }
     
     public int GetNexPlayCardDamageBonus()
     {
-        if (bonusStructureInfo.IsJockeyingForPositionBonusDamageActive || bonusStructureInfo.IsIrishWhipBonusActive)
+        bool isAnyNextPlayCardBonusActive = bonusStructureInfo.IsJockeyingForPositionBonusDamageActive
+                                         || bonusStructureInfo.IsIrishWhipBonusActive
+                                         || bonusStructureInfo.ClotheslineBonusActive
+                                         || bonusStructureInfo.AtomicDropBonusActive
+                                         || bonusStructureInfo.SnapMareBonusActive;
+        if (isAnyNextPlayCardBonusActive )
             return bonusStructureInfo.BonusDamage;
         return 0;
     }
 
     public int GetTurnDamageBonus(CardController cardController)
-    {
+    {   
         int damage = 0;
-        if (cardController.VerifyIfTheLastPlayedTypeIs("Maneuver"))
+        if (cardController.ContainType("Maneuver"))
             damage += bonusStructureInfo.IAmTheGameBonus;
         return damage;
     }
     
-    public int GetDamageForSuccessfulManeuver(CardController cardController)
+    public int GetDamageForSuccessfulManeuver(CardController cardController, int lastDamageComited)
     {   
         int damage = 0;
-        if (cardController.VerifyIfTheLastPlayedTypeIs("Maneuver") && cardController.ContainsSubtype("Strike"))
+        if (cardController.ContainType("Maneuver") && cardController.ContainsSubtype("Strike"))
             damage += bonusStructureInfo.HaymakerBonus;
+        if (bonusStructureInfo.SuperkickBonusActive && cardController.ContainType("Maneuver") &&
+            (cardController != bonusStructureInfo.BonusCardActivator || bonusStructureInfo.SuperkickDobleActivada)
+                                                     && lastDamageComited >= 5)
+            damage += bonusStructureInfo.BonusDamage;
         return damage;
     }
 
@@ -121,38 +155,52 @@ public class BonusManager
         return bonusStructureInfo.WhoActivateNextPlayedCardBonusEffect;
     }
     
-    public void CheckIfBonusesShouldBeActive(PlayerController controllerCurrentPlayer, CardController cardController)
+    public void CheckIfBonusesShouldBeActive(PlayerController controllerCurrentPlayer, CardController cardController, string type)
     {
-        if (CheckNextPlayCardBonusConditions(controllerCurrentPlayer, cardController))
+        if (CheckNextPlayCardBonusConditions(controllerCurrentPlayer, cardController, type))
             DeactivateNextPlayedCardBonusEffect();
     }
 
-    private bool CheckNextPlayCardBonusConditions(PlayerController controllerCurrentPlayer, CardController cardController)
-    {
-        return CheckSpecificBonusConditions(cardController) ||
+    private bool CheckNextPlayCardBonusConditions(PlayerController controllerCurrentPlayer, CardController cardController, string type)
+    {   
+        return CheckSpecificBonusConditions(cardController, type) ||
                GetTurnCounterForBonus() <= 0 ||
                (GetWhoActivateNextPlayedCardBonusEffect() != controllerCurrentPlayer &&
                 GetWhoActivateNextPlayedCardBonusEffect() != null);
     }
 
-    private bool CheckSpecificBonusConditions(CardController cardController)
-    {   if (bonusStructureInfo.IsJockeyingForPositionBonusDamageActive ||
+    private bool CheckSpecificBonusConditions(CardController cardController, string type)
+    {
+        if (bonusStructureInfo.IsJockeyingForPositionBonusDamageActive ||
             bonusStructureInfo.IsJockeyingForPositionBonusFortitudActive)
             return !cardController.ContainsSubtype("Grapple");
+        
         if (bonusStructureInfo.IsIrishWhipBonusActive)
             return !cardController.ContainsSubtype("Strike");
+
+        if (bonusStructureInfo.ClotheslineBonusActive || bonusStructureInfo.AtomicDropBonusActive)
+            return !(type == "Maneuver");
+
+        if (bonusStructureInfo.SnapMareBonusActive)
+            return !(type == "Maneuver" && cardController.ContainsSubtype("Strike"));
+        
         return false;
     }
 
     private void DeactivateNextPlayedCardBonusEffect()
-    {
+    {   
         DeactivateBonus("JockeyingFortitud");
         DeactivateBonus("JockeyingDamage");
         DeactivateBonus("IrishWhip");
+        DeactivateBonus("Clothesline");
+        DeactivateBonus("AtomicDrop");
+        DeactivateBonus("SnapMare");
     }
 
     public void DeactivateTurnBonus()
-    {
+    {   
+        DeactivateBonus("Superkick");
+        bonusStructureInfo.SuperkickDobleActivada = false;
         bonusStructureInfo.IAmTheGameBonus = 0;
         bonusStructureInfo.HaymakerBonus = 0;
     }
@@ -169,6 +217,18 @@ public class BonusManager
                 break;
             case "IrishWhip":
                 bonusStructureInfo.IsIrishWhipBonusActive = false;
+                break;
+            case "Superkick":
+                bonusStructureInfo.SuperkickBonusActive = false;
+                break;
+            case "Clothesline":
+                bonusStructureInfo.ClotheslineBonusActive = false;
+                break;
+            case "AtomicDrop":
+                bonusStructureInfo.AtomicDropBonusActive = false;
+                break;
+            case "SnapMare":
+                bonusStructureInfo.SnapMareBonusActive = false;
                 break;
         }
     }

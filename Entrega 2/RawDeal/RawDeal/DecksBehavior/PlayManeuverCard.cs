@@ -16,31 +16,32 @@ public class PlayManeuverCard
         this.gameStructureInfo = gameStructureInfo;
     }
 
-    public void PlayCard(CardController playedCardController)
+    public void PlayCard(CardController playedCardController, int lastDamageComited)
     {
         playedCardController.ApplyManeuverEffect(playedCardController);
-        StartDamageProduceByTheCard(playedCardController);
+        StartDamageProduceByTheCard(playedCardController, lastDamageComited);
         MoveCardHasBeenUsedToRingArea(playedCardController);
     }
 
-    private void StartDamageProduceByTheCard(CardController playedCardController)
+    private void StartDamageProduceByTheCard(CardController playedCardController, int lastDamageComited)
     {
         var totalDamage = GetDamageProduced(playedCardController);
+        playedCardController.ApplyBonusEffect();
+        int extraDamage = gameStructureInfo.BonusManager.GetDamageForSuccessfulManeuver(playedCardController, lastDamageComited);
 
         if (CanThePlayerReceiveDamage(totalDamage))
         {
-            SayThatTheyAreGoingToReceiveDamage(totalDamage);
-            CauseDamageActionPlayCard(totalDamage, gameStructureInfo.ControllerOpponentPlayer,
+            SayThatTheyAreGoingToReceiveDamage(totalDamage + extraDamage);
+            CauseDamageActionPlayCard(totalDamage+ extraDamage, gameStructureInfo.ControllerOpponentPlayer,
                 gameStructureInfo.GetOpponentPlayer());
         }
     }
 
     private int GetDamageProduced(CardController playedCardController)
-    {
+    {   
         var damage = playedCardController.GetDamageProducedByTheCard() +
                      gameStructureInfo.BonusManager.GetNexPlayCardDamageBonus() +
-                     gameStructureInfo.BonusManager.GetTurnDamageBonus(playedCardController) +
-                     gameStructureInfo.BonusManager.GetDamageForSuccessfulManeuver(playedCardController);
+                     gameStructureInfo.BonusManager.GetTurnDamageBonus(playedCardController);
         var totalDamage =
             gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(damage,
                 gameStructureInfo.ControllerOpponentPlayer);
@@ -100,7 +101,8 @@ public class PlayManeuverCard
 
     private void DeckReversal(CardController flippedCardController, PlayerController controllerOpponentPlayer)
     {
-        theReversalCardIsUsed = flippedCardController.CanUseThisReversalCard(controllerOpponentPlayer, "Deck");
+        int extraDamage = gameStructureInfo.BonusManager.GetDamageForSuccessfulManeuver(gameStructureInfo.CardBeingPlayed, gameStructureInfo.LastDamageComited);
+        theReversalCardIsUsed = flippedCardController.CanUseThisReversalCard(controllerOpponentPlayer, "Deck", extraDamage);
         if (theReversalCardIsUsed)
         {
             gameStructureInfo.EffectsUtils.EndTurn();
