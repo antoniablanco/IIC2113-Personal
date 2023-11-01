@@ -97,9 +97,7 @@ public class PlayerController
 
     private bool CanReversalPlayedCard(CardController card, string reverseBy)
     {   
-        int damageForSuccessfulManeuver = gameStructureInfo.BonusManager.GetDamageForSuccessfulManeuver(gameStructureInfo.CardBeingPlayed, gameStructureInfo.LastDamageComited);
-        Console.WriteLine(damageForSuccessfulManeuver);
-        return card.GetIfCardCanReversalPlayedCard(reverseBy, damageForSuccessfulManeuver);
+        return card.GetIfCardCanReversalPlayedCard(reverseBy);
     }
 
     public bool TheirSuperStarCanUseSuperAbility(PlayerController currentPlayer)

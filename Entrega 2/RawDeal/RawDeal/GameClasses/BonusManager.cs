@@ -103,17 +103,16 @@ public class BonusManager
         int damage = 0;
         if (cardController.ContainType("Maneuver"))
             damage += bonusStructureInfo.IAmTheGameBonus;
+        if (cardController.ContainType("Maneuver") && cardController.ContainsSubtype("Strike"))
+            damage += bonusStructureInfo.HaymakerBonus;
         return damage;
     }
     
     public int GetDamageForSuccessfulManeuver(CardController cardController, int lastDamageComited)
     {   
         int damage = 0;
-        if (cardController.ContainType("Maneuver") && cardController.ContainsSubtype("Strike"))
-            damage += bonusStructureInfo.HaymakerBonus;
-        if (bonusStructureInfo.SuperkickBonusActive && cardController.ContainType("Maneuver") &&
-            (cardController != bonusStructureInfo.BonusCardActivator || bonusStructureInfo.SuperkickDobleActivada)
-                                                     && lastDamageComited >= 5)
+        if (bonusStructureInfo.SuperkickBonusActive && 
+            cardController.ContainType("Maneuver") && lastDamageComited >= 5 && cardController.GetCardTitle()=="Superkick")
             damage += bonusStructureInfo.BonusDamage;
         return damage;
     }

@@ -24,7 +24,7 @@ public class PlayManeuverCard
     }
 
     private void StartDamageProduceByTheCard(CardController playedCardController, int lastDamageComited)
-    {
+    {   
         var totalDamage = GetDamageProduced(playedCardController);
         playedCardController.ApplyBonusEffect();
         int extraDamage = gameStructureInfo.BonusManager.GetDamageForSuccessfulManeuver(playedCardController, lastDamageComited);
@@ -45,7 +45,6 @@ public class PlayManeuverCard
         var totalDamage =
             gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(damage,
                 gameStructureInfo.ControllerOpponentPlayer);
-        gameStructureInfo.LastDamageComited = totalDamage;
         return totalDamage;
     }
 
@@ -55,7 +54,8 @@ public class PlayManeuverCard
     }
 
     private void SayThatTheyAreGoingToReceiveDamage(int totalDamage)
-    {
+    {   
+        gameStructureInfo.LastDamageComited = totalDamage;
         var opposingSuperStarName = gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar();
         gameStructureInfo.View.SayThatSuperstarWillTakeSomeDamage(opposingSuperStarName, totalDamage);
     }
@@ -63,7 +63,7 @@ public class PlayManeuverCard
     private void CauseDamageActionPlayCard(int totalDamage, PlayerController controllerOpponentPlayer, Player player)
     {
         DeclaresWithoutUseVariablesForReversalDeck();
-
+    
         for (var currentDamage = 0; currentDamage < totalDamage; currentDamage++)
             HandleDifferentOptionsForDamage(currentDamage, totalDamage, controllerOpponentPlayer, player);
     }
