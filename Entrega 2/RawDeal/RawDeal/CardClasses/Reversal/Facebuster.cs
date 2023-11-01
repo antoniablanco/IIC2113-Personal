@@ -13,7 +13,7 @@ public class Facebuster: Card
     }
     
     public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, 
-        string reverseBy, int totaldamage, int damageBonusForSuccessfulManeuver = 0)
+        string reverseBy, int totaldamage)
     {
         return gameStructureInfo.LastCardBeingPlayedTitle == "Irish Whip" && reverseBy == "Hand" && playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
     }

@@ -111,9 +111,9 @@ public class CardController
         return _card.CheckIfCardCanBePlayed(gameStructureInfo);
     }
 
-    public bool GetIfCardCanReversalPlayedCard(string reverseBy, int totaldamage, int damageForSuccessfulManeuver=0)
+    public bool GetIfCardCanReversalPlayedCard(string reverseBy, int totaldamage)
     {
-        return _card.CanReversalThisCard(gameStructureInfo.CardBeingPlayed, gameStructureInfo, reverseBy, totaldamage, damageForSuccessfulManeuver) &&
+        return _card.CanReversalThisCard(gameStructureInfo.CardBeingPlayed, gameStructureInfo, reverseBy, totaldamage) &&
                gameStructureInfo.CardBeingPlayed.CanThisCardBeReversal();
     }
 
@@ -122,27 +122,15 @@ public class CardController
         return _card.CheckIfCardCanBeReverted();
     }
 
-    public bool CanUseThisReversalCard(PlayerController controllerPlayer, string reverseBy, int totaldamage, int damageForSuccessfulManeuver=0)
+    public bool CanUseThisReversalCard(PlayerController controllerPlayer, string reverseBy, int totaldamage)
     {
         return GetCardFortitude(GetCardTypes()[0]) + gameStructureInfo.BonusManager.GetFortitudBonus() <=
-            controllerPlayer.FortitudRating() && IsReversalType() && GetIfCardCanReversalPlayedCard(reverseBy, totaldamage, damageForSuccessfulManeuver);
+            controllerPlayer.FortitudRating() && IsReversalType() && GetIfCardCanReversalPlayedCard(reverseBy, totaldamage);
     }
 
     public bool VerifyIfTheLastPlayedTypeIs(string type)
     {
         return gameStructureInfo.CardBeingPlayedType == type;
-    }
-
-    public bool DealsTheMaximumDamage(int maximumDamage, int damageForSuccessfulManeuver)
-    {   
-        var damage = GetDamageProducedByTheCard() + gameStructureInfo.BonusManager.GetNexPlayCardDamageBonus() + 
-                     gameStructureInfo.BonusManager.GetTurnDamageBonus(this) + 
-                     damageForSuccessfulManeuver;
-        var totalDamage =
-            gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(damage,
-                gameStructureInfo.ControllerOpponentPlayer);
-        
-        return totalDamage <= maximumDamage;
     }
 
     public void ApplyReversalEffect()

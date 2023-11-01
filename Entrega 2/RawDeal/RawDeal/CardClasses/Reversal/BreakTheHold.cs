@@ -11,7 +11,7 @@ public class BreakTheHold : Card
     }
 
     public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, 
-        string reverseBy, int totaldamage, int damageBonusForSuccessfulManeuver = 0)
+        string reverseBy, int totaldamage)
     {
         return playedCardController.ContainsSubtype("Submission") &&
                playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
