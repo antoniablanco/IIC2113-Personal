@@ -104,6 +104,7 @@ public class PlayManeuverCard
     private void DeckReversal(CardController flippedCardController, PlayerController controllerOpponentPlayer, int lastDamageComited)
     {   
         int extraDamage = gameStructureInfo.BonusManager.GetDamageForSuccessfulManeuver(gameStructureInfo.CardBeingPlayed, lastDamageComited);
+
         theReversalCardIsUsed = flippedCardController.CanUseThisReversalCard(controllerOpponentPlayer, "Deck", extraDamage);
         if (theReversalCardIsUsed)
         {

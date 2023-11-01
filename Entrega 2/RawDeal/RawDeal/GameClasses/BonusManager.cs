@@ -28,6 +28,9 @@ public class BonusManager
             case "Haymaker":
                 bonusStructureInfo.HaymakerBonus += bonusValue;
                 break;
+            case "Superkick":
+                bonusStructureInfo.SuperkickBonus = bonusValue;
+                break;
         }
     }
     
@@ -64,9 +67,6 @@ public class BonusManager
             case "IrishWhip":
                 bonusStructureInfo.IsIrishWhipBonusActive = true;
                 break;
-            case "Superkick":
-                SpecialCaseSuperkick();
-                break;
             case "Clothesline":
                 bonusStructureInfo.ClotheslineBonusActive = true;
                 break;
@@ -78,16 +78,10 @@ public class BonusManager
                 break;
         }
     }
-
-    private void SpecialCaseSuperkick()
-    {
-        if (bonusStructureInfo.SuperkickBonusActive)
-            bonusStructureInfo.SuperkickDobleActivada = true;
-        bonusStructureInfo.SuperkickBonusActive = true;
-    }
     
     public int GetNexPlayCardDamageBonus()
-    {
+    {   
+        Console.WriteLine(bonusStructureInfo.IsIrishWhipBonusActive);
         bool isAnyNextPlayCardBonusActive = bonusStructureInfo.IsJockeyingForPositionBonusDamageActive
                                          || bonusStructureInfo.IsIrishWhipBonusActive
                                          || bonusStructureInfo.ClotheslineBonusActive
@@ -111,9 +105,8 @@ public class BonusManager
     public int GetDamageForSuccessfulManeuver(CardController cardController, int lastDamageComited)
     {   
         int damage = 0;
-        if (bonusStructureInfo.SuperkickBonusActive && 
-            cardController.ContainType("Maneuver") && lastDamageComited >= 5 && cardController.GetCardTitle()=="Superkick")
-            damage += bonusStructureInfo.BonusDamage;
+        if (cardController.ContainType("Maneuver") && lastDamageComited >= 5 && cardController.GetCardTitle()=="Superkick")
+            damage += bonusStructureInfo.SuperkickBonus;
         return damage;
     }
 
@@ -198,10 +191,10 @@ public class BonusManager
 
     public void DeactivateTurnBonus()
     {   
-        DeactivateBonus("Superkick");
         bonusStructureInfo.SuperkickDobleActivada = false;
         bonusStructureInfo.IAmTheGameBonus = 0;
         bonusStructureInfo.HaymakerBonus = 0;
+        bonusStructureInfo.SuperkickBonus = 0;
     }
     
     private void DeactivateBonus(string type)
@@ -216,9 +209,6 @@ public class BonusManager
                 break;
             case "IrishWhip":
                 bonusStructureInfo.IsIrishWhipBonusActive = false;
-                break;
-            case "Superkick":
-                bonusStructureInfo.SuperkickBonusActive = false;
                 break;
             case "Clothesline":
                 bonusStructureInfo.ClotheslineBonusActive = false;

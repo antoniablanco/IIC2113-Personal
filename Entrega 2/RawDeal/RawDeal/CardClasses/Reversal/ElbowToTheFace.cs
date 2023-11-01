@@ -13,8 +13,6 @@ public class ElbowToTheFace : Card
     
     public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, string reverseBy, int damageBonusForSuccessfulManeuver = 0)
     {   
-        Console.WriteLine("Revisando Elbow");
-        Console.WriteLine(damageBonusForSuccessfulManeuver);
         const int maximumDamageProducedByPlayedCard = 7;
         return playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver") &&
                playedCardController.DealsTheMaximumDamage(maximumDamageProducedByPlayedCard, damageBonusForSuccessfulManeuver);

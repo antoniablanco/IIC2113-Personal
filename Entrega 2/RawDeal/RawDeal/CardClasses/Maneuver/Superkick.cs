@@ -13,10 +13,6 @@ public class Superkick: Card
     
     public override void ApplyBonusEffect(GameStructureInfo gameStructureInfo)
     {
-        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect("Superkick", bonusValue:5, "Damage");
-        gameStructureInfo.BonusManager.SetWhoActivateNextPlayedCardBonusEffect(gameStructureInfo.ControllerCurrentPlayer);
-        var turnsBeforeEffectExpires = 2;
-        gameStructureInfo.BonusManager.SetTurnsLeftForBonusCounter(turnsBeforeEffectExpires);
-        gameStructureInfo.BonusManager.SetBonusCardActivator(gameStructureInfo.CardBeingPlayed);
+        gameStructureInfo.BonusManager.ApplyTurnBonusEffect("Superkick", bonusValue:5);
     }
 }
