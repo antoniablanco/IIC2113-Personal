@@ -164,6 +164,7 @@ public class PlayerController
             "Hand" => player.CardsHand.Find(card => card.GetCardTitle() == cardName),
             "RingSide" => player.CardsRingSide.Find(card => card.GetCardTitle() == cardName),
             "Arsenal" => player.CardsArsenal.Find(card => card.GetCardTitle() == cardName),
+            "RingArea" => player.CardsRingArea.Find(card => card.GetCardTitle() == cardName),
             _ => throw new CardNotFoundException("The card is not in this deck")
         };
     }
