@@ -26,7 +26,7 @@ public class RockBottom : Card
         const int numberOfCardToDiscard = 1;
         new DiscardCardsFromHandToRingSideEffect(gameStructureInfo.ControllerOpponentPlayer,
             gameStructureInfo.ControllerOpponentPlayer, numberOfCardToDiscard, gameStructureInfo);
-        new FindAndMoveCard(cardTitle:"The People’s Elbow", gameStructureInfo.ControllerOpponentPlayer,
+        new FindAndMoveCard(cardTitle:"The People's Elbow", gameStructureInfo.ControllerOpponentPlayer,
             gameStructureInfo);
     }
     

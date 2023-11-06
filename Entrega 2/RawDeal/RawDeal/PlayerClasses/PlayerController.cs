@@ -39,7 +39,7 @@ public class PlayerController
     }
 
     public bool HasCardsInArsenal()
-    {
+    {   
         return (player.CardsArsenal.Count > 0);
     }
 
@@ -159,14 +159,19 @@ public class PlayerController
     
     public CardController FindCardCardFrom(string deck, string cardName)
     {
-        return deck switch
+        CardController foundCard = deck switch
         {
             "Hand" => player.CardsHand.Find(card => card.GetCardTitle() == cardName),
             "RingSide" => player.CardsRingSide.Find(card => card.GetCardTitle() == cardName),
             "Arsenal" => player.CardsArsenal.Find(card => card.GetCardTitle() == cardName),
             "RingArea" => player.CardsRingArea.Find(card => card.GetCardTitle() == cardName),
-            _ => throw new CardNotFoundException("The card is not in this deck")
+            _ => null // Si no se encuentra la carta, asigna null
         };
+
+        if (foundCard == null)
+            throw new CardNotFoundException("The card is not in this deck");
+
+        return foundCard;
     }
 
     public List<String> StringCardsFrom(string deck)

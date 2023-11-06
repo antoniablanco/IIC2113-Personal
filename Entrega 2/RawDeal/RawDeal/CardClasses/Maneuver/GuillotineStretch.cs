@@ -16,7 +16,7 @@ public class GuillotineStretch : Card
         const int numberOfCardToDiscard = 1;
         new DiscardCardsFromHandToRingSideEffect(gameStructureInfo.ControllerOpponentPlayer,
             gameStructureInfo.ControllerOpponentPlayer, numberOfCardToDiscard, gameStructureInfo);
-
+    
         const int maximumNumberOfCardsToSteal = 1;
         new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo).MayStealCards(maximumNumberOfCardsToSteal);

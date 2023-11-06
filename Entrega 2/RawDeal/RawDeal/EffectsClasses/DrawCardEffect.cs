@@ -17,15 +17,12 @@ public class DrawCardEffect: EffectsUtils
     }
     
     public void MayStealCards(int maximumNumberOfcardToDraw)
-    {
-        if (CheckIfThePlayerHasCardInArsenal(controllerPlayer))
-        {
-            var numberOfcardToDraw = gameStructureInfo.View.AskHowManyCardsToDrawBecauseOfACardEffect(
-                controllerPlayer.NameOfSuperStar(), maximumNumberOfcardToDraw);
-            if (controllerPlayer.NumberOfCardIn("Arsenal") < numberOfcardToDraw)
-                numberOfcardToDraw = controllerPlayer.NumberOfCardIn("Arsenal");
-            StealCards(numberOfcardToDraw);
-        }
+    {   
+        var numberOfcardToDraw = gameStructureInfo.View.AskHowManyCardsToDrawBecauseOfACardEffect(
+            controllerPlayer.NameOfSuperStar(), maximumNumberOfcardToDraw);
+        if (controllerPlayer.NumberOfCardIn("Arsenal") < numberOfcardToDraw)
+            numberOfcardToDraw = controllerPlayer.NumberOfCardIn("Arsenal");
+        StealCards(numberOfcardToDraw);
     }
 
     public void StealCards(int numberOfcardToDraw = 1)

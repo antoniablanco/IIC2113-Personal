@@ -27,7 +27,8 @@ public class FindAndMoveCard: EffectsUtils
     {
         try { SearchCardInRingSide(); }
         catch (CardNotFoundException)
-        {
+        {   
+            gameStructureInfo.View.SayThatPlayerDidntFindTheCard(playerController.NameOfSuperStar());
             try { SearchCardInArsenal(); }
             catch (CardNotFoundException)
             {
@@ -38,18 +39,21 @@ public class FindAndMoveCard: EffectsUtils
     }
 
     private void SearchCardInRingSide()
-    {
+    {   
         gameStructureInfo.View.SayThatPlayerSearchesForTheTargetCardInHisRingside(
             playerController.NameOfSuperStar(), cardTitle);
+        cardTitle = cardTitle == "The People's Elbow"? "The People’s Elbow": cardTitle;
         CardController card = playerController.FindCardCardFrom("RingSide", cardTitle);
         gameStructureInfo.View.SayThatPlayerFoundTheCardAndPutItIntoHisHand(playerController.NameOfSuperStar());
         gameStructureInfo.CardMovement.TransferChoosinCardFromRingSideToHand(player, card);
     }
 
     private void SearchCardInArsenal()
-    {
+    {   
+        cardTitle = cardTitle == "The People’s Elbow"? "The People's Elbow": cardTitle;
         gameStructureInfo.View.SayThatPlayerSearchesForTheTargetCardInHisArsenal(
             playerController.NameOfSuperStar(), cardTitle);
+        cardTitle = cardTitle == "The People's Elbow"? "The People’s Elbow": cardTitle;
         CardController card = playerController.FindCardCardFrom("Arsenal", cardTitle);
         gameStructureInfo.View.SayThatPlayerFoundTheCardAndPutItIntoHisHand(playerController.NameOfSuperStar());
         gameStructureInfo.CardMovement.TransferChoosinCardArsenalToHand(player, card);
