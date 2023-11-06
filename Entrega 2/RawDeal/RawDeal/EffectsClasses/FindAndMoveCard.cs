@@ -43,7 +43,6 @@ public class FindAndMoveCard: EffectsUtils
         cardTitle = cardTitle == "The People’s Elbow"? "The People's Elbow": cardTitle;
         gameStructureInfo.View.SayThatPlayerSearchesForTheTargetCardInHisRingside(
             playerController.NameOfSuperStar(), cardTitle);
-        cardTitle = cardTitle == "The People's Elbow"? "The People’s Elbow": cardTitle;
         CardController card = playerController.FindCardCardFrom("RingSide", cardTitle);
         gameStructureInfo.View.SayThatPlayerFoundTheCardAndPutItIntoHisHand(playerController.NameOfSuperStar());
         gameStructureInfo.CardMovement.TransferChoosinCardFromRingSideToHand(player, card);
@@ -54,7 +53,6 @@ public class FindAndMoveCard: EffectsUtils
         cardTitle = cardTitle == "The People’s Elbow"? "The People's Elbow": cardTitle;
         gameStructureInfo.View.SayThatPlayerSearchesForTheTargetCardInHisArsenal(
             playerController.NameOfSuperStar(), cardTitle);
-        cardTitle = cardTitle == "The People's Elbow"? "The People’s Elbow": cardTitle;
         CardController card = playerController.FindCardCardFrom("Arsenal", cardTitle);
         gameStructureInfo.View.SayThatPlayerFoundTheCardAndPutItIntoHisHand(playerController.NameOfSuperStar());
         gameStructureInfo.CardMovement.TransferChoosinCardArsenalToHand(player, card);

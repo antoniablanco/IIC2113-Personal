@@ -181,6 +181,7 @@ public class PlayerController
             "Hand" => gameStructureInfo.CardsVisualizor.CreateStringCardList(player.CardsHand),
             "RingSide" => gameStructureInfo.CardsVisualizor.CreateStringCardList(player.CardsRingSide),
             "RingArea" => gameStructureInfo.CardsVisualizor.CreateStringCardList(player.CardsRingArea),
+            "Arsenal" => gameStructureInfo.CardsVisualizor.CreateStringCardList(player.CardsArsenal),
             _ => gameStructureInfo.CardsVisualizor.CreateStringCardList(player.CardsHand)
         };
     }
