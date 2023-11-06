@@ -20,15 +20,18 @@ public class DrawCardEffect: EffectsUtils
     {   
         var numberOfcardToDraw = gameStructureInfo.View.AskHowManyCardsToDrawBecauseOfACardEffect(
             controllerPlayer.NameOfSuperStar(), maximumNumberOfcardToDraw);
-        if (controllerPlayer.NumberOfCardIn("Arsenal") < numberOfcardToDraw)
-            numberOfcardToDraw = controllerPlayer.NumberOfCardIn("Arsenal");
+        
         StealCards(numberOfcardToDraw);
     }
 
     public void StealCards(int numberOfcardToDraw = 1)
-    {
+    {   
+        numberOfcardToDraw = Math.Min(controllerPlayer.NumberOfCardIn("Arsenal"), numberOfcardToDraw);
         gameStructureInfo.View.SayThatPlayerDrawCards(controllerPlayer.NameOfSuperStar(), numberOfcardToDraw);
-        for (var i = 0; i < numberOfcardToDraw; i++)
-            gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToHand(player);
+        if (IsPositive(numberOfcardToDraw))
+        {
+            for (var i = 0; i < numberOfcardToDraw; i++)
+                gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToHand(player);
+        }
     }
 }
