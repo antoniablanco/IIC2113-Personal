@@ -10,12 +10,14 @@ public class GetBackDamageEffectUtils: EffectsUtils
     private Player player;
     private List<string> ringSideAsString;
     
-    public GetBackDamageEffectUtils(PlayerController controllerPlayer, Player player, GameStructureInfo gameStructureInfo, int recoveredDamage = 1)
+    public GetBackDamageEffectUtils(PlayerController controllerPlayer, GameStructureInfo gameStructureInfo, int recoveredDamage = 1)
         : base(gameStructureInfo)
     {
         this.recoveredDamage = recoveredDamage;
         this.controllerPlayer = controllerPlayer;
-        this.player = player;
+        player = gameStructureInfo.ControllerOpponentPlayer == controllerPlayer ? 
+            gameStructureInfo.GetOpponentPlayer() : gameStructureInfo.GetCurrentPlayer();
+        
         GetBackDamage();
     }
 

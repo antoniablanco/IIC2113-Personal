@@ -9,12 +9,13 @@ public class TakeDamageEffectUtils: EffectsUtils
     private PlayerController controllerPlayer;
     private Player player;
     
-    public TakeDamageEffectUtils(PlayerController controllerPlayer, Player player, int  totalDamage, GameStructureInfo gameStructureInfo)
+    public TakeDamageEffectUtils(PlayerController controllerPlayer, int  totalDamage, GameStructureInfo gameStructureInfo)
         : base(gameStructureInfo)
     {
         this. totalDamage = totalDamage;
         this.controllerPlayer = controllerPlayer;
-        this.player = player;
+        player = gameStructureInfo.ControllerOpponentPlayer == controllerPlayer ? 
+            gameStructureInfo.GetOpponentPlayer() : gameStructureInfo.GetCurrentPlayer();
         TakeDamage();
     }
 

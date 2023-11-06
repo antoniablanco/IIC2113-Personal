@@ -123,7 +123,7 @@ public class PlayManeuverCard
             gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar(),
             gameStructureInfo.CardBeingPlayed.GetCardStunValue());
         
-        new DrawCardEffect(gameStructureInfo.ControllerOpponentPlayer,gameStructureInfo.GetOpponentPlayer(), 
+        new DrawCardEffect(gameStructureInfo.ControllerOpponentPlayer, 
             gameStructureInfo).StealCards(numberOfCardsToSteal);
     }
 

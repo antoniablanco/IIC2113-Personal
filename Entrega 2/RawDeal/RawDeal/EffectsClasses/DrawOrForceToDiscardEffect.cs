@@ -39,10 +39,10 @@ public class DrawOrForceToDiscardEffect: EffectsUtils
     private void DrawCards()
     {
         if (shouldAsk)
-            new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.GetCurrentPlayer(), 
+            new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
                 gameStructureInfo).MayStealCards(numberOfCardsToSteal);
         else
-            new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(), 
+            new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
                 gameStructureInfo).StealCards(numberOfCardsToSteal);
     }
 

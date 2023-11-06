@@ -15,10 +15,9 @@ public class Kane: SuperStar
 
     public override void UsingAutomaticSuperAbilityAtTheStartOfTheTurn(GameStructureInfo gameStructureInfo)
     {   
-        Player player = gameStructureInfo.GetOpponentPlayer();
         View.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
         
         const int totalDamage = 1;
-        new TakeDamageEffectUtils(gameStructureInfo.ControllerOpponentPlayer, player, totalDamage, gameStructureInfo);
+        new TakeDamageEffectUtils(gameStructureInfo.ControllerOpponentPlayer,totalDamage, gameStructureInfo);
     }
 }

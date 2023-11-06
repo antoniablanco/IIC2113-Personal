@@ -15,10 +15,9 @@ public class Recovery: Card
     public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {   
         const int numberOfDamageToRecover = 2;
-        new GetBackDamageEffectUtils(gameStructureInfo.ControllerCurrentPlayer,
-            gameStructureInfo.GetCurrentPlayer(), gameStructureInfo, numberOfDamageToRecover);
+        new GetBackDamageEffectUtils(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo, numberOfDamageToRecover);
         
-        new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(), 
+        new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo).StealCards();
         
         gameStructureInfo.EffectsUtils.DiscardActionCardToRingAreButNotSaying(playedCardController, gameStructureInfo.GetCurrentPlayer());

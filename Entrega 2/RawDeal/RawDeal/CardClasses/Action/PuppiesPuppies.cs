@@ -15,12 +15,11 @@ public class PuppiesPuppies: Card
     public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
         const int numberOfDamageToRecover = 5;
-        new GetBackDamageEffectUtils(gameStructureInfo.ControllerCurrentPlayer,
-            gameStructureInfo.GetCurrentPlayer(), gameStructureInfo, numberOfDamageToRecover);
+        new GetBackDamageEffectUtils(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo, numberOfDamageToRecover);
 
         const int numberOfCardsToSteal = 2;
         
-        new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(), 
+        new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo).StealCards(numberOfCardsToSteal);
 
         gameStructureInfo.EffectsUtils.DiscardActionCardToRingAreButNotSaying(playedCardController,

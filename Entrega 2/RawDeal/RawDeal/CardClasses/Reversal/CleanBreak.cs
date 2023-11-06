@@ -25,7 +25,7 @@ public class CleanBreak : Card
 
         const int numberOfCardsToSteal = 1;
         
-        new DrawCardEffect(gameStructureInfo.ControllerOpponentPlayer,gameStructureInfo.GetOpponentPlayer(), 
+        new DrawCardEffect(gameStructureInfo.ControllerOpponentPlayer, 
             gameStructureInfo).StealCards(numberOfCardsToSteal);
         gameStructureInfo.EffectsUtils.EndTurn();
     }

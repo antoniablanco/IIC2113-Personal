@@ -19,7 +19,7 @@ public class StoneCold: SuperStar
         View.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
         
         const int numberOfCardsToSteal = 1;
-        new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(), 
+        new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo).StealCards(numberOfCardsToSteal);
         
         new DiscardCardsFromHandToArsenalEffect(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo);

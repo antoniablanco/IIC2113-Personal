@@ -9,12 +9,13 @@ public class ColateralDamageEffectUtils: EffectsUtils
     private PlayerController controllerPlayer;
     private Player player;
     
-    public ColateralDamageEffectUtils(PlayerController controllerPlayer, Player player, GameStructureInfo gameStructureInfo, int totalDamage = 1)
+    public ColateralDamageEffectUtils(PlayerController controllerPlayer, GameStructureInfo gameStructureInfo, int totalDamage = 1)
         : base(gameStructureInfo)
     {   
         this.totalDamage = totalDamage;
         this.controllerPlayer = controllerPlayer;
-        this.player = player;
+        player = gameStructureInfo.ControllerOpponentPlayer == controllerPlayer ? 
+            gameStructureInfo.GetOpponentPlayer() : gameStructureInfo.GetCurrentPlayer();
         ColateralDamage();
     }
     

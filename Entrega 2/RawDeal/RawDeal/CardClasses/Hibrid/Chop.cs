@@ -17,7 +17,7 @@ public class Chop: Card
         gameStructureInfo.EffectsUtils.DiscardCardFromHandNotifying(playedCardController,
             gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.GetCurrentPlayer());
         
-        new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer,gameStructureInfo.GetCurrentPlayer(), 
+        new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo).StealCards();
     }
     

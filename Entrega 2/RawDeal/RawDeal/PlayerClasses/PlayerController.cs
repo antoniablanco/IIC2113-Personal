@@ -1,4 +1,5 @@
 using RawDeal.CardClasses;
+using RawDeal.Exceptions;
 using RawDeal.GameClasses;
 
 namespace RawDeal.PlayerClasses;
@@ -153,6 +154,17 @@ public class PlayerController
             "Hand" => player.CardsHand[index],
             "RingSide" => player.CardsRingSide[index],
             _ => player.CardsHand[index]
+        };
+    }
+    
+    public CardController FindCardCardFrom(string deck, string cardName)
+    {
+        return deck switch
+        {
+            "Hand" => player.CardsHand.Find(card => card.GetCardTitle() == cardName),
+            "RingSide" => player.CardsRingSide.Find(card => card.GetCardTitle() == cardName),
+            "Arsenal" => player.CardsArsenal.Find(card => card.GetCardTitle() == cardName),
+            _ => throw new CardNotFoundException("The card is not in this deck")
         };
     }
 

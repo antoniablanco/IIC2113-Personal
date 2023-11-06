@@ -21,7 +21,7 @@ public class ChynaInterferes : Card
     {
         const int numberOfCardsToSteal = 2;
         
-        new DrawCardEffect(gameStructureInfo.ControllerOpponentPlayer,gameStructureInfo.GetOpponentPlayer(), 
+        new DrawCardEffect(gameStructureInfo.ControllerOpponentPlayer, 
             gameStructureInfo).StealCards(numberOfCardsToSteal);
 
         var damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
@@ -29,7 +29,7 @@ public class ChynaInterferes : Card
             gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(int.Parse(Damage),
                 damagedPlayerController);
 
-        new ProduceDamageEffectUtils(damageProduce, damagedPlayerController, gameStructureInfo.GetCurrentPlayer(),
+        new ProduceDamageEffectUtils(damageProduce, damagedPlayerController,
             gameStructureInfo);
         
         gameStructureInfo.EffectsUtils.EndTurn();

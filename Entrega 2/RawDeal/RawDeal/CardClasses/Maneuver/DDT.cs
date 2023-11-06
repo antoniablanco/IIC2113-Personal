@@ -13,8 +13,7 @@ public class DDT : Card
 
     public override void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
-        new ColateralDamageEffectUtils(gameStructureInfo.ControllerCurrentPlayer,
-            gameStructureInfo.GetCurrentPlayer(), gameStructureInfo);
+        new ColateralDamageEffectUtils(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo);
 
         const int numberOfCardToDiscard = 2;
         new DiscardCardsFromHandToRingSideEffect(gameStructureInfo.ControllerOpponentPlayer,

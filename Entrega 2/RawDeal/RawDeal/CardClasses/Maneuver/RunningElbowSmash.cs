@@ -13,7 +13,7 @@ public class RunningElbowSmash : Card
 
     public override void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
-        new ColateralDamageEffectUtils(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.GetCurrentPlayer(), 
+        new ColateralDamageEffectUtils(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo);
     }
 }

@@ -43,6 +43,12 @@ public abstract class Card : IViewableCardInfo
     public virtual void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
     }
+    
+    public virtual void ApplyBonusEffect(GameStructureInfo gameStructureInfo)
+    {
+    }
+    
+    
 
     public virtual int GetFortitude(string type)
     {
@@ -57,10 +63,5 @@ public abstract class Card : IViewableCardInfo
     public virtual bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo)
     { 
         return true;
-    }
-
-    public virtual void ApplyBonusEffect(GameStructureInfo gameStructureInfo)
-    {
-        
     }
 }

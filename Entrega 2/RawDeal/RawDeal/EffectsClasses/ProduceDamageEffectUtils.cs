@@ -9,12 +9,13 @@ public class ProduceDamageEffectUtils: EffectsUtils
     private PlayerController controllerPlayer;
     private Player player;
     
-    public ProduceDamageEffectUtils(int totalDamage, PlayerController controllerPlayer, Player player, GameStructureInfo gameStructureInfo)
+    public ProduceDamageEffectUtils(int totalDamage, PlayerController controllerPlayer, GameStructureInfo gameStructureInfo)
         : base(gameStructureInfo)
     {   
         this.totalDamage = totalDamage;
         this.controllerPlayer = controllerPlayer;
-        this.player = player;
+        player = gameStructureInfo.ControllerOpponentPlayer == controllerPlayer ? 
+            gameStructureInfo.GetOpponentPlayer() : gameStructureInfo.GetCurrentPlayer();
         ProduceSeveralDamage();
     }
 

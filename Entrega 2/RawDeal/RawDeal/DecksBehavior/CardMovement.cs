@@ -72,4 +72,10 @@ public class CardMovement
     {
         CardTransferChoosingWhichOneToChange(cardController, player.CardsRingSide, player.CardsArsenal, moveToStart);
     }
+    
+    public void TransferChoosinCardArsenalToHand(Player player, CardController cardController,
+        string moveToStart = "End")
+    {
+        CardTransferChoosingWhichOneToChange(cardController, player.CardsArsenal, player.CardsHand, moveToStart);
+    }
 }

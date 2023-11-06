@@ -32,7 +32,7 @@ public class CrossBodyBlock: Card
             gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(int.Parse(Damage),
                 damagedPlayerController);
         
-        new ProduceDamageEffectUtils(damageProduce, damagedPlayerController, gameStructureInfo.GetCurrentPlayer(),
+        new ProduceDamageEffectUtils(damageProduce, damagedPlayerController,
             gameStructureInfo);
         gameStructureInfo.EffectsUtils.EndTurn();
     }
