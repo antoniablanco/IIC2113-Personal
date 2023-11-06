@@ -25,20 +25,33 @@ public class FindAndMoveCard: EffectsUtils
 
     private void Apply()
     {
-        try
-        {
-            CardController card = playerController.FindCardCardFrom("RingSide", cardTitle);
-            gameStructureInfo.CardMovement.TransferChoosinCardFromRingSideToHand(player, card);
-        }
+        try { SearchCardInRingSide(); }
         catch (CardNotFoundException)
         {
-            try
+            try { SearchCardInArsenal(); }
+            catch (CardNotFoundException)
             {
-                CardController card = playerController.FindCardCardFrom("Arsenal", cardTitle);
-                gameStructureInfo.CardMovement.TransferChoosinCardArsenalToHand(player, card);
+                gameStructureInfo.View.SayThatPlayerDidntFindTheCard(playerController.NameOfSuperStar());
             }
-            catch (CardNotFoundException) { }
         }
         
+    }
+
+    private void SearchCardInRingSide()
+    {
+        gameStructureInfo.View.SayThatPlayerSearchesForTheTargetCardInHisRingside(
+            playerController.NameOfSuperStar(), cardTitle);
+        CardController card = playerController.FindCardCardFrom("RingSide", cardTitle);
+        gameStructureInfo.View.SayThatPlayerFoundTheCardAndPutItIntoHisHand(playerController.NameOfSuperStar());
+        gameStructureInfo.CardMovement.TransferChoosinCardFromRingSideToHand(player, card);
+    }
+
+    private void SearchCardInArsenal()
+    {
+        gameStructureInfo.View.SayThatPlayerSearchesForTheTargetCardInHisArsenal(
+            playerController.NameOfSuperStar(), cardTitle);
+        CardController card = playerController.FindCardCardFrom("Arsenal", cardTitle);
+        gameStructureInfo.View.SayThatPlayerFoundTheCardAndPutItIntoHisHand(playerController.NameOfSuperStar());
+        gameStructureInfo.CardMovement.TransferChoosinCardArsenalToHand(player, card);
     }
 }
