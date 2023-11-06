@@ -1,6 +1,7 @@
 using RawDeal.CardClasses;
 using RawDeal.EffectsClasses;
 using RawDeal.GameClasses;
+using RawDeal.PlayerClasses;
 
 namespace RawDeal.DecksBehavior;
 
@@ -80,7 +81,14 @@ public class PlayReversalHandCard
     private void ApplyDamage(CardController cardController)
     {
         var damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
-            
+        int damageProduce = GetDamageProducedByReversalCard(cardController, damagedPlayerController);
+        
+        new ProduceDamageEffectUtils(damageProduce, damagedPlayerController,
+            gameStructureInfo);
+    }
+
+    private int GetDamageProducedByReversalCard(CardController cardController, PlayerController damagedPlayerController)
+    {
         int damageProduce;
         if (cardController.IsDamageHashtagType())
             damageProduce = gameStructureInfo.EffectsUtils.GetDamageProducedByReversalCardWithNotEspecificDamage();
@@ -89,8 +97,6 @@ public class PlayReversalHandCard
                 gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(
                     cardController.GetDamageProducedByTheCard(),
                     damagedPlayerController);
-        
-        new ProduceDamageEffectUtils(damageProduce, damagedPlayerController,
-            gameStructureInfo);
+        return damageProduce;
     }
 }
