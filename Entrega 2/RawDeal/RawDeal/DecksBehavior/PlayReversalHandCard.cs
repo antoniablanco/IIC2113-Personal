@@ -82,6 +82,7 @@ public class PlayReversalHandCard
     {
         var damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
         int damageProduce = GetDamageProducedByReversalCard(cardController, damagedPlayerController);
+        Console.WriteLine("El daño producido es. " + damageProduce);
         
         new ProduceDamageEffectUtils(damageProduce, damagedPlayerController,
             gameStructureInfo);
@@ -97,7 +98,7 @@ public class PlayReversalHandCard
                 gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(
                     cardController.GetDamageProducedByTheCard(),
                     damagedPlayerController);
-        damageProduce += cardController.ExtraReversalDamage();
+        damageProduce += gameStructureInfo.CardBeingPlayed.ExtraReversalDamage();
         return damageProduce;
     }
 }
