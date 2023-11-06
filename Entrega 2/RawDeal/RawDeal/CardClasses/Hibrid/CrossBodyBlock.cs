@@ -18,7 +18,7 @@ public class CrossBodyBlock: Card
         return gameStructureInfo.LastCardBeingPlayedTitle == "Irish Whip" && playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
     }
     
-    public override bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo)
+    public override bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo, string type = "Maneuver")
     {   
         if (gameStructureInfo.CardBeingPlayed == null)
             return false;

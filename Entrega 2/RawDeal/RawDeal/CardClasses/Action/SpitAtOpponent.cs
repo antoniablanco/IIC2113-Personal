@@ -26,7 +26,7 @@ public class SpitAtOpponent: Card
             gameStructureInfo.GetCurrentPlayer());
     }
 
-    public override bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo)
+    public override bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo, string type = "Maneuver")
     {
         return gameStructureInfo.ControllerCurrentPlayer.NumberOfCardIn("Hand") >= 2;
     }

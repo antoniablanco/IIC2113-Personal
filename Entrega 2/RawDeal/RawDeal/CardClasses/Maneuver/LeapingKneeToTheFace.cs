@@ -24,7 +24,7 @@ public class LeapingKneeToTheFace: Card
             gameStructureInfo.ControllerOpponentPlayer, numberOfCardToDiscard, gameStructureInfo);
     }
     
-    public override bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo)
+    public override bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo, string type = "Maneuver")
     {
         return gameStructureInfo.CardBeingPlayed.GetCardTitle() == "Irish Whip" &&
                gameStructureInfo.BonusManager.GetWhoActivateNextPlayedCardBonusEffect() ==

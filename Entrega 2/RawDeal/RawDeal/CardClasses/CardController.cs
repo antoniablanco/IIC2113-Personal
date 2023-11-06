@@ -111,9 +111,9 @@ public class CardController
         return Formatter.PlayToString(cardInfo);
     }
 
-    public bool CanThisCardBePlayed()
+    public bool CanThisCardBePlayed(string type = "Action")
     {   
-        return _card.CheckIfCardCanBePlayed(gameStructureInfo);
+        return _card.CheckIfCardCanBePlayed(gameStructureInfo, type);
     }
 
     public bool GetIfCardCanReversalPlayedCard(string reverseBy, int totaldamage)

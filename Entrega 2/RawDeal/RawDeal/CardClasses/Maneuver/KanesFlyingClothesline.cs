@@ -11,7 +11,7 @@ public class KanesFlyingClothesline: Card
          
     }
     
-    public override bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo)
+    public override bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo, string type = "Maneuver")
     {
         return gameStructureInfo.LastDamageComited >= 4 && gameStructureInfo.CardBeingPlayedType == "Maneuver";
     }

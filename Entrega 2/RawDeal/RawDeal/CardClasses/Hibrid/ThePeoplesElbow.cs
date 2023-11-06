@@ -18,22 +18,24 @@ public class ThePeoplesElbow: Card
         gameStructureInfo.View.SayThatPlayerPutsThisCardAtTheBottomOfHisArsenal(
             gameStructureInfo.ControllerCurrentPlayer.NameOfSuperStar(), Title);
         
-        gameStructureInfo.EffectsUtils.DiscardActionCardToRingAreButNotSaying(playedCardController,
-            gameStructureInfo.GetCurrentPlayer(), moveTo:"Start");
+        gameStructureInfo.CardMovement.TransferChoosinCardFromHandToArsenal(gameStructureInfo.GetCurrentPlayer(),
+            playedCardController, moveToStart:"Start");
         
         const int numberOfCardsToSteal = 2;
         new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo).StealCards(numberOfCardsToSteal);
     }
     
-    public override bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo)
-    {
-        try
-        {
-            gameStructureInfo.ControllerCurrentPlayer.FindCardCardFrom("RingArea", "Rock Bottom");
-            return true;
-        }
-        catch (CardNotFoundException e) { return false; }
-        
+    public override bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo, string type = "Action")
+    { 
+        if (type == "Maneuver")
+            try
+            {
+                gameStructureInfo.ControllerCurrentPlayer.FindCardCardFrom("RingArea", "Rock Bottom");
+                return true;
+            }
+            catch (CardNotFoundException e) { return false; }
+
+        return true;
     }
 }

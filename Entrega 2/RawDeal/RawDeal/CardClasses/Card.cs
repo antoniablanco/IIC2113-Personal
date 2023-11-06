@@ -60,7 +60,7 @@ public abstract class Card : IViewableCardInfo
         return true;
     }
 
-    public virtual bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo)
+    public virtual bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo, string type = "Maneuver")
     { 
         return true;
     }

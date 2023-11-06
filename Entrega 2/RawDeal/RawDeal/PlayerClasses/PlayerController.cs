@@ -68,7 +68,8 @@ public class PlayerController
         {
             int[] indexes = Enumerable.Range(0, cardController.GetCardTypes().Count()).ToArray();
             allTypesForCard.AddRange(from index in indexes where cardController.GetCardType(index) 
-                    != "Reversal" && cardController.GetCardFortitude(cardController.GetCardType(index)) 
+                    != "Reversal" && cardController.CanThisCardBePlayed(cardController.GetCardType(index)) &&
+                    cardController.GetCardFortitude(cardController.GetCardType(index)) 
                     <= FortitudRating() && cardController.CanThisCardBePlayed()
                 select new Tuple<CardController, int>(cardController, index));
         }
@@ -158,7 +159,7 @@ public class PlayerController
     }
     
     public CardController FindCardCardFrom(string deck, string cardName)
-    {
+    {   
         CardController foundCard = deck switch
         {
             "Hand" => player.CardsHand.Find(card => card.GetCardTitle() == cardName),
