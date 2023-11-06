@@ -40,7 +40,6 @@ public class FindAndMoveCard: EffectsUtils
 
     private void SearchCardInRingSide()
     {   
-        cardTitle = cardTitle == "The People’s Elbow"? "The People's Elbow": cardTitle;
         gameStructureInfo.View.SayThatPlayerSearchesForTheTargetCardInHisRingside(
             playerController.NameOfSuperStar(), cardTitle);
         CardController card = playerController.FindCardCardFrom("RingSide", cardTitle);
@@ -50,7 +49,6 @@ public class FindAndMoveCard: EffectsUtils
 
     private void SearchCardInArsenal()
     {   
-        cardTitle = cardTitle == "The People’s Elbow"? "The People's Elbow": cardTitle;
         gameStructureInfo.View.SayThatPlayerSearchesForTheTargetCardInHisArsenal(
             playerController.NameOfSuperStar(), cardTitle);
         CardController card = playerController.FindCardCardFrom("Arsenal", cardTitle);

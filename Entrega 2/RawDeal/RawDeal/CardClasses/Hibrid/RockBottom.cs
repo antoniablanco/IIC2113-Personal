@@ -32,7 +32,7 @@ public class RockBottom : Card
     
     public override void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
-        new FindAndMoveCard(cardTitle:"The People’s Elbow", gameStructureInfo.ControllerCurrentPlayer,
+        new FindAndMoveCard(cardTitle:"The People's Elbow", gameStructureInfo.ControllerCurrentPlayer,
             gameStructureInfo);
     }
 }
