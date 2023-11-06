@@ -64,4 +64,13 @@ public abstract class Card : IViewableCardInfo
     { 
         return true;
     }
+    
+    public virtual void FinishTurn(GameStructureInfo gameStructureInfo)
+    {
+    }
+
+    public virtual int ExtraReversalDamage(GameStructureInfo gameStructureInfo)
+    {
+        return 0;
+    }
 }

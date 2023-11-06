@@ -24,6 +24,7 @@ public class Facebuster: Card
         new DrawCardEffect(gameStructureInfo.ControllerOpponentPlayer,
             gameStructureInfo).MayStealCards(maximumNumberOfCardsToSteal);
         
+        /*
         var damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
         var damageProduce =
             gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(int.Parse(Damage),
@@ -31,6 +32,7 @@ public class Facebuster: Card
         
         new ProduceDamageEffectUtils(damageProduce, damagedPlayerController,
             gameStructureInfo);
+            */
         
         gameStructureInfo.EffectsUtils.EndTurn();
     }

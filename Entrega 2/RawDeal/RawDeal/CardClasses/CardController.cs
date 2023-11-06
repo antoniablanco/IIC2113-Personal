@@ -34,6 +34,11 @@ public class CardController
     {
         return _card.Damage == "#" ? 0 : int.Parse(_card.Damage);
     }
+    
+    public bool IsDamageHashtagType()
+    {
+        return _card.Damage == "#";
+    }
 
     public string GetCardTitle()
     {
@@ -151,5 +156,10 @@ public class CardController
     public void ApplyBonusEffect()
     {
         _card.ApplyBonusEffect(gameStructureInfo);
+    }
+    
+    public void FinishTurn()
+    {
+        _card.FinishTurn(gameStructureInfo);
     }
 }

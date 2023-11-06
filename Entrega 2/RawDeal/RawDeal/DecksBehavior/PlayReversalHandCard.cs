@@ -1,4 +1,5 @@
 using RawDeal.CardClasses;
+using RawDeal.EffectsClasses;
 using RawDeal.GameClasses;
 
 namespace RawDeal.DecksBehavior;
@@ -56,6 +57,8 @@ public class PlayReversalHandCard
         SayTheReversalCardIsPlayed(cardController);
         MoveCardsImplicateInReversal(cardController);
         cardController.ApplyReversalEffect();
+        ApplyDamage(cardController);
+        cardController.FinishTurn();
     }
 
     private void SayTheReversalCardIsPlayed(CardController cardController)
@@ -72,5 +75,24 @@ public class PlayReversalHandCard
             gameStructureInfo.CardBeingPlayed);
         gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(gameStructureInfo.GetOpponentPlayer(),
             cardController);
+    }
+
+    private void ApplyDamage(CardController cardController)
+    {
+        var damagedPlayerController = (cardController.GetCardTitle() == "Knee To The Gut")
+            ? gameStructureInfo.ControllerCurrentPlayer
+            : gameStructureInfo.ControllerOpponentPlayer;
+            
+        int damageProduce;
+        if (cardController.IsDamageHashtagType())
+            damageProduce = gameStructureInfo.EffectsUtils.GetDamageProducedByReversalCardWithNotEspecificDamage();
+        else
+            damageProduce =
+                gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(
+                    cardController.GetDamageProducedByTheCard(),
+                    damagedPlayerController);
+        
+        new ProduceDamageEffectUtils(damageProduce, damagedPlayerController,
+            gameStructureInfo);
     }
 }

@@ -19,6 +19,13 @@ public class BonusStructureInfo
     public int HaymakerBonus = 0;
     public int SuperkickBonus = 0;
     
+    public int DiscusPunchReverseBonus = 0;
+    public int UndertakersFlyingClotheslineReverseBonus = 0;
+    public int KanesFlyingClotheslineReverseBonus = 0;
+    
+    public int StoneColdStunnerBonus = 0;
+    public int KanesTombsonePiledriverBonus = 0;
+    
     public int BonusDamage = 4;
     public int BonusFortitude = 8;
     public int turnsLeftForBonusCounter = 0;

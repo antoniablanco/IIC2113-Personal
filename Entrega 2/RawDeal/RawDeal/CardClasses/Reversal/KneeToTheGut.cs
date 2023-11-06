@@ -23,12 +23,7 @@ public class KneeToTheGut : Card
     }
 
     public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
-    {
-        var damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
-        var damage = gameStructureInfo.EffectsUtils.GetDamageProducedByReversalCardWithNotEspecificDamage();
-        
-        new ProduceDamageEffectUtils(damage, damagedPlayerController,
-            gameStructureInfo);
+    {   
         gameStructureInfo.EffectsUtils.EndTurn();
     }
 }

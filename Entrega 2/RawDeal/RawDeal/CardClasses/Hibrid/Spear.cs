@@ -18,7 +18,8 @@ public class Spear: Card
         return gameStructureInfo.LastCardBeingPlayedTitle == "Irish Whip" && playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
     }
     public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
-    {
+    {   
+        /*
         var damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
         var damageProduce =
             gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(int.Parse(Damage),
@@ -26,6 +27,7 @@ public class Spear: Card
         
         new ProduceDamageEffectUtils(damageProduce, damagedPlayerController,
             gameStructureInfo);
+            */
         gameStructureInfo.EffectsUtils.EndTurn();
     }
 }

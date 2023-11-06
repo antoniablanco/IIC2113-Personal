@@ -19,7 +19,8 @@ public class VerticalSuplex: Card
     }
     
     public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
-    {
+    {   
+        /*
         var damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
         var damageProduce =
             gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(int.Parse(Damage),
@@ -27,6 +28,7 @@ public class VerticalSuplex: Card
         
         new ProduceDamageEffectUtils(damageProduce, damagedPlayerController,
             gameStructureInfo);
+            */
         gameStructureInfo.EffectsUtils.EndTurn();
     }
 }
