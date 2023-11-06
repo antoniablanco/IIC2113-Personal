@@ -1,3 +1,5 @@
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClasses.UnspecifiedType;
 
 public class KanesFlyingClothesline: Card
@@ -7,5 +9,15 @@ public class KanesFlyingClothesline: Card
         :base(title, types, subtypes, fortitude, damage, stunValue, cardEffect)
     {
          
+    }
+    
+    public override bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo)
+    {
+        return gameStructureInfo.LastDamageComited >= 4 && gameStructureInfo.CardBeingPlayedType == "Maneuver";
+    }
+    
+    public override int ExtraReversalDamage(GameStructureInfo gameStructureInfo)
+    {
+        return 6;
     }
 }

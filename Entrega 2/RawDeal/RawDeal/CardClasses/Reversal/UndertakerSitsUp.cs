@@ -1,3 +1,5 @@
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClasses.UnspecifiedType;
 
 public class UndertakerSitsUp: Card
@@ -8,4 +10,6 @@ public class UndertakerSitsUp: Card
     {
          
     }
+    
+    
 }

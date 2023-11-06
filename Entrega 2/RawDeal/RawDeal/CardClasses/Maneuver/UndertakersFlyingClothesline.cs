@@ -1,3 +1,5 @@
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClasses.UnspecifiedType;
 
 public class UndertakersFlyingClothesline: Card
@@ -7,5 +9,15 @@ public class UndertakersFlyingClothesline: Card
         :base(title, types, subtypes, fortitude, damage, stunValue, cardEffect)
     {
          
+    }
+    
+    public override bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo)
+    {
+        return gameStructureInfo.LastDamageComited >= 5 && gameStructureInfo.CardBeingPlayedType == "Maneuver";
+    }
+    
+    public override int ExtraReversalDamage(GameStructureInfo gameStructureInfo)
+    {
+        return 6;
     }
 }

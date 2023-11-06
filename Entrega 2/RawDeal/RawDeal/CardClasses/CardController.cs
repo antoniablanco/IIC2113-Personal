@@ -158,4 +158,9 @@ public class CardController
         _card.ApplyBonusEffect(gameStructureInfo);
     }
     
+    public int ExtraReversalDamage()
+    {
+        return _card.ExtraReversalDamage(gameStructureInfo);
+    }
+    
 }

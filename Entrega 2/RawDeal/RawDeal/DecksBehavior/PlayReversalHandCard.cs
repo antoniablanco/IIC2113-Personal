@@ -97,6 +97,7 @@ public class PlayReversalHandCard
                 gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(
                     cardController.GetDamageProducedByTheCard(),
                     damagedPlayerController);
+        damageProduce += cardController.ExtraReversalDamage();
         return damageProduce;
     }
 }

@@ -1,3 +1,5 @@
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClasses.UnspecifiedType;
 
 public class DiscusPunch: Card
@@ -7,5 +9,10 @@ public class DiscusPunch: Card
         :base(title, types, subtypes, fortitude, damage, stunValue, cardEffect)
     {
          
+    }
+    
+    public override int ExtraReversalDamage(GameStructureInfo gameStructureInfo)
+    {
+        return 2;
     }
 }
