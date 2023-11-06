@@ -32,6 +32,7 @@ public class PlayReversalHandCard
         if (gameStructureInfo.PlayCard.HasSelectedAValidCard(indexReversalCard))
         {
             PlayingReversalCard(indexReversalCard, possibleReversals);
+            gameStructureInfo.EffectsUtils.EndTurn();
             return true;
         }
 
@@ -58,7 +59,6 @@ public class PlayReversalHandCard
         MoveCardsImplicateInReversal(cardController);
         cardController.ApplyReversalEffect();
         ApplyDamage(cardController);
-        cardController.FinishTurn();
     }
 
     private void SayTheReversalCardIsPlayed(CardController cardController)
@@ -79,9 +79,7 @@ public class PlayReversalHandCard
 
     private void ApplyDamage(CardController cardController)
     {
-        var damagedPlayerController = (cardController.GetCardTitle() == "Knee To The Gut")
-            ? gameStructureInfo.ControllerCurrentPlayer
-            : gameStructureInfo.ControllerOpponentPlayer;
+        var damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
             
         int damageProduce;
         if (cardController.IsDamageHashtagType())

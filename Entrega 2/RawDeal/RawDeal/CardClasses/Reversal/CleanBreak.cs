@@ -27,6 +27,5 @@ public class CleanBreak : Card
         
         new DrawCardEffect(gameStructureInfo.ControllerOpponentPlayer, 
             gameStructureInfo).StealCards(numberOfCardsToSteal);
-        gameStructureInfo.EffectsUtils.EndTurn();
     }
 }

@@ -21,17 +21,5 @@ public class ManagerInterferes : Card
     {
         new DrawCardEffect(gameStructureInfo.ControllerOpponentPlayer, 
             gameStructureInfo).StealCards();
-        
-        /*
-        var damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
-        var damageProduce =
-            gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(int.Parse(Damage),
-                damagedPlayerController);
-        
-        new ProduceDamageEffectUtils(damageProduce, damagedPlayerController,
-            gameStructureInfo);
-        */
-        gameStructureInfo.EffectsUtils.EndTurn();
-    
     }
 }

@@ -17,8 +17,4 @@ public class EscapeMove : Card
                playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
     }
 
-    public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
-    {
-        gameStructureInfo.EffectsUtils.EndTurn();
-    }
 }

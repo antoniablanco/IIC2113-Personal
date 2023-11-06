@@ -16,9 +16,4 @@ public class StepAside : Card
         return playedCardController.ContainsSubtype("Strike") &&
                playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
     }
-
-    public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
-    {
-        gameStructureInfo.EffectsUtils.EndTurn();
-    }
 }

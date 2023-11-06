@@ -158,8 +158,4 @@ public class CardController
         _card.ApplyBonusEffect(gameStructureInfo);
     }
     
-    public void FinishTurn()
-    {
-        _card.FinishTurn(gameStructureInfo);
-    }
 }

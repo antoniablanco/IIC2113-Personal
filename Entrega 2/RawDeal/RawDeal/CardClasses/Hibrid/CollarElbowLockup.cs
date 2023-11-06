@@ -20,9 +20,4 @@ public class CollarElbowLockup: Card
         new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo).StealCards();
     }
-    
-    public override void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
-    {
-        
-    }
 }

@@ -23,17 +23,5 @@ public class ChynaInterferes : Card
         
         new DrawCardEffect(gameStructureInfo.ControllerOpponentPlayer, 
             gameStructureInfo).StealCards(numberOfCardsToSteal);
-        
-        /*
-        var damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
-        var damageProduce =
-            gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(int.Parse(Damage),
-                damagedPlayerController);
-
-        new ProduceDamageEffectUtils(damageProduce, damagedPlayerController,
-            gameStructureInfo);
-        */
-        
-        gameStructureInfo.EffectsUtils.EndTurn();
     }
 }

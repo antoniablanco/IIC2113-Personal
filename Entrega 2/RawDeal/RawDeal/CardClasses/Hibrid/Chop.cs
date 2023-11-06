@@ -21,8 +21,4 @@ public class Chop: Card
             gameStructureInfo).StealCards();
     }
     
-    public override void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
-    {
-        
-    }
 }

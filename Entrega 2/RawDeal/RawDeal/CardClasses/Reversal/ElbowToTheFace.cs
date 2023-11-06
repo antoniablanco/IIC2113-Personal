@@ -18,17 +18,4 @@ public class ElbowToTheFace : Card
                totaldamage <= maximumDamageProducedByPlayedCard;
     }
 
-    public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
-    {   
-        /*
-        var damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
-        var damageProduce =
-            gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(int.Parse(Damage),
-                damagedPlayerController);
-        
-        new ProduceDamageEffectUtils(damageProduce, damagedPlayerController,
-            gameStructureInfo);
-        */
-        gameStructureInfo.EffectsUtils.EndTurn();
-    }
 }

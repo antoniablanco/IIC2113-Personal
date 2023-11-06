@@ -24,16 +24,5 @@ public class LouTheszPress: Card
         new DrawCardEffect(gameStructureInfo.ControllerOpponentPlayer,
             gameStructureInfo).MayStealCards(maximumNumberOfCardsToSteal);
         
-        /*
-        var damagedPlayerController = gameStructureInfo.ControllerCurrentPlayer;
-        var damageProduce =
-            gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(int.Parse(Damage),
-                damagedPlayerController);
-        
-        new ProduceDamageEffectUtils(damageProduce, damagedPlayerController,
-            gameStructureInfo);
-        */
-        
-        gameStructureInfo.EffectsUtils.EndTurn();
     }
 }

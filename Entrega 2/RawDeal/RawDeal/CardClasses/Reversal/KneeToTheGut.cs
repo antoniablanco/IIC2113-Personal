@@ -21,9 +21,4 @@ public class KneeToTheGut : Card
                playedCardController.HasAnyTypeDifferentOfReversal();
                
     }
-
-    public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
-    {   
-        gameStructureInfo.EffectsUtils.EndTurn();
-    }
 }

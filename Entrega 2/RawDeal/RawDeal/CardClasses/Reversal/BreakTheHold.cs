@@ -16,9 +16,4 @@ public class BreakTheHold : Card
         return playedCardController.ContainsSubtype("Submission") &&
                playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
     }
-
-    public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
-    {
-        gameStructureInfo.EffectsUtils.EndTurn();
-    }
 }
