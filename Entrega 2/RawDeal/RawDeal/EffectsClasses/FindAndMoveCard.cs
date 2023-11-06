@@ -40,6 +40,7 @@ public class FindAndMoveCard: EffectsUtils
 
     private void SearchCardInRingSide()
     {   
+        cardTitle = cardTitle == "The People’s Elbow"? "The People's Elbow": cardTitle;
         gameStructureInfo.View.SayThatPlayerSearchesForTheTargetCardInHisRingside(
             playerController.NameOfSuperStar(), cardTitle);
         cardTitle = cardTitle == "The People's Elbow"? "The People’s Elbow": cardTitle;
