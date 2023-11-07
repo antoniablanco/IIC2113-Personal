@@ -200,10 +200,10 @@ public class PlayerController
     {
         int contador = 0;
         foreach (var card in player.CardsArsenal)
-        {
+        {   
             if (card.GetCardTitle().ToLower().Split(' ').Contains(word.ToLower()))
                 contador++;
         }
-        return 0;
+        return contador;
     }
 }
