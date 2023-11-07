@@ -20,6 +20,7 @@ public class Recovery: Card
         new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo).StealCards();
         
-        gameStructureInfo.EffectsUtils.DiscardActionCardToRingAreButNotSaying(playedCardController, gameStructureInfo.GetCurrentPlayer());
+       gameStructureInfo.EffectsUtils.DiscardActionCardToRingAreButNotSaying(playedCardController, 
+           gameStructureInfo.GetCurrentPlayer());
     }
 }

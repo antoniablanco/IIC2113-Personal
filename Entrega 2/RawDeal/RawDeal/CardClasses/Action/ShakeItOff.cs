@@ -1,3 +1,6 @@
+using RawDeal.EffectsClasses;
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClasses.UnspecifiedType;
 
 public class ShakeItOff: Card
@@ -7,5 +10,19 @@ public class ShakeItOff: Card
         :base(title, types, subtypes, fortitude, damage, stunValue, cardEffect)
     {
          
+    }
+    
+    public override bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo, string type = "Maneuver")
+    {
+        return gameStructureInfo.ControllerCurrentPlayer.FortitudRating() <
+               gameStructureInfo.ControllerOpponentPlayer.FortitudRating();
+    }
+    
+    public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    {
+        new MoveLessThanDOpponentCardEffect(gameStructureInfo.ControllerCurrentPlayer,
+            gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo);
+        gameStructureInfo.EffectsUtils.DiscardActionCardToRingAreButNotSaying(playedCardController,
+            gameStructureInfo.GetCurrentPlayer());
     }
 }

@@ -91,7 +91,7 @@ public class PlayerController
         return allTypesForCard;
         
     }
-
+    
     public int FortitudRating()
     {
         return player.CardsRingArea.Sum(card => card.GetDamageProducedByTheCard());
@@ -192,6 +192,16 @@ public class PlayerController
     public (List<String>, List<CardController>) HandCardsButNotTheCardIsBeingPlayed(CardController cardController)
     {
         List<CardController> cardOptions = player.CardsHand.Where(card => card != cardController).ToList();
+        List<String> stringCardOptions = gameStructureInfo.CardsVisualizor.CreateStringCardList(cardOptions);
+        return (stringCardOptions, cardOptions);
+    }
+    
+    public (List<String>, List<CardController>) GetCardsFromRingAreaThatMeetDCriteria(int maximumDamage)
+    {
+        List<CardController> cardOptions = player.CardsRingArea
+            .Where(card => card.GetDamageProducedByTheCard() <= maximumDamage)
+            .ToList();
+        
         List<String> stringCardOptions = gameStructureInfo.CardsVisualizor.CreateStringCardList(cardOptions);
         return (stringCardOptions, cardOptions);
     }
