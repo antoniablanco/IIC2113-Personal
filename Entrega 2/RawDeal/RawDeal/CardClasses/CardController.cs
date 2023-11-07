@@ -168,4 +168,9 @@ public class CardController
         return _card.PlusFornitudAfterEspecificCard(gameStructureInfo);
     }
     
+    public int ExtraDamage()
+    {
+        return _card.ExtraDamage(gameStructureInfo);
+    }
+    
 }

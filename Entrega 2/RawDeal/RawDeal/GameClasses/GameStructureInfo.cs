@@ -24,6 +24,7 @@ public class GameStructureInfo
     public CardController CardBeingPlayed;
     public string CardBeingPlayedType;
     public string LastCardBeingPlayedTitle;
+    public string LastCardBeingPlayedType;
     public PlayCard PlayCard;
     public Player PlayerOne;
     public Player PlayerTwo;

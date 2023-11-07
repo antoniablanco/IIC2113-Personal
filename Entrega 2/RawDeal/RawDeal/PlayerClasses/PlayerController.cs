@@ -154,6 +154,8 @@ public class PlayerController
         {
             "Hand" => player.CardsHand[index],
             "RingSide" => player.CardsRingSide[index],
+            "Arsenal" => player.CardsArsenal[index],
+            "RingArea" => player.CardsRingArea[index],
             _ => player.CardsHand[index]
         };
     }

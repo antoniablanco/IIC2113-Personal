@@ -26,9 +26,6 @@ public class BonusManager
             case "Superkick":
                 bonusStructureInfo.SuperkickBonus = bonusValue;
                 break;
-            case "Pedigree":
-                bonusStructureInfo.PedigreeBonus = bonusValue;
-                break;
         }
     }
     
@@ -96,8 +93,6 @@ public class BonusManager
             damage += bonusStructureInfo.IAmTheGameBonus;
         if (cardController.ContainType("Maneuver") && cardController.ContainsSubtype("Strike"))
             damage += bonusStructureInfo.HaymakerBonus;
-        if (cardController.ContainsSubtype("Strike"))
-            damage += bonusStructureInfo.PedigreeBonus;
         
         return damage;
     }
@@ -194,7 +189,6 @@ public class BonusManager
         bonusStructureInfo.IAmTheGameBonus = 0;
         bonusStructureInfo.HaymakerBonus = 0;
         bonusStructureInfo.SuperkickBonus = 0;
-        bonusStructureInfo.PedigreeBonus = 0;
     }
     
     private void DeactivateBonus(string type)
