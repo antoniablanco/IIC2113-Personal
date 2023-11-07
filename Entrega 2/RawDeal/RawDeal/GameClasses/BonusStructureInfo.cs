@@ -15,6 +15,7 @@ public class BonusStructureInfo
     public int IAmTheGameBonus = 0;
     public int HaymakerBonus = 0;
     public int SuperkickBonus = 0;
+    public int MrSockoBonus = 1;
     
     public int BonusDamage = 4;
     public int BonusFortitude = 8;

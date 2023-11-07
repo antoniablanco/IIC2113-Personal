@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using RawDeal.CardClasses;
+using RawDeal.Exceptions;
 using RawDeal.PlayerClasses;
 
 namespace RawDeal.GameClasses;
@@ -86,15 +87,26 @@ public class BonusManager
         return 0;
     }
 
-    public int GetTurnDamageBonus(CardController cardController)
+    public int GetTurnDamageBonus(CardController cardController, PlayerController ControllerCurrentPlayer)
     {   
         int damage = 0;
         if (cardController.ContainType("Maneuver"))
             damage += bonusStructureInfo.IAmTheGameBonus;
+        if (HasMrSockoInArsenal(ControllerCurrentPlayer))
+            damage += bonusStructureInfo.MrSockoBonus;
         if (cardController.ContainType("Maneuver") && cardController.ContainsSubtype("Strike"))
             damage += bonusStructureInfo.HaymakerBonus;
         
         return damage;
+    }
+
+    private bool HasMrSockoInArsenal(PlayerController ControllerCurrentPlayer)
+    {
+        try
+        {   
+            ControllerCurrentPlayer.FindCardCardFrom("RingArea", "Mr. Socko");
+            return true;
+        } catch (CardNotFoundException e) { return false;} 
     }
     
     public int GetDamageForSuccessfulManeuver(CardController cardController, int lastDamageComited)
@@ -212,6 +224,9 @@ public class BonusManager
                 break;
             case "SnapMare":
                 bonusStructureInfo.SnapMareBonusActive = false;
+                break;
+            case "MrSocko":
+                bonusStructureInfo.MrSockoBonus = 0;
                 break;
         }
     }

@@ -1,3 +1,6 @@
+using RawDeal.EffectsClasses;
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClasses.UnspecifiedType;
 
 public class MrSocko: Card
@@ -8,4 +11,12 @@ public class MrSocko: Card
     {
          
     }
+    
+    public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    {
+        new ChooseRingSideOrArsenalToSelectCardEffect(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo);
+        gameStructureInfo.EffectsUtils.DiscardActionCardToRingAreButNotSaying(playedCardController,
+            gameStructureInfo.GetCurrentPlayer());
+    }
+    
 }

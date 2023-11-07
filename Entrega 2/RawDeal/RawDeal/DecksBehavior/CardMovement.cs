@@ -1,10 +1,17 @@
 using RawDeal.CardClasses;
+using RawDeal.GameClasses;
 using RawDeal.PlayerClasses;
 
 namespace RawDeal.DecksBehavior;
 
 public class CardMovement
-{
+{   
+    private readonly GameStructureInfo gameStructureInfo;
+
+    public CardMovement(GameStructureInfo gameStructureInfo)
+    {
+        this.gameStructureInfo = gameStructureInfo;
+    }
     public CardController? TransferOfUnselectedCard(List<CardController> sourceList,
         List<CardController> destinationList, bool moveToStart)
     {
@@ -79,7 +86,7 @@ public class CardMovement
         CardTransferChoosingWhichOneToChange(cardController, player.CardsRingSide, player.CardsArsenal, moveToStart);
     }
     
-    public void TransferChoosinCardArsenalToHand(Player player, CardController cardController,
+    public void TransferChoosinCardFromArsenalToHand(Player player, CardController cardController,
         string moveToStart = "End")
     {
         CardTransferChoosingWhichOneToChange(cardController, player.CardsArsenal, player.CardsHand, moveToStart);

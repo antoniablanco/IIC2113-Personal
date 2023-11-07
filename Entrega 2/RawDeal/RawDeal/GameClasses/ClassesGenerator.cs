@@ -16,6 +16,7 @@ public class ClassesGenerator
     private void Create()
     {
         CreateGetSetGameVariablesClass();
+        CreateCardMovementClass();
         CreatePlayCardClass();
         CreateEffectsClass();
         CreateViewDecksClass();
@@ -57,5 +58,11 @@ public class ClassesGenerator
     {
         EndTurnManager endTurnManager = new EndTurnManager(gameStructureInfo);
         gameStructureInfo.EndTurnManager = endTurnManager;
+    }
+    
+    private void CreateCardMovementClass()
+    {
+        CardMovement cardMovement = new CardMovement(gameStructureInfo);
+        gameStructureInfo.CardMovement = cardMovement;
     }
 }

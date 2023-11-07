@@ -89,7 +89,7 @@ public class PlayCard
     {   
         var damage = playedCardController.GetDamageProducedByTheCard() +
                      gameStructureInfo.BonusManager.GetNexPlayCardDamageBonus() +
-                     gameStructureInfo.BonusManager.GetTurnDamageBonus(playedCardController);
+                     gameStructureInfo.BonusManager.GetTurnDamageBonus(playedCardController, gameStructureInfo.ControllerCurrentPlayer);
         var totalDamage =
             gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(damage,
                 gameStructureInfo.ControllerOpponentPlayer);

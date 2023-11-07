@@ -9,7 +9,7 @@ namespace RawDeal.GameClasses;
 public class GameStructureInfo
 {
     public BonusManager BonusManager;
-    public CardMovement CardMovement =new CardMovement();
+    public CardMovement CardMovement;
     public CardsVisualizor CardsVisualizor = new CardsVisualizor();
     public PlayerController ControllerCurrentPlayer;
     public PlayerController ControllerOpponentPlayer;

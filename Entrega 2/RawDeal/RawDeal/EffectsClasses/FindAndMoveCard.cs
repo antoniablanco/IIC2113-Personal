@@ -53,6 +53,6 @@ public class FindAndMoveCard: EffectsUtils
             playerController.NameOfSuperStar(), cardTitle);
         CardController card = playerController.FindCardCardFrom("Arsenal", cardTitle);
         gameStructureInfo.View.SayThatPlayerFoundTheCardAndPutItIntoHisHand(playerController.NameOfSuperStar());
-        gameStructureInfo.CardMovement.TransferChoosinCardArsenalToHand(player, card);
+        gameStructureInfo.CardMovement.TransferChoosinCardFromArsenalToHand(player, card);
     }
 }

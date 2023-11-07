@@ -15,5 +15,6 @@ public class PlayActionCard
     public void PlayCard(CardController playedCardController)
     {
         playedCardController.ApplyActionEffect();
+        playedCardController.ApplyBonusEffect();
     }
 }
