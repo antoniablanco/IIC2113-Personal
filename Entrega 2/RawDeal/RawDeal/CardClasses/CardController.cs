@@ -160,7 +160,12 @@ public class CardController
     
     public int ExtraReversalDamage()
     {
-        return _card.ExtraReversalDamage(gameStructureInfo);
+        return _card.ExtraReversalDamage();
+    }
+    
+    public int PlusFornitudAfterEspecificCard()
+    {
+        return _card.PlusFornitudAfterEspecificCard(gameStructureInfo);
     }
     
 }

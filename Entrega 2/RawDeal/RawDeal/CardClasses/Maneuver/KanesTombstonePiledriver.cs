@@ -1,3 +1,5 @@
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClasses.UnspecifiedType;
 
 public class KanesTombstonePiledriver: Card
@@ -8,4 +10,12 @@ public class KanesTombstonePiledriver: Card
     {
          
     }   
+    
+    public override int PlusFornitudAfterEspecificCard(GameStructureInfo gameStructureInfo)
+    {
+        int fornitud = 0;
+        if (gameStructureInfo.CardBeingPlayed.GetCardTitle() == "Kane’s Choke Slam" && gameStructureInfo.GetSetGameVariables.GetRoundsInTurn() > 1)
+            fornitud = -6;
+        return fornitud;
+    }
 }

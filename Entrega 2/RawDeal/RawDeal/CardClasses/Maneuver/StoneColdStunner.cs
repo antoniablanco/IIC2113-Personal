@@ -1,3 +1,5 @@
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClasses.UnspecifiedType;
 
 public class StoneColdStunner: Card
@@ -7,5 +9,13 @@ public class StoneColdStunner: Card
         :base(title, types, subtypes, fortitude, damage, stunValue, cardEffect)
     {
          
+    }
+    
+    public override int PlusFornitudAfterEspecificCard(GameStructureInfo gameStructureInfo)
+    {
+        int fornitud = 0;
+        if (gameStructureInfo.CardBeingPlayed.GetCardTitle() == "Kick" && gameStructureInfo.GetSetGameVariables.GetRoundsInTurn() > 1)
+            fornitud = -6;
+        return fornitud;
     }
 }

@@ -12,11 +12,6 @@ public class BonusManager
     {
         this.bonusStructureInfo = bonusStructureInfo;
     }
-
-    public void SetBonusCardActivator(CardController cardController)
-    {
-        bonusStructureInfo.BonusCardActivator = cardController;
-    }
     
     public void ApplyTurnBonusEffect(string typeName, int bonusValue)
     {
@@ -190,7 +185,6 @@ public class BonusManager
 
     public void DeactivateTurnBonus()
     {   
-        bonusStructureInfo.SuperkickDobleActivada = false;
         bonusStructureInfo.IAmTheGameBonus = 0;
         bonusStructureInfo.HaymakerBonus = 0;
         bonusStructureInfo.SuperkickBonus = 0;

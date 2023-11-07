@@ -1,3 +1,5 @@
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClasses.UnspecifiedType;
 
 public class Pedigree: Card
@@ -7,5 +9,16 @@ public class Pedigree: Card
         :base(title, types, subtypes, fortitude, damage, stunValue, cardEffect)
     {
          
+    }
+    
+    public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, 
+        string reverseBy, int totaldamage)
+    {
+        return playedCardController.GetCardTitle() == "Back Body Drop";
+    }
+    
+    public override void ApplyBonusEffect(GameStructureInfo gameStructureInfo)
+    {
+        gameStructureInfo.BonusManager.ApplyTurnBonusEffect("Pedigree", bonusValue:2);
     }
 }

@@ -31,6 +31,7 @@ public class GameStructureInfo
     public ViewDecks ViewDecks;
     public PlayerController WinnerPlayer;
     public BonusStructureInfo BonusStructureInfo = new BonusStructureInfo();
+    public int NumberOfRoundsInTheTurn = 0;
 
     public Player GetCurrentPlayer()
     {

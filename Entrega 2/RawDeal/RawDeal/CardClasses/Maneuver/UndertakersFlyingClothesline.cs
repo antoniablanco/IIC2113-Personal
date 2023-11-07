@@ -16,7 +16,7 @@ public class UndertakersFlyingClothesline: Card
         return gameStructureInfo.LastDamageComited >= 5 && gameStructureInfo.CardBeingPlayedType == "Maneuver";
     }
     
-    public override int ExtraReversalDamage(GameStructureInfo gameStructureInfo)
+    public override int ExtraReversalDamage()
     {
         return 6;
     }

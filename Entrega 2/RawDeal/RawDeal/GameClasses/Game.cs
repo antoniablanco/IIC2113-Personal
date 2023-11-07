@@ -63,7 +63,7 @@ public class Game
     }
 
     private void SetTurnStartInformation()
-    {
+    {   
         gameStructureInfo.ControllerCurrentPlayer.DrawCard();
         SetVariableTrueBecauseTurnStarted();
         view.SayThatATurnBegins(gameStructureInfo.ControllerCurrentPlayer.NameOfSuperStar());
@@ -74,6 +74,7 @@ public class Game
     private void SetVariableTrueBecauseTurnStarted()
     {   
         gameStructureInfo.IsTheTurnBeingPlayed = true;
+        gameStructureInfo.GetSetGameVariables.OneRoundMoreInTurn();
         gameStructureInfo.LastDamageComited = 0;
         gameStructureInfo.ControllerCurrentPlayer.TheTurnHasJustStartTheSuperStarHasNotUsedHisSuperAbility();
     }

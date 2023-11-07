@@ -47,4 +47,14 @@ public class GetSetGameVariables
     {   
         return gameStructureInfo.WinnerPlayer.NameOfSuperStar();
     }
+
+    public void OneRoundMoreInTurn()
+    {
+        gameStructureInfo.NumberOfRoundsInTheTurn += 1;
+    }
+
+    public int GetRoundsInTurn()
+    {
+        return gameStructureInfo.NumberOfRoundsInTheTurn;
+    }
 }

@@ -16,7 +16,7 @@ public class KanesFlyingClothesline: Card
         return gameStructureInfo.LastDamageComited >= 4 && gameStructureInfo.CardBeingPlayedType == "Maneuver";
     }
     
-    public override int ExtraReversalDamage(GameStructureInfo gameStructureInfo)
+    public override int ExtraReversalDamage()
     {
         return 6;
     }
