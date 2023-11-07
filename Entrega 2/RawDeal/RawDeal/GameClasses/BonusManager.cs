@@ -89,13 +89,20 @@ public class BonusManager
 
     public int GetTurnDamageBonus(CardController cardController, PlayerController ControllerCurrentPlayer)
     {   
-        int damage = 0;
+        int damage = EternalDamage(cardController, ControllerCurrentPlayer);
         if (cardController.ContainType("Maneuver"))
             damage += bonusStructureInfo.IAmTheGameBonus;
-        if (HasMrSockoInArsenal(ControllerCurrentPlayer))
-            damage += bonusStructureInfo.MrSockoBonus;
         if (cardController.ContainType("Maneuver") && cardController.ContainsSubtype("Strike"))
             damage += bonusStructureInfo.HaymakerBonus;
+        
+        return damage;
+    }
+
+    public int EternalDamage(CardController cardController, PlayerController ControllerCurrentPlayer)
+    {   
+        int damage = 0;
+        if (HasMrSockoInArsenal(ControllerCurrentPlayer) && cardController.ContainType("Maneuver"))
+            damage += bonusStructureInfo.MrSockoBonus;
         
         return damage;
     }

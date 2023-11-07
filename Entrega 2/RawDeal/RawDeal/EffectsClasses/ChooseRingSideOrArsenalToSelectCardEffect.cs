@@ -41,7 +41,7 @@ public class ChooseRingSideOrArsenalToSelectCardEffect: EffectsUtils
             case SelectedEffect.TakeCardFromArsenal:
                 return "Arsenal";
             case SelectedEffect.TakeCardFromRingside:
-                return "Ringside";
+                return "RingSide";
             default:
                 return "Error";
         }
@@ -54,7 +54,7 @@ public class ChooseRingSideOrArsenalToSelectCardEffect: EffectsUtils
             case "Arsenal":
                 gameStructureInfo.CardMovement.TransferChoosinCardFromArsenalToHand(player, cardController);
                 break;
-            case "Ringside":
+            case "RingSide":
                 gameStructureInfo.CardMovement.TransferChoosinCardFromRingSideToHand(player, cardController);
                 break;
         }
