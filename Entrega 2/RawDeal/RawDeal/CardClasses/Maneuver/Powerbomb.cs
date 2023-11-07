@@ -21,6 +21,6 @@ public class Powerbomb: Card
     
     public override int ExtraDamage(GameStructureInfo gameStructureInfo)
     {
-        return gameStructureInfo.ControllerCurrentPlayer.NumberOfCardsInArsenalWithTheWord("slam");
+        return gameStructureInfo.ControllerCurrentPlayer.NumberOfCardsInRingAreaWithTheWord("slam");
     }
 }

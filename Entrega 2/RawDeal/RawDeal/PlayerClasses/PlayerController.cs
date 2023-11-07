@@ -196,13 +196,13 @@ public class PlayerController
         return (stringCardOptions, cardOptions);
     }
     
-    public int NumberOfCardsInArsenalWithTheWord(string word)
+    public int NumberOfCardsInRingAreaWithTheWord(string word)
     {
         int contador = 0;
-        foreach (var card in player.CardsArsenal)
+        foreach (var card in player.CardsRingArea)
         {   
-            if (card.GetCardTitle().ToLower().Split(' ').Contains(word.ToLower()))
-                contador++;
+            if (card.GetCardTitle().ToLower().Split(' ').Contains(word.ToLower()) && card.ContainType("Maneuver"))
+                contador += 1;
         }
         return contador;
     }
