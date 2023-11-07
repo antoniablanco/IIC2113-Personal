@@ -27,7 +27,6 @@ public class EndTurnManager
     public void DeclareEndOfTurn()
     {
         gameStructureInfo.IsTheTurnBeingPlayed = false;
-        gameStructureInfo.NumberOfRoundsInTheTurn = 0;
     }
 
     private bool CheckIfPlayersHasCardsInArsenalToContinuePlaying()

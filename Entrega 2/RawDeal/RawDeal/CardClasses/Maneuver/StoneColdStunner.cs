@@ -14,8 +14,11 @@ public class StoneColdStunner: Card
     public override int PlusFornitudAfterEspecificCard(GameStructureInfo gameStructureInfo)
     {
         int fornitud = 0;
-        if (gameStructureInfo.CardBeingPlayed.GetCardTitle() == "Kick" && gameStructureInfo.GetSetGameVariables.GetRoundsInTurn() > 1)
-            fornitud = -6;
+        if (gameStructureInfo.CardBeingPlayed != null)
+        {
+            if (gameStructureInfo.CardBeingPlayed.GetCardTitle() == "Kick" && gameStructureInfo.GetSetGameVariables.GetRoundsInTurn() > 1)
+                fornitud = -6;
+        }
         return fornitud;
     }
 }

@@ -46,7 +46,7 @@ public class PlayerController
     private List<CardController> CardsAvailableToPlay()
     {
         return player.CardsHand
-            .Where(card => card.GetCardFortitude(card.GetCardTypes()[0]) <= FortitudRating() 
+            .Where(card => card.GetCardFortitude(card.GetCardTypes()[0]) + card.PlusFornitudAfterEspecificCard() <= FortitudRating() 
                            && card.HasAnyTypeDifferentOfReversal() && card.CanThisCardBePlayed())
             .ToList();
     }
@@ -69,7 +69,7 @@ public class PlayerController
             int[] indexes = Enumerable.Range(0, cardController.GetCardTypes().Count()).ToArray();
             allTypesForCard.AddRange(from index in indexes where cardController.GetCardType(index) 
                     != "Reversal" && cardController.CanThisCardBePlayed(cardController.GetCardType(index)) &&
-                    cardController.GetCardFortitude(cardController.GetCardType(index)) 
+                    cardController.GetCardFortitude(cardController.GetCardType(index)) + cardController.PlusFornitudAfterEspecificCard()
                     <= FortitudRating() && cardController.CanThisCardBePlayed()
                 select new Tuple<CardController, int>(cardController, index));
         }
@@ -192,5 +192,16 @@ public class PlayerController
         List<CardController> cardOptions = player.CardsHand.Where(card => card != cardController).ToList();
         List<String> stringCardOptions = gameStructureInfo.CardsVisualizor.CreateStringCardList(cardOptions);
         return (stringCardOptions, cardOptions);
+    }
+    
+    public int NumberOfCardsInArsenalWithTheWord(string word)
+    {
+        int contador = 0;
+        foreach (var card in player.CardsArsenal)
+        {
+            if (card.GetCardTitle().ToLower().Split(' ').Contains(word.ToLower()))
+                contador++;
+        }
+        return 0;
     }
 }

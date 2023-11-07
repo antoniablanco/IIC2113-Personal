@@ -14,8 +14,12 @@ public class KanesTombstonePiledriver: Card
     public override int PlusFornitudAfterEspecificCard(GameStructureInfo gameStructureInfo)
     {
         int fornitud = 0;
-        if (gameStructureInfo.CardBeingPlayed.GetCardTitle() == "Kane’s Choke Slam" && gameStructureInfo.GetSetGameVariables.GetRoundsInTurn() > 1)
-            fornitud = -6;
+        if (gameStructureInfo.CardBeingPlayed != null)
+        {   
+            if (gameStructureInfo.CardBeingPlayed.GetCardTitle() == "Kane's Chokeslam" &&
+                gameStructureInfo.GetSetGameVariables.GetRoundsInTurn() > 1)
+                fornitud -= 6;
+        }
         return fornitud;
     }
 }

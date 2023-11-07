@@ -57,6 +57,7 @@ public class Game
         while (gameStructureInfo.GetSetGameVariables.TheTurnIsBeingPlayed())
         {   
             gameStructureInfo.BonusManager.RemoveOneTurnFromBonusCounter();
+            gameStructureInfo.GetSetGameVariables.OneRoundMoreInTurn();
             DisplayPlayerInformation();
             PlayerSelectedAction();
         }
@@ -64,8 +65,8 @@ public class Game
 
     private void SetTurnStartInformation()
     {   
-        gameStructureInfo.ControllerCurrentPlayer.DrawCard();
         SetVariableTrueBecauseTurnStarted();
+        gameStructureInfo.ControllerCurrentPlayer.DrawCard();
         view.SayThatATurnBegins(gameStructureInfo.ControllerCurrentPlayer.NameOfSuperStar());
         superAbilityInformation.TheSuperAbilityThatIsAtTheStartOfTheTurnIsUsed(gameStructureInfo);
         gameStructureInfo.ControllerCurrentPlayer.BlockSuperAbilityBecauseIsJustAtTheStartOfTheTurn();
@@ -74,8 +75,8 @@ public class Game
     private void SetVariableTrueBecauseTurnStarted()
     {   
         gameStructureInfo.IsTheTurnBeingPlayed = true;
-        gameStructureInfo.GetSetGameVariables.OneRoundMoreInTurn();
         gameStructureInfo.LastDamageComited = 0;
+        gameStructureInfo.NumberOfRoundsInTheTurn = 0;
         gameStructureInfo.ControllerCurrentPlayer.TheTurnHasJustStartTheSuperStarHasNotUsedHisSuperAbility();
     }
 

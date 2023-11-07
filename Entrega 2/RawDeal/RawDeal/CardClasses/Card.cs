@@ -24,13 +24,6 @@ public abstract class Card : IViewableCardInfo
     public List<string> Types { get; set; }
     public List<string> Subtypes { get; set; }
     public string CardEffect { get; set; }
-
-    
-    
-    public virtual bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, string reverseBy, int totaldamage)
-    {
-        return true;
-    }
     
     public virtual void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
     {
@@ -48,7 +41,10 @@ public abstract class Card : IViewableCardInfo
     {
     }
     
-    
+    public virtual bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, string reverseBy, int totaldamage)
+    {
+        return true;
+    }
 
     public virtual int GetFortitude(string type)
     {
@@ -71,6 +67,11 @@ public abstract class Card : IViewableCardInfo
     }
 
     public virtual int PlusFornitudAfterEspecificCard(GameStructureInfo gameStructureInfo)
+    {
+        return 0;
+    }
+    
+    public virtual int ExtraDamage(GameStructureInfo gameStructureInfo)
     {
         return 0;
     }
