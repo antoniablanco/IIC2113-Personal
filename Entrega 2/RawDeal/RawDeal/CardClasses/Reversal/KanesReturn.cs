@@ -1,3 +1,5 @@
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClasses.UnspecifiedType;
 
 public class KanesReturn: Card
@@ -7,5 +9,12 @@ public class KanesReturn: Card
         :base(title, types, subtypes, fortitude, damage, stunValue, cardEffect)
     {
          
+    }
+    
+    public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
+    {
+        gameStructureInfo.BonusManager.ApplyTurnBonusEffect("KanesReturnDamage", bonusValue:2);
+        gameStructureInfo.BonusManager.ApplyTurnBonusEffect("KanesReturnFortitud", bonusValue:25);
+        gameStructureInfo.BonusManager.SetWhoActivateNextPlayedCardBonusEffect(gameStructureInfo.ControllerOpponentPlayer);
     }
 }

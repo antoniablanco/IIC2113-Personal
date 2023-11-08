@@ -27,6 +27,27 @@ public class BonusManager
             case "Superkick":
                 bonusStructureInfo.SuperkickBonus = bonusValue;
                 break;
+            case "PowerofDarknessDamage":
+                bonusStructureInfo.PowerofDarknessDamageBonus += bonusValue;
+                break;
+            case "PowerofDarknessFortitud":
+                bonusStructureInfo.PowerofDarknessFortitudBonus += bonusValue;
+                break;
+            case "DontYouNeverEVER":
+                bonusStructureInfo.DontYouNeverEVERBonus += bonusValue;
+                break;
+            case "UndertakerSitsUpDamage":
+                bonusStructureInfo.UndertakerSitsUpDamageBonus += bonusValue;
+                break;
+            case "UndertakerSitsUpFortitud":
+                bonusStructureInfo.UndertakerSitsUpFortitudBonus += bonusValue;
+                break;
+            case "KanesReturnDamage":
+                bonusStructureInfo.KanesReturnDamageBonus += bonusValue;
+                break;
+            case "KanesReturnFortitud":
+                bonusStructureInfo.KanesReturnDamageBonus += bonusValue;
+                break;
         }
     }
     
@@ -72,16 +93,28 @@ public class BonusManager
             case "SnapMare":
                 bonusStructureInfo.SnapMareBonusActive = true;
                 break;
+            case "GetCrowdSupport":
+                bonusStructureInfo.GetCrowdSupportBonusActive = true;
+                break;
+            case "OpenUpaCanOfWhoopAss":
+                bonusStructureInfo.OpenUpaCanOfWhoopAssBonusActive = true;
+                break;
+            case "SmackdownHotel":
+                bonusStructureInfo.SmackdownHotelBonus = true;
+                break;
         }
     }
     
     public int GetNexPlayCardDamageBonus()
-    {   
+    {
         bool isAnyNextPlayCardBonusActive = bonusStructureInfo.IsJockeyingForPositionBonusDamageActive
-                                         || bonusStructureInfo.IsIrishWhipBonusActive
-                                         || bonusStructureInfo.ClotheslineBonusActive
-                                         || bonusStructureInfo.AtomicDropBonusActive
-                                         || bonusStructureInfo.SnapMareBonusActive;
+                                            || bonusStructureInfo.IsIrishWhipBonusActive
+                                            || bonusStructureInfo.ClotheslineBonusActive
+                                            || bonusStructureInfo.AtomicDropBonusActive
+                                            || bonusStructureInfo.SnapMareBonusActive
+                                            || bonusStructureInfo.GetCrowdSupportBonusActive
+                                            || bonusStructureInfo.OpenUpaCanOfWhoopAssBonusActive
+                                            || bonusStructureInfo.SmackdownHotelBonus;
         if (isAnyNextPlayCardBonusActive )
             return bonusStructureInfo.BonusDamage;
         return 0;
@@ -91,7 +124,11 @@ public class BonusManager
     {   
         int damage = EternalDamage(cardController, ControllerCurrentPlayer);
         if (cardController.ContainType("Maneuver"))
-            damage += bonusStructureInfo.IAmTheGameBonus;
+        {
+            damage += bonusStructureInfo.IAmTheGameBonus + bonusStructureInfo.PowerofDarknessDamageBonus +
+                      bonusStructureInfo.UndertakerSitsUpDamageBonus + bonusStructureInfo.KanesReturnDamageBonus +
+                      bonusStructureInfo.DontYouNeverEVERBonus;
+        }
         if (cardController.ContainType("Maneuver") && cardController.ContainsSubtype("Strike"))
             damage += bonusStructureInfo.HaymakerBonus;
         
@@ -124,11 +161,16 @@ public class BonusManager
         return damage;
     }
 
-    public int GetFortitudBonus()
+    public int GetFortitudBonus(string lastTypePlayed)
     {
-        if (bonusStructureInfo.IsJockeyingForPositionBonusFortitudActive)
-            return bonusStructureInfo.BonusFortitude;
-        return 0;
+        int bonus = 0;
+        if (bonusStructureInfo.IsJockeyingForPositionBonusFortitudActive || bonusStructureInfo.GetCrowdSupportBonusActive 
+                                                                         || bonusStructureInfo.OpenUpaCanOfWhoopAssBonusActive )
+            bonus += bonusStructureInfo.BonusFortitude;
+        if (lastTypePlayed == "Maneuver")
+            bonus += bonusStructureInfo.PowerofDarknessFortitudBonus + bonusStructureInfo.UndertakerSitsUpFortitudBonus
+                + bonusStructureInfo.KanesReturnFortitudBonus;
+        return bonus;
     }
 
     public void AddingOneTurnFromBonusCounter()
@@ -184,7 +226,10 @@ public class BonusManager
         if (bonusStructureInfo.IsIrishWhipBonusActive)
             return !cardController.ContainsSubtype("Strike");
 
-        if (bonusStructureInfo.ClotheslineBonusActive || bonusStructureInfo.AtomicDropBonusActive)
+        if (bonusStructureInfo.ClotheslineBonusActive || bonusStructureInfo.AtomicDropBonusActive 
+                                                      || bonusStructureInfo.GetCrowdSupportBonusActive 
+                                                      || bonusStructureInfo.OpenUpaCanOfWhoopAssBonusActive 
+                                                      || bonusStructureInfo.SmackdownHotelBonus)
             return !(type == "Maneuver");
 
         if (bonusStructureInfo.SnapMareBonusActive)
@@ -203,11 +248,22 @@ public class BonusManager
         DeactivateBonus("SnapMare");
     }
 
-    public void DeactivateTurnBonus()
+    public void DeactivateTurnBonus(PlayerController controllerCurrentPlayer)
     {   
         bonusStructureInfo.IAmTheGameBonus = 0;
         bonusStructureInfo.HaymakerBonus = 0;
         bonusStructureInfo.SuperkickBonus = 0;
+        bonusStructureInfo.PowerofDarknessDamageBonus = 0;
+        bonusStructureInfo.PowerofDarknessFortitudBonus = 0;
+        if (bonusStructureInfo.WhoActivateNextPlayedCardBonusEffect != null)
+            if (controllerCurrentPlayer == bonusStructureInfo.WhoActivateNextPlayedCardBonusEffect)
+            {
+                bonusStructureInfo.UndertakerSitsUpDamageBonus = 0;
+                bonusStructureInfo.UndertakerSitsUpFortitudBonus = 0;
+                bonusStructureInfo.KanesReturnDamageBonus = 0;
+                bonusStructureInfo.KanesReturnFortitudBonus = 0;
+                bonusStructureInfo.DontYouNeverEVERBonus = 0;
+            }
     }
     
     private void DeactivateBonus(string type)
@@ -231,9 +287,6 @@ public class BonusManager
                 break;
             case "SnapMare":
                 bonusStructureInfo.SnapMareBonusActive = false;
-                break;
-            case "MrSocko":
-                bonusStructureInfo.MrSockoBonus = 0;
                 break;
         }
     }

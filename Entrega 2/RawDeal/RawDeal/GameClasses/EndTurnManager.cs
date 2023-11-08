@@ -15,7 +15,7 @@ public class EndTurnManager
     public void UpdateVariablesAtEndOfTurn()
     {   
         DeclareEndOfTurn();
-        gameStructureInfo.BonusManager.DeactivateTurnBonus();
+        gameStructureInfo.BonusManager.DeactivateTurnBonus(gameStructureInfo.ControllerCurrentPlayer);
         if (!CheckIfPlayersHasCardsInArsenalToContinuePlaying())
         {   
             PlayerController loserPlayer = (gameStructureInfo.ControllerCurrentPlayer.HasCardsInArsenal()) ? gameStructureInfo.ControllerOpponentPlayer : gameStructureInfo.ControllerCurrentPlayer;

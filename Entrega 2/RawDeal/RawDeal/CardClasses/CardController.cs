@@ -129,7 +129,7 @@ public class CardController
 
     public bool CanUseThisReversalCard(PlayerController controllerPlayer, string reverseBy, int totaldamage)
     {
-        return GetCardFortitude(GetCardTypes()[0]) + gameStructureInfo.BonusManager.GetFortitudBonus() <=
+        return GetCardFortitude(GetCardTypes()[0]) + gameStructureInfo.BonusManager.GetFortitudBonus(gameStructureInfo.CardBeingPlayedType) <=
             controllerPlayer.FortitudRating() && IsReversalType() && GetIfCardCanReversalPlayedCard(reverseBy, totaldamage);
     }
 

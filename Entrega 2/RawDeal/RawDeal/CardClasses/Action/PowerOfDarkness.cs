@@ -1,3 +1,6 @@
+using RawDeal.GameClasses;
+using RawDeal.PlayerClasses;
+
 namespace RawDeal.CardClasses.UnspecifiedType;
 
 public class PowerOfDarkness: Card
@@ -7,5 +10,18 @@ public class PowerOfDarkness: Card
         :base(title, types, subtypes, fortitude, damage, stunValue, cardEffect)
     {
          
+    }
+    
+    public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    {
+        ApplyEffect(gameStructureInfo, gameStructureInfo.ControllerCurrentPlayer);
+        gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(gameStructureInfo.GetCurrentPlayer(),
+            playedCardController);
+    }
+
+    private void ApplyEffect(GameStructureInfo gameStructureInfo, PlayerController playerController)
+    {
+        gameStructureInfo.BonusManager.ApplyTurnBonusEffect("PowerofDarknessDamage", bonusValue:5);
+        gameStructureInfo.BonusManager.ApplyTurnBonusEffect("PowerofDarknessFortitud", bonusValue:20);
     }
 }

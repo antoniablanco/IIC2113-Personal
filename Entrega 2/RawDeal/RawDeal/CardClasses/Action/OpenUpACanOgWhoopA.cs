@@ -1,3 +1,7 @@
+using RawDeal.EffectsClasses;
+using RawDeal.GameClasses;
+using RawDeal.PlayerClasses;
+
 namespace RawDeal.CardClasses.UnspecifiedType;
 
 public class OpenUpACanOgWhoopA: Card
@@ -7,5 +11,21 @@ public class OpenUpACanOgWhoopA: Card
         :base(title, types, subtypes, fortitude, damage, stunValue, cardEffect)
     {
          
+    }
+    
+    public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    {   
+        ApplyEffect(gameStructureInfo, gameStructureInfo.ControllerCurrentPlayer);
+        gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(gameStructureInfo.GetCurrentPlayer(),
+            playedCardController);
+    }
+
+    private void ApplyEffect(GameStructureInfo gameStructureInfo, PlayerController playerController)
+    {   
+        new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
+            gameStructureInfo).StealCards();
+        
+        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect("OpenUpaCanOfWhoopAss", bonusValue:6, "Damage");
+        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect("OpenUpaCanOfWhoopAss", bonusValue:20, "Fortitude");
     }
 }

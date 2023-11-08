@@ -1,3 +1,4 @@
+using RawDeal.Exceptions;
 using RawDeal.GameClasses;
 
 namespace RawDeal.CardClasses.UnspecifiedType;

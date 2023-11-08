@@ -1,3 +1,5 @@
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClasses.UnspecifiedType;
 
 public class DontYouNeverEver: Card
@@ -7,5 +9,11 @@ public class DontYouNeverEver: Card
         :base(title, types, subtypes, fortitude, damage, stunValue, cardEffect)
     {
          
+    }
+    
+    public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
+    {
+        gameStructureInfo.BonusManager.ApplyTurnBonusEffect("DontYouNeverEVER", bonusValue:2);
+        gameStructureInfo.BonusManager.SetWhoActivateNextPlayedCardBonusEffect(gameStructureInfo.ControllerOpponentPlayer);
     }
 }

@@ -11,5 +11,11 @@ public class UndertakerSitsUp: Card
          
     }
     
+    public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
+    {
+        gameStructureInfo.BonusManager.ApplyTurnBonusEffect("UndertakerSitsUpDamage", bonusValue:2);
+        gameStructureInfo.BonusManager.ApplyTurnBonusEffect("UndertakerSitsUpFortitud", bonusValue:25);
+        gameStructureInfo.BonusManager.SetWhoActivateNextPlayedCardBonusEffect(gameStructureInfo.ControllerOpponentPlayer);
+    }
     
 }
