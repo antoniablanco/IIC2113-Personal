@@ -52,8 +52,7 @@ public class BonusManager
     }
     
     public void ApplyNextPlayedCardBonusEffect(string typeName, int bonusValue, string bonusType)
-    {   
-        DeactivateNextPlayedCardBonusEffect();
+    {  
         SetBonus(bonusType, bonusValue);
         ActivateBonus(typeName);
     }
@@ -106,7 +105,7 @@ public class BonusManager
     }
     
     public int GetNexPlayCardDamageBonus()
-    {
+    {   
         bool isAnyNextPlayCardBonusActive = bonusStructureInfo.IsJockeyingForPositionBonusDamageActive
                                             || bonusStructureInfo.IsIrishWhipBonusActive
                                             || bonusStructureInfo.ClotheslineBonusActive
@@ -246,6 +245,9 @@ public class BonusManager
         DeactivateBonus("Clothesline");
         DeactivateBonus("AtomicDrop");
         DeactivateBonus("SnapMare");
+        DeactivateBonus("GetCrowdSupport");
+        DeactivateBonus("OpenUpaCanOfWhoopAss");
+        DeactivateBonus("SmackdownHotel");
     }
 
     public void DeactivateTurnBonus(PlayerController controllerCurrentPlayer)
@@ -287,6 +289,15 @@ public class BonusManager
                 break;
             case "SnapMare":
                 bonusStructureInfo.SnapMareBonusActive = false;
+                break;
+            case "GetCrowdSupport":
+                bonusStructureInfo.GetCrowdSupportBonusActive = false;
+                break;
+            case "OpenUpaCanOfWhoopAss":
+                bonusStructureInfo.OpenUpaCanOfWhoopAssBonusActive = false;
+                break;
+            case "SmackdownHotel":
+                bonusStructureInfo.SmackdownHotelBonus = false;
                 break;
         }
     }

@@ -46,6 +46,7 @@ public class PlayManeuverCard
         var totalDamage =
             gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(damage,
                 gameStructureInfo.ControllerOpponentPlayer);
+        Console.WriteLine(playedCardController.GetDamageProducedByTheCard() + " " + gameStructureInfo.BonusManager.GetNexPlayCardDamageBonus() + " " + gameStructureInfo.BonusManager.GetTurnDamageBonus(playedCardController, gameStructureInfo.ControllerCurrentPlayer) + " " + playedCardController.ExtraDamage());
         return totalDamage;
     }
 
