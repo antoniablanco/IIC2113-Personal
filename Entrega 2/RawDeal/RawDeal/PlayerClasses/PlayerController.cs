@@ -52,7 +52,7 @@ public class PlayerController
     }
 
     public List<CardController> CardsAvailableToReversal(int totaldamage) 
-    {
+    {   
         return player.CardsHand
             .Where(card => card.GetCardFortitude(card.GetCardTypes()[0]) + 
                 gameStructureInfo.BonusManager.GetFortitudBonus(gameStructureInfo.CardBeingPlayedType) <= FortitudRating() 

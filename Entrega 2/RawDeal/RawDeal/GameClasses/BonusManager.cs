@@ -15,7 +15,7 @@ public class BonusManager
     }
     
     public void ApplyTurnBonusEffect(string typeName, int bonusValue)
-    {
+    {   
         switch (typeName)
         {
             case "IAmTheGame":
@@ -46,8 +46,10 @@ public class BonusManager
                 bonusStructureInfo.KanesReturnDamageBonus += bonusValue;
                 break;
             case "KanesReturnFortitud":
-                bonusStructureInfo.KanesReturnDamageBonus += bonusValue;
+            {
+                bonusStructureInfo.KanesReturnFortitudBonus += bonusValue;
                 break;
+            }
         }
     }
     
@@ -259,7 +261,7 @@ public class BonusManager
         bonusStructureInfo.PowerofDarknessFortitudBonus = 0;
         if (bonusStructureInfo.WhoActivateNextPlayedCardBonusEffect != null)
             if (controllerCurrentPlayer == bonusStructureInfo.WhoActivateNextPlayedCardBonusEffect)
-            {
+            {   
                 bonusStructureInfo.UndertakerSitsUpDamageBonus = 0;
                 bonusStructureInfo.UndertakerSitsUpFortitudBonus = 0;
                 bonusStructureInfo.KanesReturnDamageBonus = 0;
