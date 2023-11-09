@@ -24,7 +24,7 @@ public class KanesReturn: Card
         new ColateralDamageEffectUtils(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo, totalDamage);
         
         gameStructureInfo.BonusManager.ApplyTurnBonusEffect("KanesReturnDamage", bonusValue:2);
-        gameStructureInfo.BonusManager.ApplyTurnBonusEffect("KanesReturnFortitud", bonusValue:25);
+        gameStructureInfo.BonusManager.ApplyTurnBonusEffect("KanesReturnFortitud", bonusValue:15);
         gameStructureInfo.BonusManager.SetWhoActivateNextPlayedCardBonusEffect(gameStructureInfo.ControllerOpponentPlayer);
     }
 }
