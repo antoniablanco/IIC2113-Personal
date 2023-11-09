@@ -495,6 +495,10 @@ public class CardGenerator
                 return new TortureRack(card.Title, card.Types, card.Subtypes, card.Fortitude, card.Damage,
                     card.StunValue,
                     card.CardEffect);
+            case "Take That Move, Shine It Up Real Nice, Turn That Sumb*tch Sideways, and Stick It Straight Up Your Roody Poo Candy A %$!":
+                return new TakeThatMoveShineItUpRealNice(card.Title,
+                    card.Types, card.Subtypes, card.Fortitude, card.Damage, card.StunValue,
+                    card.CardEffect);
             case "Tree of Woe":
                 return new TreeOfWoe(card.Title, card.Types, card.Subtypes, card.Fortitude, card.Damage, card.StunValue,
                     card.CardEffect);

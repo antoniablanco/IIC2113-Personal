@@ -1,11 +1,11 @@
 using RawDeal.EffectsClasses;
 using RawDeal.GameClasses;
 
-namespace RawDeal.CardClasses.UnspecifiedType;
+namespace RawDeal.CardClasses.Reversal;
 
-public class DontYouNeverEver: Card
+public class TakeThatMoveShineItUpRealNice: Card
 {
-    public DontYouNeverEver(string title, List<string> types, List<string> subtypes, string fortitude, string damage,
+    public TakeThatMoveShineItUpRealNice(string title, List<string> types, List<string> subtypes, string fortitude, string damage,
         string stunValue, string cardEffect)
         :base(title, types, subtypes, fortitude, damage, stunValue, cardEffect)
     {
@@ -22,11 +22,9 @@ public class DontYouNeverEver: Card
     
     public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
     {   
-        const int numberOfCardToDiscard = 2;
-        new DiscardCardsFromHandToRingSideEffect(gameStructureInfo.ControllerCurrentPlayer,
-            gameStructureInfo.ControllerCurrentPlayer, numberOfCardToDiscard, gameStructureInfo);
-        
-        gameStructureInfo.BonusManager.ApplyTurnBonusEffect("DontYouNeverEVER", bonusValue:2);
-        gameStructureInfo.BonusManager.SetWhoActivateNextPlayedCardBonusEffect(gameStructureInfo.ControllerOpponentPlayer);
+        const int numberOfDamageToRecover = 5;
+        new GetBackDamageEffectUtils(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo, 
+            numberOfDamageToRecover);
+
     }
 }
