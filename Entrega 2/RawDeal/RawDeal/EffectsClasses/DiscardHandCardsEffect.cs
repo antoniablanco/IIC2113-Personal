@@ -24,7 +24,7 @@ public class DiscardHandCardsEffect: EffectsUtils
         
         for (var currentIndex = 0; currentIndex < numberOfCardsInHand; currentIndex++)
         {   
-            var discardCardController = controllerPlayer.GetSpecificCardFrom("Hand", currentIndex);
+            var discardCardController = controllerPlayer.GetSpecificCardFrom("Hand", 0);
             gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingSide(player,
                 discardCardController);
         }

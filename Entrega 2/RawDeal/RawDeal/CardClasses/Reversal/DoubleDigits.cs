@@ -26,6 +26,7 @@ public class DoubleDigits: Card
             gameStructureInfo.ControllerCurrentPlayer, numberOfCardToDiscard, gameStructureInfo);
         
         const int totalDamage = 2;
-        new ColateralDamageEffectUtils(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo, totalDamage);
+        new ProduceDamageEffectUtils(totalDamage, gameStructureInfo.ControllerCurrentPlayer,
+            gameStructureInfo);
     }
 }
