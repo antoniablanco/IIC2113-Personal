@@ -1,3 +1,4 @@
+using RawDeal.EffectsClasses;
 using RawDeal.GameClasses;
 
 namespace RawDeal.CardClasses.UnspecifiedType;
@@ -11,8 +12,17 @@ public class KanesReturn: Card
          
     }
     
-    public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
+    public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, 
+        string reverseBy, int totaldamage)
     {
+        return playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
+    }
+    
+    public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
+    {   
+        const int totalDamage = 4;
+        new ColateralDamageEffectUtils(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo, totalDamage);
+        
         gameStructureInfo.BonusManager.ApplyTurnBonusEffect("KanesReturnDamage", bonusValue:2);
         gameStructureInfo.BonusManager.ApplyTurnBonusEffect("KanesReturnFortitud", bonusValue:25);
         gameStructureInfo.BonusManager.SetWhoActivateNextPlayedCardBonusEffect(gameStructureInfo.ControllerOpponentPlayer);
