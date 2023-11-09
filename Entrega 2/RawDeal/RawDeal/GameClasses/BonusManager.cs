@@ -121,9 +121,9 @@ public class BonusManager
         return 0;
     }
 
-    public int GetTurnDamageBonus(CardController cardController, PlayerController ControllerCurrentPlayer)
+    public int GetTurnDamageBonus(CardController cardController)
     {   
-        int damage = EternalDamage(cardController, ControllerCurrentPlayer);
+        int damage = 0;
         if (cardController.ContainType("Maneuver"))
         {
             damage += bonusStructureInfo.IAmTheGameBonus + bonusStructureInfo.PowerofDarknessDamageBonus +
@@ -132,16 +132,15 @@ public class BonusManager
         }
         if (cardController.ContainType("Maneuver") && cardController.ContainsSubtype("Strike"))
             damage += bonusStructureInfo.HaymakerBonus;
-        
         return damage;
     }
 
     public int EternalDamage(CardController cardController, PlayerController ControllerCurrentPlayer)
     {   
+        Console.WriteLine("La carta es: "+cardController.GetCardTitle());
         int damage = 0;
         if (HasMrSockoInArsenal(ControllerCurrentPlayer) && cardController.ContainType("Maneuver"))
             damage += bonusStructureInfo.MrSockoBonus;
-        
         return damage;
     }
 

@@ -117,7 +117,7 @@ public class CardController
     }
 
     public bool GetIfCardCanReversalPlayedCard(string reverseBy, int totaldamage)
-    {
+    {   
         return _card.CanReversalThisCard(gameStructureInfo.CardBeingPlayed, gameStructureInfo, reverseBy, totaldamage) &&
                gameStructureInfo.CardBeingPlayed.CanThisCardBeReversal();
     }

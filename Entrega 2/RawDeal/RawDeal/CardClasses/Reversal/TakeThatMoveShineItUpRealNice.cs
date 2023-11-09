@@ -11,14 +11,13 @@ public class TakeThatMoveShineItUpRealNice: Card
     {
          
     }
-    
-    public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, 
-        string reverseBy, int totaldamage)
-    {
+    public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, string reverseBy, int totaldamage)
+    {   
         return (playedCardController.ContainsSubtype("Strike") || playedCardController.ContainsSubtype("Grapple")
                                                                || playedCardController.ContainsSubtype("Submission"))
                && playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
     }
+    
     
     public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
     {   

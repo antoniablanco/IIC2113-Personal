@@ -42,7 +42,7 @@ public abstract class Card : IViewableCardInfo
     }
     
     public virtual bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, string reverseBy, int totaldamage)
-    {
+    {   
         return true;
     }
 
