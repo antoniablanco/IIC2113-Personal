@@ -1,3 +1,6 @@
+using RawDeal.EffectsClasses;
+using RawDeal.GameClasses;
+
 namespace RawDeal.CardClasses.UnspecifiedType;
 
 public class HellfireBrimstone: Card
@@ -7,5 +10,15 @@ public class HellfireBrimstone: Card
         :base(title, types, subtypes, fortitude, damage, stunValue, cardEffect)
     {
          
+    }
+    
+    public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
+    {   
+        new DiscardHandCardsEffect(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo);
+        new DiscardHandCardsEffect(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo);
+        
+        const int totalDamage = 5;
+        new ProduceDamageEffectUtils(totalDamage, gameStructureInfo.ControllerOpponentPlayer,
+            gameStructureInfo);
     }
 }
