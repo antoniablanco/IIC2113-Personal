@@ -15,6 +15,7 @@ public class VerticalSuplex: Card
         string reverseBy, int totaldamage)
     {
         return playedCardController.GetCardTitle() == "Vertical Suplex" && 
-               playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
+               playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver") &&
+               gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totaldamage);;
     }
 }

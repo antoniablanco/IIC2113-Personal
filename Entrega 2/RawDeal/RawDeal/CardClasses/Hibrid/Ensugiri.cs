@@ -16,7 +16,8 @@ public class Ensugiri: Card
         string reverseBy, int totaldamage)
     {
         return playedCardController.GetCardTitle() == "Kick" && 
-               playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
+               playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver") &&
+               gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totaldamage);;
     }
     
 }

@@ -16,7 +16,8 @@ public class JockeyingForPosition : Card
     public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, 
         string reverseBy, int totaldamage)
     {
-        return playedCardController.GetCardTitle() == "Jockeying for Position";
+        return playedCardController.GetCardTitle() == "Jockeying for Position" &&
+               gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totaldamage);;
     }
 
     public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)

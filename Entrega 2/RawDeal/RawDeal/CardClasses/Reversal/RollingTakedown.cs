@@ -17,6 +17,7 @@ public class RollingTakedown : Card
         const int maximumDamageProducedByPlayedCard = 7;
         return playedCardController.ContainsSubtype("Grapple") &&
                playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver") &&
-               totaldamage <= maximumDamageProducedByPlayedCard;
+               totaldamage <= maximumDamageProducedByPlayedCard &&
+               gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totaldamage);;
     }
 }

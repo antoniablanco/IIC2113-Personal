@@ -18,7 +18,8 @@ public class RockBottom : Card
         int numberOfCardsInHand = gameStructureInfo.ControllerOpponentPlayer.NumberOfCardIn("Hand");
         return playedCardController.ContainsSubtype("Grapple")
                && reverseBy == "Hand" && playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver")
-               && numberOfCardsInHand > 1;
+               && numberOfCardsInHand > 1 &&
+               gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totaldamage);;
     }
 
     public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)

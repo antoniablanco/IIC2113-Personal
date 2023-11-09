@@ -14,7 +14,8 @@ public class EscapeMove : Card
         string reverseBy, int totaldamage)
     {
         return playedCardController.ContainsSubtype("Grapple") &&
-               playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
+               playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver") &&
+               gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totaldamage);;
     }
 
 }

@@ -15,7 +15,8 @@ public class IrishWhip: Card
     public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo,
         string reverseBy, int totaldamage)
     {
-        return playedCardController.GetCardTitle() == "Irish Whip";
+        return playedCardController.GetCardTitle() == "Irish Whip" &&
+               gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totaldamage);;
     }
     
     public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)

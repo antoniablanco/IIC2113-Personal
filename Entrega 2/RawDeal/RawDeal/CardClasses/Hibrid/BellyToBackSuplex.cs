@@ -16,7 +16,8 @@ public class BellyToBackSuplex: Card
         string reverseBy, int totaldamage)
     {
         return playedCardController.GetCardTitle() == "Belly to Back Suplex" && 
-               playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
+               playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver") &&
+               gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totaldamage);;
     }
     
 }

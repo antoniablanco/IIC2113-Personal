@@ -55,6 +55,7 @@ public class PlayCard
     {
         gameStructureInfo.BonusManager.CheckIfBonusesShouldBeActive(gameStructureInfo.ControllerCurrentPlayer,
             cardController, type );
+        gameStructureInfo.BonusManager.CheckIfReversalBonusShouldBeActive(gameStructureInfo.ControllerCurrentPlayer);
     }
     
     private void SetLastPlayedCardInfo(Tuple<CardController, int> playedCardController)

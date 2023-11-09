@@ -16,6 +16,11 @@ public class BonusStructureInfo
     public bool OpenUpaCanOfWhoopAssBonusActive = false;
     public bool SmackdownHotelBonusActive = false;
     
+    public int BonusDamage = 4;
+    public int BonusFortitude = 8;
+    public int turnsLeftForBonusCounter = 0;
+    public PlayerController WhoActivateNextPlayedCardBonusEffect;
+    
     // Bonus que afectan en la longitud del turno
     public int IAmTheGameBonus = 0;
     public int HaymakerBonus = 0;
@@ -29,8 +34,9 @@ public class BonusStructureInfo
     public int KanesReturnDamageBonus = 0;
     public int KanesReturnFortitudBonus = 0;
     
-    public int BonusDamage = 4;
-    public int BonusFortitude = 8;
-    public int turnsLeftForBonusCounter = 0;
-    public PlayerController WhoActivateNextPlayedCardBonusEffect;
+    // Bonus para reversar cartas
+    public bool DiversionBonusActive = false;
+    public bool StaggerBonusActive = false;
+    public bool AyatollahBonusActive = false;
+    
 }

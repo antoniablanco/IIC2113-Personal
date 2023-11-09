@@ -69,6 +69,8 @@ public class BonusManager
             case "Damage":
                 bonusStructureInfo.BonusDamage = bonus;
                 break;
+            case "Reversal":
+                break;
         }
     }
     
@@ -102,6 +104,15 @@ public class BonusManager
                 break;
             case "SmackdownHotel":
                 bonusStructureInfo.SmackdownHotelBonusActive = true;
+                break;
+            case "Diversion":
+                bonusStructureInfo.DiversionBonusActive = true;
+                break;
+            case "Stagger":
+                bonusStructureInfo.StaggerBonusActive = true;
+                break;
+            case "Ayatollah":
+                bonusStructureInfo.AyatollahBonusActive = true;
                 break;
         }
     }
@@ -238,6 +249,29 @@ public class BonusManager
         return false;
     }
 
+    public void CheckIfReversalBonusShouldBeActive(PlayerController controllerCurrentPlayer)
+    {
+        if (GetTurnCounterForBonus() <= 0 ||
+            (GetWhoActivateNextPlayedCardBonusEffect() != controllerCurrentPlayer &&
+             GetWhoActivateNextPlayedCardBonusEffect() != null))
+        {
+            DeactivateBonus("Diversion");
+            DeactivateBonus("Stagger");
+        }
+    }
+
+    public bool CanReversal( GameStructureInfo gameStructureInfo, string reverseBy,
+        int totaldamage)
+    {
+        if (bonusStructureInfo.DiversionBonusActive)
+            return gameStructureInfo.CardBeingPlayedType == "Maneuver";
+        if (bonusStructureInfo.StaggerBonusActive)
+            return gameStructureInfo.CardBeingPlayedType == "Maneuver" && totaldamage <= 7;
+        if (bonusStructureInfo.AyatollahBonusActive)
+            return reverseBy == "Hand";
+        return true;
+    }
+
     private void DeactivateNextPlayedCardBonusEffect()
     {   
         DeactivateBonus("JockeyingFortitud");
@@ -258,6 +292,7 @@ public class BonusManager
         bonusStructureInfo.SuperkickBonus = 0;
         bonusStructureInfo.PowerofDarknessDamageBonus = 0;
         bonusStructureInfo.PowerofDarknessFortitudBonus = 0;
+        DeactivateBonus("Ayatollah");
         if (bonusStructureInfo.WhoActivateNextPlayedCardBonusEffect != null)
             if (controllerCurrentPlayer == bonusStructureInfo.WhoActivateNextPlayedCardBonusEffect)
             {   
@@ -299,6 +334,15 @@ public class BonusManager
                 break;
             case "SmackdownHotel":
                 bonusStructureInfo.SmackdownHotelBonusActive = false;
+                break;
+            case "Diversion":
+                bonusStructureInfo.DiversionBonusActive = false;
+                break;
+            case "Stagger":
+                bonusStructureInfo.StaggerBonusActive = false;
+                break;
+            case "Ayatollah":
+                bonusStructureInfo.AyatollahBonusActive = false;
                 break;
         }
     }

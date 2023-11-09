@@ -16,7 +16,8 @@ public class DoubleArmDDT: Card
         string reverseBy, int totaldamage)
     {
         return playedCardController.GetCardTitle() == "Back Body Drop" && 
-               playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
+               playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver") &&
+               gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totaldamage);;
     }
     
 }

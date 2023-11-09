@@ -13,6 +13,7 @@ public class NoChanceInHell : Card
     public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, 
         string reverseBy, int totaldamage)
     {
-        return playedCardController.VerifyIfTheLastPlayedTypeIs("Action");
+        return playedCardController.VerifyIfTheLastPlayedTypeIs("Action") &&
+               gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totaldamage);;
     }
 }

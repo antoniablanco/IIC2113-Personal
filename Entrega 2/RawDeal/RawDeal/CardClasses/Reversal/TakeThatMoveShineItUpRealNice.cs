@@ -15,7 +15,8 @@ public class TakeThatMoveShineItUpRealNice: Card
     {   
         return (playedCardController.ContainsSubtype("Strike") || playedCardController.ContainsSubtype("Grapple")
                                                                || playedCardController.ContainsSubtype("Submission"))
-               && playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
+               && playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver") &&
+               gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totaldamage);;
     }
     
     

@@ -15,6 +15,8 @@ public class Spear: Card
     public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, 
         string reverseBy, int totaldamage)
     {
-        return gameStructureInfo.LastCardBeingPlayedTitle == "Irish Whip" && playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
+        return gameStructureInfo.LastCardBeingPlayedTitle == "Irish Whip" 
+               && playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver") &&
+               gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totaldamage);;
     }
 }

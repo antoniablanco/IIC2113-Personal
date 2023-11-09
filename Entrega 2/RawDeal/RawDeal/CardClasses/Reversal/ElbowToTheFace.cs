@@ -15,7 +15,8 @@ public class ElbowToTheFace : Card
     {   
         const int maximumDamageProducedByPlayedCard = 7;
         return playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver") &&
-               totaldamage <= maximumDamageProducedByPlayedCard;
+               totaldamage <= maximumDamageProducedByPlayedCard &&
+               gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totaldamage);;
     }
 
 }

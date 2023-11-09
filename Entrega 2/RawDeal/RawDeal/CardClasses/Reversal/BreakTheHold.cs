@@ -14,6 +14,7 @@ public class BreakTheHold : Card
         string reverseBy, int totaldamage)
     {
         return playedCardController.ContainsSubtype("Submission") &&
-               playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver");
+               playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver") &&
+               gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totaldamage);
     }
 }

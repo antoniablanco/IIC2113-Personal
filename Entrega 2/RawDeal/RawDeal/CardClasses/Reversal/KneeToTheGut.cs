@@ -18,7 +18,8 @@ public class KneeToTheGut : Card
         return playedCardController.ContainsSubtype("Strike") &&
                playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver") &&
                totaldamage <= maximumDamageProducedByPlayedCard &&
-               playedCardController.HasAnyTypeDifferentOfReversal();
+               playedCardController.HasAnyTypeDifferentOfReversal() &&
+               gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totaldamage);;
                
     }
 }
