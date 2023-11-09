@@ -101,7 +101,7 @@ public class BonusManager
                 bonusStructureInfo.OpenUpaCanOfWhoopAssBonusActive = true;
                 break;
             case "SmackdownHotel":
-                bonusStructureInfo.SmackdownHotelBonus = true;
+                bonusStructureInfo.SmackdownHotelBonusActive = true;
                 break;
         }
     }
@@ -115,7 +115,7 @@ public class BonusManager
                                             || bonusStructureInfo.SnapMareBonusActive
                                             || bonusStructureInfo.GetCrowdSupportBonusActive
                                             || bonusStructureInfo.OpenUpaCanOfWhoopAssBonusActive
-                                            || bonusStructureInfo.SmackdownHotelBonus;
+                                            || bonusStructureInfo.SmackdownHotelBonusActive;
         if (isAnyNextPlayCardBonusActive )
             return bonusStructureInfo.BonusDamage;
         return 0;
@@ -230,7 +230,7 @@ public class BonusManager
         if (bonusStructureInfo.ClotheslineBonusActive || bonusStructureInfo.AtomicDropBonusActive 
                                                       || bonusStructureInfo.GetCrowdSupportBonusActive 
                                                       || bonusStructureInfo.OpenUpaCanOfWhoopAssBonusActive 
-                                                      || bonusStructureInfo.SmackdownHotelBonus)
+                                                      || bonusStructureInfo.SmackdownHotelBonusActive)
             return !(type == "Maneuver");
 
         if (bonusStructureInfo.SnapMareBonusActive)
@@ -299,7 +299,7 @@ public class BonusManager
                 bonusStructureInfo.OpenUpaCanOfWhoopAssBonusActive = false;
                 break;
             case "SmackdownHotel":
-                bonusStructureInfo.SmackdownHotelBonus = false;
+                bonusStructureInfo.SmackdownHotelBonusActive = false;
                 break;
         }
     }

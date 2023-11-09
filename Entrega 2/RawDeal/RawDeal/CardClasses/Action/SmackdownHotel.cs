@@ -25,6 +25,14 @@ public class SmackdownHotel: Card
         new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo).StealCards();
         
+        new SeeOponentHandEffect(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.ControllerOpponentPlayer,
+        gameStructureInfo);
+        
         gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect("SmackdownHotel", bonusValue:6, "Damage");
+        
+        gameStructureInfo.BonusManager.SetWhoActivateNextPlayedCardBonusEffect(playerController);
+        
+        var turnsBeforeEffectExpires = 2;
+        gameStructureInfo.BonusManager.SetTurnsLeftForBonusCounter(turnsBeforeEffectExpires);
     }
 }

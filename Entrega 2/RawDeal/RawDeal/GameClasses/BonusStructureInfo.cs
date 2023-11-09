@@ -14,7 +14,7 @@ public class BonusStructureInfo
     public bool SnapMareBonusActive = false;
     public bool GetCrowdSupportBonusActive = false;
     public bool OpenUpaCanOfWhoopAssBonusActive = false;
-    public bool SmackdownHotelBonus = false;
+    public bool SmackdownHotelBonusActive = false;
     
     // Bonus que afectan en la longitud del turno
     public int IAmTheGameBonus = 0;
