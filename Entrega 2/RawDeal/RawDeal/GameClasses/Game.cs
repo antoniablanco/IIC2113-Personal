@@ -57,7 +57,7 @@ public class Game
         while (gameStructureInfo.GetSetGameVariables.TheTurnIsBeingPlayed())
         {   
             gameStructureInfo.BonusManager.RemoveOneTurnFromBonusCounter();
-            gameStructureInfo.GetSetGameVariables.OneRoundMoreInTurn();
+            //gameStructureInfo.GetSetGameVariables.OneRoundMoreInTurn();
             DisplayPlayerInformation();
             PlayerSelectedAction();
         }

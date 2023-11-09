@@ -52,6 +52,11 @@ public class GetSetGameVariables
     {
         gameStructureInfo.NumberOfRoundsInTheTurn += 1;
     }
+    
+    public void OneRoundLessInTurn()
+    {
+        gameStructureInfo.NumberOfRoundsInTheTurn -= 1;
+    }
 
     public int GetRoundsInTurn()
     {

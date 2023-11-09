@@ -22,4 +22,10 @@ public class Stagger: Card
         var turnsBeforeEffectExpires = 2;
         gameStructureInfo.BonusManager.SetTurnsLeftForBonusCounter(turnsBeforeEffectExpires);
     }
+    
+    public override bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo, string type = "Maneuver")
+    { 
+        return gameStructureInfo.CardBeingPlayedType == "Maneuver" 
+               && gameStructureInfo.GetSetGameVariables.GetRoundsInTurn() > 1;
+    }
 }

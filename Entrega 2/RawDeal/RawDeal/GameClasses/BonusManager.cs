@@ -148,7 +148,6 @@ public class BonusManager
 
     public int EternalDamage(CardController cardController, PlayerController ControllerCurrentPlayer)
     {   
-        Console.WriteLine("La carta es: "+cardController.GetCardTitle());
         int damage = 0;
         if (HasMrSockoInArsenal(ControllerCurrentPlayer) && cardController.ContainType("Maneuver"))
             damage += bonusStructureInfo.MrSockoBonus;
@@ -264,11 +263,11 @@ public class BonusManager
         int totaldamage)
     {
         if (bonusStructureInfo.DiversionBonusActive)
-            return gameStructureInfo.CardBeingPlayedType == "Maneuver";
+            return !(gameStructureInfo.CardBeingPlayedType == "Maneuver");
         if (bonusStructureInfo.StaggerBonusActive)
-            return gameStructureInfo.CardBeingPlayedType == "Maneuver" && totaldamage <= 7;
+            return !(gameStructureInfo.CardBeingPlayedType == "Maneuver" && totaldamage <= 7);
         if (bonusStructureInfo.AyatollahBonusActive)
-            return reverseBy == "Hand";
+            return (reverseBy == "Hand");
         return true;
     }
 

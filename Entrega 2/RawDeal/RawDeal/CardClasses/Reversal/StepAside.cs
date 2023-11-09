@@ -12,7 +12,8 @@ public class StepAside : Card
 
     public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, 
         string reverseBy, int totaldamage)
-    {
+    {   
+        Console.WriteLine();
         return playedCardController.ContainsSubtype("Strike") &&
                playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver") &&
                gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totaldamage);;

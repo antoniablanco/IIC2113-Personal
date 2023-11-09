@@ -14,12 +14,18 @@ public class PlayCard
     }
 
     public void PlayCardAction()
-    {
+    {   
+        gameStructureInfo.GetSetGameVariables.OneRoundMoreInTurn();
         var selectedCard = gameStructureInfo.View.AskUserToSelectAPlay(GetPossibleCardsToPlayString());
         if (HasSelectedAValidCard(selectedCard))
+        {
             StartToPlayACardAction(selectedCard);
+        }
         else
+        { 
             gameStructureInfo.BonusManager.AddingOneTurnFromBonusCounter();
+            gameStructureInfo.GetSetGameVariables.OneRoundLessInTurn();
+        }
     }
 
     private List<string> GetPossibleCardsToPlayString()
