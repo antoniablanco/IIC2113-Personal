@@ -79,13 +79,15 @@ public class PlayManeuverCard
 
     private void HandleDifferentOptionsForDamage(int currentDamage, int totalDamage,
         PlayerController controllerOpponentPlayer, Player player)
-    {
+    {   
         if (CheckShouldReceiveDamage(controllerOpponentPlayer))
             ShowOneFaceDownCard(currentDamage + 1, totalDamage, player, controllerOpponentPlayer);
         else if (CheckIfShouldApplyStunValue())
             UseStunValueOpcion();
-        else if (PlayerLostDueToLackOfCardsToReceiveDamage(controllerOpponentPlayer))
-            gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning(controllerOpponentPlayer);
+        else if (PlayerLostDueToLackOfCardsToReceiveDamage(gameStructureInfo.ControllerOpponentPlayer))
+            gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning(gameStructureInfo.ControllerOpponentPlayer);
+        else if (PlayerLostDueToLackOfCardsToReceiveDamage(gameStructureInfo.ControllerCurrentPlayer))
+            gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning(gameStructureInfo.ControllerCurrentPlayer);
     }
 
     private bool CheckShouldReceiveDamage(PlayerController controllerOpponentPlayer)
@@ -120,17 +122,20 @@ public class PlayManeuverCard
 
     private void UseStunValueOpcion()
     {
-        isStunValueUsed = true;
-        var numberOfCardsToSteal = gameStructureInfo.View.AskHowManyCardsToDrawBecauseOfStunValue(
-            gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar(),
-            gameStructureInfo.CardBeingPlayed.GetCardStunValue());
+        if (!PlayerLostDueToLackOfCardsToReceiveDamage(gameStructureInfo.ControllerOpponentPlayer))
+        {
+            isStunValueUsed = true;
+            var numberOfCardsToSteal = gameStructureInfo.View.AskHowManyCardsToDrawBecauseOfStunValue(
+                gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar(),
+                gameStructureInfo.CardBeingPlayed.GetCardStunValue());
         
-        new DrawCardEffect(gameStructureInfo.ControllerOpponentPlayer, 
-            gameStructureInfo).StealCards(numberOfCardsToSteal);
+            new DrawCardEffect(gameStructureInfo.ControllerOpponentPlayer, 
+                gameStructureInfo).StealCards(numberOfCardsToSteal);
+        }
     }
 
     private bool PlayerLostDueToLackOfCardsToReceiveDamage(PlayerController controllerOpponentPlayer)
-    {
+    {   
         return !controllerOpponentPlayer.HasCardsInArsenal();
     }
 
