@@ -208,12 +208,17 @@ public class PlayerController
     
     public int NumberOfCardsInRingAreaWithTheWord(string word)
     {
-        int contador = 0;
+        int counter = 0;
         foreach (var card in player.CardsRingArea)
         {   
-            if (card.GetCardTitle().ToLower().Split(' ').Contains(word.ToLower()) && card.ContainType("Maneuver"))
-                contador += 1;
+            if (DoesTheManeuverCardHaveTheWord(card, word))
+                counter += 1;
         }
-        return contador;
+        return counter;
+    }
+    
+    private bool DoesTheManeuverCardHaveTheWord(CardController card, string word)
+    {
+        return card.GetCardTitle().ToLower().Split(' ').Contains(word.ToLower()) && card.ContainType("Maneuver");
     }
 }

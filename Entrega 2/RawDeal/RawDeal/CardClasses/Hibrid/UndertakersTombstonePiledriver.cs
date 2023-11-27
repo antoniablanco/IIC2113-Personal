@@ -14,12 +14,12 @@ public class UndertakersTombstonePiledriver: Card
 
     public override int GetFortitude(string type)
     {
-        if (type == "Maneuver")
-            return 30;
-        else if (type == "Action")
-            return 0;
-        else
-            return int.Parse(Fortitude);
+        return type switch
+        {
+            "Maneuver" => 30,
+            "Action" => 0,
+            _ => int.Parse(Fortitude)
+        };
     }
 
     public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)

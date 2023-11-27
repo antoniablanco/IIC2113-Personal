@@ -10,7 +10,7 @@ public class StoneCold: SuperStar
     public StoneCold(string name, string logo, int handSize, int superstarValue, string superstarAbility, View view)
         : base(name, logo, handSize, superstarValue, superstarAbility, view)
     {
-        // Constructor de la clase base
+        
     }
 
     public override void UsingElectiveSuperAbility(GameStructureInfo gameStructureInfo)
@@ -29,13 +29,5 @@ public class StoneCold: SuperStar
     public override bool CanUseSuperAbility(PlayerController currentPlayer)
     {
         return (currentPlayer.NumberOfCardIn("Arsenal") > 0 && !currentPlayer.HasTheSuperAbilityBeenUsedThisTurn());
-    }
-}
-
-public class DiscardingCardsFromHandToArsenalEffect
-{
-    public DiscardingCardsFromHandToArsenalEffect(PlayerController controllerCurrentPlayer, GameStructureInfo gameStructureInfo)
-    {
-        throw new NotImplementedException();
     }
 }

@@ -1,10 +1,14 @@
+#region
+
 using RawDeal.PlayerClasses;
+
+#endregion
 
 namespace RawDeal.GameClasses;
 
 public class GetSetGameVariables
 {
-    private GameStructureInfo gameStructureInfo = new GameStructureInfo();
+    private GameStructureInfo gameStructureInfo = new();
 
     public GetSetGameVariables(GameStructureInfo gameStructureInfo)
     {
@@ -13,15 +17,29 @@ public class GetSetGameVariables
 
     public void CreatePlayerInitialOrder()
     {
-        gameStructureInfo.ControllerCurrentPlayer = (gameStructureInfo.ControllerPlayerOne.GetSuperStarValue() < gameStructureInfo.ControllerPlayerTwo.GetSuperStarValue()) ? gameStructureInfo.ControllerPlayerTwo : gameStructureInfo.ControllerPlayerOne;
-        gameStructureInfo.ControllerOpponentPlayer = (gameStructureInfo.ControllerPlayerOne.GetSuperStarValue() < gameStructureInfo.ControllerPlayerTwo.GetSuperStarValue()) ? gameStructureInfo.ControllerPlayerOne : gameStructureInfo.ControllerPlayerTwo;
+        gameStructureInfo.ControllerCurrentPlayer =
+            gameStructureInfo.ControllerPlayerOne.GetSuperStarValue() <
+            gameStructureInfo.ControllerPlayerTwo.GetSuperStarValue()
+                ? gameStructureInfo.ControllerPlayerTwo
+                : gameStructureInfo.ControllerPlayerOne;
+        gameStructureInfo.ControllerOpponentPlayer =
+            gameStructureInfo.ControllerPlayerOne.GetSuperStarValue() <
+            gameStructureInfo.ControllerPlayerTwo.GetSuperStarValue()
+                ? gameStructureInfo.ControllerPlayerOne
+                : gameStructureInfo.ControllerPlayerTwo;
     }
 
     public bool ShouldWeContinueTheGame()
-    {   
-        if ((!gameStructureInfo.ControllerPlayerOne.HasCardsInArsenal() || !gameStructureInfo.ControllerPlayerTwo.HasCardsInArsenal()) && gameStructureInfo.WinnerPlayer == null)
-            gameStructureInfo.WinnerPlayer = (gameStructureInfo.ControllerCurrentPlayer.HasCardsInArsenal()) ? gameStructureInfo.ControllerCurrentPlayer : gameStructureInfo.ControllerOpponentPlayer;
-        return (gameStructureInfo.ControllerPlayerOne.HasCardsInArsenal() && gameStructureInfo.ControllerPlayerTwo.HasCardsInArsenal() && gameStructureInfo.IsTheGameStillPlaying);
+    {
+        if ((!gameStructureInfo.ControllerPlayerOne.HasCardsInArsenal() ||
+             !gameStructureInfo.ControllerPlayerTwo.HasCardsInArsenal())
+            && gameStructureInfo.WinnerPlayer == null)
+            gameStructureInfo.WinnerPlayer = gameStructureInfo.ControllerCurrentPlayer.HasCardsInArsenal()
+                ? gameStructureInfo.ControllerCurrentPlayer
+                : gameStructureInfo.ControllerOpponentPlayer;
+        return gameStructureInfo.ControllerPlayerOne.HasCardsInArsenal() && gameStructureInfo.ControllerPlayerTwo
+                                                                             .HasCardsInArsenal()
+                                                                         && gameStructureInfo.IsTheGameStillPlaying;
     }
 
     public bool TheTurnIsBeingPlayed()
@@ -30,21 +48,26 @@ public class GetSetGameVariables
     }
 
     public void SetVariablesAfterWinning(PlayerController loserPlayer)
-    {   
-        gameStructureInfo.WinnerPlayer =(gameStructureInfo.ControllerCurrentPlayer == loserPlayer) ?  gameStructureInfo.ControllerOpponentPlayer : gameStructureInfo.ControllerCurrentPlayer;
+    {
+        gameStructureInfo.WinnerPlayer = gameStructureInfo.ControllerCurrentPlayer == loserPlayer
+            ? gameStructureInfo.ControllerOpponentPlayer
+            : gameStructureInfo.ControllerCurrentPlayer;
         gameStructureInfo.IsTheGameStillPlaying = false;
         gameStructureInfo.EndTurnManager.DeclareEndOfTurn();
     }
 
     public void SetVariablesAfterGaveUp()
-    {   
-        gameStructureInfo.WinnerPlayer = (gameStructureInfo.ControllerCurrentPlayer == gameStructureInfo.ControllerPlayerOne) ? gameStructureInfo.ControllerPlayerTwo : gameStructureInfo.ControllerPlayerOne;
+    {
+        gameStructureInfo.WinnerPlayer =
+            gameStructureInfo.ControllerCurrentPlayer == gameStructureInfo.ControllerPlayerOne
+                ? gameStructureInfo.ControllerPlayerTwo
+                : gameStructureInfo.ControllerPlayerOne;
         gameStructureInfo.IsTheGameStillPlaying = false;
         gameStructureInfo.EndTurnManager.DeclareEndOfTurn();
     }
 
-    public string GetWinnerSuperstarName() 
-    {   
+    public string GetWinnerSuperstarName()
+    {
         return gameStructureInfo.WinnerPlayer.NameOfSuperStar();
     }
 
@@ -52,7 +75,7 @@ public class GetSetGameVariables
     {
         gameStructureInfo.NumberOfRoundsInTheTurn += 1;
     }
-    
+
     public void OneRoundLessInTurn()
     {
         gameStructureInfo.NumberOfRoundsInTheTurn -= 1;

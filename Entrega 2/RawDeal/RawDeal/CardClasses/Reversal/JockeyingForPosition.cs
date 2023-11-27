@@ -14,10 +14,10 @@ public class JockeyingForPosition : Card
     }
 
     public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, 
-        string reverseBy, int totaldamage)
+        string reverseBy, int totalDamage)
     {
         return playedCardController.GetCardTitle() == "Jockeying for Position" &&
-               gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totaldamage);;
+               gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totalDamage);;
     }
 
     public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)

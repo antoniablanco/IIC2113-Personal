@@ -35,7 +35,8 @@ public class DiscardCardsFromHandToRingSideEffect: EffectsUtils
     private void DiscardACardOfMyChoiceFromHandNotNotifying(int cardsRemainingToDiscard)
     {
         var selectedCard = gameStructureInfo.View.AskPlayerToSelectACardToDiscard(handFormatoString,
-            opponentPlayerController.NameOfSuperStar(), currentPlayerController.NameOfSuperStar(), cardsRemainingToDiscard);
+            opponentPlayerController.NameOfSuperStar(), currentPlayerController.NameOfSuperStar(), 
+            cardsRemainingToDiscard);
 
         if (gameStructureInfo.PlayCard.HasSelectedAValidCard(selectedCard))
         {

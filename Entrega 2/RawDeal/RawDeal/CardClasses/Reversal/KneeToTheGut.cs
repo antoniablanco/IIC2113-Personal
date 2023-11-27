@@ -12,14 +12,14 @@ public class KneeToTheGut : Card
     }
 
     public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, 
-        string reverseBy, int totaldamage)
+        string reverseBy, int totalDamage)
     {
         const int maximumDamageProducedByPlayedCard = 7;
         return playedCardController.ContainsSubtype("Strike") &&
                playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver") &&
-               totaldamage <= maximumDamageProducedByPlayedCard &&
+               totalDamage <= maximumDamageProducedByPlayedCard &&
                playedCardController.HasAnyTypeDifferentOfReversal() &&
-               gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totaldamage);;
+               gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totalDamage);;
                
     }
 }

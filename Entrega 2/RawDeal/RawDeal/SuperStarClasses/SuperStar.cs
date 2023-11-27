@@ -15,7 +15,7 @@ public abstract class SuperStar
     public int SuperstarValue;
     protected View View;
 
-    public SuperStar(string name, string logo, int handSize, int superstarValue, string superstarAbility, View view)
+    protected SuperStar(string name, string logo, int handSize, int superstarValue, string superstarAbility, View view)
     {
         Name = name;
         Logo = logo;

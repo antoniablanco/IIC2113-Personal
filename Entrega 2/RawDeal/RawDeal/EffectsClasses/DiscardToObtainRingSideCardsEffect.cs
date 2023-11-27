@@ -28,7 +28,8 @@ public class DiscardToObtainRingSideCardsEffect: EffectsUtils
 
     private void AskHowManyCardsWantsToChange()
     {
-        int numberOfCardsToDiscard = gameStructureInfo.View.AskHowManyCardsToDiscard(currentPlayerController.NameOfSuperStar(), maximumNumberOfCardsToDiscard);
+        int numberOfCardsToDiscard = gameStructureInfo.View.AskHowManyCardsToDiscard(currentPlayerController.NameOfSuperStar(), 
+            maximumNumberOfCardsToDiscard);
         
         new DiscardCardsFromHandToRingSideEffect(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo.ControllerCurrentPlayer, numberOfCardsToDiscard, gameStructureInfo);

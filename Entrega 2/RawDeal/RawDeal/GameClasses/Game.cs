@@ -1,4 +1,3 @@
-using RawDeal.DecksBehavior;
 using RawDeal.Exceptions;
 using RawDeal.PlayerClasses;
 using RawDeal.SuperStarClasses;
@@ -9,10 +8,10 @@ namespace RawDeal.GameClasses;
 
 public class Game
 {
-    private string deckFolder;
-    private GameStructureInfo gameStructureInfo = new GameStructureInfo();
-    private SuperAbilityInformation superAbilityInformation = new SuperAbilityInformation();
-    private View view;
+    private readonly string deckFolder;
+    private readonly GameStructureInfo gameStructureInfo = new();
+    private readonly SuperAbilityInformation superAbilityInformation = new();
+    private readonly View view;
 
 
     public Game(View view, string deckFolder)
@@ -23,12 +22,12 @@ public class Game
     }
 
     private void CreateClasses()
-    {   
+    {
         gameStructureInfo.View = view;
         new ClassesGenerator(gameStructureInfo);
     }
 
-    public void Play() 
+    public void Play()
     {
         try
         {
@@ -43,59 +42,64 @@ public class Game
 
     private void RunGameGivenThatTheDecksAreValid()
     {
-        while (gameStructureInfo.GetSetGameVariables.ShouldWeContinueTheGame())
-        {
-            PlayOneTurn();
-        }
+        while (gameStructureInfo.GetSetGameVariables.ShouldWeContinueTheGame()) PlayOneTurn();
         view.CongratulateWinner(gameStructureInfo.GetSetGameVariables.GetWinnerSuperstarName());
     }
 
     private void PlayOneTurn()
-    {   
+    {
         SetTurnStartInformation();
 
         while (gameStructureInfo.GetSetGameVariables.TheTurnIsBeingPlayed())
-        {   
+        {
             gameStructureInfo.BonusManager.RemoveOneTurnFromBonusCounter();
-            //gameStructureInfo.GetSetGameVariables.OneRoundMoreInTurn();
             DisplayPlayerInformation();
             PlayerSelectedAction();
         }
     }
 
     private void SetTurnStartInformation()
-    {   
-        SetVariableTrueBecauseTurnStarted();
+    {
+        SetVariablesBecauseTurnStarted();
         gameStructureInfo.ControllerCurrentPlayer.DrawCard();
         view.SayThatATurnBegins(gameStructureInfo.ControllerCurrentPlayer.NameOfSuperStar());
         superAbilityInformation.TheSuperAbilityThatIsAtTheStartOfTheTurnIsUsed(gameStructureInfo);
         gameStructureInfo.ControllerCurrentPlayer.BlockSuperAbilityBecauseIsJustAtTheStartOfTheTurn();
     }
 
-    private void SetVariableTrueBecauseTurnStarted()
-    {   
+    private void SetVariablesBecauseTurnStarted()
+    {
         gameStructureInfo.IsTheTurnBeingPlayed = true;
         gameStructureInfo.LastDamageComited = 0;
         gameStructureInfo.NumberOfRoundsInTheTurn = 0;
         gameStructureInfo.ControllerCurrentPlayer.TheTurnHasJustStartTheSuperStarHasNotUsedHisSuperAbility();
     }
 
-    private void DisplayPlayerInformation() 
-    {   
-        PlayerInfo playerUno = new PlayerInfo(gameStructureInfo.ControllerPlayerOne.NameOfSuperStar(), gameStructureInfo.ControllerPlayerOne.FortitudRating(), gameStructureInfo.ControllerPlayerOne.NumberOfCardIn("Hand"), gameStructureInfo.ControllerPlayerOne.NumberOfCardIn("Arsenal"));
-        PlayerInfo playerDos = new PlayerInfo(gameStructureInfo.ControllerPlayerTwo.NameOfSuperStar(), gameStructureInfo.ControllerPlayerTwo.FortitudRating(), gameStructureInfo.ControllerPlayerTwo.NumberOfCardIn("Hand"), gameStructureInfo.ControllerPlayerTwo.NumberOfCardIn("Arsenal"));
-        
-        List<PlayerInfo> playersListToPrint =  new List<PlayerInfo> { playerUno, playerDos };
-        
-        int numCurrentPlayer = gameStructureInfo.ControllerCurrentPlayer == gameStructureInfo.ControllerPlayerOne ? 0 : 1;
-        int numOppositePlayer = gameStructureInfo.ControllerOpponentPlayer == gameStructureInfo.ControllerPlayerOne ? 0 : 1;
+    private void DisplayPlayerInformation()
+    {
+        PlayerInfo playerOne = new PlayerInfo(gameStructureInfo.ControllerPlayerOne.NameOfSuperStar(),
+            gameStructureInfo.ControllerPlayerOne.FortitudRating(),
+            gameStructureInfo.ControllerPlayerOne.NumberOfCardIn("Hand"),
+            gameStructureInfo.ControllerPlayerOne.NumberOfCardIn("Arsenal"));
+        PlayerInfo playerTwo = new PlayerInfo(gameStructureInfo.ControllerPlayerTwo.NameOfSuperStar(),
+            gameStructureInfo.ControllerPlayerTwo.FortitudRating(),
+            gameStructureInfo.ControllerPlayerTwo.NumberOfCardIn("Hand"),
+            gameStructureInfo.ControllerPlayerTwo.NumberOfCardIn("Arsenal"));
 
-        gameStructureInfo.View.ShowGameInfo(playersListToPrint[numCurrentPlayer], playersListToPrint[numOppositePlayer]);
+        List<PlayerInfo>  playersListToPrint = new List<PlayerInfo> { playerOne, playerTwo };
+
+        int numCurrentPlayer =
+            gameStructureInfo.ControllerCurrentPlayer == gameStructureInfo.ControllerPlayerOne ? 0 : 1;
+        int numOppositePlayer =
+            gameStructureInfo.ControllerOpponentPlayer == gameStructureInfo.ControllerPlayerOne ? 0 : 1;
+
+        gameStructureInfo.View.ShowGameInfo(playersListToPrint[numCurrentPlayer],
+            playersListToPrint[numOppositePlayer]);
     }
 
     private void PlayerSelectedAction()
     {
-        var activityToPerform = GetNextMove();
+        NextPlay activityToPerform = GetNextMove();
 
         switch (activityToPerform)
         {
@@ -120,9 +124,9 @@ public class Game
     }
 
     private NextPlay GetNextMove()
-    {   
+    {
         NextPlay activityToPerform;
-        
+
         if (superAbilityInformation.PlayerCanUseSuperStarAbility(gameStructureInfo))
             activityToPerform = view.AskUserWhatToDoWhenUsingHisAbilityIsPossible();
         else

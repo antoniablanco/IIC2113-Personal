@@ -10,7 +10,8 @@ public class DrawOrForceToDiscardEffect: EffectsUtils
     private int numberOfCardsToDiscard;
     private bool shouldAsk;
     
-    public DrawOrForceToDiscardEffect(GameStructureInfo gameStructureInfo, int numberOfCardsToSteal, int maximumNumberOfCardsToDiscard, bool shouldAsk=false)
+    public DrawOrForceToDiscardEffect(GameStructureInfo gameStructureInfo, int numberOfCardsToSteal, 
+        int maximumNumberOfCardsToDiscard, bool shouldAsk=false)
 
         : base(gameStructureInfo)
     {

@@ -11,12 +11,13 @@ public class ElbowToTheFace : Card
     {
     }
     
-    public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, string reverseBy, int totaldamage)
+    public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, 
+        string reverseBy, int totalDamage)
     {   
         const int maximumDamageProducedByPlayedCard = 7;
         return playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver") &&
-               totaldamage <= maximumDamageProducedByPlayedCard &&
-               gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totaldamage);;
+               totalDamage <= maximumDamageProducedByPlayedCard &&
+               gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totalDamage);;
     }
 
 }

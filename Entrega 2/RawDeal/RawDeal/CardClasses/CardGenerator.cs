@@ -537,11 +537,7 @@ public class CardGenerator
                 return new Y2J(card.Title, card.Types, card.Subtypes, card.Fortitude, card.Damage, card.StunValue,
                     card.CardEffect);
             default:
-                return new Y2J(card.Title, card.Types, card.Subtypes, card.Fortitude, card.Damage, card.StunValue,
-                    card.CardEffect);
+                throw new InvalidOperationException("Esta carta no ha sido encontrada");
         }
-
-        throw new InvalidOperationException("Esta carta no ha sido encontrada");
-        ;
     }
 }

@@ -127,10 +127,10 @@ public class CardController
         return _card.CheckIfCardCanBeReverted();
     }
 
-    public bool CanUseThisReversalCard(PlayerController controllerPlayer, string reverseBy, int totaldamage)
+    public bool CanUseThisReversalCard(PlayerController controllerPlayer, string reverseBy, int totalDamage)
     {
         return GetCardFortitude(GetCardTypes()[0]) + gameStructureInfo.BonusManager.GetFortitudBonus(gameStructureInfo.CardBeingPlayedType) <=
-            controllerPlayer.FortitudRating() && IsReversalType() && GetIfCardCanReversalPlayedCard(reverseBy, totaldamage);
+            controllerPlayer.FortitudRating() && IsReversalType() && GetIfCardCanReversalPlayedCard(reverseBy, totalDamage);
     }
 
     public bool VerifyIfTheLastPlayedTypeIs(string type)

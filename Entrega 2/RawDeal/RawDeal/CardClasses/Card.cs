@@ -5,7 +5,7 @@ namespace RawDeal.CardClasses;
 
 public abstract class Card : IViewableCardInfo
 {
-    public Card(string title, List<string> types, List<string> subtypes, string fortitude, string damage,
+    protected Card(string title, List<string> types, List<string> subtypes, string fortitude, string damage,
         string stunValue, string cardEffect)
     {
         Title = title;
@@ -41,9 +41,10 @@ public abstract class Card : IViewableCardInfo
     {
     }
     
-    public virtual bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, string reverseBy, int totaldamage)
+    public virtual bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, 
+        string reverseBy, int totalDamage)
     {   
-        return gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totaldamage);
+        return gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totalDamage);
     }
 
     public virtual int GetFortitude(string type)

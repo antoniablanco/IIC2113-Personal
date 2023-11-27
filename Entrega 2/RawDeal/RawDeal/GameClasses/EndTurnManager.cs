@@ -18,7 +18,9 @@ public class EndTurnManager
         gameStructureInfo.BonusManager.DeactivateTurnBonus(gameStructureInfo.ControllerCurrentPlayer);
         if (!CheckIfPlayersHasCardsInArsenalToContinuePlaying())
         {   
-            PlayerController loserPlayer = (gameStructureInfo.ControllerCurrentPlayer.HasCardsInArsenal()) ? gameStructureInfo.ControllerOpponentPlayer : gameStructureInfo.ControllerCurrentPlayer;
+            PlayerController loserPlayer = 
+                (gameStructureInfo.ControllerCurrentPlayer.HasCardsInArsenal()) ? 
+                    gameStructureInfo.ControllerOpponentPlayer : gameStructureInfo.ControllerCurrentPlayer;
             gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning(loserPlayer);
         }
         UpdateNumberOfPlayers();
@@ -31,12 +33,17 @@ public class EndTurnManager
 
     private bool CheckIfPlayersHasCardsInArsenalToContinuePlaying()
     {   
-        return gameStructureInfo.ControllerCurrentPlayer.HasCardsInArsenal() && gameStructureInfo.ControllerOpponentPlayer.HasCardsInArsenal();
+        return gameStructureInfo.ControllerCurrentPlayer.HasCardsInArsenal() && 
+               gameStructureInfo.ControllerOpponentPlayer.HasCardsInArsenal();
     }
 
     private void UpdateNumberOfPlayers()
     {   
-        gameStructureInfo.ControllerCurrentPlayer = (gameStructureInfo.ControllerCurrentPlayer == gameStructureInfo.ControllerPlayerOne) ? gameStructureInfo.ControllerPlayerTwo : gameStructureInfo.ControllerPlayerOne;
-        gameStructureInfo.ControllerOpponentPlayer = (gameStructureInfo.ControllerOpponentPlayer == gameStructureInfo.ControllerPlayerOne) ? gameStructureInfo.ControllerPlayerTwo : gameStructureInfo.ControllerPlayerOne;
+        gameStructureInfo.ControllerCurrentPlayer = 
+            (gameStructureInfo.ControllerCurrentPlayer == gameStructureInfo.ControllerPlayerOne) ? 
+                gameStructureInfo.ControllerPlayerTwo : gameStructureInfo.ControllerPlayerOne;
+        gameStructureInfo.ControllerOpponentPlayer = 
+            (gameStructureInfo.ControllerOpponentPlayer == gameStructureInfo.ControllerPlayerOne) ? 
+                gameStructureInfo.ControllerPlayerTwo : gameStructureInfo.ControllerPlayerOne;
     }
 }
