@@ -13,7 +13,7 @@ public class AtomicDrop: Card
     
     public override void ApplyBonusEffect(GameStructureInfo gameStructureInfo)
     {
-        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect("AtomicDrop", bonusValue:2, "Damage");
+        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect(BonusEnum.BonusType.AtomicDrop, bonusValue:2, "Damage");
         gameStructureInfo.BonusManager.SetWhoActivateNextPlayedCardBonusEffect(gameStructureInfo.ControllerCurrentPlayer);
         var turnsBeforeEffectExpires = 2;
         gameStructureInfo.BonusManager.SetTurnsLeftForBonusCounter(turnsBeforeEffectExpires);

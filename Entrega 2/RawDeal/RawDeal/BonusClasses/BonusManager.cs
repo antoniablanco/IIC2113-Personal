@@ -14,44 +14,44 @@ public class BonusManager
         this.bonusStructureInfo = bonusStructureInfo;
     }
     
-    public void ApplyTurnBonusEffect(string typeName, int bonusValue)
+    public void ApplyTurnBonusEffect(BonusEnum.BonusType bonusType, int bonusValue)
     {   
-        switch (typeName)
+        switch (bonusType)
         {
-            case "IAmTheGame":
+            case BonusEnum.BonusType.IAmTheGame:
                 bonusStructureInfo.IAmTheGameBonus += bonusValue;
                 break;
-            case "Haymaker":
+            case BonusEnum.BonusType.Haymaker:
                 bonusStructureInfo.HaymakerBonus += bonusValue;
                 break;
-            case "Superkick":
+            case BonusEnum.BonusType.Superkick:
                 bonusStructureInfo.SuperkickBonus = bonusValue;
                 break;
-            case "PowerofDarknessDamage":
+            case BonusEnum.BonusType.PowerofDarknessDamage:
                 bonusStructureInfo.PowerofDarknessDamageBonus += bonusValue;
                 break;
-            case "PowerofDarknessFortitud":
+            case BonusEnum.BonusType.PowerofDarknessFortitud:
                 bonusStructureInfo.PowerofDarknessFortitudBonus += bonusValue;
                 break;
-            case "DontYouNeverEVER":
+            case BonusEnum.BonusType.DontYouNeverEVER:
                 bonusStructureInfo.DontYouNeverEVERBonus += bonusValue;
                 break;
-            case "UndertakerSitsUpDamage":
+            case BonusEnum.BonusType.UndertakerSitsUpDamage:
                 bonusStructureInfo.UndertakerSitsUpDamageBonus += bonusValue;
                 break;
-            case "UndertakerSitsUpFortitud":
+            case BonusEnum.BonusType.UndertakerSitsUpFortitud:
                 bonusStructureInfo.UndertakerSitsUpFortitudBonus += bonusValue;
                 break;
-            case "KanesReturnDamage":
+            case BonusEnum.BonusType.KanesReturnDamage:
                 bonusStructureInfo.KanesReturnDamageBonus += bonusValue;
                 break;
-            case "KanesReturnFortitud":
+            case BonusEnum.BonusType.KanesReturnFortitud:
                 bonusStructureInfo.KanesReturnFortitudBonus += bonusValue;
                 break;
         }
     }
     
-    public void ApplyNextPlayedCardBonusEffect(string typeName, int bonusValue, string bonusType)
+    public void ApplyNextPlayedCardBonusEffect(BonusEnum.BonusType typeName, int bonusValue, string bonusType)
     {  
         SetBonus(bonusType, bonusValue);
         ActivateBonus(typeName);
@@ -72,44 +72,44 @@ public class BonusManager
         }
     }
     
-    private void ActivateBonus(string type)
+    private void ActivateBonus(BonusEnum.BonusType type)
     {
         switch (type)
         {
-            case "JockeyingFortitud":
+            case BonusEnum.BonusType.JockeyingFortitud:
                 bonusStructureInfo.IsJockeyingForPositionBonusFortitudActive = true;
                 break;
-            case "JockeyingDamage":
+            case BonusEnum.BonusType.JockeyingDamage:
                 bonusStructureInfo.IsJockeyingForPositionBonusDamageActive = true;
                 break;
-            case "IrishWhip":
+            case BonusEnum.BonusType.IrishWhip:
                 bonusStructureInfo.IsIrishWhipBonusActive = true;
                 break;
-            case "Clothesline":
+            case BonusEnum.BonusType.Clothesline:
                 bonusStructureInfo.ClotheslineBonusActive = true;
                 break;
-            case "AtomicDrop":
+            case BonusEnum.BonusType.AtomicDrop:
                 bonusStructureInfo.AtomicDropBonusActive = true;
                 break;
-            case "SnapMare":
+            case BonusEnum.BonusType.SnapMare:
                 bonusStructureInfo.SnapMareBonusActive = true;
                 break;
-            case "GetCrowdSupport":
+            case BonusEnum.BonusType.GetCrowdSupport:
                 bonusStructureInfo.GetCrowdSupportBonusActive = true;
                 break;
-            case "OpenUpaCanOfWhoopAss":
+            case BonusEnum.BonusType.OpenUpaCanOfWhoopAss:
                 bonusStructureInfo.OpenUpaCanOfWhoopAssBonusActive = true;
                 break;
-            case "SmackdownHotel":
+            case BonusEnum.BonusType.SmackdownHotel:
                 bonusStructureInfo.SmackdownHotelBonusActive = true;
                 break;
-            case "Diversion":
+            case BonusEnum.BonusType.Diversion:
                 bonusStructureInfo.DiversionBonusActive = true;
                 break;
-            case "Stagger":
+            case BonusEnum.BonusType.Stagger:
                 bonusStructureInfo.StaggerBonusActive = true;
                 break;
-            case "Ayatollah":
+            case BonusEnum.BonusType.Ayatollah:
                 bonusStructureInfo.AyatollahBonusActive = true;
                 break;
         }
@@ -144,7 +144,6 @@ public class BonusManager
         return damage;
     }
     
-    
     public int EternalDamage(CardController cardController, PlayerController controllerCurrentPlayer)
     {   
         int damage = 0;
@@ -152,7 +151,6 @@ public class BonusManager
             damage += bonusStructureInfo.MrSockoBonus;
         return damage;
     }
-    
 
     private bool DoesHasMrSockoInArsenal(PlayerController controllerCurrentPlayer)
     {
@@ -162,7 +160,6 @@ public class BonusManager
             return true;
         } catch (CardNotFoundException e) { return false;} 
     }
-    
     
     public int GetDamageForSuccessfulManeuver(CardController cardController, int lastDamageComited)
     {   
@@ -251,55 +248,55 @@ public class BonusManager
     
     private void DeactivateNextPlayedCardBonusEffect()
     {   
-        DeactivateBonus("JockeyingFortitud");
-        DeactivateBonus("JockeyingDamage");
-        DeactivateBonus("IrishWhip");
-        DeactivateBonus("Clothesline");
-        DeactivateBonus("AtomicDrop");
-        DeactivateBonus("SnapMare");
-        DeactivateBonus("GetCrowdSupport");
-        DeactivateBonus("OpenUpaCanOfWhoopAss");
-        DeactivateBonus("SmackdownHotel");
+        DeactivateBonus(BonusEnum.BonusType.JockeyingFortitud);
+        DeactivateBonus(BonusEnum.BonusType.JockeyingDamage);
+        DeactivateBonus(BonusEnum.BonusType.IrishWhip);
+        DeactivateBonus(BonusEnum.BonusType.Clothesline);
+        DeactivateBonus(BonusEnum.BonusType.AtomicDrop);
+        DeactivateBonus(BonusEnum.BonusType.SnapMare);
+        DeactivateBonus(BonusEnum.BonusType.GetCrowdSupport);
+        DeactivateBonus(BonusEnum.BonusType.OpenUpaCanOfWhoopAss);
+        DeactivateBonus(BonusEnum.BonusType.SmackdownHotel);
     }
     
-    private void DeactivateBonus(string type)
+    private void DeactivateBonus(BonusEnum.BonusType type)
     {
         switch (type)
         {
-            case "JockeyingFortitud":
+            case BonusEnum.BonusType.JockeyingFortitud:
                 bonusStructureInfo.IsJockeyingForPositionBonusFortitudActive = false;
                 break;
-            case "JockeyingDamage":
+            case BonusEnum.BonusType.JockeyingDamage:
                 bonusStructureInfo.IsJockeyingForPositionBonusDamageActive = false;
                 break;
-            case "IrishWhip":
+            case BonusEnum.BonusType.IrishWhip:
                 bonusStructureInfo.IsIrishWhipBonusActive = false;
                 break;
-            case "Clothesline":
+            case BonusEnum.BonusType.Clothesline:
                 bonusStructureInfo.ClotheslineBonusActive = false;
                 break;
-            case "AtomicDrop":
+            case BonusEnum.BonusType.AtomicDrop:
                 bonusStructureInfo.AtomicDropBonusActive = false;
                 break;
-            case "SnapMare":
+            case BonusEnum.BonusType.SnapMare:
                 bonusStructureInfo.SnapMareBonusActive = false;
                 break;
-            case "GetCrowdSupport":
+            case BonusEnum.BonusType.GetCrowdSupport:
                 bonusStructureInfo.GetCrowdSupportBonusActive = false;
                 break;
-            case "OpenUpaCanOfWhoopAss":
+            case BonusEnum.BonusType.OpenUpaCanOfWhoopAss:
                 bonusStructureInfo.OpenUpaCanOfWhoopAssBonusActive = false;
                 break;
-            case "SmackdownHotel":
+            case BonusEnum.BonusType.SmackdownHotel:
                 bonusStructureInfo.SmackdownHotelBonusActive = false;
                 break;
-            case "Diversion":
+            case BonusEnum.BonusType.Diversion:
                 bonusStructureInfo.DiversionBonusActive = false;
                 break;
-            case "Stagger":
+            case BonusEnum.BonusType.Stagger:
                 bonusStructureInfo.StaggerBonusActive = false;
                 break;
-            case "Ayatollah":
+            case BonusEnum.BonusType.Ayatollah:
                 bonusStructureInfo.AyatollahBonusActive = false;
                 break;
         }
@@ -311,8 +308,8 @@ public class BonusManager
             (GetWhoActivateNextPlayedCardBonusEffect() != controllerCurrentPlayer &&
              GetWhoActivateNextPlayedCardBonusEffect() != null))
         {
-            DeactivateBonus("Diversion");
-            DeactivateBonus("Stagger");
+            DeactivateBonus(BonusEnum.BonusType.Diversion);
+            DeactivateBonus(BonusEnum.BonusType.Stagger);
         }
     }
 
@@ -335,7 +332,7 @@ public class BonusManager
         bonusStructureInfo.SuperkickBonus = 0;
         bonusStructureInfo.PowerofDarknessDamageBonus = 0;
         bonusStructureInfo.PowerofDarknessFortitudBonus = 0;
-        DeactivateBonus("Ayatollah");
+        DeactivateBonus(BonusEnum.BonusType.Ayatollah);
         if (bonusStructureInfo.WhoActivateNextPlayedCardBonusEffect != null)
             if (controllerCurrentPlayer == bonusStructureInfo.WhoActivateNextPlayedCardBonusEffect)
             {   

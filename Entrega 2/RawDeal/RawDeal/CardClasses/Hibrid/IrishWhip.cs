@@ -13,10 +13,10 @@ public class IrishWhip: Card
     }
 
     public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo,
-        string reverseBy, int totaldamage)
+        string reverseBy, int totalDamage)
     {
         return playedCardController.GetCardTitle() == "Irish Whip" &&
-               gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totaldamage);;
+               gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totalDamage);;
     }
     
     public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
@@ -33,7 +33,7 @@ public class IrishWhip: Card
     
     private void ApplyEffect(GameStructureInfo gameStructureInfo, PlayerController playerController)
     {   
-        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect("IrishWhip", bonusValue:5, "Damage");
+        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect(BonusEnum.BonusType.IrishWhip, bonusValue:5, "Damage");
         gameStructureInfo.BonusManager.SetWhoActivateNextPlayedCardBonusEffect(playerController);
         var turnsBeforeEffectExpires = 2;
         gameStructureInfo.BonusManager.SetTurnsLeftForBonusCounter(turnsBeforeEffectExpires);

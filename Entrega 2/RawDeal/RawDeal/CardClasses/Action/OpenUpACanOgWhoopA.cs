@@ -25,8 +25,8 @@ public class OpenUpACanOgWhoopA: Card
         new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo).StealCards();
         
-        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect("OpenUpaCanOfWhoopAss", bonusValue:6, "Damage");
-        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect("OpenUpaCanOfWhoopAss", bonusValue:20, "Fortitud");
+        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect(BonusEnum.BonusType.OpenUpaCanOfWhoopAss, bonusValue:6, "Damage");
+        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect(BonusEnum.BonusType.OpenUpaCanOfWhoopAss, bonusValue:20, "Fortitud");
         
         gameStructureInfo.BonusManager.SetWhoActivateNextPlayedCardBonusEffect(playerController);
         

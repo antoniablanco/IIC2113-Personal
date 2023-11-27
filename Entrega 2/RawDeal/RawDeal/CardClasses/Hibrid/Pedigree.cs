@@ -13,15 +13,10 @@ public class Pedigree: Card
     }
     
     public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, 
-        string reverseBy, int totaldamage)
+        string reverseBy, int totalDamage)
     {
         return playedCardController.GetCardTitle() == "Back Body Drop" &&
-               gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totaldamage);;
-    }
-    
-    public override void ApplyBonusEffect(GameStructureInfo gameStructureInfo)
-    {
-        gameStructureInfo.BonusManager.ApplyTurnBonusEffect("Pedigree", bonusValue:2);
+               gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totalDamage);;
     }
     
     public override int ExtraDamage(GameStructureInfo gameStructureInfo)

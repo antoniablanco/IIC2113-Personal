@@ -19,7 +19,7 @@ public class IAmTheGame: Card
         new DrawOrForceToDiscardEffect(gameStructureInfo, maximumNumberOfCardsToSteal, 
             maximumNumberOfCardsToDiscard);
 
-        gameStructureInfo.BonusManager.ApplyTurnBonusEffect("IAmTheGame", 3);
+        gameStructureInfo.BonusManager.ApplyTurnBonusEffect(BonusEnum.BonusType.IAmTheGame, 3);
         
         gameStructureInfo.EffectsUtils.DiscardActionCardToRingAreButNotSaying(playedCardController,
             gameStructureInfo.GetCurrentPlayer());

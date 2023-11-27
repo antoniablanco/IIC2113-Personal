@@ -27,7 +27,7 @@ public class DontYouNeverEver: Card
         new DiscardCardsFromHandToRingSideEffect(gameStructureInfo.ControllerCurrentPlayer,
             gameStructureInfo.ControllerCurrentPlayer, numberOfCardToDiscard, gameStructureInfo);
         
-        gameStructureInfo.BonusManager.ApplyTurnBonusEffect("DontYouNeverEVER", bonusValue:2);
+        gameStructureInfo.BonusManager.ApplyTurnBonusEffect(BonusEnum.BonusType.DontYouNeverEVER, bonusValue:2);
         gameStructureInfo.BonusManager.SetWhoActivateNextPlayedCardBonusEffect(gameStructureInfo.ControllerOpponentPlayer);
     }
 }
