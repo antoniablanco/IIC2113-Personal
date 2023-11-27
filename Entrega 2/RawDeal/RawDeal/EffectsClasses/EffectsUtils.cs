@@ -14,8 +14,11 @@ public class EffectsUtils
     }
     
     public void DiscardCardFromHandNotifying(CardController playedCardController,
-        PlayerController controllerCurrentPlayer, Player player)
-    {
+        PlayerController controllerCurrentPlayer)
+    {   
+        Player player = gameStructureInfo.ControllerOpponentPlayer == controllerCurrentPlayer ? 
+            gameStructureInfo.GetOpponentPlayer() : gameStructureInfo.GetCurrentPlayer();
+        
         gameStructureInfo.View.SayThatPlayerMustDiscardThisCard(controllerCurrentPlayer.NameOfSuperStar(),
             playedCardController.GetCardTitle());
         gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingSide(player, playedCardController);

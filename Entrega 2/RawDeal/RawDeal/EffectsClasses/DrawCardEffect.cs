@@ -13,7 +13,7 @@ public class DrawCardEffect: EffectsUtils
     {
         this.controllerPlayer = controllerPlayer;
         player = gameStructureInfo.ControllerOpponentPlayer == controllerPlayer ? 
-            gameStructureInfo.GetOpponentPlayer() : gameStructureInfo.GetCurrentPlayer();;
+            gameStructureInfo.GetOpponentPlayer() : gameStructureInfo.GetCurrentPlayer();
     }
     
     public void MayStealCards(int maximumNumberOfcardToDraw)

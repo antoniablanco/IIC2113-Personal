@@ -38,8 +38,7 @@ public class ProduceDamageEffectUtils: EffectsUtils
         else
             gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning(controllerPlayer);
     }
-
-
+    
     private string ShowOneFaceDownCard(int currentDamage)
     {
         var flippedCardController = gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);

@@ -62,8 +62,7 @@ public class DeckValidator
         return (card.ContainsSubtype("Unique") && numberOfCardsOfThisTitle > 0) ||
                (!card.ContainsSubtype("SetUp") && numberOfCardsOfThisTitle > 2);
     }
-
-
+    
     private bool DeckSatisfiesSuperStarLogo()
     {
         return player.CardsArsenal.All(card => ThisCardSatisfiesSuperStarLogo(card, player.Superestar.Logo));

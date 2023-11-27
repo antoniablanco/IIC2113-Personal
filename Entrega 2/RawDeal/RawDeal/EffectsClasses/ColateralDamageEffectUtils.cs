@@ -39,8 +39,7 @@ public class ColateralDamageEffectUtils: EffectsUtils
             gameStructureInfo.View.SayThatPlayerLostDueToSelfDamage(controllerPlayer.NameOfSuperStar());
         }
     }
-
-
+    
     private void ShowOneFaceDownCard(int currentDamage)
     {
         var flippedCardController = gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);

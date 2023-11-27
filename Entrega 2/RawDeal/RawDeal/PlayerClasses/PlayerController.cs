@@ -51,12 +51,12 @@ public class PlayerController
             .ToList();
     }
 
-    public List<CardController> CardsAvailableToReversal(int totaldamage) 
+    public List<CardController> CardsAvailableToReversal(int totalDamage) 
     {   
         return player.CardsHand
             .Where(card => card.GetCardFortitude(card.GetCardTypes()[0]) + 
                 gameStructureInfo.BonusManager.GetFortitudBonus(gameStructureInfo.CardBeingPlayedType) <= FortitudRating() 
-                && card.IsReversalType() && CanReversalPlayedCard(card, "Hand", totaldamage))
+                && card.IsReversalType() && CanReversalPlayedCard(card, "Hand", totalDamage))
             .ToList();
     }
 
@@ -77,11 +77,11 @@ public class PlayerController
         return allTypesForCard;
     }
 
-    public List<Tuple<CardController, int>> GetPosiblesCardsForReveralWithTheirReversalTypeIndex(int totaldamage)
+    public List<Tuple<CardController, int>> GetPosiblesCardsForReveralWithTheirReversalTypeIndex(int totalDamage)
     {   
         List<Tuple<CardController, int>> allTypesForCard = new List<Tuple<CardController, int>>();
         
-        foreach (var cardController in CardsAvailableToReversal(totaldamage))
+        foreach (var cardController in CardsAvailableToReversal(totalDamage))
         {
             int[] indexes = Enumerable.Range(0, cardController.GetCardTypes().Count()).ToArray();
             allTypesForCard.AddRange(from index in indexes where cardController.GetCardType(index) == "Reversal" 
@@ -97,9 +97,9 @@ public class PlayerController
         return player.CardsRingArea.Sum(card => card.GetDamageProducedByTheCard());
     }
 
-    private bool CanReversalPlayedCard(CardController card, string reverseBy, int totaldamage)
+    private bool CanReversalPlayedCard(CardController card, string reverseBy, int totalDamage)
     {   
-        return card.GetIfCardCanReversalPlayedCard(reverseBy, totaldamage);
+        return card.GetIfCardCanReversalPlayedCard(reverseBy, totalDamage);
     }
 
     public bool TheirSuperStarCanUseSuperAbility(PlayerController currentPlayer)

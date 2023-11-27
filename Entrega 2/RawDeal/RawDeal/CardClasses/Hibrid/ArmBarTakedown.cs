@@ -15,7 +15,7 @@ public class ArmBarTakedown: Card
     public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
         gameStructureInfo.EffectsUtils.DiscardCardFromHandNotifying(playedCardController,
-            gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.GetCurrentPlayer());
+            gameStructureInfo.ControllerCurrentPlayer);
         
         new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo).StealCards();
