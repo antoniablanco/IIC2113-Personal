@@ -12,7 +12,8 @@ public class CardMovement
     {
         this.gameStructureInfo = gameStructureInfo;
     }
-    public CardController? TransferOfUnselectedCard(List<CardController> sourceList,
+    
+    public CardController TransferOfUnselectedCard(List<CardController> sourceList,
         List<CardController> destinationList, bool moveToStart)
     {
         if (sourceList.Count > 0)

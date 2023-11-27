@@ -1,5 +1,6 @@
 using RawDeal.CardClasses;
 using RawDeal.EffectsClasses;
+using RawDeal.Exceptions;
 using RawDeal.GameClasses;
 using RawDeal.PlayerClasses;
 
@@ -17,27 +18,24 @@ public class PlayReversalHandCard
     }
 
 
-    public bool IsUserUsingReversalCard()
+    public void IsUserUsingReversalCard()
     {
         var possibleReversals = gameStructureInfo.ControllerOpponentPlayer.CardsAvailableToReversal(totalDamage);
 
         if (possibleReversals.Count > 0)
-            return AskWhichReversalCardWantsToUse(possibleReversals);
-
-        return false;
+            AskWhichReversalCardWantsToUse(possibleReversals);
     }
 
-    private bool AskWhichReversalCardWantsToUse(List<CardController> possibleReversals)
+    private void AskWhichReversalCardWantsToUse(List<CardController> possibleReversals)
     {
         var indexReversalCard = UserSelectReversalCard();
         if (gameStructureInfo.PlayCard.HasSelectedAValidCard(indexReversalCard))
         {
             PlayingReversalCard(indexReversalCard, possibleReversals);
             gameStructureInfo.EffectsUtils.EndTurn();
-            return true;
+            throw new UserPlayReversalCardException("The User has played a reversal card");
         }
-
-        return false;
+        
     }
     
 

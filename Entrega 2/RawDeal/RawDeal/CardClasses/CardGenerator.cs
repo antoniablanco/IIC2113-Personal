@@ -4,6 +4,7 @@ using RawDeal.CardClasses.Hibrid;
 using RawDeal.CardClasses.Maneuver;
 using RawDeal.CardClasses.Reversal;
 using RawDeal.CardClasses.UnspecifiedType;
+using RawDeal.Exceptions;
 using RawDeal.GameClasses;
 
 namespace RawDeal.CardClasses;
@@ -492,7 +493,9 @@ public class CardGenerator
             case "Torture Rack":
                 return new TortureRack(card.Title, card.Types, card.Subtypes, card.Fortitude, card.Damage,
                     card.StunValue, card.CardEffect);
-            case "Take That Move, Shine It Up Real Nice, Turn That Sumb*tch Sideways, and Stick It Straight Up Your Roody Poo Candy A%$!":
+            case
+                "Take That Move, Shine It Up Real Nice, Turn That Sumb*tch Sideways, and Stick It Straight Up Your Roody Poo Candy A%$!"
+                :
                 return new TakeThatMoveShineItUpRealNice(card.Title,
                     card.Types, card.Subtypes, card.Fortitude, card.Damage, card.StunValue, card.CardEffect);
             case "Tree of Woe":
@@ -537,7 +540,8 @@ public class CardGenerator
                 return new Y2J(card.Title, card.Types, card.Subtypes, card.Fortitude, card.Damage, card.StunValue,
                     card.CardEffect);
             default:
-                throw new InvalidOperationException("Esta carta no ha sido encontrada");
+                throw new VariableIsNullException("Esta carta no ha sido encontrada");
         }
     }
 }
+

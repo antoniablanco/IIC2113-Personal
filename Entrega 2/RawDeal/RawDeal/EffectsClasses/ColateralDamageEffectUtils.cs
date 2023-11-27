@@ -26,30 +26,26 @@ public class ColateralDamageEffectUtils: EffectsUtils
             totalDamage);
 
         for (var currentDamage = 0; currentDamage < totalDamage; currentDamage++)
-            if (!InflictADamage(currentDamage))
-                gameStructureInfo.View.SayThatPlayerLostDueToSelfDamage(controllerPlayer.NameOfSuperStar());
+            InflictADamage(currentDamage);
     }
     
-    private bool InflictADamage(int currentDamage)
+    private void InflictADamage(int currentDamage)
     {
         if (CheckIfThePlayerHasCardInArsenal(controllerPlayer))
             ShowOneFaceDownCard(currentDamage + 1);
         else
         {
             gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning(controllerPlayer);
-            return false;
+            gameStructureInfo.View.SayThatPlayerLostDueToSelfDamage(controllerPlayer.NameOfSuperStar());
         }
-
-        return true;
     }
 
 
-    private string ShowOneFaceDownCard(int currentDamage)
+    private void ShowOneFaceDownCard(int currentDamage)
     {
         var flippedCardController = gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
         var flippedCardString = flippedCardController.GetStringCardInfo();
         gameStructureInfo.View.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
-        return flippedCardString;
     }
     
 }

@@ -1,4 +1,5 @@
 using System.Text.Json;
+using RawDeal.Exceptions;
 using RawDealView;
 
 namespace RawDeal.SuperStarClasses;
@@ -22,7 +23,7 @@ public class SuperStartGenerator
                      super.Key.HandSize, super.Key.SuperstarValue, super.Key.SuperstarAbility, view))
             return superstar;
 
-        throw new InvalidOperationException("SuperStar especifico no encontrado.");
+        throw new VariableIsNullException("SuperStar especifico no encontrado.");
 
     }
 

@@ -1,4 +1,5 @@
 using RawDeal.CardClasses;
+using RawDeal.Exceptions;
 using RawDeal.GameClasses;
 using RawDeal.PlayerClasses;
 
@@ -84,11 +85,14 @@ public class PlayCard
     private void VerifyIfIsUsedAReversalCard(Tuple<CardController, int> playedCardController)
     {
         var playReversalHandCard = new PlayReversalHandCard(gameStructureInfo, GetDamageProduced(playedCardController.Item1));
-        if (!playReversalHandCard.IsUserUsingReversalCard())
+        try
         {
+            playReversalHandCard.IsUserUsingReversalCard();
             gameStructureInfo.View.SayThatPlayerSuccessfullyPlayedACard();
             PlayCardByType(playedCardController);
+            
         }
+        catch (UserPlayReversalCardException e) { }
     }
     
     private int GetDamageProduced(CardController playedCardController)
