@@ -24,9 +24,9 @@ public class EffectsUtils
         gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingSide(player, playedCardController);
     }
     
-    public void DiscardActionCardToRingAreButNotSaying(CardController playedCardController, Player player, string moveTo = "End")
+    public void DiscardActionCardToRingAreButNotSaying(CardController playedCardController, Player player)
     {
-        gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(player, playedCardController, moveTo);
+        gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(player, playedCardController);
     }
     
     public bool IsTheSuperStarMankind(PlayerController playerController)

@@ -48,8 +48,7 @@ public class GetBackDamageEffectUtils: EffectsUtils
                     recoveredDamage - currentDamage, ringSideAsString);
             var discardedCardController = controllerPlayer.GetSpecificCardFrom("RingSide", selectedCardIndex);
 
-            gameStructureInfo.CardMovement.TransferChoosinCardFromRingSideToArsenal(player, discardedCardController,
-                "Start");
+            gameStructureInfo.CardMovement.TransferChoosinCardFromRingSideToStartOfArsenal(player, discardedCardController);
         }
     }
 }

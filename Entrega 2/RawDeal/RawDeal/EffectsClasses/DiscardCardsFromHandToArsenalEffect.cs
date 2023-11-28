@@ -24,6 +24,6 @@ public class DiscardCardsFromHandToArsenalEffect: EffectsUtils
         var discardedCardController = controllerPlayer.GetSpecificCardFrom("Hand", selectedCard);
 
         var player = gameStructureInfo.GetCurrentPlayer();
-        gameStructureInfo.CardMovement.TransferChoosinCardFromHandToArsenal(player, discardedCardController, "Start");
+        gameStructureInfo.CardMovement.TransferChoosinCardFromHandToStartOfArsenal(player, discardedCardController);
     }
 }

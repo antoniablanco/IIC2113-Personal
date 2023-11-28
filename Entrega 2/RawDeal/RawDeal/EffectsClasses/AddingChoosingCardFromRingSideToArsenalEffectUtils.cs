@@ -34,8 +34,8 @@ public class AddingChoosingCardFromRingSideToArsenalEffectUtils: EffectsUtils
                 ringAreaAsString);
         var discardedCardController =
             gameStructureInfo.ControllerCurrentPlayer.GetSpecificCardFrom("RingSide", selectedCardIndex);
-        gameStructureInfo.CardMovement.TransferChoosinCardFromRingSideToArsenal(gameStructureInfo.GetCurrentPlayer(),
-            discardedCardController, "Start");
+        gameStructureInfo.CardMovement.TransferChoosinCardFromRingSideToStartOfArsenal(gameStructureInfo.GetCurrentPlayer(),
+            discardedCardController);
     }
     
 }

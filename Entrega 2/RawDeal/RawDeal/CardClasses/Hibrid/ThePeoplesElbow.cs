@@ -18,8 +18,8 @@ public class ThePeoplesElbow: Card
         gameStructureInfo.View.SayThatPlayerPutsThisCardAtTheBottomOfHisArsenal(
             gameStructureInfo.ControllerCurrentPlayer.NameOfSuperStar(), Title);
         
-        gameStructureInfo.CardMovement.TransferChoosinCardFromHandToArsenal(gameStructureInfo.GetCurrentPlayer(),
-            playedCardController, moveToStart:"Start");
+        gameStructureInfo.CardMovement.TransferChoosinCardFromHandToStartOfArsenal(gameStructureInfo.GetCurrentPlayer(),
+            playedCardController);
         
         const int numberOfCardsToSteal = 2;
         new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
