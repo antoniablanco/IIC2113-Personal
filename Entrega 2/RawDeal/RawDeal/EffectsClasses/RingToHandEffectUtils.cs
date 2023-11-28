@@ -26,13 +26,13 @@ public class RingToHandEffectUtils: EffectsUtils
 
     private void DiscardCard(int currentNumberOfCard)
     {
-        var ringSideAsString = controllerPlayer.StringCardsFrom("RingSide");
+        var ringSideAsString = controllerPlayer.GetStringCardsFrom("RingSide");
         var selectedCard = gameStructureInfo.View.AskPlayerToSelectCardsToPutInHisHand(
             controllerPlayer.GetNameOfSuperStar(), currentNumberOfCard, ringSideAsString);
 
-        var addedCardController = controllerPlayer.GetSpecificCardFrom("RingSide", selectedCard);
+        var addedCardController = controllerPlayer.RetrieveCardFromDeckAtPosition("RingSide", selectedCard);
         var playerWhoDiscardCard = GetPlayerWhoDiscard();
-        gameStructureInfo.CardMovement.TransferChoosinCardFromRingSideToHand(playerWhoDiscardCard, addedCardController);
+        gameStructureInfo.CardMovement.TransferSelectedCardFromRingSideToHand(playerWhoDiscardCard, addedCardController);
     }
 
     private Player GetPlayerWhoDiscard()

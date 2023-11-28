@@ -13,7 +13,7 @@ public class PressSlam : Card
 
     public override void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
-        new ColateralDamageEffectUtils(gameStructureInfo.ControllerCurrentPlayer, 
+        new CollateralDamageEffectUtils(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo);
 
         const int numberOfCardToDiscard = 2;

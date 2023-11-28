@@ -16,8 +16,7 @@ public class ReversalHandCardPlay
         this.gameStructureInfo = gameStructureInfo;
         this.totalDamage = totalDamage;
     }
-
-
+    
     public void IsUserUsingReversalCard()
     {
         var possibleReversals = gameStructureInfo.ControllerOpponentPlayer.GetCardsAvailableToReversal(totalDamage);
@@ -28,7 +27,7 @@ public class ReversalHandCardPlay
 
     private void AskWhichReversalCardWantsToUse(List<CardController> possibleReversals)
     {
-        var indexReversalCard = UserSelectReversalCard();
+        var indexReversalCard = GetIndexOfReversalCardUserSelect();
         if (gameStructureInfo.CardPlay.HasSelectedAValidCard(indexReversalCard))
         {
             PlayReversalCard(indexReversalCard, possibleReversals);
@@ -37,14 +36,13 @@ public class ReversalHandCardPlay
         }
         
     }
-    
 
-    private int UserSelectReversalCard()
+    private int GetIndexOfReversalCardUserSelect()
     {
         var possibleCardsAndTheirTypes = gameStructureInfo.ControllerOpponentPlayer
-            .GetPosiblesCardsForReveralWithTheirReversalTypeIndex(totalDamage);
+            .GetPossiblesCardsForReversalWithTheirTypeIndex(totalDamage);
         var possibleReversalsString =
-            gameStructureInfo.CardsVisualizor.GetStringCardsForSpecificType(possibleCardsAndTheirTypes);
+            gameStructureInfo.CardsVisualizer.GetStringCardsForSpecificType(possibleCardsAndTheirTypes);
         var indexReversalCard =
             gameStructureInfo.View.AskUserToSelectAReversal(
                 gameStructureInfo.ControllerOpponentPlayer.GetNameOfSuperStar(), possibleReversalsString);
@@ -70,9 +68,9 @@ public class ReversalHandCardPlay
 
     private void MoveCardsImplicateInReversal(CardController cardController)
     {
-        gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingSide(gameStructureInfo.GetCurrentPlayer(),
+        gameStructureInfo.CardMovement.TransferSelectedCardFromHandToRingSide(gameStructureInfo.GetCurrentPlayer(),
             gameStructureInfo.CardBeingPlayed);
-        gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(gameStructureInfo.GetOpponentPlayer(),
+        gameStructureInfo.CardMovement.TransferSelectedCardFromHandToRingArea(gameStructureInfo.GetOpponentPlayer(),
             cardController);
     }
 
@@ -89,15 +87,15 @@ public class ReversalHandCardPlay
     {
         int damageProduce;
         if (cardController.IsDamageHashtagType())
-            damageProduce = gameStructureInfo.EffectsUtils.GetDamageProducedByReversalCardWithNotEspecificDamage() +
-                            gameStructureInfo.BonusManager.EternalDamage(gameStructureInfo.CardBeingPlayed, 
+            damageProduce = gameStructureInfo.EffectsUtils.GetDamageProducedByReversalCardWithNotSpecificDamage() +
+                            gameStructureInfo.BonusManager.GetEternalDamage(gameStructureInfo.CardBeingPlayed, 
                                 gameStructureInfo.ControllerCurrentPlayer);
         else
             damageProduce =
                 gameStructureInfo.CardPlay.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(
                     cardController.GetDamageProducedByTheCard(),
                     damagedPlayerController);
-        damageProduce += gameStructureInfo.CardBeingPlayed.ExtraReversalDamage();
+        damageProduce += gameStructureInfo.CardBeingPlayed.GetExtraReversalDamage();
         return damageProduce;
     }
 }

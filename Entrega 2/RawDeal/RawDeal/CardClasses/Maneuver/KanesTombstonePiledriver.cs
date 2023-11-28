@@ -11,7 +11,7 @@ public class KanesTombstonePiledriver: Card
          
     }   
     
-    public override int PlusFornitudAfterEspecificCard(GameStructureInfo gameStructureInfo)
+    public override int ObtainFortitudeIncreaseAfterSpecificCard(GameStructureInfo gameStructureInfo)
     {
         int fornitud = 0;
         if (gameStructureInfo.CardBeingPlayed != null)

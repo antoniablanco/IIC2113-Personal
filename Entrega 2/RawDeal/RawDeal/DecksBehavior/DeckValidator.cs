@@ -24,7 +24,7 @@ public class DeckValidator
 
     private bool HasSuperStar()
     {
-        return player.Superestar != null;
+        return player.Superstar != null;
     }
 
     private bool MeetsSubtypeConditions()
@@ -38,7 +38,7 @@ public class DeckValidator
 
     private bool DeckContainsSubType(string subType)
     {
-        return player.CardsArsenal.Any(card => card.ContainsSubtype(subType));
+        return player.CardsArsenal.Any(card => card.DoesTheCardContainsSubtype(subType));
     }
 
     private bool DeckMeetsQuantityCriteria()
@@ -59,19 +59,19 @@ public class DeckValidator
 
     private bool ExceedsMaximumSubtypeQuantity(CardController card, int numberOfCardsOfThisTitle)
     {
-        return (card.ContainsSubtype("Unique") && numberOfCardsOfThisTitle > 0) ||
-               (!card.ContainsSubtype("SetUp") && numberOfCardsOfThisTitle > 2);
+        return (card.DoesTheCardContainsSubtype("Unique") && numberOfCardsOfThisTitle > 0) ||
+               (!card.DoesTheCardContainsSubtype("SetUp") && numberOfCardsOfThisTitle > 2);
     }
     
     private bool DeckSatisfiesSuperStarLogo()
     {
-        return player.CardsArsenal.All(card => ThisCardSatisfiesSuperStarLogo(card, player.Superestar.Logo));
+        return player.CardsArsenal.All(card => ThisCardSatisfiesSuperStarLogo(card, player.Superstar.Logo));
     }
 
     private bool ThisCardSatisfiesSuperStarLogo(CardController cardController, string logoSuperStar)
     {
         var superstarLogos = new List<string>
             { "StoneCold", "Undertaker", "Mankind", "HHH", "TheRock", "Kane", "Jericho" };
-        return superstarLogos.All(logo => !cardController.ContainsSuperStarLogo(logo) || logoSuperStar == logo);
+        return superstarLogos.All(logo => !cardController.DoesContainsSuperStarLogo(logo) || logoSuperStar == logo);
     }
 }

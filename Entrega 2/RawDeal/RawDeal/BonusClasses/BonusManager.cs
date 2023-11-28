@@ -61,7 +61,7 @@ public class BonusManager
     {
         switch (type)
         {
-            case BonusEnum.CardBonusType.Fortitud:
+            case BonusEnum.CardBonusType.Fortitude:
                 bonusStructureInfo.BonusFortitude = bonus;
                 break;
             case BonusEnum.CardBonusType.Damage:
@@ -77,7 +77,7 @@ public class BonusManager
         switch (name)
         {
             case BonusEnum.CardBonusName.JockeyingFortitud:
-                bonusStructureInfo.IsJockeyingForPositionBonusFortitudActive = true;
+                bonusStructureInfo.IsJockeyingForPositionBonusFortitudeActive = true;
                 break;
             case BonusEnum.CardBonusName.JockeyingDamage:
                 bonusStructureInfo.IsJockeyingForPositionBonusDamageActive = true;
@@ -132,53 +132,53 @@ public class BonusManager
     public int GetTurnDamageBonus(CardController cardController)
     {   
         int damage = 0;
-        if (cardController.ContainType("Maneuver"))
+        if (cardController.DoesTheCardContainType("Maneuver"))
         {
             damage += bonusStructureInfo.IAmTheGameBonus + bonusStructureInfo.PowerofDarknessDamageBonus +
                       bonusStructureInfo.UndertakerSitsUpDamageBonus + bonusStructureInfo.KanesReturnDamageBonus +
                       bonusStructureInfo.DontYouNeverEVERBonus;
         }
-        if (cardController.ContainType("Maneuver") && cardController.ContainsSubtype("Strike"))
+        if (cardController.DoesTheCardContainType("Maneuver") && cardController.DoesTheCardContainsSubtype("Strike"))
             damage += bonusStructureInfo.HaymakerBonus;
         
         return damage;
     }
     
-    public int EternalDamage(CardController cardController, PlayerController controllerCurrentPlayer)
+    public int GetEternalDamage(CardController cardController, PlayerController controllerCurrentPlayer)
     {   
         int damage = 0;
-        if (DoesHasMrSockoInArsenal(controllerCurrentPlayer) && cardController.ContainType("Maneuver"))
+        if (DoesHaveMrSockoInArsenal(controllerCurrentPlayer) && cardController.DoesTheCardContainType("Maneuver"))
             damage += bonusStructureInfo.MrSockoBonus;
         return damage;
     }
 
-    private bool DoesHasMrSockoInArsenal(PlayerController controllerCurrentPlayer)
+    private bool DoesHaveMrSockoInArsenal(PlayerController controllerCurrentPlayer)
     {
         try
         {   
-            controllerCurrentPlayer.FindCardCardFrom("RingArea", "Mr. Socko");
+            controllerCurrentPlayer.GetCardInDeckByName("RingArea", "Mr. Socko");
             return true;
         } catch (CardNotFoundException e) { return false;} 
     }
     
-    public int GetDamageForSuccessfulManeuver(CardController cardController, int lastDamageComited)
+    public int GetDamageForSuccessfulManeuver(CardController cardController, int lastDamageCommitted)
     {   
         int damage = 0;
-        if (CheckConditionsForSuperkickBonus(cardController, lastDamageComited))
+        if (CheckConditionsForSuperKickBonus(cardController, lastDamageCommitted))
             damage += bonusStructureInfo.SuperkickBonus;
         return damage;
     }
 
-    private bool CheckConditionsForSuperkickBonus(CardController cardController, int lastDamageComited)
+    private bool CheckConditionsForSuperKickBonus(CardController cardController, int lastDamageCommitted)
     {
-        return cardController.ContainType("Maneuver") && lastDamageComited >= 5 &&
+        return cardController.DoesTheCardContainType("Maneuver") && lastDamageCommitted >= 5 &&
                cardController.GetCardTitle() == "Superkick";
     }
 
-    public int GetFortitudBonus(string lastTypePlayed)
+    public int GetFortitudeBonus(string lastTypePlayed)
     {
         int bonus = 0;
-        if (bonusStructureInfo.IsJockeyingForPositionBonusFortitudActive || bonusStructureInfo.GetCrowdSupportBonusActive 
+        if (bonusStructureInfo.IsJockeyingForPositionBonusFortitudeActive || bonusStructureInfo.GetCrowdSupportBonusActive 
                                                                          || bonusStructureInfo.OpenUpaCanOfWhoopAssBonusActive )
             bonus += bonusStructureInfo.BonusFortitude;
         if (lastTypePlayed == "Maneuver")
@@ -234,11 +234,11 @@ public class BonusManager
     private bool CheckSpecificBonusConditions(CardController cardController, string type)
     {
         if (bonusStructureInfo.IsJockeyingForPositionBonusDamageActive ||
-            bonusStructureInfo.IsJockeyingForPositionBonusFortitudActive)
-            return !cardController.ContainsSubtype("Grapple");
+            bonusStructureInfo.IsJockeyingForPositionBonusFortitudeActive)
+            return !cardController.DoesTheCardContainsSubtype("Grapple");
         
         if (bonusStructureInfo.IsIrishWhipBonusActive)
-            return !cardController.ContainsSubtype("Strike");
+            return !cardController.DoesTheCardContainsSubtype("Strike");
 
         if (bonusStructureInfo.ClotheslineBonusActive || bonusStructureInfo.AtomicDropBonusActive 
                                                       || bonusStructureInfo.GetCrowdSupportBonusActive 
@@ -247,7 +247,7 @@ public class BonusManager
             return type != "Maneuver";
 
         if (bonusStructureInfo.SnapMareBonusActive)
-            return !(type == "Maneuver" && cardController.ContainsSubtype("Strike"));
+            return !(type == "Maneuver" && cardController.DoesTheCardContainsSubtype("Strike"));
         
         return false;
     }
@@ -270,7 +270,7 @@ public class BonusManager
         switch (name)
         {
             case BonusEnum.CardBonusName.JockeyingFortitud:
-                bonusStructureInfo.IsJockeyingForPositionBonusFortitudActive = false;
+                bonusStructureInfo.IsJockeyingForPositionBonusFortitudeActive = false;
                 break;
             case BonusEnum.CardBonusName.JockeyingDamage:
                 bonusStructureInfo.IsJockeyingForPositionBonusDamageActive = false;
@@ -333,7 +333,7 @@ public class BonusManager
 
     public void DeactivateTurnBonus(PlayerController controllerCurrentPlayer)
     {   
-        DeactiveNormalTurnBonus();
+        DeactivateNormalTurnBonus();
         try
         {
             if (controllerCurrentPlayer == bonusStructureInfo.WhoActivateNextPlayedCardBonusEffect)
@@ -341,7 +341,7 @@ public class BonusManager
         } catch (NullReferenceException e) {}
     }
     
-    private void DeactiveNormalTurnBonus()
+    private void DeactivateNormalTurnBonus()
     {
         bonusStructureInfo.IAmTheGameBonus = 0;
         bonusStructureInfo.HaymakerBonus = 0;

@@ -62,7 +62,7 @@ public class ClassesGenerator
     
     private void CreateCardMovementClass()
     {
-        CardMovement cardMovement = new CardMovement(gameStructureInfo);
+        CardMovement cardMovement = new CardMovement();
         gameStructureInfo.CardMovement = cardMovement;
     }
 }

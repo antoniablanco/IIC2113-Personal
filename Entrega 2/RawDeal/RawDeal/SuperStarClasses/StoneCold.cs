@@ -13,7 +13,7 @@ public class StoneCold: SuperStar
         
     }
 
-    public override void UsingElectiveSuperAbility(GameStructureInfo gameStructureInfo)
+    public override void UseElectiveSuperAbility(GameStructureInfo gameStructureInfo)
     {
         gameStructureInfo.ControllerCurrentPlayer.MarkSuperAbilityAsUsedInThisTurn();
         View.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
@@ -28,6 +28,6 @@ public class StoneCold: SuperStar
 
     public override bool CanUseSuperAbility(PlayerController currentPlayer)
     {
-        return (currentPlayer.NumberOfCardIn("Arsenal") > 0 && !currentPlayer.HasTheSuperAbilityBeenUsedThisTurn());
+        return (currentPlayer.GetNumberOfCardIn("Arsenal") > 0 && !currentPlayer.HasTheSuperAbilityBeenUsedThisTurn());
     }
 }

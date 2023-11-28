@@ -7,7 +7,7 @@ public class BonusStructureInfo
 {   
     // Bonus que afectan a la proxima carta jugada
     public bool IsJockeyingForPositionBonusDamageActive = false;
-    public bool IsJockeyingForPositionBonusFortitudActive = false;
+    public bool IsJockeyingForPositionBonusFortitudeActive = false;
     public bool IsIrishWhipBonusActive = false;
     public bool ClotheslineBonusActive = false;
     public bool AtomicDropBonusActive = false;

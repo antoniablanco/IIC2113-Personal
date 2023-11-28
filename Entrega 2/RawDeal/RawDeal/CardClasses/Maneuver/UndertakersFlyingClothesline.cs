@@ -13,10 +13,10 @@ public class UndertakersFlyingClothesline: Card
     
     public override bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo, string type = "Maneuver")
     {
-        return gameStructureInfo.LastDamageComited >= 5 && gameStructureInfo.CardBeingPlayedType == "Maneuver";
+        return gameStructureInfo.LastDamageCommitted >= 5 && gameStructureInfo.CardBeingPlayedType == "Maneuver";
     }
     
-    public override int ExtraReversalDamage()
+    public override int GetExtraReversalDamage()
     {
         return 6;
     }

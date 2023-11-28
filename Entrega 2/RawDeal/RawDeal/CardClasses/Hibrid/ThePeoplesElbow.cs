@@ -18,7 +18,7 @@ public class ThePeoplesElbow: Card
         gameStructureInfo.View.SayThatPlayerPutsThisCardAtTheBottomOfHisArsenal(
             gameStructureInfo.ControllerCurrentPlayer.GetNameOfSuperStar(), Title);
         
-        gameStructureInfo.CardMovement.TransferChoosinCardFromHandToStartOfArsenal(gameStructureInfo.GetCurrentPlayer(),
+        gameStructureInfo.CardMovement.TransferSelectedCardFromHandToStartOfArsenal(gameStructureInfo.GetCurrentPlayer(),
             playedCardController);
         
         const int numberOfCardsToSteal = 2;
@@ -31,7 +31,7 @@ public class ThePeoplesElbow: Card
         if (type == "Maneuver")
             try
             {
-                gameStructureInfo.ControllerCurrentPlayer.FindCardCardFrom("RingArea", "Rock Bottom");
+                gameStructureInfo.ControllerCurrentPlayer.GetCardInDeckByName("RingArea", "Rock Bottom");
                 return true;
             }
             catch (CardNotFoundException e) { return false; }

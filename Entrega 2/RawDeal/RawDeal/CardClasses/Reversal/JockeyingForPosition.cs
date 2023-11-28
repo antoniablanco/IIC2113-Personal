@@ -28,7 +28,7 @@ public class JockeyingForPosition : Card
     public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
         ApplyEffect(gameStructureInfo, gameStructureInfo.ControllerCurrentPlayer);
-        gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(gameStructureInfo.GetCurrentPlayer(),
+        gameStructureInfo.CardMovement.TransferSelectedCardFromHandToRingArea(gameStructureInfo.GetCurrentPlayer(),
             playedCardController);
     }
 
@@ -52,7 +52,7 @@ public class JockeyingForPosition : Card
                 break;
             case SelectedEffect.NextGrapplesReversalIsPlus8F:
                 gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect(BonusEnum.CardBonusName.JockeyingFortitud, bonusValue:8, 
-                    BonusEnum.CardBonusType.Fortitud);
+                    BonusEnum.CardBonusType.Fortitude);
                 break;
         }
     }

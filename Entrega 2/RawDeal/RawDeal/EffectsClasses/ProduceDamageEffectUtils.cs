@@ -41,7 +41,7 @@ public class ProduceDamageEffectUtils: EffectsUtils
     
     private void ShowOneFaceDownCard(int currentDamage)
     {
-        var flippedCardController = gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
+        var flippedCardController = gameStructureInfo.CardMovement.TransferUnselectedCardFromArsenalToRingSide(player);
         var flippedCardString = flippedCardController.GetStringCardInfo();
         gameStructureInfo.View.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
     }

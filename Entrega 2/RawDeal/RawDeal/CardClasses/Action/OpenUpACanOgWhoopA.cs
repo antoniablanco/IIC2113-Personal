@@ -16,7 +16,7 @@ public class OpenUpACanOgWhoopA: Card
     public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {   
         ApplyEffect(gameStructureInfo, gameStructureInfo.ControllerCurrentPlayer);
-        gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(gameStructureInfo.GetCurrentPlayer(),
+        gameStructureInfo.CardMovement.TransferSelectedCardFromHandToRingArea(gameStructureInfo.GetCurrentPlayer(),
             playedCardController);
     }
 
@@ -28,7 +28,7 @@ public class OpenUpACanOgWhoopA: Card
         gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect(BonusEnum.CardBonusName.OpenUpaCanOfWhoopAss, bonusValue:6, 
             BonusEnum.CardBonusType.Damage);
         gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect(BonusEnum.CardBonusName.OpenUpaCanOfWhoopAss, bonusValue:20, 
-            BonusEnum.CardBonusType.Fortitud);
+            BonusEnum.CardBonusType.Fortitude);
         
         gameStructureInfo.BonusManager.SetWhoActivateNextPlayedCardBonusEffect(playerController);
         

@@ -16,22 +16,22 @@ public class CardDrawEffect: EffectsUtils
             gameStructureInfo.GetOpponentPlayer() : gameStructureInfo.GetCurrentPlayer();
     }
     
-    public void MayStealCards(int maximumNumberOfcardToDraw)
+    public void MayStealCards(int maximumNumberOfCardToDraw)
     {   
-        var numberOfcardToDraw = gameStructureInfo.View.AskHowManyCardsToDrawBecauseOfACardEffect(
-            controllerPlayer.GetNameOfSuperStar(), maximumNumberOfcardToDraw);
+        var numberOfCardToDraw = gameStructureInfo.View.AskHowManyCardsToDrawBecauseOfACardEffect(
+            controllerPlayer.GetNameOfSuperStar(), maximumNumberOfCardToDraw);
         
-        StealCards(numberOfcardToDraw);
+        StealCards(numberOfCardToDraw);
     }
 
-    public void StealCards(int numberOfcardToDraw = 1)
+    public void StealCards(int numberOfCardToDraw = 1)
     {   
-        numberOfcardToDraw = Math.Min(controllerPlayer.NumberOfCardIn("Arsenal"), numberOfcardToDraw);
-        gameStructureInfo.View.SayThatPlayerDrawCards(controllerPlayer.GetNameOfSuperStar(), numberOfcardToDraw);
-        if (IsPositive(numberOfcardToDraw))
+        numberOfCardToDraw = Math.Min(controllerPlayer.GetNumberOfCardIn("Arsenal"), numberOfCardToDraw);
+        gameStructureInfo.View.SayThatPlayerDrawCards(controllerPlayer.GetNameOfSuperStar(), numberOfCardToDraw);
+        if (IsPositive(numberOfCardToDraw))
         {
-            for (var i = 0; i < numberOfcardToDraw; i++)
-                gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToHand(player);
+            for (var i = 0; i < numberOfCardToDraw; i++)
+                gameStructureInfo.CardMovement.TransferUnselectedCardFromArsenalToHand(player);
         }
     }
 }

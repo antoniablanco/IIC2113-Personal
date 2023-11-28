@@ -2,7 +2,7 @@ using RawDeal.CardClasses;
 
 namespace RawDeal.DecksBehavior;
 
-public class CardsVisualizor
+public class CardsVisualizer
 {
     public List<string> CreateStringCardList(List<CardController> cardsInSelectedSet)
     {

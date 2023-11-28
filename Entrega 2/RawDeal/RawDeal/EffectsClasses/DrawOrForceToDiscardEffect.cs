@@ -18,10 +18,10 @@ public class DrawOrForceToDiscardEffect: EffectsUtils
         this.shouldAsk = shouldAsk;
         this.numberOfCardsToSteal = numberOfCardsToSteal;
         numberOfCardsToDiscard = maximumNumberOfCardsToDiscard;
-        AskDrawOrForceToDiscar();
+        AskDrawOrForceToDiscard();
     }
     
-    private void AskDrawOrForceToDiscar()
+    private void AskDrawOrForceToDiscard()
     {
         SelectedEffect selectedEffect = gameStructureInfo.View.AskUserToChooseBetweenDrawingOrForcingOpponentToDiscardCards(
             gameStructureInfo.ControllerCurrentPlayer.GetNameOfSuperStar());

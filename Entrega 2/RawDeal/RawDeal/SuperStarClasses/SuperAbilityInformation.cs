@@ -4,7 +4,7 @@ namespace RawDeal.SuperStarClasses;
 
 public class SuperAbilityInformation
 {
-    public void TheSuperAbilityThatIsAtTheStartOfTheTurnIsUsed(GameStructureInfo gameStructureInfo)
+    public void UseStartOfTurnSuperAbility(GameStructureInfo gameStructureInfo)
     {
         gameStructureInfo.ControllerCurrentPlayer.UseAutomaticSuperAbility();
     }
@@ -15,8 +15,8 @@ public class SuperAbilityInformation
         gameStructureInfo.ControllerCurrentPlayer.UseElectiveSuperAbility();
     }
 
-    public bool PlayerCanUseSuperStarAbility(GameStructureInfo gameStructureInfo) 
+    public bool CanPlayerUseSuperStarAbility(GameStructureInfo gameStructureInfo) 
     {
-        return gameStructureInfo.ControllerCurrentPlayer.TheirSuperStarCanUseSuperAbility(gameStructureInfo.ControllerCurrentPlayer);
+        return gameStructureInfo.ControllerCurrentPlayer.CheckIfSuperStarCanUseSuperAbility(gameStructureInfo.ControllerCurrentPlayer);
     }
 }

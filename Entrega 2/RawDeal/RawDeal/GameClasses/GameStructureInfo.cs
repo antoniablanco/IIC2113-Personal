@@ -10,7 +10,7 @@ public class GameStructureInfo
 {
     public BonusManager BonusManager;
     public CardMovement CardMovement;
-    public CardsVisualizor CardsVisualizor = new CardsVisualizor();
+    public CardsVisualizer CardsVisualizer = new CardsVisualizer();
     public PlayerController ControllerCurrentPlayer;
     public PlayerController ControllerOpponentPlayer;
     public PlayerController ControllerPlayerOne;
@@ -20,7 +20,7 @@ public class GameStructureInfo
     public GetSetGameVariables GetSetGameVariables;
     public bool IsTheGameStillPlaying = true;
     public bool IsTheTurnBeingPlayed = true;
-    public int LastDamageComited = 0;
+    public int LastDamageCommitted = 0;
     public CardController CardBeingPlayed;
     public string CardBeingPlayedType;
     public string LastCardBeingPlayedTitle;

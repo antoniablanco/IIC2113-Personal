@@ -20,12 +20,12 @@ public class DiscardHandEffect: EffectsUtils
     private void DiscardHand()
     {
         gameStructureInfo.View.SayThatPlayerDiscardsHisHand(controllerPlayer.GetNameOfSuperStar());
-        int numberOfCardsInHand = controllerPlayer.NumberOfCardIn("Hand");
+        int numberOfCardsInHand = controllerPlayer.GetNumberOfCardIn("Hand");
         
         for (var currentIndex = 0; currentIndex < numberOfCardsInHand; currentIndex++)
         {   
-            var discardCardController = controllerPlayer.GetSpecificCardFrom("Hand", 0);
-            gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingSide(player,
+            var discardCardController = controllerPlayer.RetrieveCardFromDeckAtPosition("Hand", 0);
+            gameStructureInfo.CardMovement.TransferSelectedCardFromHandToRingSide(player,
                 discardCardController);
         }
     }

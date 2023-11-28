@@ -13,7 +13,7 @@ public class Undertaker: SuperStar
         // Constructor de la clase base
     }
 
-    public override void UsingElectiveSuperAbility(GameStructureInfo gameStructureInfo)
+    public override void UseElectiveSuperAbility(GameStructureInfo gameStructureInfo)
     {
         gameStructureInfo.ControllerCurrentPlayer.MarkSuperAbilityAsUsedInThisTurn();
         View.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
@@ -28,6 +28,6 @@ public class Undertaker: SuperStar
 
     public override bool CanUseSuperAbility(PlayerController currentPlayer)
     {
-        return (currentPlayer.NumberOfCardIn("Hand") > 1 && !currentPlayer.HasTheSuperAbilityBeenUsedThisTurn());
+        return (currentPlayer.GetNumberOfCardIn("Hand") > 1 && !currentPlayer.HasTheSuperAbilityBeenUsedThisTurn());
     }
 }

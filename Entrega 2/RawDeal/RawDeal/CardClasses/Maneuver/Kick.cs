@@ -13,6 +13,6 @@ public class Kick : Card
 
     public override void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
-        new ColateralDamageEffectUtils(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo);
+        new CollateralDamageEffectUtils(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo);
     }
 }

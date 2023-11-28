@@ -33,7 +33,7 @@ public class TakeDamageEffectUtils: EffectsUtils
         for (var currentDamage = 0; currentDamage < totalDamage; currentDamage++)
         {
             var flippedCardController =
-                gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
+                gameStructureInfo.CardMovement.TransferUnselectedCardFromArsenalToRingSide(player);
             var flippedCardString = flippedCardController.GetStringCardInfo();
 
             gameStructureInfo.View.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage + 1, totalDamage);

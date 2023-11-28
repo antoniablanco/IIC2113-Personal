@@ -21,7 +21,7 @@ public class MoveLessThanDOpponentEffect: EffectsUtils
     
     private void Apply()
     {   
-        int maximumDamage = currentPlayerController.FortitudRating();
+        int maximumDamage = currentPlayerController.FortitudeRating();
         posibleCards = opponentPlayerController.GetCardsFromRingAreaThatMeetDCriteria(maximumDamage);
         if (IsPositive(posibleCards .Item1.Count()))
         {
@@ -42,7 +42,7 @@ public class MoveLessThanDOpponentEffect: EffectsUtils
             ? gameStructureInfo.GetCurrentPlayer()
             : gameStructureInfo.GetOpponentPlayer();
         
-        gameStructureInfo.CardMovement.TransferChoosinCardFromRingAreaToRingSide(playerWhoDiscardCard,
+        gameStructureInfo.CardMovement.TransferSelectedCardFromRingAreaToRingSide(playerWhoDiscardCard,
             discardCardController);
         
     }

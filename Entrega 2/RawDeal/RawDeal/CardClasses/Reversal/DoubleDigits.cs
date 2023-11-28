@@ -15,8 +15,8 @@ public class DoubleDigits: Card
     public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, 
         string reverseBy, int totalDamage)
     {
-        return (playedCardController.ContainsSubtype("Strike") || playedCardController.ContainsSubtype("Grapple")
-               || playedCardController.ContainsSubtype("Submission"))&& playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver") &&
+        return (playedCardController.DoesTheCardContainsSubtype("Strike") || playedCardController.DoesTheCardContainsSubtype("Grapple")
+               || playedCardController.DoesTheCardContainsSubtype("Submission"))&& playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver") &&
                gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totalDamage);;
     }
     

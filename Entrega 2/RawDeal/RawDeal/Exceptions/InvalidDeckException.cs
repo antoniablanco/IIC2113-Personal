@@ -2,7 +2,7 @@ namespace RawDeal.Exceptions;
 
 public class InvalidDeckException : Exception
 {
-    public InvalidDeckException(string mensaje) : base(mensaje)
+    public InvalidDeckException(string message) : base(message)
     {
     }
 }

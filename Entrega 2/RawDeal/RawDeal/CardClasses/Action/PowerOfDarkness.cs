@@ -15,7 +15,7 @@ public class PowerOfDarkness: Card
     public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
         ApplyEffect(gameStructureInfo, gameStructureInfo.ControllerCurrentPlayer);
-        gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(gameStructureInfo.GetCurrentPlayer(),
+        gameStructureInfo.CardMovement.TransferSelectedCardFromHandToRingArea(gameStructureInfo.GetCurrentPlayer(),
             playedCardController);
     }
 

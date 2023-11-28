@@ -13,7 +13,7 @@ public class FishermansSuplex : Card
 
     public override void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
-        new ColateralDamageEffectUtils(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo);
+        new CollateralDamageEffectUtils(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo);
 
         const int maximumNumberOfCardsToSteal = 1;
         new CardDrawEffect(gameStructureInfo.ControllerCurrentPlayer, 

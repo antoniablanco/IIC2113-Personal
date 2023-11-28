@@ -11,9 +11,9 @@ public class Mankind: SuperStar
         
     }
 
-    public override void UsingAutomaticSuperAbilityAtTheStartOfTheTurn(GameStructureInfo gameStructureInfo)
+    public override void UseAutomaticSuperAbilityAtTheStartOfTheTurn(GameStructureInfo gameStructureInfo)
     {
-        if (gameStructureInfo.ControllerCurrentPlayer.NumberOfCardIn("Arsenal") > 0) 
+        if (gameStructureInfo.ControllerCurrentPlayer.GetNumberOfCardIn("Arsenal") > 0) 
             gameStructureInfo.ControllerCurrentPlayer.DrawCard();
     }
 }

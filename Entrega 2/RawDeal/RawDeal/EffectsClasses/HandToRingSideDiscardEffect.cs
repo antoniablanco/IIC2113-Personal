@@ -25,7 +25,7 @@ public class HandToRingSideDiscardEffect: EffectsUtils
         for (var currentDamage = 0; currentDamage < cardsToDiscardCount; currentDamage++)
         {
             handFormatoString = opponentPlayerController
-                .HandCardsButNotTheCardIsBeingPlayed(gameStructureInfo.CardBeingPlayed).Item1;
+                .GetHandCardsButNotTheCardIsBeingPlayed(gameStructureInfo.CardBeingPlayed).Item1;
 
             if (IsPositive(handFormatoString.Count()))
                 DiscardACardOfMyChoiceFromHandNotNotifying(cardsToDiscardCount - currentDamage);
@@ -41,11 +41,11 @@ public class HandToRingSideDiscardEffect: EffectsUtils
         if (gameStructureInfo.CardPlay.HasSelectedAValidCard(selectedCard))
         {
             var discardCardController = opponentPlayerController
-                .HandCardsButNotTheCardIsBeingPlayed(gameStructureInfo.CardBeingPlayed).Item2[selectedCard];
+                .GetHandCardsButNotTheCardIsBeingPlayed(gameStructureInfo.CardBeingPlayed).Item2[selectedCard];
             var playerWhoDiscardCard = opponentPlayerController == gameStructureInfo.ControllerCurrentPlayer
                 ? gameStructureInfo.GetCurrentPlayer()
                 : gameStructureInfo.GetOpponentPlayer();
-            gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingSide(playerWhoDiscardCard,
+            gameStructureInfo.CardMovement.TransferSelectedCardFromHandToRingSide(playerWhoDiscardCard,
                 discardCardController);
         }
     }

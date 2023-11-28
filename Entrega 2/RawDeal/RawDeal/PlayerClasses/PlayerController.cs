@@ -17,7 +17,7 @@ public class PlayerController
 
     public void DrawInitialHandCards()
     {
-        for (var i = 0; i < player.Superestar.HandSize; i++)
+        for (var i = 0; i < player.Superstar.HandSize; i++)
             DrawCard();
     }
 
@@ -28,12 +28,12 @@ public class PlayerController
 
     public string GetNameOfSuperStar()
     {
-        return player.Superestar.Name;
+        return player.Superstar.Name;
     }
 
     public int GetSuperStarValue()
     {
-        return player.Superestar.SuperstarValue;
+        return player.Superstar.SuperstarValue;
     }
 
     public bool HasCardsInArsenal()
@@ -44,7 +44,7 @@ public class PlayerController
     private List<CardController> GetCardsAvailableToPlay()
     {
         return player.CardsHand
-            .Where(card => card.GetCardFortitude(card.GetCardTypes()[0]) + card.PlusFornitudAfterEspecificCard() <= FortitudRating() 
+            .Where(card => card.GetCardFortitude(card.GetCardTypes()[0]) + card.GetPlusFortitudeAfterSpecificCard() <= FortitudeRating() 
                            && card.HasAnyTypeDifferentOfReversal() && card.CanThisCardBePlayed())
             .ToList();
     }
@@ -53,12 +53,12 @@ public class PlayerController
     {   
         return player.CardsHand
             .Where(card => card.GetCardFortitude(card.GetCardTypes()[0]) + 
-                gameStructureInfo.BonusManager.GetFortitudBonus(gameStructureInfo.CardBeingPlayedType) <= FortitudRating() 
+                gameStructureInfo.BonusManager.GetFortitudeBonus(gameStructureInfo.CardBeingPlayedType) <= FortitudeRating() 
                 && card.IsReversalType() && CanReversalPlayedCard(card, "Hand", totalDamage))
             .ToList();
     }
 
-    public List<Tuple<CardController, int>> GetPosiblesCardsToPlayWithTheirTypeIndex()
+    public List<Tuple<CardController, int>> GetPossibleCardsToPlayWithTheirTypeIndex()
     {   
         List<Tuple<CardController, int>> allTypesForCard = new List<Tuple<CardController, int>>();
 
@@ -67,15 +67,15 @@ public class PlayerController
             int[] indexes = Enumerable.Range(0, cardController.GetCardTypes().Count()).ToArray();
             allTypesForCard.AddRange(from index in indexes where cardController.GetCardType(index) 
                     != "Reversal" && cardController.CanThisCardBePlayed(cardController.GetCardType(index)) &&
-                    cardController.GetCardFortitude(cardController.GetCardType(index)) + cardController.PlusFornitudAfterEspecificCard()
-                    <= FortitudRating() && cardController.CanThisCardBePlayed()
+                    cardController.GetCardFortitude(cardController.GetCardType(index)) + cardController.GetPlusFortitudeAfterSpecificCard()
+                    <= FortitudeRating() && cardController.CanThisCardBePlayed()
                 select new Tuple<CardController, int>(cardController, index));
         }
 
         return allTypesForCard;
     }
 
-    public List<Tuple<CardController, int>> GetPosiblesCardsForReveralWithTheirReversalTypeIndex(int totalDamage)
+    public List<Tuple<CardController, int>> GetPossiblesCardsForReversalWithTheirTypeIndex(int totalDamage)
     {   
         List<Tuple<CardController, int>> allTypesForCard = new List<Tuple<CardController, int>>();
         
@@ -90,52 +90,52 @@ public class PlayerController
         
     }
     
-    public int FortitudRating()
+    public int FortitudeRating()
     {
         return player.CardsRingArea.Sum(card => card.GetDamageProducedByTheCard());
     }
 
     private bool CanReversalPlayedCard(CardController card, string reverseBy, int totalDamage)
     {   
-        return card.GetIfCardCanReversalPlayedCard(reverseBy, totalDamage);
+        return card.DoesTheCardCanReversalPlayedCard(reverseBy, totalDamage);
     }
 
-    public bool TheirSuperStarCanUseSuperAbility(PlayerController currentPlayer)
+    public bool CheckIfSuperStarCanUseSuperAbility(PlayerController currentPlayer)
     {
-        return player.Superestar.CanUseSuperAbility(currentPlayer);
+        return player.Superstar.CanUseSuperAbility(currentPlayer);
     }
 
     public void UseElectiveSuperAbility()
     {
-        player.Superestar.UsingElectiveSuperAbility(gameStructureInfo);
+        player.Superstar.UseElectiveSuperAbility(gameStructureInfo);
     }
 
     public void UseAutomaticSuperAbility()
     {
-        player.Superestar.UsingAutomaticSuperAbilityAtTheStartOfTheTurn(gameStructureInfo);
+        player.Superstar.UseAutomaticSuperAbilityAtTheStartOfTheTurn(gameStructureInfo);
     }
 
     public void BlockSuperAbilityBecauseIsJustAtTheStartOfTheTurn()
     {
-        player.Superestar.BlockSuperAbilityBecauseIsJustAtTheStartOfTheTurn(gameStructureInfo);
+        player.Superstar.BlockSuperAbilityBecauseIsJustAtTheStartOfTheTurn(gameStructureInfo);
     }
 
     public bool HasTheSuperAbilityBeenUsedThisTurn()
     {
-        return player.TheHabilityHasBeenUsedThisTurn;
+        return player.TheAbilityHasBeenUsedThisTurn;
     }
 
     public void MarkSuperAbilityAsUsedInThisTurn()
     {
-        player.TheHabilityHasBeenUsedThisTurn = true;
+        player.TheAbilityHasBeenUsedThisTurn = true;
     }
 
     public void MarkSuperAbilityAsUnusedInThisTurn()
     {
-        player.TheHabilityHasBeenUsedThisTurn = false;
+        player.TheAbilityHasBeenUsedThisTurn = false;
     }
 
-    public int NumberOfCardIn(string deck)
+    public int GetNumberOfCardIn(string deck)
     {
         return deck switch
         {
@@ -146,7 +146,7 @@ public class PlayerController
         };
     }
 
-    public CardController GetSpecificCardFrom(string deck, int index)
+    public CardController RetrieveCardFromDeckAtPosition(string deck, int index)
     {
         return deck switch
         {
@@ -158,7 +158,7 @@ public class PlayerController
         };
     }
     
-    public CardController FindCardCardFrom(string deck, string cardName)
+    public CardController GetCardInDeckByName(string deck, string cardName)
     {   
         CardController foundCard = deck switch
         {
@@ -175,22 +175,22 @@ public class PlayerController
         return foundCard;
     }
 
-    public List<String> StringCardsFrom(string deck)
+    public List<String> GetStringCardsFrom(string deck)
     {
         return deck switch
         {
-            "Hand" => gameStructureInfo.CardsVisualizor.CreateStringCardList(player.CardsHand),
-            "RingSide" => gameStructureInfo.CardsVisualizor.CreateStringCardList(player.CardsRingSide),
-            "RingArea" => gameStructureInfo.CardsVisualizor.CreateStringCardList(player.CardsRingArea),
-            "Arsenal" => gameStructureInfo.CardsVisualizor.CreateStringCardList(player.CardsArsenal),
+            "Hand" => gameStructureInfo.CardsVisualizer.CreateStringCardList(player.CardsHand),
+            "RingSide" => gameStructureInfo.CardsVisualizer.CreateStringCardList(player.CardsRingSide),
+            "RingArea" => gameStructureInfo.CardsVisualizer.CreateStringCardList(player.CardsRingArea),
+            "Arsenal" => gameStructureInfo.CardsVisualizer.CreateStringCardList(player.CardsArsenal),
             _ => throw new CardNotFoundException("Deck Not Implemented")
         };
     }
 
-    public (List<String>, List<CardController>) HandCardsButNotTheCardIsBeingPlayed(CardController cardController)
+    public (List<String>, List<CardController>) GetHandCardsButNotTheCardIsBeingPlayed(CardController cardController)
     {
         List<CardController> cardOptions = player.CardsHand.Where(card => card != cardController).ToList();
-        List<String> stringCardOptions = gameStructureInfo.CardsVisualizor.CreateStringCardList(cardOptions);
+        List<String> stringCardOptions = gameStructureInfo.CardsVisualizer.CreateStringCardList(cardOptions);
         return (stringCardOptions, cardOptions);
     }
     
@@ -200,11 +200,11 @@ public class PlayerController
             .Where(card => card.GetDamageProducedByTheCard() <= maximumDamage)
             .ToList();
         
-        List<String> stringCardOptions = gameStructureInfo.CardsVisualizor.CreateStringCardList(cardOptions);
+        List<String> stringCardOptions = gameStructureInfo.CardsVisualizer.CreateStringCardList(cardOptions);
         return (stringCardOptions, cardOptions);
     }
     
-    public int NumberOfCardsInRingAreaWithTheWord(string word)
+    public int GetNumberOfCardsInRingAreaWithTheWord(string word)
     {
         int counter = 0;
         foreach (var card in player.CardsRingArea)
@@ -217,6 +217,6 @@ public class PlayerController
     
     private bool DoesTheManeuverCardHaveTheWord(CardController card, string word)
     {
-        return card.GetCardTitle().ToLower().Split(' ').Contains(word.ToLower()) && card.ContainType("Maneuver");
+        return card.GetCardTitle().ToLower().Split(' ').Contains(word.ToLower()) && card.DoesTheCardContainType("Maneuver");
     }
 }

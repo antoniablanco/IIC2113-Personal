@@ -15,7 +15,7 @@ public class RollingTakedown : Card
         string reverseBy, int totalDamage)
     {
         const int maximumDamageProducedByPlayedCard = 7;
-        return playedCardController.ContainsSubtype("Grapple") &&
+        return playedCardController.DoesTheCardContainsSubtype("Grapple") &&
                playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver") &&
                totalDamage <= maximumDamageProducedByPlayedCard &&
                gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totalDamage);;

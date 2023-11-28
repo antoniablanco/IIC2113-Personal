@@ -43,7 +43,7 @@ public class GetSetGameVariables
                                                                          && gameStructureInfo.IsTheGameStillPlaying;
     }
 
-    public bool TheTurnIsBeingPlayed()
+    public bool IsTheTurnIsBeingPlayed()
     {
         return gameStructureInfo.IsTheTurnBeingPlayed;
     }
@@ -72,12 +72,12 @@ public class GetSetGameVariables
         return gameStructureInfo.WinnerPlayer.GetNameOfSuperStar();
     }
 
-    public void OneRoundMoreInTurn()
+    public void AddOneRoundMoreInTurn()
     {
         gameStructureInfo.NumberOfRoundsInTheTurn += 1;
     }
 
-    public void OneRoundLessInTurn()
+    public void DecrementRoundInTurn()
     {
         gameStructureInfo.NumberOfRoundsInTheTurn -= 1;
     }

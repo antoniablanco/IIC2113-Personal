@@ -18,7 +18,7 @@ public class CardGenerator
         return cards;
     }
 
-    public List<CardController> CreateDiferentTypesOfCard(string playerString, List<CardJson> totalCards,
+    public List<CardController> CreateDifferentTypesOfCard(string playerString, List<CardJson> totalCards,
         GameStructureInfo gameStructureInfo)
     {
         var pathDeck = Path.Combine(playerString);

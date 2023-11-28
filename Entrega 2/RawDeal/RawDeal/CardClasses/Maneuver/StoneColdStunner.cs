@@ -11,7 +11,7 @@ public class StoneColdStunner: Card
          
     }
     
-    public override int PlusFornitudAfterEspecificCard(GameStructureInfo gameStructureInfo)
+    public override int ObtainFortitudeIncreaseAfterSpecificCard(GameStructureInfo gameStructureInfo)
     {
         int fornitud = 0;
         try

@@ -13,7 +13,7 @@ public class StepAside : Card
     public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, 
         string reverseBy, int totalDamage)
     {   
-        return playedCardController.ContainsSubtype("Strike") &&
+        return playedCardController.DoesTheCardContainsSubtype("Strike") &&
                playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver") &&
                gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totalDamage);;
     }

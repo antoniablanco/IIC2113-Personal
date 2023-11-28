@@ -23,7 +23,7 @@ public class GetBackDamageEffectUtils: EffectsUtils
 
     private void GetBackDamage()
     {
-        ringSideAsString = controllerPlayer.StringCardsFrom("RingSide");
+        ringSideAsString = controllerPlayer.GetStringCardsFrom("RingSide");
 
         recoveredDamage = LimitRecoveryToAvailableDamage();
 
@@ -42,13 +42,13 @@ public class GetBackDamageEffectUtils: EffectsUtils
     {
         for (var currentDamage = 0; currentDamage < recoveredDamage; currentDamage++)
         {
-            ringSideAsString = controllerPlayer.StringCardsFrom("RingSide");
+            ringSideAsString = controllerPlayer.GetStringCardsFrom("RingSide");
             var selectedCardIndex =
                 gameStructureInfo.View.AskPlayerToSelectCardsToRecover(controllerPlayer.GetNameOfSuperStar(),
                     recoveredDamage - currentDamage, ringSideAsString);
-            var discardedCardController = controllerPlayer.GetSpecificCardFrom("RingSide", selectedCardIndex);
+            var discardedCardController = controllerPlayer.RetrieveCardFromDeckAtPosition("RingSide", selectedCardIndex);
 
-            gameStructureInfo.CardMovement.TransferChoosinCardFromRingSideToStartOfArsenal(player, discardedCardController);
+            gameStructureInfo.CardMovement.TransferSelectedCardFromRingSideToStartOfArsenal(player, discardedCardController);
         }
     }
 }

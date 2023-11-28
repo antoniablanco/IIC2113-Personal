@@ -10,12 +10,12 @@ public class Player
     public List<CardController> CardsRingArea = new List<CardController>();
     public List<CardController> CardsRingSide = new List<CardController>();
 
-    public SuperStar? Superestar;
-    public bool TheHabilityHasBeenUsedThisTurn = false;
+    public SuperStar? Superstar;
+    public bool TheAbilityHasBeenUsedThisTurn = false;
 
     public Player(List<CardController> cardsPlayer, SuperStar? superstar)
     {
-        Superestar = superstar;
+        Superstar = superstar;
         CardsArsenal.AddRange(cardsPlayer);
     }
 }

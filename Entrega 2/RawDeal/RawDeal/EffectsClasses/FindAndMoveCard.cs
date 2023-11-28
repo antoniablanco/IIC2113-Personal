@@ -42,17 +42,17 @@ public class FindAndMoveCard: EffectsUtils
     {   
         gameStructureInfo.View.SayThatPlayerSearchesForTheTargetCardInHisRingside(
             playerController.GetNameOfSuperStar(), cardTitle);
-        CardController card = playerController.FindCardCardFrom("RingSide", cardTitle);
+        CardController card = playerController.GetCardInDeckByName("RingSide", cardTitle);
         gameStructureInfo.View.SayThatPlayerFoundTheCardAndPutItIntoHisHand(playerController.GetNameOfSuperStar());
-        gameStructureInfo.CardMovement.TransferChoosinCardFromRingSideToHand(player, card);
+        gameStructureInfo.CardMovement.TransferSelectedCardFromRingSideToHand(player, card);
     }
 
     private void SearchCardInArsenal()
     {   
         gameStructureInfo.View.SayThatPlayerSearchesForTheTargetCardInHisArsenal(
             playerController.GetNameOfSuperStar(), cardTitle);
-        CardController card = playerController.FindCardCardFrom("Arsenal", cardTitle);
+        CardController card = playerController.GetCardInDeckByName("Arsenal", cardTitle);
         gameStructureInfo.View.SayThatPlayerFoundTheCardAndPutItIntoHisHand(playerController.GetNameOfSuperStar());
-        gameStructureInfo.CardMovement.TransferChoosinCardFromArsenalToHand(player, card);
+        gameStructureInfo.CardMovement.TransferSelectedCardFromArsenalToHand(player, card);
     }
 }

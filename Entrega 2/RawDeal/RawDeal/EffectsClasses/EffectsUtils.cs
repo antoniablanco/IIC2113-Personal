@@ -21,12 +21,12 @@ public class EffectsUtils
         
         gameStructureInfo.View.SayThatPlayerMustDiscardThisCard(controllerCurrentPlayer.GetNameOfSuperStar(),
             playedCardController.GetCardTitle());
-        gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingSide(player, playedCardController);
+        gameStructureInfo.CardMovement.TransferSelectedCardFromHandToRingSide(player, playedCardController);
     }
     
     public void DiscardActionCardToRingAreButNotSaying(CardController playedCardController, Player player)
     {
-        gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(player, playedCardController);
+        gameStructureInfo.CardMovement.TransferSelectedCardFromHandToRingArea(player, playedCardController);
     }
     
     public bool IsTheSuperStarMankind(PlayerController playerController)
@@ -34,13 +34,13 @@ public class EffectsUtils
         return playerController.GetNameOfSuperStar() == "MANKIND";
     }
 
-    public int GetDamageProducedByReversalCardWithNotEspecificDamage()
+    public int GetDamageProducedByReversalCardWithNotSpecificDamage()
     {
         var totalDamage = gameStructureInfo.CardBeingPlayed.GetDamageProducedByTheCard() +
                           gameStructureInfo.BonusManager.GetNexPlayCardDamageBonus() + 
                           gameStructureInfo.BonusManager.GetTurnDamageBonus(gameStructureInfo.CardBeingPlayed) +
                           gameStructureInfo.BonusManager.GetDamageForSuccessfulManeuver(gameStructureInfo.CardBeingPlayed, 
-                              gameStructureInfo.LastDamageComited);
+                              gameStructureInfo.LastDamageCommitted);
         if (IsTheSuperStarMankind(gameStructureInfo.ControllerOpponentPlayer) ||
             IsTheSuperStarMankind(gameStructureInfo.ControllerCurrentPlayer))
             totalDamage -= 1;

@@ -13,7 +13,7 @@ public class Kane: SuperStar
         
     }
 
-    public override void UsingAutomaticSuperAbilityAtTheStartOfTheTurn(GameStructureInfo gameStructureInfo)
+    public override void UseAutomaticSuperAbilityAtTheStartOfTheTurn(GameStructureInfo gameStructureInfo)
     {   
         View.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
         

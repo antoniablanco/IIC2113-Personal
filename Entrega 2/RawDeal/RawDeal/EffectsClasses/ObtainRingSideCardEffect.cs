@@ -18,8 +18,9 @@ public class ObtainRingSideCardEffect: EffectsUtils
     }
 
     private void Apply()
-    {   
-        int numberOfCardInHand = currentPlayerController.HandCardsButNotTheCardIsBeingPlayed(gameStructureInfo.CardBeingPlayed).Item1.Count();
+    {
+        int numberOfCardInHand = currentPlayerController
+            .GetHandCardsButNotTheCardIsBeingPlayed(gameStructureInfo.CardBeingPlayed).Item1.Count;
         maximumNumberOfCardsToDiscard = Math.Min(maximumNumberOfCardsToDiscard, numberOfCardInHand);
 
         if (IsPositive(maximumNumberOfCardsToDiscard))

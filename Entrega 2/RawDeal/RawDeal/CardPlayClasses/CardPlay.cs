@@ -16,7 +16,7 @@ public class CardPlay
 
     public void PlayCardAction()
     {   
-        gameStructureInfo.GetSetGameVariables.OneRoundMoreInTurn();
+        gameStructureInfo.GetSetGameVariables.AddOneRoundMoreInTurn();
         var selectedCard = gameStructureInfo.View.AskUserToSelectAPlay(GetPossibleCardsToPlayString());
         
         if (HasSelectedAValidCard(selectedCard))
@@ -24,15 +24,15 @@ public class CardPlay
         else
         { 
             gameStructureInfo.BonusManager.AddOneTurnFromBonusCounter();
-            gameStructureInfo.GetSetGameVariables.OneRoundLessInTurn();
+            gameStructureInfo.GetSetGameVariables.DecrementRoundInTurn();
         }
     }
 
     private List<string> GetPossibleCardsToPlayString()
     {   
         var possibleCardsAndTheirTypes =
-            gameStructureInfo.ControllerCurrentPlayer.GetPosiblesCardsToPlayWithTheirTypeIndex();
-        var cardsStrings = gameStructureInfo.CardsVisualizor.GetStringCardsForSpecificType(possibleCardsAndTheirTypes);
+            gameStructureInfo.ControllerCurrentPlayer.GetPossibleCardsToPlayWithTheirTypeIndex();
+        var cardsStrings = gameStructureInfo.CardsVisualizer.GetStringCardsForSpecificType(possibleCardsAndTheirTypes);
         return cardsStrings;
     }
 
@@ -53,7 +53,7 @@ public class CardPlay
     private Tuple<CardController, int> GetCardPlayed(int indexSelectedCard)
     {
         var allCardsAndTheirTypes =
-            gameStructureInfo.ControllerCurrentPlayer.GetPosiblesCardsToPlayWithTheirTypeIndex();
+            gameStructureInfo.ControllerCurrentPlayer.GetPossibleCardsToPlayWithTheirTypeIndex();
         return allCardsAndTheirTypes[indexSelectedCard];
     }
 
@@ -100,7 +100,7 @@ public class CardPlay
         var damage = playedCardController.GetDamageProducedByTheCard() +
                      gameStructureInfo.BonusManager.GetNexPlayCardDamageBonus() +
                      gameStructureInfo.BonusManager.GetTurnDamageBonus(playedCardController)+ 
-                     gameStructureInfo.BonusManager.EternalDamage(playedCardController, gameStructureInfo.ControllerCurrentPlayer);
+                     gameStructureInfo.BonusManager.GetEternalDamage(playedCardController, gameStructureInfo.ControllerCurrentPlayer);
         var totalDamage =
             gameStructureInfo.CardPlay.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(damage,
                 gameStructureInfo.ControllerOpponentPlayer);
@@ -129,7 +129,7 @@ public class CardPlay
 
     private void PlayActionCard(CardController playedCardController)
     {
-        var playActionCard = new ActionCardPlay(gameStructureInfo);
+        var playActionCard = new ActionCardPlay();
         playActionCard.PlayCard(playedCardController);
     }
 

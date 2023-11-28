@@ -11,7 +11,7 @@ public class DiscusPunch: Card
          
     }
     
-    public override int ExtraReversalDamage()
+    public override int GetExtraReversalDamage()
     {
         return 2;
     }

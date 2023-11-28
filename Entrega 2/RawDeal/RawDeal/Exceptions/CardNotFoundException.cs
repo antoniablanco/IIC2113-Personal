@@ -2,7 +2,7 @@ namespace RawDeal.Exceptions;
 
 public class CardNotFoundException: Exception
 {
-    public CardNotFoundException(string mensaje) : base(mensaje)
+    public CardNotFoundException(string message) : base(message)
     {
     }
 }

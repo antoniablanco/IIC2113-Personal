@@ -22,18 +22,18 @@ public class RingOrArsenalCardEffect: EffectsUtils
 
     private void Apply()
     {   
-        string deck = GetSelectedEffectChosenByPlayer(playerController.GetNameOfSuperStar());
-        List<String> optionCards = playerController.StringCardsFrom(deck);
+        string deck = GetSelectedEffect(playerController.GetNameOfSuperStar());
+        List<String> optionCards = playerController.GetStringCardsFrom(deck);
         
         const int numberOfCardsToSelect = 1;
         int indexOfCard = gameStructureInfo.View.AskPlayerToSelectCardsToPutInHisHand(playerController.GetNameOfSuperStar(), 
             numberOfCardsToSelect, optionCards);
         
-        var addedCardController = playerController.GetSpecificCardFrom(deck, indexOfCard);
+        var addedCardController = playerController.RetrieveCardFromDeckAtPosition(deck, indexOfCard);
         MoveCardsTo(deck, addedCardController);
     }
     
-    private  string GetSelectedEffectChosenByPlayer(string nameOfSuperStar)
+    private  string GetSelectedEffect(string nameOfSuperStar)
     {
         SelectedEffect effectToPerform = gameStructureInfo.View.AskUserToChooseBetweenTakingACardFromYourArsenalOrRingside( nameOfSuperStar);
         switch (effectToPerform)
@@ -52,10 +52,10 @@ public class RingOrArsenalCardEffect: EffectsUtils
         switch (deck)
         {
             case "Arsenal":
-                gameStructureInfo.CardMovement.TransferChoosinCardFromArsenalToHand(player, cardController);
+                gameStructureInfo.CardMovement.TransferSelectedCardFromArsenalToHand(player, cardController);
                 break;
             case "RingSide":
-                gameStructureInfo.CardMovement.TransferChoosinCardFromRingSideToHand(player, cardController);
+                gameStructureInfo.CardMovement.TransferSelectedCardFromRingSideToHand(player, cardController);
                 break;
         }
     }

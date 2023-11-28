@@ -14,8 +14,8 @@ public class ShakeItOff: Card
     
     public override bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo, string type = "Maneuver")
     {
-        return gameStructureInfo.ControllerCurrentPlayer.FortitudRating() <
-               gameStructureInfo.ControllerOpponentPlayer.FortitudRating();
+        return gameStructureInfo.ControllerCurrentPlayer.FortitudeRating() <
+               gameStructureInfo.ControllerOpponentPlayer.FortitudeRating();
     }
     
     public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)

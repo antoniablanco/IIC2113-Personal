@@ -19,8 +19,8 @@ public class Powerbomb: Card
             gameStructureInfo).MayStealCards(maximumNumberOfCardsToSteal);
     }
     
-    public override int ExtraDamage(GameStructureInfo gameStructureInfo)
+    public override int GetExtraDamage(GameStructureInfo gameStructureInfo)
     {
-        return gameStructureInfo.ControllerCurrentPlayer.NumberOfCardsInRingAreaWithTheWord("slam");
+        return gameStructureInfo.ControllerCurrentPlayer.GetNumberOfCardsInRingAreaWithTheWord("slam");
     }
 }

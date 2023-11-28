@@ -15,7 +15,7 @@ public class CardController
         this.gameStructureInfo = gameStructureInfo;
     }
 
-    public bool ContainsSuperStarLogo(string superStarLogo)
+    public bool DoesContainsSuperStarLogo(string superStarLogo)
     {
         return _card.Subtypes.Any(t => t.Contains(superStarLogo));
     }
@@ -55,12 +55,12 @@ public class CardController
         return _card.Types[index];
     }
 
-    public bool ContainsSubtype(string subType)
+    public bool DoesTheCardContainsSubtype(string subType)
     {
         return _card.Subtypes.Contains(subType);
     }
     
-    public bool ContainType(string type)
+    public bool DoesTheCardContainType(string type)
     {
         return _card.Types.Contains(type);
     }
@@ -85,7 +85,7 @@ public class CardController
         return int.Parse(_card.StunValue);
     }
 
-    public bool TheCardHasStunValue()
+    public bool DoesTheCardHasStunValue()
     {
         return int.Parse(_card.StunValue) > 0;
     }
@@ -116,7 +116,7 @@ public class CardController
         return _card.CheckIfCardCanBePlayed(gameStructureInfo, type);
     }
 
-    public bool GetIfCardCanReversalPlayedCard(string reverseBy, int totalDamage)
+    public bool DoesTheCardCanReversalPlayedCard(string reverseBy, int totalDamage)
     {   
         return _card.CanReversalThisCard(gameStructureInfo.CardBeingPlayed, gameStructureInfo, reverseBy, totalDamage) &&
                gameStructureInfo.CardBeingPlayed.CanThisCardBeReversal();
@@ -129,8 +129,8 @@ public class CardController
 
     public bool CanUseThisReversalCard(PlayerController controllerPlayer, string reverseBy, int totalDamage)
     {
-        return GetCardFortitude(GetCardTypes()[0]) + gameStructureInfo.BonusManager.GetFortitudBonus(gameStructureInfo.CardBeingPlayedType) <=
-            controllerPlayer.FortitudRating() && IsReversalType() && GetIfCardCanReversalPlayedCard(reverseBy, totalDamage);
+        return GetCardFortitude(GetCardTypes()[0]) + gameStructureInfo.BonusManager.GetFortitudeBonus(gameStructureInfo.CardBeingPlayedType) <=
+            controllerPlayer.FortitudeRating() && IsReversalType() && DoesTheCardCanReversalPlayedCard(reverseBy, totalDamage);
     }
 
     public bool VerifyIfTheLastPlayedTypeIs(string type)
@@ -158,19 +158,19 @@ public class CardController
         _card.ApplyBonusEffect(gameStructureInfo);
     }
     
-    public int ExtraReversalDamage()
+    public int GetExtraReversalDamage()
     {
-        return _card.ExtraReversalDamage();
+        return _card.GetExtraReversalDamage();
     }
     
-    public int PlusFornitudAfterEspecificCard()
+    public int GetPlusFortitudeAfterSpecificCard()
     {
-        return _card.PlusFornitudAfterEspecificCard(gameStructureInfo);
+        return _card.ObtainFortitudeIncreaseAfterSpecificCard(gameStructureInfo);
     }
     
-    public int ExtraDamage()
+    public int GetExtraDamage()
     {
-        return _card.ExtraDamage(gameStructureInfo);
+        return _card.GetExtraDamage(gameStructureInfo);
     }
     
 }

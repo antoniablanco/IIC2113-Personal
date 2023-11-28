@@ -13,7 +13,7 @@ public class BreakTheHold : Card
     public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, 
         string reverseBy, int totalDamage)
     {
-        return playedCardController.ContainsSubtype("Submission") &&
+        return playedCardController.DoesTheCardContainsSubtype("Submission") &&
                playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver") &&
                gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totalDamage);
     }

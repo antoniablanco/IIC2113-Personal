@@ -31,7 +31,7 @@ public class BonusEnum
     public enum CardBonusType
     {
         Damage,
-        Fortitud,
+        Fortitude,
         Reversal,
         None
     }

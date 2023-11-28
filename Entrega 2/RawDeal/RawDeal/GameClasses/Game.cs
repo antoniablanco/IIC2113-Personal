@@ -50,7 +50,7 @@ public class Game
     {
         SetTurnStartInformation();
 
-        while (gameStructureInfo.GetSetGameVariables.TheTurnIsBeingPlayed())
+        while (gameStructureInfo.GetSetGameVariables.IsTheTurnIsBeingPlayed())
         {
             gameStructureInfo.BonusManager.RemoveOneTurnFromBonusCounter();
             DisplayPlayerInformation();
@@ -63,14 +63,14 @@ public class Game
         SetVariablesAtTheStartOfTurn();
         gameStructureInfo.ControllerCurrentPlayer.DrawCard();
         view.SayThatATurnBegins(gameStructureInfo.ControllerCurrentPlayer.GetNameOfSuperStar());
-        superAbilityInformation.TheSuperAbilityThatIsAtTheStartOfTheTurnIsUsed(gameStructureInfo);
+        superAbilityInformation.UseStartOfTurnSuperAbility(gameStructureInfo);
         gameStructureInfo.ControllerCurrentPlayer.BlockSuperAbilityBecauseIsJustAtTheStartOfTheTurn();
     }
 
     private void SetVariablesAtTheStartOfTurn()
     {
         gameStructureInfo.IsTheTurnBeingPlayed = true;
-        gameStructureInfo.LastDamageComited = 0;
+        gameStructureInfo.LastDamageCommitted = 0;
         gameStructureInfo.NumberOfRoundsInTheTurn = 0;
         gameStructureInfo.ControllerCurrentPlayer.MarkSuperAbilityAsUnusedInThisTurn();
     }
@@ -78,13 +78,13 @@ public class Game
     private void DisplayPlayerInformation()
     {
         PlayerInfo playerOne = new PlayerInfo(gameStructureInfo.ControllerPlayerOne.GetNameOfSuperStar(),
-            gameStructureInfo.ControllerPlayerOne.FortitudRating(),
-            gameStructureInfo.ControllerPlayerOne.NumberOfCardIn("Hand"),
-            gameStructureInfo.ControllerPlayerOne.NumberOfCardIn("Arsenal"));
+            gameStructureInfo.ControllerPlayerOne.FortitudeRating(),
+            gameStructureInfo.ControllerPlayerOne.GetNumberOfCardIn("Hand"),
+            gameStructureInfo.ControllerPlayerOne.GetNumberOfCardIn("Arsenal"));
         PlayerInfo playerTwo = new PlayerInfo(gameStructureInfo.ControllerPlayerTwo.GetNameOfSuperStar(),
-            gameStructureInfo.ControllerPlayerTwo.FortitudRating(),
-            gameStructureInfo.ControllerPlayerTwo.NumberOfCardIn("Hand"),
-            gameStructureInfo.ControllerPlayerTwo.NumberOfCardIn("Arsenal"));
+            gameStructureInfo.ControllerPlayerTwo.FortitudeRating(),
+            gameStructureInfo.ControllerPlayerTwo.GetNumberOfCardIn("Hand"),
+            gameStructureInfo.ControllerPlayerTwo.GetNumberOfCardIn("Arsenal"));
 
         List<PlayerInfo>  playersListToPrint = new List<PlayerInfo> { playerOne, playerTwo };
 
@@ -127,7 +127,7 @@ public class Game
     {
         NextPlay activityToPerform;
 
-        if (superAbilityInformation.PlayerCanUseSuperStarAbility(gameStructureInfo))
+        if (superAbilityInformation.CanPlayerUseSuperStarAbility(gameStructureInfo))
             activityToPerform = view.AskUserWhatToDoWhenUsingHisAbilityIsPossible();
         else
             activityToPerform = view.AskUserWhatToDoWhenHeCannotUseHisAbility();

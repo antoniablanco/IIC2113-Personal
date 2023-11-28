@@ -3,23 +3,23 @@ using RawDeal.PlayerClasses;
 
 namespace RawDeal.EffectsClasses;
 
-public class ColateralDamageEffectUtils: EffectsUtils
+public class CollateralDamageEffectUtils: EffectsUtils
 {
     private int totalDamage;
     private PlayerController controllerPlayer;
     private Player player;
     
-    public ColateralDamageEffectUtils(PlayerController controllerPlayer, GameStructureInfo gameStructureInfo, int totalDamage = 1)
+    public CollateralDamageEffectUtils(PlayerController controllerPlayer, GameStructureInfo gameStructureInfo, int totalDamage = 1)
         : base(gameStructureInfo)
     {   
         this.totalDamage = totalDamage;
         this.controllerPlayer = controllerPlayer;
         player = gameStructureInfo.ControllerOpponentPlayer == controllerPlayer ? 
             gameStructureInfo.GetOpponentPlayer() : gameStructureInfo.GetCurrentPlayer();
-        ColateralDamage();
+        ProduceCollateralDamage();
     }
     
-    private void ColateralDamage()
+    private void ProduceCollateralDamage()
     {
         gameStructureInfo.View.SayThatPlayerDamagedHimself(controllerPlayer.GetNameOfSuperStar(), totalDamage);
         gameStructureInfo.View.SayThatSuperstarWillTakeSomeDamage(controllerPlayer.GetNameOfSuperStar(),
@@ -42,7 +42,7 @@ public class ColateralDamageEffectUtils: EffectsUtils
     
     private void ShowOneFaceDownCard(int currentDamage)
     {
-        var flippedCardController = gameStructureInfo.CardMovement.TranferUnselectedCardFromArsenalToRingSide(player);
+        var flippedCardController = gameStructureInfo.CardMovement.TransferUnselectedCardFromArsenalToRingSide(player);
         var flippedCardString = flippedCardController.GetStringCardInfo();
         gameStructureInfo.View.ShowCardOverturnByTakingDamage(flippedCardString, currentDamage, totalDamage);
     }

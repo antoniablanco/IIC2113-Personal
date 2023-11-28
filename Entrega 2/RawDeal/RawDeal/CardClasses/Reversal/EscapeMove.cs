@@ -13,7 +13,7 @@ public class EscapeMove : Card
     public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo, 
         string reverseBy, int totalDamage)
     {
-        return playedCardController.ContainsSubtype("Grapple") &&
+        return playedCardController.DoesTheCardContainsSubtype("Grapple") &&
                playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver") &&
                gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totalDamage);;
     }

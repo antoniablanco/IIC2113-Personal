@@ -13,7 +13,7 @@ public class Jericho: SuperStar
         
     }
 
-    public override void UsingElectiveSuperAbility(GameStructureInfo gameStructureInfo)
+    public override void UseElectiveSuperAbility(GameStructureInfo gameStructureInfo)
     {
         View.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
         gameStructureInfo.ControllerCurrentPlayer.MarkSuperAbilityAsUsedInThisTurn();
@@ -28,6 +28,6 @@ public class Jericho: SuperStar
 
     public override bool CanUseSuperAbility(PlayerController currentPlayer)
     {
-        return (currentPlayer.NumberOfCardIn("Hand") > 0 && !currentPlayer.HasTheSuperAbilityBeenUsedThisTurn());
+        return (currentPlayer.GetNumberOfCardIn("Hand") > 0 && !currentPlayer.HasTheSuperAbilityBeenUsedThisTurn());
     }
 }

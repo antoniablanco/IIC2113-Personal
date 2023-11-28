@@ -26,7 +26,7 @@ public class UndertakerSitsUp: Card
         gameStructureInfo.BonusManager.SetWhoActivateNextPlayedCardBonusEffect(gameStructureInfo.ControllerOpponentPlayer);
         
         const int totalDamage = 4;
-        new ColateralDamageEffectUtils(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo, totalDamage);
+        new CollateralDamageEffectUtils(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo, totalDamage);
         
         const int numberOfCardToDiscard = 1;
         new HandToRingSideDiscardEffect(gameStructureInfo.ControllerCurrentPlayer,

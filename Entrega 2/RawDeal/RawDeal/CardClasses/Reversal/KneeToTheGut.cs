@@ -15,7 +15,7 @@ public class KneeToTheGut : Card
         string reverseBy, int totalDamage)
     {
         const int maximumDamageProducedByPlayedCard = 7;
-        return playedCardController.ContainsSubtype("Strike") &&
+        return playedCardController.DoesTheCardContainsSubtype("Strike") &&
                playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver") &&
                totalDamage <= maximumDamageProducedByPlayedCard &&
                playedCardController.HasAnyTypeDifferentOfReversal() &&

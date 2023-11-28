@@ -19,7 +19,7 @@ public class Pedigree: Card
                gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totalDamage);;
     }
     
-    public override int ExtraDamage(GameStructureInfo gameStructureInfo)
+    public override int GetExtraDamage(GameStructureInfo gameStructureInfo)
     {
         int damage = 0;
         if (gameStructureInfo.LastCardBeingPlayedTitle != null)
@@ -32,14 +32,14 @@ public class Pedigree: Card
     private int IsNotTheFirstCard(GameStructureInfo gameStructureInfo)
     {
         CardController cardController;
-        try { cardController = gameStructureInfo.ControllerCurrentPlayer.FindCardCardFrom(
+        try { cardController = gameStructureInfo.ControllerCurrentPlayer.GetCardInDeckByName(
             "RingArea", gameStructureInfo.LastCardBeingPlayedTitle); }
-        catch (CardNotFoundException) { cardController = gameStructureInfo.ControllerCurrentPlayer.FindCardCardFrom(
+        catch (CardNotFoundException) { cardController = gameStructureInfo.ControllerCurrentPlayer.GetCardInDeckByName(
             "RingSide", gameStructureInfo.LastCardBeingPlayedTitle); }
 
         if (cardController != null)
         {
-            if (cardController.ContainsSubtype("Strike") && gameStructureInfo.LastCardBeingPlayedType == "Maneuver" &&
+            if (cardController.DoesTheCardContainsSubtype("Strike") && gameStructureInfo.LastCardBeingPlayedType == "Maneuver" &&
                 gameStructureInfo.GetSetGameVariables.GetRoundsInTurn() > 1)
                 return 2;
         }

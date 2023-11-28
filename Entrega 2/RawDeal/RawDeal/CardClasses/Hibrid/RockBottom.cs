@@ -15,8 +15,8 @@ public class RockBottom : Card
     public override bool CanReversalThisCard(CardController playedCardController, GameStructureInfo gameStructureInfo,
         string reverseBy, int totaldamage)
     {
-        int numberOfCardsInHand = gameStructureInfo.ControllerOpponentPlayer.NumberOfCardIn("Hand");
-        return playedCardController.ContainsSubtype("Grapple")
+        int numberOfCardsInHand = gameStructureInfo.ControllerOpponentPlayer.GetNumberOfCardIn("Hand");
+        return playedCardController.DoesTheCardContainsSubtype("Grapple")
                && reverseBy == "Hand" && playedCardController.VerifyIfTheLastPlayedTypeIs("Maneuver")
                && numberOfCardsInHand > 1 &&
                gameStructureInfo.BonusManager.CanReversal(gameStructureInfo, reverseBy, totaldamage);;

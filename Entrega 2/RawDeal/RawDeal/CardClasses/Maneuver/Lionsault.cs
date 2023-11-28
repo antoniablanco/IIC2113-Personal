@@ -20,6 +20,6 @@ public class Lionsault : Card
 
     public override bool CheckIfCardCanBePlayed(GameStructureInfo gameStructureInfo, string type = "Maneuver")
     {
-        return gameStructureInfo.LastDamageComited >= 4;
+        return gameStructureInfo.LastDamageCommitted >= 4;
     }
 }

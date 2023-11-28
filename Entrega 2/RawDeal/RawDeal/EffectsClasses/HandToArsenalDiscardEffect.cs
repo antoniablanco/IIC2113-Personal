@@ -16,14 +16,14 @@ public class HandToArsenalDiscardEffect: EffectsUtils
 
     private void Apply()
     {
-        var handCardsAsString = controllerPlayer.StringCardsFrom("Hand");
+        var handCardsAsString = controllerPlayer.GetStringCardsFrom("Hand");
         var selectedCard =
             gameStructureInfo.View.AskPlayerToReturnOneCardFromHisHandToHisArsenal(controllerPlayer.GetNameOfSuperStar(),
                 handCardsAsString);
 
-        var discardedCardController = controllerPlayer.GetSpecificCardFrom("Hand", selectedCard);
+        var discardedCardController = controllerPlayer.RetrieveCardFromDeckAtPosition("Hand", selectedCard);
 
         var player = gameStructureInfo.GetCurrentPlayer();
-        gameStructureInfo.CardMovement.TransferChoosinCardFromHandToStartOfArsenal(player, discardedCardController);
+        gameStructureInfo.CardMovement.TransferSelectedCardFromHandToStartOfArsenal(player, discardedCardController);
     }
 }

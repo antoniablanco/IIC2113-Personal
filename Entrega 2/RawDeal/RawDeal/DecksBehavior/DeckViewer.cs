@@ -24,26 +24,26 @@ public class DeckViewer
         switch (setCardsToView)
         {
             case CardSet.Hand:
-                ActionSeeTotalCards(gameStructureInfo.ControllerCurrentPlayer.StringCardsFrom("Hand"));
+                ShowTotalCardsOf(gameStructureInfo.ControllerCurrentPlayer.GetStringCardsFrom("Hand"));
                 break;
             case CardSet.RingArea:
-                ActionSeeTotalCards(gameStructureInfo.ControllerCurrentPlayer.StringCardsFrom("RingArea"));
+                ShowTotalCardsOf(gameStructureInfo.ControllerCurrentPlayer.GetStringCardsFrom("RingArea"));
                 break;
             case CardSet.RingsidePile:
-                ActionSeeTotalCards(gameStructureInfo.ControllerCurrentPlayer.StringCardsFrom("RingSide"));
+                ShowTotalCardsOf(gameStructureInfo.ControllerCurrentPlayer.GetStringCardsFrom("RingSide"));
                 break;
             case CardSet.OpponentsRingArea:
-                ActionSeeTotalCards(gameStructureInfo.ControllerOpponentPlayer.StringCardsFrom("RingArea"));
+                ShowTotalCardsOf(gameStructureInfo.ControllerOpponentPlayer.GetStringCardsFrom("RingArea"));
                 break;
             case CardSet.OpponentsRingsidePile:
-                ActionSeeTotalCards(gameStructureInfo.ControllerOpponentPlayer.StringCardsFrom("RingSide"));
+                ShowTotalCardsOf(gameStructureInfo.ControllerOpponentPlayer.GetStringCardsFrom("RingSide"));
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
     }
 
-    private void ActionSeeTotalCards(List<string> stringCardSet)
+    private void ShowTotalCardsOf(List<string> stringCardSet)
     {
         gameStructureInfo.View.ShowCards(stringCardSet);
     }

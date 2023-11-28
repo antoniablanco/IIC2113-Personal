@@ -62,17 +62,17 @@ public abstract class Card : IViewableCardInfo
         return true;
     }
 
-    public virtual int ExtraReversalDamage()
+    public virtual int GetExtraReversalDamage()
     {
         return 0;
     }
 
-    public virtual int PlusFornitudAfterEspecificCard(GameStructureInfo gameStructureInfo)
+    public virtual int ObtainFortitudeIncreaseAfterSpecificCard(GameStructureInfo gameStructureInfo)
     {
         return 0;
     }
     
-    public virtual int ExtraDamage(GameStructureInfo gameStructureInfo)
+    public virtual int GetExtraDamage(GameStructureInfo gameStructureInfo)
     {
         return 0;
     }

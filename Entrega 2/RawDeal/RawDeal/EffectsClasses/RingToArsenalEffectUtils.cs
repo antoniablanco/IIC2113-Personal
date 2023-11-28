@@ -28,13 +28,13 @@ public class RingToArsenalEffectUtils: EffectsUtils
 
     private void DiscardCard(int currentNumberOfCard)
     {
-        var ringAreaAsString = gameStructureInfo.ControllerCurrentPlayer.StringCardsFrom("RingSide");
+        var ringAreaAsString = gameStructureInfo.ControllerCurrentPlayer.GetStringCardsFrom("RingSide");
         var selectedCardIndex =
             gameStructureInfo.View.AskPlayerToSelectCardsToRecover(controllerPlayer.GetNameOfSuperStar(), currentNumberOfCard,
                 ringAreaAsString);
         var discardedCardController =
-            gameStructureInfo.ControllerCurrentPlayer.GetSpecificCardFrom("RingSide", selectedCardIndex);
-        gameStructureInfo.CardMovement.TransferChoosinCardFromRingSideToStartOfArsenal(gameStructureInfo.GetCurrentPlayer(),
+            gameStructureInfo.ControllerCurrentPlayer.RetrieveCardFromDeckAtPosition("RingSide", selectedCardIndex);
+        gameStructureInfo.CardMovement.TransferSelectedCardFromRingSideToStartOfArsenal(gameStructureInfo.GetCurrentPlayer(),
             discardedCardController);
     }
     

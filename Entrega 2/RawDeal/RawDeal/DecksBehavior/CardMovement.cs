@@ -6,14 +6,7 @@ namespace RawDeal.DecksBehavior;
 
 public class CardMovement
 {   
-    private readonly GameStructureInfo gameStructureInfo;
-
-    public CardMovement(GameStructureInfo gameStructureInfo)
-    {
-        this.gameStructureInfo = gameStructureInfo;
-    }
-    
-    private void CardTransferToStartChoosingWhichOneToChange(CardController cardController, List<CardController> sourceList,
+    private void TransferSelectedCardToStart(CardController cardController, List<CardController> sourceList,
         List<CardController> destinationList)
     {
         if (sourceList.Count > 0)
@@ -41,7 +34,7 @@ public class CardMovement
         throw new InvalidOperationException("No se puede transferir una tarjeta porque la lista de origen está vacía.");
     }
 
-    private void CardTransferChoosingWhichOneToChange(CardController cardController, List<CardController> sourceList,
+    private void TransferSelectedCard(CardController cardController, List<CardController> sourceList,
         List<CardController> destinationList)
     {
         if (sourceList.Count > 0)
@@ -52,48 +45,48 @@ public class CardMovement
         }
     }
 
-    public CardController? TranferUnselectedCardFromArsenalToHand(Player player)
+    public CardController? TransferUnselectedCardFromArsenalToHand(Player player)
     {
         return TransferOfUnselectedCard(player.CardsArsenal, player.CardsHand);
     }
 
-    public CardController? TranferUnselectedCardFromArsenalToRingSide(Player player)
+    public CardController? TransferUnselectedCardFromArsenalToRingSide(Player player)
     {
         return TransferOfUnselectedCard(player.CardsArsenal, player.CardsRingSide);
     }
 
-    public void TransferChoosinCardFromHandToRingArea(Player player, CardController cardController)
+    public void TransferSelectedCardFromHandToRingArea(Player player, CardController cardController)
     {
-        CardTransferChoosingWhichOneToChange(cardController, player.CardsHand, player.CardsRingArea);
+        TransferSelectedCard(cardController, player.CardsHand, player.CardsRingArea);
     }
     
-    public void TransferChoosinCardFromHandToStartOfArsenal(Player player, CardController cardController)
+    public void TransferSelectedCardFromHandToStartOfArsenal(Player player, CardController cardController)
     {   
-        CardTransferToStartChoosingWhichOneToChange(cardController, player.CardsHand, player.CardsArsenal);
+        TransferSelectedCardToStart(cardController, player.CardsHand, player.CardsArsenal);
     }
 
-    public void TransferChoosinCardFromHandToRingSide(Player player, CardController cardController)
+    public void TransferSelectedCardFromHandToRingSide(Player player, CardController cardController)
     {   
-        CardTransferChoosingWhichOneToChange(cardController, player.CardsHand, player.CardsRingSide);
+        TransferSelectedCard(cardController, player.CardsHand, player.CardsRingSide);
     }
     
-    public void TransferChoosinCardFromRingAreaToRingSide(Player player, CardController cardController)
+    public void TransferSelectedCardFromRingAreaToRingSide(Player player, CardController cardController)
     {
-        CardTransferChoosingWhichOneToChange(cardController, player.CardsRingArea, player.CardsRingSide);
+        TransferSelectedCard(cardController, player.CardsRingArea, player.CardsRingSide);
     }
 
-    public void TransferChoosinCardFromRingSideToHand(Player player, CardController cardController)
+    public void TransferSelectedCardFromRingSideToHand(Player player, CardController cardController)
     {   
-        CardTransferChoosingWhichOneToChange(cardController, player.CardsRingSide, player.CardsHand);
+        TransferSelectedCard(cardController, player.CardsRingSide, player.CardsHand);
     }
     
-    public void TransferChoosinCardFromRingSideToStartOfArsenal(Player player, CardController cardController)
+    public void TransferSelectedCardFromRingSideToStartOfArsenal(Player player, CardController cardController)
     {
-        CardTransferToStartChoosingWhichOneToChange(cardController, player.CardsRingSide, player.CardsArsenal);
+        TransferSelectedCardToStart(cardController, player.CardsRingSide, player.CardsArsenal);
     }
     
-    public void TransferChoosinCardFromArsenalToHand(Player player, CardController cardController)
+    public void TransferSelectedCardFromArsenalToHand(Player player, CardController cardController)
     {
-        CardTransferChoosingWhichOneToChange(cardController, player.CardsArsenal, player.CardsHand);
+        TransferSelectedCard(cardController, player.CardsArsenal, player.CardsHand);
     }
 }
