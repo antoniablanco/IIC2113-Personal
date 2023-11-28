@@ -34,7 +34,7 @@ public class JockeyingForPosition : Card
 
     private void ApplyEffect(GameStructureInfo gameStructureInfo, PlayerController playerController)
     {
-        GetSelectedEffectChosenByPlayer(gameStructureInfo, playerController.NameOfSuperStar());
+        GetSelectedEffectChosenByPlayer(gameStructureInfo, playerController.GetNameOfSuperStar());
         gameStructureInfo.BonusManager.SetWhoActivateNextPlayedCardBonusEffect(playerController);
         var turnsBeforeEffectExpires = 2;
         gameStructureInfo.BonusManager.SetTurnsLeftForBonusCounter(turnsBeforeEffectExpires);

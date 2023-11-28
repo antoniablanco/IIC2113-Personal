@@ -16,7 +16,7 @@ public class DDT : Card
         new ColateralDamageEffectUtils(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo);
 
         const int numberOfCardToDiscard = 2;
-        new DiscardCardsFromHandToRingSideEffect(gameStructureInfo.ControllerOpponentPlayer,
+        new HandToRingSideDiscardEffect(gameStructureInfo.ControllerOpponentPlayer,
             gameStructureInfo.ControllerOpponentPlayer, numberOfCardToDiscard, gameStructureInfo);
     }
 }

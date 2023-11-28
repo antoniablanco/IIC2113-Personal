@@ -25,11 +25,11 @@ public class GameStructureInfo
     public string CardBeingPlayedType;
     public string LastCardBeingPlayedTitle;
     public string LastCardBeingPlayedType;
-    public PlayCard PlayCard;
+    public CardPlay CardPlay;
     public Player PlayerOne;
     public Player PlayerTwo;
     public View View;
-    public ViewDecks ViewDecks;
+    public DeckViewer DeckViewer;
     public PlayerController WinnerPlayer;
     public BonusStructureInfo BonusStructureInfo = new BonusStructureInfo();
     public int NumberOfRoundsInTheTurn = 0;

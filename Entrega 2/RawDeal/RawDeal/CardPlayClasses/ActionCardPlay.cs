@@ -3,11 +3,11 @@ using RawDeal.GameClasses;
 
 namespace RawDeal.DecksBehavior;
 
-public class PlayActionCard
+public class ActionCardPlay
 {
     private GameStructureInfo gameStructureInfo;
 
-    public PlayActionCard(GameStructureInfo gameStructureInfo)
+    public ActionCardPlay(GameStructureInfo gameStructureInfo)
     {
         this.gameStructureInfo = gameStructureInfo;
     }

@@ -21,7 +21,7 @@ public class GetCrowdSupport: Card
     }
 
     private void ApplyEffect(GameStructureInfo gameStructureInfo, PlayerController playerController)
-    {   new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
+    {   new CardDrawEffect(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo).StealCards();
         
         gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect(BonusEnum.CardBonusName.GetCrowdSupport, bonusValue:4, 

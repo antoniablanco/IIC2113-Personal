@@ -14,11 +14,11 @@ public class GuillotineStretch : Card
     public override void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
         const int numberOfCardToDiscard = 1;
-        new DiscardCardsFromHandToRingSideEffect(gameStructureInfo.ControllerOpponentPlayer,
+        new HandToRingSideDiscardEffect(gameStructureInfo.ControllerOpponentPlayer,
             gameStructureInfo.ControllerOpponentPlayer, numberOfCardToDiscard, gameStructureInfo);
     
         const int maximumNumberOfCardsToSteal = 1;
-        new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
+        new CardDrawEffect(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo).MayStealCards(maximumNumberOfCardsToSteal);
     }
 }

@@ -29,7 +29,7 @@ public class UndertakerSitsUp: Card
         new ColateralDamageEffectUtils(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo, totalDamage);
         
         const int numberOfCardToDiscard = 1;
-        new DiscardCardsFromHandToRingSideEffect(gameStructureInfo.ControllerCurrentPlayer,
+        new HandToRingSideDiscardEffect(gameStructureInfo.ControllerCurrentPlayer,
             gameStructureInfo.ControllerCurrentPlayer, numberOfCardToDiscard, gameStructureInfo);
     }
     

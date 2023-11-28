@@ -16,13 +16,13 @@ public class ThePeoplesElbow: Card
     public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {   
         gameStructureInfo.View.SayThatPlayerPutsThisCardAtTheBottomOfHisArsenal(
-            gameStructureInfo.ControllerCurrentPlayer.NameOfSuperStar(), Title);
+            gameStructureInfo.ControllerCurrentPlayer.GetNameOfSuperStar(), Title);
         
         gameStructureInfo.CardMovement.TransferChoosinCardFromHandToStartOfArsenal(gameStructureInfo.GetCurrentPlayer(),
             playedCardController);
         
         const int numberOfCardsToSteal = 2;
-        new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
+        new CardDrawEffect(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo).StealCards(numberOfCardsToSteal);
     }
     

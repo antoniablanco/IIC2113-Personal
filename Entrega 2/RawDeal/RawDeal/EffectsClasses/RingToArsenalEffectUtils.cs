@@ -3,12 +3,12 @@ using RawDeal.PlayerClasses;
 
 namespace RawDeal.EffectsClasses;
 
-public class AddingChoosingCardFromRingSideToArsenalEffectUtils: EffectsUtils
+public class RingToArsenalEffectUtils: EffectsUtils
 {
     private PlayerController controllerPlayer;
     private int numberOfCardToRecover;
     
-    public AddingChoosingCardFromRingSideToArsenalEffectUtils(PlayerController controllerPlayer, 
+    public RingToArsenalEffectUtils(PlayerController controllerPlayer, 
         GameStructureInfo gameStructureInfo, int numberOfCardToRecover=1)
         : base(gameStructureInfo)
     {
@@ -30,7 +30,7 @@ public class AddingChoosingCardFromRingSideToArsenalEffectUtils: EffectsUtils
     {
         var ringAreaAsString = gameStructureInfo.ControllerCurrentPlayer.StringCardsFrom("RingSide");
         var selectedCardIndex =
-            gameStructureInfo.View.AskPlayerToSelectCardsToRecover(controllerPlayer.NameOfSuperStar(), currentNumberOfCard,
+            gameStructureInfo.View.AskPlayerToSelectCardsToRecover(controllerPlayer.GetNameOfSuperStar(), currentNumberOfCard,
                 ringAreaAsString);
         var discardedCardController =
             gameStructureInfo.ControllerCurrentPlayer.GetSpecificCardFrom("RingSide", selectedCardIndex);

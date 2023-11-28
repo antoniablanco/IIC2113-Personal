@@ -15,14 +15,14 @@ public class StoneCold: SuperStar
 
     public override void UsingElectiveSuperAbility(GameStructureInfo gameStructureInfo)
     {
-        gameStructureInfo.ControllerCurrentPlayer.TheSuperStarHasUsedHisSuperAbilityThisTurn();
+        gameStructureInfo.ControllerCurrentPlayer.MarkSuperAbilityAsUsedInThisTurn();
         View.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
         
         const int numberOfCardsToSteal = 1;
-        new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
+        new CardDrawEffect(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo).StealCards(numberOfCardsToSteal);
         
-        new DiscardCardsFromHandToArsenalEffect(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo);
+        new HandToArsenalDiscardEffect(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo);
     }
 
 

@@ -15,7 +15,7 @@ public class RollOutOfTheRing: Card
     public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {   
         const int maxNumberOfCardsToObtain = 2;
-        new DiscardToObtainRingSideCardsEffect(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo,
+        new ObtainRingSideCardEffect(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo,
             maxNumberOfCardsToObtain);
         
         gameStructureInfo.EffectsUtils.DiscardActionCardToRingAreButNotSaying(playedCardController,

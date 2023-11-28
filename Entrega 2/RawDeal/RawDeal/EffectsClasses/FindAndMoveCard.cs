@@ -28,11 +28,11 @@ public class FindAndMoveCard: EffectsUtils
         try { SearchCardInRingSide(); }
         catch (CardNotFoundException)
         {   
-            gameStructureInfo.View.SayThatPlayerDidntFindTheCard(playerController.NameOfSuperStar());
+            gameStructureInfo.View.SayThatPlayerDidntFindTheCard(playerController.GetNameOfSuperStar());
             try { SearchCardInArsenal(); }
             catch (CardNotFoundException)
             {
-                gameStructureInfo.View.SayThatPlayerDidntFindTheCard(playerController.NameOfSuperStar());
+                gameStructureInfo.View.SayThatPlayerDidntFindTheCard(playerController.GetNameOfSuperStar());
             }
         }
         
@@ -41,18 +41,18 @@ public class FindAndMoveCard: EffectsUtils
     private void SearchCardInRingSide()
     {   
         gameStructureInfo.View.SayThatPlayerSearchesForTheTargetCardInHisRingside(
-            playerController.NameOfSuperStar(), cardTitle);
+            playerController.GetNameOfSuperStar(), cardTitle);
         CardController card = playerController.FindCardCardFrom("RingSide", cardTitle);
-        gameStructureInfo.View.SayThatPlayerFoundTheCardAndPutItIntoHisHand(playerController.NameOfSuperStar());
+        gameStructureInfo.View.SayThatPlayerFoundTheCardAndPutItIntoHisHand(playerController.GetNameOfSuperStar());
         gameStructureInfo.CardMovement.TransferChoosinCardFromRingSideToHand(player, card);
     }
 
     private void SearchCardInArsenal()
     {   
         gameStructureInfo.View.SayThatPlayerSearchesForTheTargetCardInHisArsenal(
-            playerController.NameOfSuperStar(), cardTitle);
+            playerController.GetNameOfSuperStar(), cardTitle);
         CardController card = playerController.FindCardCardFrom("Arsenal", cardTitle);
-        gameStructureInfo.View.SayThatPlayerFoundTheCardAndPutItIntoHisHand(playerController.NameOfSuperStar());
+        gameStructureInfo.View.SayThatPlayerFoundTheCardAndPutItIntoHisHand(playerController.GetNameOfSuperStar());
         gameStructureInfo.CardMovement.TransferChoosinCardFromArsenalToHand(player, card);
     }
 }

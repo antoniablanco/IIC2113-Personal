@@ -32,8 +32,8 @@ public class ClassesGenerator
 
     private void CreatePlayCardClass()
     {
-        PlayCard playCard = new PlayCard(gameStructureInfo);
-        gameStructureInfo.PlayCard = playCard;
+        CardPlay cardPlay = new CardPlay(gameStructureInfo);
+        gameStructureInfo.CardPlay = cardPlay;
     }
 
     private void CreateEffectsClass()
@@ -44,8 +44,8 @@ public class ClassesGenerator
     
     private void CreateViewDecksClass()
     {
-        ViewDecks viewDecks = new ViewDecks(gameStructureInfo);
-        gameStructureInfo.ViewDecks = viewDecks;
+        DeckViewer deckViewer = new DeckViewer(gameStructureInfo);
+        gameStructureInfo.DeckViewer = deckViewer;
     }
 
     private void CreateBonusManagerClass()

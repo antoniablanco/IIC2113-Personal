@@ -19,7 +19,7 @@ public class EffectsUtils
         Player player = gameStructureInfo.ControllerOpponentPlayer == controllerCurrentPlayer ? 
             gameStructureInfo.GetOpponentPlayer() : gameStructureInfo.GetCurrentPlayer();
         
-        gameStructureInfo.View.SayThatPlayerMustDiscardThisCard(controllerCurrentPlayer.NameOfSuperStar(),
+        gameStructureInfo.View.SayThatPlayerMustDiscardThisCard(controllerCurrentPlayer.GetNameOfSuperStar(),
             playedCardController.GetCardTitle());
         gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingSide(player, playedCardController);
     }
@@ -31,7 +31,7 @@ public class EffectsUtils
     
     public bool IsTheSuperStarMankind(PlayerController playerController)
     {
-        return playerController.NameOfSuperStar() == "MANKIND";
+        return playerController.GetNameOfSuperStar() == "MANKIND";
     }
 
     public int GetDamageProducedByReversalCardWithNotEspecificDamage()

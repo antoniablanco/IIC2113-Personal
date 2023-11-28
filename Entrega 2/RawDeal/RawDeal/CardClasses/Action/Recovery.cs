@@ -17,7 +17,7 @@ public class Recovery: Card
         const int numberOfDamageToRecover = 2;
         new GetBackDamageEffectUtils(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo, numberOfDamageToRecover);
         
-        new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
+        new CardDrawEffect(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo).StealCards();
         
        gameStructureInfo.EffectsUtils.DiscardActionCardToRingAreButNotSaying(playedCardController, 

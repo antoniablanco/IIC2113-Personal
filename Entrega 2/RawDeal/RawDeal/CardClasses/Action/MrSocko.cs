@@ -14,7 +14,7 @@ public class MrSocko: Card
     
     public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
-        new ChooseRingSideOrArsenalToSelectCardEffect(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo);
+        new RingOrArsenalCardEffect(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo);
         gameStructureInfo.EffectsUtils.DiscardActionCardToRingAreButNotSaying(playedCardController,
             gameStructureInfo.GetCurrentPlayer());
     }

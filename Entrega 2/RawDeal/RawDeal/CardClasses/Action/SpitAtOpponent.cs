@@ -15,11 +15,11 @@ public class SpitAtOpponent: Card
     public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
         const int numberOfCardToDiscardCurrentPlayer = 1;
-        new DiscardCardsFromHandToRingSideEffect(gameStructureInfo.ControllerCurrentPlayer,
+        new HandToRingSideDiscardEffect(gameStructureInfo.ControllerCurrentPlayer,
             gameStructureInfo.ControllerCurrentPlayer, numberOfCardToDiscardCurrentPlayer, gameStructureInfo);
 
         const int numberOfCardToDiscardOpponentPlayer = 4;
-        new DiscardCardsFromHandToRingSideEffect(gameStructureInfo.ControllerOpponentPlayer, 
+        new HandToRingSideDiscardEffect(gameStructureInfo.ControllerOpponentPlayer, 
             gameStructureInfo.ControllerOpponentPlayer, numberOfCardToDiscardOpponentPlayer, gameStructureInfo);
 
         gameStructureInfo.EffectsUtils.DiscardActionCardToRingAreButNotSaying(playedCardController,

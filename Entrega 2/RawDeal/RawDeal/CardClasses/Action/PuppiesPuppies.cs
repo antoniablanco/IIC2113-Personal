@@ -19,7 +19,7 @@ public class PuppiesPuppies: Card
 
         const int numberOfCardsToSteal = 2;
         
-        new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
+        new CardDrawEffect(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo).StealCards(numberOfCardsToSteal);
 
         gameStructureInfo.EffectsUtils.DiscardActionCardToRingAreButNotSaying(playedCardController,

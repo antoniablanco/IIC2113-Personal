@@ -3,14 +3,14 @@ using RawDeal.PlayerClasses;
 
 namespace RawDeal.EffectsClasses;
 
-public class DiscardCardsFromHandToRingSideEffect: EffectsUtils
+public class HandToRingSideDiscardEffect: EffectsUtils
 {
     private PlayerController opponentPlayerController;
     private PlayerController currentPlayerController;
     private int cardsToDiscardCount;
     private List<string> handFormatoString;
     
-    public DiscardCardsFromHandToRingSideEffect(PlayerController opponentPlayerController,
+    public HandToRingSideDiscardEffect(PlayerController opponentPlayerController,
         PlayerController currentPlayerController, int cardsToDiscardCount, GameStructureInfo gameStructureInfo)
         : base(gameStructureInfo)
     {
@@ -35,10 +35,10 @@ public class DiscardCardsFromHandToRingSideEffect: EffectsUtils
     private void DiscardACardOfMyChoiceFromHandNotNotifying(int cardsRemainingToDiscard)
     {
         var selectedCard = gameStructureInfo.View.AskPlayerToSelectACardToDiscard(handFormatoString,
-            opponentPlayerController.NameOfSuperStar(), currentPlayerController.NameOfSuperStar(), 
+            opponentPlayerController.GetNameOfSuperStar(), currentPlayerController.GetNameOfSuperStar(), 
             cardsRemainingToDiscard);
 
-        if (gameStructureInfo.PlayCard.HasSelectedAValidCard(selectedCard))
+        if (gameStructureInfo.CardPlay.HasSelectedAValidCard(selectedCard))
         {
             var discardCardController = opponentPlayerController
                 .HandCardsButNotTheCardIsBeingPlayed(gameStructureInfo.CardBeingPlayed).Item2[selectedCard];

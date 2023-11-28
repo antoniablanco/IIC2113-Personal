@@ -3,12 +3,12 @@ using RawDeal.PlayerClasses;
 
 namespace RawDeal.EffectsClasses;
 
-public class DiscardHandCardsEffect: EffectsUtils
+public class DiscardHandEffect: EffectsUtils
 {
     private PlayerController controllerPlayer;
     private Player player;
     
-    public DiscardHandCardsEffect(PlayerController controllerPlayer, GameStructureInfo gameStructureInfo)
+    public DiscardHandEffect(PlayerController controllerPlayer, GameStructureInfo gameStructureInfo)
         : base(gameStructureInfo)
     {   
         this.controllerPlayer = controllerPlayer;
@@ -19,7 +19,7 @@ public class DiscardHandCardsEffect: EffectsUtils
 
     private void DiscardHand()
     {
-        gameStructureInfo.View.SayThatPlayerDiscardsHisHand(controllerPlayer.NameOfSuperStar());
+        gameStructureInfo.View.SayThatPlayerDiscardsHisHand(controllerPlayer.GetNameOfSuperStar());
         int numberOfCardsInHand = controllerPlayer.NumberOfCardIn("Hand");
         
         for (var currentIndex = 0; currentIndex < numberOfCardsInHand; currentIndex++)

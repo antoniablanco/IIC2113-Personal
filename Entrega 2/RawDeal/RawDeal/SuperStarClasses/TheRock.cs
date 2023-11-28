@@ -17,11 +17,11 @@ public class TheRock: SuperStar
     {  
         if (CanUseSuperAbility(gameStructureInfo.ControllerCurrentPlayer))
         {
-            gameStructureInfo.ControllerCurrentPlayer.TheSuperStarHasUsedHisSuperAbilityThisTurn();
+            gameStructureInfo.ControllerCurrentPlayer.MarkSuperAbilityAsUsedInThisTurn();
             if (View.DoesPlayerWantToUseHisAbility(Name))
             {
                 View.SayThatPlayerIsGoingToUseHisAbility(Name, SuperstarAbility);
-                new AddingChoosingCardFromRingSideToArsenalEffectUtils(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo);
+                new RingToArsenalEffectUtils(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo);
             }
         }
     }
@@ -33,6 +33,6 @@ public class TheRock: SuperStar
 
     public override void BlockSuperAbilityBecauseIsJustAtTheStartOfTheTurn(GameStructureInfo gameStructureInfo)
     {
-        gameStructureInfo.ControllerCurrentPlayer.TheSuperStarHasUsedHisSuperAbilityThisTurn();
+        gameStructureInfo.ControllerCurrentPlayer.MarkSuperAbilityAsUsedInThisTurn();
     }
 }

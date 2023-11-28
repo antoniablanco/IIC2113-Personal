@@ -21,8 +21,8 @@ public class SeeOponentHandEffect: EffectsUtils
     
     private void Apply()
     {
-        gameStructureInfo.View.SayThatPlayerLooksAtHisOpponentsHand(currentPlayerController.NameOfSuperStar(),
-            opponentPlayerController.NameOfSuperStar());
+        gameStructureInfo.View.SayThatPlayerLooksAtHisOpponentsHand(currentPlayerController.GetNameOfSuperStar(),
+            opponentPlayerController.GetNameOfSuperStar());
         List<string> stringCardSet = opponentPlayerController.StringCardsFrom("Hand");
         gameStructureInfo.View.ShowCards(stringCardSet);
     }

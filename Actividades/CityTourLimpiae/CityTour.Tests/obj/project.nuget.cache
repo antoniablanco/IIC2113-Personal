@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "P+RFeAG31P13U5EwibWECmc+IijipqYDgZDxYmhlHwJqQJ2KWzOoOxl6a/uNb6iDE8KXmMHKuquk1HTvJkxsMA==",
+  "dgSpecHash": "4jClC2GC/DF885UNpOqd/5g8J4ivonKg0iBYx9D5cS8Zntr0QBIzlvaYQO5AuhSpv1B7iUoIf1V+G0szI/rGiA==",
   "success": true,
-  "projectFilePath": "/Users/antoniablanco/Desktop/CityTour/CityTour.Tests/CityTour.Tests.csproj",
+  "projectFilePath": "/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividades/CityTourLimpiae/CityTour.Tests/CityTour.Tests.csproj",
   "expectedPackageFiles": [
     "/Users/antoniablanco/.nuget/packages/coverlet.collector/3.1.0/coverlet.collector.3.1.0.nupkg.sha512",
     "/Users/antoniablanco/.nuget/packages/microsoft.codecoverage/16.11.0/microsoft.codecoverage.16.11.0.nupkg.sha512",

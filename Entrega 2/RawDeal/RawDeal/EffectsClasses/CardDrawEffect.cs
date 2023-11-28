@@ -3,12 +3,12 @@ using RawDeal.PlayerClasses;
 
 namespace RawDeal.EffectsClasses;
 
-public class DrawCardEffect: EffectsUtils
+public class CardDrawEffect: EffectsUtils
 {
     private PlayerController controllerPlayer;
     private Player player;
     
-    public DrawCardEffect(PlayerController controllerPlayer, GameStructureInfo gameStructureInfo)
+    public CardDrawEffect(PlayerController controllerPlayer, GameStructureInfo gameStructureInfo)
         : base(gameStructureInfo)
     {
         this.controllerPlayer = controllerPlayer;
@@ -19,7 +19,7 @@ public class DrawCardEffect: EffectsUtils
     public void MayStealCards(int maximumNumberOfcardToDraw)
     {   
         var numberOfcardToDraw = gameStructureInfo.View.AskHowManyCardsToDrawBecauseOfACardEffect(
-            controllerPlayer.NameOfSuperStar(), maximumNumberOfcardToDraw);
+            controllerPlayer.GetNameOfSuperStar(), maximumNumberOfcardToDraw);
         
         StealCards(numberOfcardToDraw);
     }
@@ -27,7 +27,7 @@ public class DrawCardEffect: EffectsUtils
     public void StealCards(int numberOfcardToDraw = 1)
     {   
         numberOfcardToDraw = Math.Min(controllerPlayer.NumberOfCardIn("Arsenal"), numberOfcardToDraw);
-        gameStructureInfo.View.SayThatPlayerDrawCards(controllerPlayer.NameOfSuperStar(), numberOfcardToDraw);
+        gameStructureInfo.View.SayThatPlayerDrawCards(controllerPlayer.GetNameOfSuperStar(), numberOfcardToDraw);
         if (IsPositive(numberOfcardToDraw))
         {
             for (var i = 0; i < numberOfcardToDraw; i++)

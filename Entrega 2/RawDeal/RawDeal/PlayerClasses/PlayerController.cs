@@ -26,7 +26,7 @@ public class PlayerController
         gameStructureInfo.CardMovement.TransferOfUnselectedCard(player.CardsArsenal, player.CardsHand);
     }
 
-    public string NameOfSuperStar()
+    public string GetNameOfSuperStar()
     {
         return player.Superestar.Name;
     }
@@ -41,7 +41,7 @@ public class PlayerController
         return (player.CardsArsenal.Count > 0);
     }
 
-    private List<CardController> CardsAvailableToPlay()
+    private List<CardController> GetCardsAvailableToPlay()
     {
         return player.CardsHand
             .Where(card => card.GetCardFortitude(card.GetCardTypes()[0]) + card.PlusFornitudAfterEspecificCard() <= FortitudRating() 
@@ -49,7 +49,7 @@ public class PlayerController
             .ToList();
     }
 
-    public List<CardController> CardsAvailableToReversal(int totalDamage) 
+    public List<CardController> GetCardsAvailableToReversal(int totalDamage) 
     {   
         return player.CardsHand
             .Where(card => card.GetCardFortitude(card.GetCardTypes()[0]) + 
@@ -62,7 +62,7 @@ public class PlayerController
     {   
         List<Tuple<CardController, int>> allTypesForCard = new List<Tuple<CardController, int>>();
 
-        foreach (var cardController in CardsAvailableToPlay())
+        foreach (var cardController in GetCardsAvailableToPlay())
         {
             int[] indexes = Enumerable.Range(0, cardController.GetCardTypes().Count()).ToArray();
             allTypesForCard.AddRange(from index in indexes where cardController.GetCardType(index) 
@@ -79,7 +79,7 @@ public class PlayerController
     {   
         List<Tuple<CardController, int>> allTypesForCard = new List<Tuple<CardController, int>>();
         
-        foreach (var cardController in CardsAvailableToReversal(totalDamage))
+        foreach (var cardController in GetCardsAvailableToReversal(totalDamage))
         {
             int[] indexes = Enumerable.Range(0, cardController.GetCardTypes().Count()).ToArray();
             allTypesForCard.AddRange(from index in indexes where cardController.GetCardType(index) == "Reversal" 
@@ -105,12 +105,12 @@ public class PlayerController
         return player.Superestar.CanUseSuperAbility(currentPlayer);
     }
 
-    public void UsingElectiveSuperAbility()
+    public void UseElectiveSuperAbility()
     {
         player.Superestar.UsingElectiveSuperAbility(gameStructureInfo);
     }
 
-    public void UsingAutomaticSuperAbility()
+    public void UseAutomaticSuperAbility()
     {
         player.Superestar.UsingAutomaticSuperAbilityAtTheStartOfTheTurn(gameStructureInfo);
     }
@@ -125,12 +125,12 @@ public class PlayerController
         return player.TheHabilityHasBeenUsedThisTurn;
     }
 
-    public void TheSuperStarHasUsedHisSuperAbilityThisTurn()
+    public void MarkSuperAbilityAsUsedInThisTurn()
     {
         player.TheHabilityHasBeenUsedThisTurn = true;
     }
 
-    public void TheTurnHasJustStartTheSuperStarHasNotUsedHisSuperAbility()
+    public void MarkSuperAbilityAsUnusedInThisTurn()
     {
         player.TheHabilityHasBeenUsedThisTurn = false;
     }

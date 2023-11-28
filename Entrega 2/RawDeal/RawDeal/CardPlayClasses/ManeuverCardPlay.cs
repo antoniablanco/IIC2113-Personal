@@ -5,13 +5,13 @@ using RawDeal.PlayerClasses;
 
 namespace RawDeal.DecksBehavior;
 
-public class PlayManeuverCard
+public class ManeuverCardPlay
 {
     private readonly GameStructureInfo gameStructureInfo;
     private bool isStunValueUsed;
     private bool theReversalCardIsUsed;
 
-    public PlayManeuverCard(GameStructureInfo gameStructureInfo)
+    public ManeuverCardPlay(GameStructureInfo gameStructureInfo)
     {
         this.gameStructureInfo = gameStructureInfo;
     }
@@ -45,7 +45,7 @@ public class PlayManeuverCard
                      playedCardController.ExtraDamage()+ 
                      gameStructureInfo.BonusManager.EternalDamage(playedCardController, gameStructureInfo.ControllerCurrentPlayer);
         var totalDamage =
-            gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(damage,
+            gameStructureInfo.CardPlay.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(damage,
                 gameStructureInfo.ControllerOpponentPlayer);
         return totalDamage;
     }
@@ -58,7 +58,7 @@ public class PlayManeuverCard
     private void SayThatTheyAreGoingToReceiveDamage(int totalDamage)
     {   
         gameStructureInfo.LastDamageComited = totalDamage;
-        var opposingSuperStarName = gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar();
+        var opposingSuperStarName = gameStructureInfo.ControllerOpponentPlayer.GetNameOfSuperStar();
         gameStructureInfo.View.SayThatSuperstarWillTakeSomeDamage(opposingSuperStarName, totalDamage);
     }
 
@@ -113,13 +113,13 @@ public class PlayManeuverCard
         if (theReversalCardIsUsed)
         {
             gameStructureInfo.EffectsUtils.EndTurn();
-            gameStructureInfo.View.SayThatCardWasReversedByDeck(controllerOpponentPlayer.NameOfSuperStar());
+            gameStructureInfo.View.SayThatCardWasReversedByDeck(controllerOpponentPlayer.GetNameOfSuperStar());
         }
     }
 
     private bool CheckIfShouldApplyStunValue()
     {
-        return theReversalCardIsUsed && gameStructureInfo.CardBeingPlayed.TheCardHadStunValue() && !isStunValueUsed;
+        return theReversalCardIsUsed && gameStructureInfo.CardBeingPlayed.TheCardHasStunValue() && !isStunValueUsed;
     }
 
     private void UseStunValueOpcion()
@@ -128,10 +128,10 @@ public class PlayManeuverCard
         {
             isStunValueUsed = true;
             var numberOfCardsToSteal = gameStructureInfo.View.AskHowManyCardsToDrawBecauseOfStunValue(
-                gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar(),
+                gameStructureInfo.ControllerOpponentPlayer.GetNameOfSuperStar(),
                 gameStructureInfo.CardBeingPlayed.GetCardStunValue());
         
-            new DrawCardEffect(gameStructureInfo.ControllerOpponentPlayer, 
+            new CardDrawEffect(gameStructureInfo.ControllerOpponentPlayer, 
                 gameStructureInfo).StealCards(numberOfCardsToSteal);
         }
     }

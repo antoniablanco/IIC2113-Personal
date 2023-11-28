@@ -4,13 +4,13 @@ using RawDeal.PlayerClasses;
 
 namespace RawDeal.EffectsClasses;
 
-public class MoveLessThanDOpponentCardEffect: EffectsUtils
+public class MoveLessThanDOpponentEffect: EffectsUtils
 {
     private PlayerController opponentPlayerController;
     private PlayerController currentPlayerController;
     private (List<String>, List<CardController>) posibleCards;
     
-    public MoveLessThanDOpponentCardEffect(PlayerController currentPlayerController, 
+    public MoveLessThanDOpponentEffect(PlayerController currentPlayerController, 
         PlayerController opponentPlayerController, GameStructureInfo gameStructureInfo)
         : base(gameStructureInfo)
     {
@@ -26,8 +26,8 @@ public class MoveLessThanDOpponentCardEffect: EffectsUtils
         if (IsPositive(posibleCards .Item1.Count()))
         {
             int selectedCardIndex = gameStructureInfo.View.AskPlayerToSelectACardToDiscardFromRingArea(
-                currentPlayerController.NameOfSuperStar(),
-                opponentPlayerController.NameOfSuperStar(), posibleCards.Item1);
+                currentPlayerController.GetNameOfSuperStar(),
+                opponentPlayerController.GetNameOfSuperStar(), posibleCards.Item1);
             DiscardACardOfPlayerChoice(selectedCardIndex);
         }
         else

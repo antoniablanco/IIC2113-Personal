@@ -3,11 +3,11 @@ using RawDeal.PlayerClasses;
 
 namespace RawDeal.EffectsClasses;
 
-public class DiscardCardsFromHandToArsenalEffect: EffectsUtils
+public class HandToArsenalDiscardEffect: EffectsUtils
 {
     private PlayerController controllerPlayer;
     
-    public DiscardCardsFromHandToArsenalEffect(PlayerController controllerPlayer, GameStructureInfo gameStructureInfo)
+    public HandToArsenalDiscardEffect(PlayerController controllerPlayer, GameStructureInfo gameStructureInfo)
         : base(gameStructureInfo)
     {
         this.controllerPlayer = controllerPlayer;
@@ -18,7 +18,7 @@ public class DiscardCardsFromHandToArsenalEffect: EffectsUtils
     {
         var handCardsAsString = controllerPlayer.StringCardsFrom("Hand");
         var selectedCard =
-            gameStructureInfo.View.AskPlayerToReturnOneCardFromHisHandToHisArsenal(controllerPlayer.NameOfSuperStar(),
+            gameStructureInfo.View.AskPlayerToReturnOneCardFromHisHandToHisArsenal(controllerPlayer.GetNameOfSuperStar(),
                 handCardsAsString);
 
         var discardedCardController = controllerPlayer.GetSpecificCardFrom("Hand", selectedCard);

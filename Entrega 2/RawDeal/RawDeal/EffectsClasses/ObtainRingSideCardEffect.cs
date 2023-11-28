@@ -3,12 +3,12 @@ using RawDeal.PlayerClasses;
 
 namespace RawDeal.EffectsClasses;
 
-public class DiscardToObtainRingSideCardsEffect: EffectsUtils
+public class ObtainRingSideCardEffect: EffectsUtils
 {   
     private PlayerController currentPlayerController;
     private int maximumNumberOfCardsToDiscard;
     
-    public DiscardToObtainRingSideCardsEffect(PlayerController currentPlayerController, 
+    public ObtainRingSideCardEffect(PlayerController currentPlayerController, 
         GameStructureInfo gameStructureInfo, int maximumNumberOfCardsToDiscard)
         : base(gameStructureInfo)
     {
@@ -28,12 +28,12 @@ public class DiscardToObtainRingSideCardsEffect: EffectsUtils
 
     private void AskHowManyCardsWantsToChange()
     {
-        int numberOfCardsToDiscard = gameStructureInfo.View.AskHowManyCardsToDiscard(currentPlayerController.NameOfSuperStar(), 
+        int numberOfCardsToDiscard = gameStructureInfo.View.AskHowManyCardsToDiscard(currentPlayerController.GetNameOfSuperStar(), 
             maximumNumberOfCardsToDiscard);
         
-        new DiscardCardsFromHandToRingSideEffect(gameStructureInfo.ControllerCurrentPlayer, 
+        new HandToRingSideDiscardEffect(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo.ControllerCurrentPlayer, numberOfCardsToDiscard, gameStructureInfo);
             
-        new AddingChoosingCardFromRingSideToHandEffectUtils(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo, numberOfCardsToDiscard);
+        new RingToHandEffectUtils(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo, numberOfCardsToDiscard);
     }
 }

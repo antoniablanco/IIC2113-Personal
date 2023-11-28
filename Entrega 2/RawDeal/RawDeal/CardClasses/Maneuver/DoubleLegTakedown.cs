@@ -14,7 +14,7 @@ public class DoubleLegTakedown : Card
     public override void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
         const int maximumNumberOfCardsToSteal = 1;
-        new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
+        new CardDrawEffect(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo).MayStealCards(maximumNumberOfCardsToSteal);
     }
 }

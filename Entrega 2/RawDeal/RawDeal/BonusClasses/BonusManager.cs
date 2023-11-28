@@ -187,7 +187,7 @@ public class BonusManager
         return bonus;
     }
 
-    public void AddingOneTurnFromBonusCounter()
+    public void AddOneTurnFromBonusCounter()
     {
         bonusStructureInfo.turnsLeftForBonusCounter += 1;
     }

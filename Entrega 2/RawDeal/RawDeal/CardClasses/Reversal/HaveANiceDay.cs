@@ -23,6 +23,6 @@ public class HaveANiceDay: Card
     
     public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
     {
-        new DiscardHandCardsEffect(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo);
+        new DiscardHandEffect(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo);
     }
 }

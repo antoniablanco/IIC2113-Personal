@@ -85,7 +85,7 @@ public class CardController
         return int.Parse(_card.StunValue);
     }
 
-    public bool TheCardHadStunValue()
+    public bool TheCardHasStunValue()
     {
         return int.Parse(_card.StunValue) > 0;
     }

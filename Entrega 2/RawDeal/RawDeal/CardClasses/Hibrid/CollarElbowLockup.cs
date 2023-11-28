@@ -17,7 +17,7 @@ public class CollarElbowLockup: Card
         gameStructureInfo.EffectsUtils.DiscardCardFromHandNotifying(playedCardController,
             gameStructureInfo.ControllerCurrentPlayer);
         
-        new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
+        new CardDrawEffect(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo).StealCards();
     }
 }

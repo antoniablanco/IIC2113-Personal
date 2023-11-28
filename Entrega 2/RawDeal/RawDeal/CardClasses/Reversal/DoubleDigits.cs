@@ -23,7 +23,7 @@ public class DoubleDigits: Card
     public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
     {
         const int numberOfCardToDiscard = 2;
-        new DiscardCardsFromHandToRingSideEffect(gameStructureInfo.ControllerCurrentPlayer,
+        new HandToRingSideDiscardEffect(gameStructureInfo.ControllerCurrentPlayer,
             gameStructureInfo.ControllerCurrentPlayer, numberOfCardToDiscard, gameStructureInfo);
         
         const int totalDamage = 2;

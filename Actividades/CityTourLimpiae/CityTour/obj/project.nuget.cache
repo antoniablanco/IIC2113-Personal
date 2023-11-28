@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cEw5exP5cWTejZvMpFKPBoQhFuLkovS+2bQIZSecZEFfg05U01D9iGO+Z245qEcfbe+dJPzh2as02gAHEt/HrQ==",
+  "dgSpecHash": "IQbfParQj6q1x8eRMATnXDMEw4uVydrHDOngvO5fEHa9cdyqtUL4AdUhyCJrce4U5l584z26G8pe+8SDS4M+/Q==",
   "success": true,
-  "projectFilePath": "/Users/antoniablanco/Desktop/CityTour/CityTour/CityTour.csproj",
+  "projectFilePath": "/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividades/CityTourLimpiae/CityTour/CityTour.csproj",
   "expectedPackageFiles": [
     "/Users/antoniablanco/.nuget/packages/microsoft.netcore.app.ref/6.0.21/microsoft.netcore.app.ref.6.0.21.nupkg.sha512",
     "/Users/antoniablanco/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.21/microsoft.aspnetcore.app.ref.6.0.21.nupkg.sha512"

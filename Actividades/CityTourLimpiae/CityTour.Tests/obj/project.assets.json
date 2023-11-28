@@ -6126,11 +6126,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/antoniablanco/Desktop/CityTour/CityTour.Tests/CityTour.Tests.csproj",
+      "projectUniqueName": "/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividades/CityTourLimpiae/CityTour.Tests/CityTour.Tests.csproj",
       "projectName": "CityTour.Tests",
-      "projectPath": "/Users/antoniablanco/Desktop/CityTour/CityTour.Tests/CityTour.Tests.csproj",
+      "projectPath": "/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividades/CityTourLimpiae/CityTour.Tests/CityTour.Tests.csproj",
       "packagesPath": "/Users/antoniablanco/.nuget/packages/",
-      "outputPath": "/Users/antoniablanco/Desktop/CityTour/CityTour.Tests/obj/",
+      "outputPath": "/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividades/CityTourLimpiae/CityTour.Tests/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/antoniablanco/.nuget/NuGet/NuGet.Config"
@@ -6145,8 +6145,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "/Users/antoniablanco/Desktop/CityTour/CityTour/CityTour.csproj": {
-              "projectPath": "/Users/antoniablanco/Desktop/CityTour/CityTour/CityTour.csproj"
+            "/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividades/CityTourLimpiae/CityTour/CityTour.csproj": {
+              "projectPath": "/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividades/CityTourLimpiae/CityTour/CityTour.csproj"
             }
           }
         }

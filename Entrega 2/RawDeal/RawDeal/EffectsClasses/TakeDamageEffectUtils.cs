@@ -23,7 +23,7 @@ public class TakeDamageEffectUtils: EffectsUtils
     {
         if (IsPositive(totalDamage))
         {
-            gameStructureInfo.View.SayThatSuperstarWillTakeSomeDamage(controllerPlayer.NameOfSuperStar(), totalDamage);
+            gameStructureInfo.View.SayThatSuperstarWillTakeSomeDamage(controllerPlayer.GetNameOfSuperStar(), totalDamage);
             ApplyDamageToPlayer();
         }
     }

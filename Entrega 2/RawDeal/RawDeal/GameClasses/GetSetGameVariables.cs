@@ -30,7 +30,7 @@ public class GetSetGameVariables
                 : gameStructureInfo.ControllerPlayerTwo;
     }
 
-    public bool ShouldWeContinueTheGame()
+    public bool ShouldContinueTheGame()
     {
         if ((!gameStructureInfo.ControllerPlayerOne.HasCardsInArsenal() ||
              !gameStructureInfo.ControllerPlayerTwo.HasCardsInArsenal())
@@ -69,7 +69,7 @@ public class GetSetGameVariables
 
     public string GetWinnerSuperstarName()
     {
-        return gameStructureInfo.WinnerPlayer.NameOfSuperStar();
+        return gameStructureInfo.WinnerPlayer.GetNameOfSuperStar();
     }
 
     public void OneRoundMoreInTurn()

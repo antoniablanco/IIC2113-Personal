@@ -44,7 +44,7 @@ public class GetBackDamageEffectUtils: EffectsUtils
         {
             ringSideAsString = controllerPlayer.StringCardsFrom("RingSide");
             var selectedCardIndex =
-                gameStructureInfo.View.AskPlayerToSelectCardsToRecover(controllerPlayer.NameOfSuperStar(),
+                gameStructureInfo.View.AskPlayerToSelectCardsToRecover(controllerPlayer.GetNameOfSuperStar(),
                     recoveredDamage - currentDamage, ringSideAsString);
             var discardedCardController = controllerPlayer.GetSpecificCardFrom("RingSide", selectedCardIndex);
 

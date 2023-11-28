@@ -14,7 +14,7 @@ public class HeadlockTakedown : Card
     public override void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
         const int numberOfCardsToSteal = 1;
-        new DrawCardEffect(gameStructureInfo.ControllerOpponentPlayer, 
+        new CardDrawEffect(gameStructureInfo.ControllerOpponentPlayer, 
             gameStructureInfo).StealCards(numberOfCardsToSteal);
     }
 }

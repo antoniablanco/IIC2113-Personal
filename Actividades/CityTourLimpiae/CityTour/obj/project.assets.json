@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/antoniablanco/Desktop/CityTour/CityTour/CityTour.csproj",
+      "projectUniqueName": "/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividades/CityTourLimpiae/CityTour/CityTour.csproj",
       "projectName": "CityTour",
-      "projectPath": "/Users/antoniablanco/Desktop/CityTour/CityTour/CityTour.csproj",
+      "projectPath": "/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividades/CityTourLimpiae/CityTour/CityTour.csproj",
       "packagesPath": "/Users/antoniablanco/.nuget/packages/",
-      "outputPath": "/Users/antoniablanco/Desktop/CityTour/CityTour/obj/",
+      "outputPath": "/Users/antoniablanco/Desktop/Detallado-Git/IIC2113-Personal/Actividades/CityTourLimpiae/CityTour/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/antoniablanco/.nuget/NuGet/NuGet.Config"

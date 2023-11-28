@@ -20,7 +20,7 @@ public class ManagerInterferes : Card
 
     public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
     {
-        new DrawCardEffect(gameStructureInfo.ControllerOpponentPlayer, 
+        new CardDrawEffect(gameStructureInfo.ControllerOpponentPlayer, 
             gameStructureInfo).StealCards();
     }
 }

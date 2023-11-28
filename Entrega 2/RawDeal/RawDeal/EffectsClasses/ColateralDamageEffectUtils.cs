@@ -21,8 +21,8 @@ public class ColateralDamageEffectUtils: EffectsUtils
     
     private void ColateralDamage()
     {
-        gameStructureInfo.View.SayThatPlayerDamagedHimself(controllerPlayer.NameOfSuperStar(), totalDamage);
-        gameStructureInfo.View.SayThatSuperstarWillTakeSomeDamage(controllerPlayer.NameOfSuperStar(),
+        gameStructureInfo.View.SayThatPlayerDamagedHimself(controllerPlayer.GetNameOfSuperStar(), totalDamage);
+        gameStructureInfo.View.SayThatSuperstarWillTakeSomeDamage(controllerPlayer.GetNameOfSuperStar(),
             totalDamage);
 
         for (var currentDamage = 0; currentDamage < totalDamage; currentDamage++)
@@ -36,7 +36,7 @@ public class ColateralDamageEffectUtils: EffectsUtils
         else
         {
             gameStructureInfo.GetSetGameVariables.SetVariablesAfterWinning(controllerPlayer);
-            gameStructureInfo.View.SayThatPlayerLostDueToSelfDamage(controllerPlayer.NameOfSuperStar());
+            gameStructureInfo.View.SayThatPlayerLostDueToSelfDamage(controllerPlayer.GetNameOfSuperStar());
         }
     }
     

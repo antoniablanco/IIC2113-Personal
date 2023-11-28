@@ -3,18 +3,18 @@ using RawDealView.Options;
 
 namespace RawDeal.DecksBehavior;
 
-public class ViewDecks
+public class DeckViewer
 {
     private readonly GameStructureInfo gameStructureInfo;
 
-    public ViewDecks(GameStructureInfo gameStructureInfo)
+    public DeckViewer(GameStructureInfo gameStructureInfo)
     {
         this.gameStructureInfo = gameStructureInfo;
     }
 
     public void SelectCardsToViewAction()
     {
-        gameStructureInfo.BonusManager.AddingOneTurnFromBonusCounter();
+        gameStructureInfo.BonusManager.AddOneTurnFromBonusCounter();
         SelectCardsToView();
     }
 

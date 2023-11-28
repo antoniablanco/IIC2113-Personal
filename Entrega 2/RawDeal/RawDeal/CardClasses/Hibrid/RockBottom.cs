@@ -25,7 +25,7 @@ public class RockBottom : Card
     public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
     {
         const int numberOfCardToDiscard = 1;
-        new DiscardCardsFromHandToRingSideEffect(gameStructureInfo.ControllerOpponentPlayer,
+        new HandToRingSideDiscardEffect(gameStructureInfo.ControllerOpponentPlayer,
             gameStructureInfo.ControllerOpponentPlayer, numberOfCardToDiscard, gameStructureInfo);
         new FindAndMoveCard(cardTitle:"The People's Elbow", gameStructureInfo.ControllerOpponentPlayer,
             gameStructureInfo);

@@ -15,7 +15,7 @@ public class ThePeoplesEyebrow: Card
     public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {   
         const int maxNumberOfCardsToObtain = 2;
-        new AddingChoosingCardFromRingSideToHandEffectUtils(gameStructureInfo.ControllerCurrentPlayer,
+        new RingToHandEffectUtils(gameStructureInfo.ControllerCurrentPlayer,
             gameStructureInfo, maxNumberOfCardsToObtain);
         
         const int numberOfDamageToRecover = 2;

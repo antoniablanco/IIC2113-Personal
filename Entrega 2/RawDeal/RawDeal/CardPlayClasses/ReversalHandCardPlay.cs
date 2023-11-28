@@ -6,12 +6,12 @@ using RawDeal.PlayerClasses;
 
 namespace RawDeal.DecksBehavior;
 
-public class PlayReversalHandCard
+public class ReversalHandCardPlay
 {
     private readonly GameStructureInfo gameStructureInfo = new();
     private readonly int totalDamage;
 
-    public PlayReversalHandCard(GameStructureInfo gameStructureInfo, int totalDamage)
+    public ReversalHandCardPlay(GameStructureInfo gameStructureInfo, int totalDamage)
     {
         this.gameStructureInfo = gameStructureInfo;
         this.totalDamage = totalDamage;
@@ -20,7 +20,7 @@ public class PlayReversalHandCard
 
     public void IsUserUsingReversalCard()
     {
-        var possibleReversals = gameStructureInfo.ControllerOpponentPlayer.CardsAvailableToReversal(totalDamage);
+        var possibleReversals = gameStructureInfo.ControllerOpponentPlayer.GetCardsAvailableToReversal(totalDamage);
 
         if (possibleReversals.Count > 0)
             AskWhichReversalCardWantsToUse(possibleReversals);
@@ -29,9 +29,9 @@ public class PlayReversalHandCard
     private void AskWhichReversalCardWantsToUse(List<CardController> possibleReversals)
     {
         var indexReversalCard = UserSelectReversalCard();
-        if (gameStructureInfo.PlayCard.HasSelectedAValidCard(indexReversalCard))
+        if (gameStructureInfo.CardPlay.HasSelectedAValidCard(indexReversalCard))
         {
-            PlayingReversalCard(indexReversalCard, possibleReversals);
+            PlayReversalCard(indexReversalCard, possibleReversals);
             gameStructureInfo.EffectsUtils.EndTurn();
             throw new UserPlayReversalCardException("The User has played a reversal card");
         }
@@ -47,11 +47,11 @@ public class PlayReversalHandCard
             gameStructureInfo.CardsVisualizor.GetStringCardsForSpecificType(possibleCardsAndTheirTypes);
         var indexReversalCard =
             gameStructureInfo.View.AskUserToSelectAReversal(
-                gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar(), possibleReversalsString);
+                gameStructureInfo.ControllerOpponentPlayer.GetNameOfSuperStar(), possibleReversalsString);
         return indexReversalCard;
     }
 
-    private void PlayingReversalCard(int indexReversalCard, List<CardController> possibleReversals)
+    private void PlayReversalCard(int indexReversalCard, List<CardController> possibleReversals)
     {
         var cardController = possibleReversals[indexReversalCard];
         SayTheReversalCardIsPlayed(cardController);
@@ -65,7 +65,7 @@ public class PlayReversalHandCard
         var indexType = cardController.GetIndexForType("Reversal");
         var reversalString = cardController.GetStringPlayedInfo(indexType);
         gameStructureInfo.View.SayThatPlayerReversedTheCard(
-            gameStructureInfo.ControllerOpponentPlayer.NameOfSuperStar(), reversalString);
+            gameStructureInfo.ControllerOpponentPlayer.GetNameOfSuperStar(), reversalString);
     }
 
     private void MoveCardsImplicateInReversal(CardController cardController)
@@ -94,7 +94,7 @@ public class PlayReversalHandCard
                                 gameStructureInfo.ControllerCurrentPlayer);
         else
             damageProduce =
-                gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(
+                gameStructureInfo.CardPlay.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(
                     cardController.GetDamageProducedByTheCard(),
                     damagedPlayerController);
         damageProduce += gameStructureInfo.CardBeingPlayed.ExtraReversalDamage();

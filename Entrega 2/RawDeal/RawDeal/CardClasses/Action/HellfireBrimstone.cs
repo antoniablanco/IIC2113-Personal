@@ -14,8 +14,8 @@ public class HellfireBrimstone: Card
     
     public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {   
-        new DiscardHandCardsEffect(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo);
-        new DiscardHandCardsEffect(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo);
+        new DiscardHandEffect(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo);
+        new DiscardHandEffect(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo);
         
         const int totalDamage = 5;
         new ProduceDamageEffectUtils(totalDamage, gameStructureInfo.ControllerOpponentPlayer,

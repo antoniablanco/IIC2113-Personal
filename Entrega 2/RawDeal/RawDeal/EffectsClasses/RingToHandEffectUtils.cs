@@ -3,12 +3,12 @@ using RawDeal.PlayerClasses;
 
 namespace RawDeal.EffectsClasses;
 
-public class AddingChoosingCardFromRingSideToHandEffectUtils: EffectsUtils
+public class RingToHandEffectUtils: EffectsUtils
 {
     private PlayerController controllerPlayer;
     private int numberOfCardToRecover;
     
-    public AddingChoosingCardFromRingSideToHandEffectUtils(PlayerController controllerPlayer, 
+    public RingToHandEffectUtils(PlayerController controllerPlayer, 
         GameStructureInfo gameStructureInfo, int numberOfCardToRecover=1)
         : base(gameStructureInfo)
     {
@@ -28,7 +28,7 @@ public class AddingChoosingCardFromRingSideToHandEffectUtils: EffectsUtils
     {
         var ringSideAsString = controllerPlayer.StringCardsFrom("RingSide");
         var selectedCard = gameStructureInfo.View.AskPlayerToSelectCardsToPutInHisHand(
-            controllerPlayer.NameOfSuperStar(), currentNumberOfCard, ringSideAsString);
+            controllerPlayer.GetNameOfSuperStar(), currentNumberOfCard, ringSideAsString);
 
         var addedCardController = controllerPlayer.GetSpecificCardFrom("RingSide", selectedCard);
         var playerWhoDiscardCard = GetPlayerWhoDiscard();

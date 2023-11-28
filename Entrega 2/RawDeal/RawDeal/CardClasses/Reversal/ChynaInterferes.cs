@@ -22,7 +22,7 @@ public class ChynaInterferes : Card
     {
         const int numberOfCardsToSteal = 2;
         
-        new DrawCardEffect(gameStructureInfo.ControllerOpponentPlayer, 
+        new CardDrawEffect(gameStructureInfo.ControllerOpponentPlayer, 
             gameStructureInfo).StealCards(numberOfCardsToSteal);
     }
 }

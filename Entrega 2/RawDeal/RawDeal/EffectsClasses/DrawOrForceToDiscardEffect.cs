@@ -24,7 +24,7 @@ public class DrawOrForceToDiscardEffect: EffectsUtils
     private void AskDrawOrForceToDiscar()
     {
         SelectedEffect selectedEffect = gameStructureInfo.View.AskUserToChooseBetweenDrawingOrForcingOpponentToDiscardCards(
-            gameStructureInfo.ControllerCurrentPlayer.NameOfSuperStar());
+            gameStructureInfo.ControllerCurrentPlayer.GetNameOfSuperStar());
         
         switch (selectedEffect)
         {
@@ -40,16 +40,16 @@ public class DrawOrForceToDiscardEffect: EffectsUtils
     private void DrawCards()
     {
         if (shouldAsk)
-            new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
+            new CardDrawEffect(gameStructureInfo.ControllerCurrentPlayer, 
                 gameStructureInfo).MayStealCards(numberOfCardsToSteal);
         else
-            new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
+            new CardDrawEffect(gameStructureInfo.ControllerCurrentPlayer, 
                 gameStructureInfo).StealCards(numberOfCardsToSteal);
     }
 
     private void ForceOpponentToDiscard()
     {
-        new DiscardCardsFromHandToRingSideEffect(gameStructureInfo.ControllerOpponentPlayer,
+        new HandToRingSideDiscardEffect(gameStructureInfo.ControllerOpponentPlayer,
             gameStructureInfo.ControllerOpponentPlayer, numberOfCardsToDiscard, gameStructureInfo);
     }
 }

@@ -16,7 +16,7 @@ public class FishermansSuplex : Card
         new ColateralDamageEffectUtils(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo);
 
         const int maximumNumberOfCardsToSteal = 1;
-        new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
+        new CardDrawEffect(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo).MayStealCards(maximumNumberOfCardsToSteal);
     }
 }

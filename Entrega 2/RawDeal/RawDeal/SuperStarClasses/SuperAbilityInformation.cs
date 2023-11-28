@@ -6,13 +6,13 @@ public class SuperAbilityInformation
 {
     public void TheSuperAbilityThatIsAtTheStartOfTheTurnIsUsed(GameStructureInfo gameStructureInfo)
     {
-        gameStructureInfo.ControllerCurrentPlayer.UsingAutomaticSuperAbility();
+        gameStructureInfo.ControllerCurrentPlayer.UseAutomaticSuperAbility();
     }
 
     public void UseSuperAbilityAction(GameStructureInfo gameStructureInfo)
     {   
-        gameStructureInfo.BonusManager.AddingOneTurnFromBonusCounter();
-        gameStructureInfo.ControllerCurrentPlayer.UsingElectiveSuperAbility();
+        gameStructureInfo.BonusManager.AddOneTurnFromBonusCounter();
+        gameStructureInfo.ControllerCurrentPlayer.UseElectiveSuperAbility();
     }
 
     public bool PlayerCanUseSuperStarAbility(GameStructureInfo gameStructureInfo) 

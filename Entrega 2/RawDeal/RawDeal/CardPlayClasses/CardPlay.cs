@@ -5,11 +5,11 @@ using RawDeal.PlayerClasses;
 
 namespace RawDeal.DecksBehavior;
 
-public class PlayCard
+public class CardPlay
 {
     private readonly GameStructureInfo gameStructureInfo = new();
 
-    public PlayCard(GameStructureInfo gameStructureInfo)
+    public CardPlay(GameStructureInfo gameStructureInfo)
     {
         this.gameStructureInfo = gameStructureInfo;
     }
@@ -23,7 +23,7 @@ public class PlayCard
             StartToPlayACardAction(selectedCard);
         else
         { 
-            gameStructureInfo.BonusManager.AddingOneTurnFromBonusCounter();
+            gameStructureInfo.BonusManager.AddOneTurnFromBonusCounter();
             gameStructureInfo.GetSetGameVariables.OneRoundLessInTurn();
         }
     }
@@ -78,13 +78,13 @@ public class PlayCard
     private void SayThatTheyAreGoingToPlayACard(CardController playedCardController, int indexType)
     {
         var playedCardString = playedCardController.GetStringPlayedInfo(indexType);
-        var nameSuperStar = gameStructureInfo.ControllerCurrentPlayer.NameOfSuperStar();
+        var nameSuperStar = gameStructureInfo.ControllerCurrentPlayer.GetNameOfSuperStar();
         gameStructureInfo.View.SayThatPlayerIsTryingToPlayThisCard(nameSuperStar, playedCardString);
     }
 
     private void VerifyIfIsUsedAReversalCard(Tuple<CardController, int> playedCardController)
     {
-        var playReversalHandCard = new PlayReversalHandCard(gameStructureInfo, GetDamageProduced(playedCardController.Item1));
+        var playReversalHandCard = new ReversalHandCardPlay(gameStructureInfo, GetDamageProduced(playedCardController.Item1));
         try
         {
             playReversalHandCard.IsUserUsingReversalCard();
@@ -102,7 +102,7 @@ public class PlayCard
                      gameStructureInfo.BonusManager.GetTurnDamageBonus(playedCardController)+ 
                      gameStructureInfo.BonusManager.EternalDamage(playedCardController, gameStructureInfo.ControllerCurrentPlayer);
         var totalDamage =
-            gameStructureInfo.PlayCard.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(damage,
+            gameStructureInfo.CardPlay.ObtainDamageByCheckingIfTheCardBelongsToMankindSuperStar(damage,
                 gameStructureInfo.ControllerOpponentPlayer);
         return totalDamage;
     }
@@ -123,13 +123,13 @@ public class PlayCard
 
     private void PlayManeuverCard(CardController playedCardController)
     {
-        var playManeuverCard = new PlayManeuverCard(gameStructureInfo);
+        var playManeuverCard = new ManeuverCardPlay(gameStructureInfo);
         playManeuverCard.PlayCard(playedCardController);
     }
 
     private void PlayActionCard(CardController playedCardController)
     {
-        var playActionCard = new PlayActionCard(gameStructureInfo);
+        var playActionCard = new ActionCardPlay(gameStructureInfo);
         playActionCard.PlayCard(playedCardController);
     }
 

@@ -20,7 +20,7 @@ public class ShakeItOff: Card
     
     public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {
-        new MoveLessThanDOpponentCardEffect(gameStructureInfo.ControllerCurrentPlayer,
+        new MoveLessThanDOpponentEffect(gameStructureInfo.ControllerCurrentPlayer,
             gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo);
         gameStructureInfo.EffectsUtils.DiscardActionCardToRingAreButNotSaying(playedCardController,
             gameStructureInfo.GetCurrentPlayer());

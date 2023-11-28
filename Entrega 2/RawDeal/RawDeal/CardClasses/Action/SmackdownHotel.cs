@@ -22,7 +22,7 @@ public class SmackdownHotel: Card
 
     private void ApplyEffect(GameStructureInfo gameStructureInfo, PlayerController playerController)
     {   
-        new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
+        new CardDrawEffect(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo).StealCards();
         
         new SeeOponentHandEffect(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.ControllerOpponentPlayer,

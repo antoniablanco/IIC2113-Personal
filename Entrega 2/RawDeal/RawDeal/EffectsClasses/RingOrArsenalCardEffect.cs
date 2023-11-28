@@ -5,12 +5,12 @@ using RawDealView.Options;
 
 namespace RawDeal.EffectsClasses;
 
-public class ChooseRingSideOrArsenalToSelectCardEffect: EffectsUtils
+public class RingOrArsenalCardEffect: EffectsUtils
 {   
     private PlayerController playerController;
     private Player player;
     
-    public ChooseRingSideOrArsenalToSelectCardEffect(PlayerController playerController, GameStructureInfo gameStructureInfo)
+    public RingOrArsenalCardEffect(PlayerController playerController, GameStructureInfo gameStructureInfo)
         : base(gameStructureInfo)
     {
         this.playerController = playerController;
@@ -22,11 +22,11 @@ public class ChooseRingSideOrArsenalToSelectCardEffect: EffectsUtils
 
     private void Apply()
     {   
-        string deck = GetSelectedEffectChosenByPlayer(playerController.NameOfSuperStar());
+        string deck = GetSelectedEffectChosenByPlayer(playerController.GetNameOfSuperStar());
         List<String> optionCards = playerController.StringCardsFrom(deck);
         
         const int numberOfCardsToSelect = 1;
-        int indexOfCard = gameStructureInfo.View.AskPlayerToSelectCardsToPutInHisHand(playerController.NameOfSuperStar(), 
+        int indexOfCard = gameStructureInfo.View.AskPlayerToSelectCardsToPutInHisHand(playerController.GetNameOfSuperStar(), 
             numberOfCardsToSelect, optionCards);
         
         var addedCardController = playerController.GetSpecificCardFrom(deck, indexOfCard);

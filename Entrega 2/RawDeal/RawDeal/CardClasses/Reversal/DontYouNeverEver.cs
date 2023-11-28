@@ -24,7 +24,7 @@ public class DontYouNeverEver: Card
     public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
     {   
         const int numberOfCardToDiscard = 2;
-        new DiscardCardsFromHandToRingSideEffect(gameStructureInfo.ControllerCurrentPlayer,
+        new HandToRingSideDiscardEffect(gameStructureInfo.ControllerCurrentPlayer,
             gameStructureInfo.ControllerCurrentPlayer, numberOfCardToDiscard, gameStructureInfo);
         
         gameStructureInfo.BonusManager.ApplyTurnBonusEffect(BonusEnum.CardBonusName.DontYouNeverEVER, bonusValue:2);
