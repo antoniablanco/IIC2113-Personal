@@ -21,8 +21,8 @@ public class UndertakerSitsUp: Card
     
     public override void ApplyReversalEffect(GameStructureInfo gameStructureInfo)
     {
-        gameStructureInfo.BonusManager.ApplyTurnBonusEffect(BonusEnum.BonusType.UndertakerSitsUpDamage, bonusValue:2);
-        gameStructureInfo.BonusManager.ApplyTurnBonusEffect(BonusEnum.BonusType.UndertakerSitsUpFortitud, bonusValue:25);
+        gameStructureInfo.BonusManager.ApplyTurnBonusEffect(BonusEnum.CardBonusName.UndertakerSitsUpDamage, bonusValue:2);
+        gameStructureInfo.BonusManager.ApplyTurnBonusEffect(BonusEnum.CardBonusName.UndertakerSitsUpFortitud, bonusValue:25);
         gameStructureInfo.BonusManager.SetWhoActivateNextPlayedCardBonusEffect(gameStructureInfo.ControllerOpponentPlayer);
         
         const int totalDamage = 4;

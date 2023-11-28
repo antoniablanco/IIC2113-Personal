@@ -13,6 +13,6 @@ public class Haymaker: Card
     
     public override void ApplyManeuverEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {   
-        gameStructureInfo.BonusManager.ApplyTurnBonusEffect(BonusEnum.BonusType.Haymaker, 1);
+        gameStructureInfo.BonusManager.ApplyTurnBonusEffect(BonusEnum.CardBonusName.Haymaker, 1);
     }
 }

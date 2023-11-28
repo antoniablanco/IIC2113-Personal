@@ -13,7 +13,8 @@ public class SnapMare: Card
     
     public override void ApplyBonusEffect(GameStructureInfo gameStructureInfo)
     {
-        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect(BonusEnum.BonusType.SnapMare, bonusValue:2, "Damage");
+        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect(BonusEnum.CardBonusName.SnapMare, bonusValue:2, 
+            BonusEnum.CardBonusType.Damage);
         gameStructureInfo.BonusManager.SetWhoActivateNextPlayedCardBonusEffect(gameStructureInfo.ControllerCurrentPlayer);
         var turnsBeforeEffectExpires = 2;
         gameStructureInfo.BonusManager.SetTurnsLeftForBonusCounter(turnsBeforeEffectExpires);

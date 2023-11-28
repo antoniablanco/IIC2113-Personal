@@ -20,7 +20,8 @@ public class AyatollahOfRocknRoll: Card
         gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(gameStructureInfo.GetCurrentPlayer(),
             playedCardController);
         
-        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect(BonusEnum.BonusType.Ayatollah, bonusValue:0, "Reversal");
+        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect(BonusEnum.CardBonusName.Ayatollah, bonusValue:0, 
+            BonusEnum.CardBonusType.Reversal);
         
         gameStructureInfo.BonusManager.SetWhoActivateNextPlayedCardBonusEffect(gameStructureInfo.ControllerCurrentPlayer);
         var turnsBeforeEffectExpires = 2;

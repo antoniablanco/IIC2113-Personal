@@ -21,7 +21,7 @@ public class PowerOfDarkness: Card
 
     private void ApplyEffect(GameStructureInfo gameStructureInfo, PlayerController playerController)
     {
-        gameStructureInfo.BonusManager.ApplyTurnBonusEffect(BonusEnum.BonusType.PowerofDarknessDamage, bonusValue:5);
-        gameStructureInfo.BonusManager.ApplyTurnBonusEffect(BonusEnum.BonusType.PowerofDarknessFortitud, bonusValue:20);
+        gameStructureInfo.BonusManager.ApplyTurnBonusEffect(BonusEnum.CardBonusName.PowerofDarknessDamage, bonusValue:5);
+        gameStructureInfo.BonusManager.ApplyTurnBonusEffect(BonusEnum.CardBonusName.PowerofDarknessFortitud, bonusValue:20);
     }
 }

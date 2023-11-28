@@ -47,10 +47,12 @@ public class JockeyingForPosition : Card
         switch (effectToPerform)
         {
             case SelectedEffect.NextGrappleIsPlus4D:
-                gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect(BonusEnum.BonusType.JockeyingDamage, bonusValue:4, "Damage");
+                gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect(BonusEnum.CardBonusName.JockeyingDamage, bonusValue:4,
+                    BonusEnum.CardBonusType.Damage);
                 break;
             case SelectedEffect.NextGrapplesReversalIsPlus8F:
-                gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect(BonusEnum.BonusType.JockeyingFortitud, bonusValue:8, "Fortitude");
+                gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect(BonusEnum.CardBonusName.JockeyingFortitud, bonusValue:8, 
+                    BonusEnum.CardBonusType.Fortitud);
                 break;
         }
     }

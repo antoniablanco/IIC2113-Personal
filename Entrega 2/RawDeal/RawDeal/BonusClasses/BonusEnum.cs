@@ -2,7 +2,7 @@ namespace RawDeal.GameClasses;
 
 public class BonusEnum
 {
-    public enum BonusType
+    public enum CardBonusName
     {
         IAmTheGame,
         Haymaker,
@@ -26,5 +26,13 @@ public class BonusEnum
         Diversion,
         Stagger,
         Ayatollah
+    }
+    
+    public enum CardBonusType
+    {
+        Damage,
+        Fortitud,
+        Reversal,
+        None
     }
 }

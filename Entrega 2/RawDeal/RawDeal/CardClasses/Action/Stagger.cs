@@ -16,7 +16,8 @@ public class Stagger: Card
         gameStructureInfo.CardMovement.TransferChoosinCardFromHandToRingArea(gameStructureInfo.GetCurrentPlayer(),
             playedCardController);
         
-        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect(BonusEnum.BonusType.Stagger, bonusValue:0, "Reversal");
+        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect(BonusEnum.CardBonusName.Stagger, bonusValue:0, 
+            BonusEnum.CardBonusType.Reversal);
         
         gameStructureInfo.BonusManager.SetWhoActivateNextPlayedCardBonusEffect(gameStructureInfo.ControllerCurrentPlayer);
         var turnsBeforeEffectExpires = 2;

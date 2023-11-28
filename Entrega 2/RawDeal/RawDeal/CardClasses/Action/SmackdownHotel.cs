@@ -28,7 +28,8 @@ public class SmackdownHotel: Card
         new SeeOponentHandEffect(gameStructureInfo.ControllerCurrentPlayer, gameStructureInfo.ControllerOpponentPlayer,
         gameStructureInfo);
         
-        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect(BonusEnum.BonusType.SmackdownHotel, bonusValue:6, "Damage");
+        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect(BonusEnum.CardBonusName.SmackdownHotel, bonusValue:6, 
+            BonusEnum.CardBonusType.Damage);
         
         gameStructureInfo.BonusManager.SetWhoActivateNextPlayedCardBonusEffect(playerController);
         

@@ -13,7 +13,7 @@ public class Diversion: Card
     
     public override void ApplyActionEffect(GameStructureInfo gameStructureInfo, CardController playedCardController)
     {   
-        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect(BonusEnum.BonusType.Diversion, bonusValue:0, "Reversal");
+        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect(BonusEnum.CardBonusName.Diversion, bonusValue:0, BonusEnum.CardBonusType.Reversal);
         
         gameStructureInfo.BonusManager.SetWhoActivateNextPlayedCardBonusEffect(gameStructureInfo.ControllerCurrentPlayer);
         var turnsBeforeEffectExpires = 2;

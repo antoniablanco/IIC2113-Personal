@@ -14,6 +14,6 @@ public class Superkick: Card
     
     public override void ApplyBonusEffect(GameStructureInfo gameStructureInfo)
     {
-        gameStructureInfo.BonusManager.ApplyTurnBonusEffect(BonusEnum.BonusType.Superkick, bonusValue:5);
+        gameStructureInfo.BonusManager.ApplyTurnBonusEffect(BonusEnum.CardBonusName.Superkick, bonusValue:5);
     }
 }

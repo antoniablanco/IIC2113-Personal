@@ -24,8 +24,8 @@ public class KanesReturn: Card
         const int totalDamage = 4;
         new ColateralDamageEffectUtils(gameStructureInfo.ControllerOpponentPlayer, gameStructureInfo, totalDamage);
         
-        gameStructureInfo.BonusManager.ApplyTurnBonusEffect(BonusEnum.BonusType.KanesReturnDamage, bonusValue:2);
-        gameStructureInfo.BonusManager.ApplyTurnBonusEffect(BonusEnum.BonusType.KanesReturnFortitud, bonusValue:15);
+        gameStructureInfo.BonusManager.ApplyTurnBonusEffect(BonusEnum.CardBonusName.KanesReturnDamage, bonusValue:2);
+        gameStructureInfo.BonusManager.ApplyTurnBonusEffect(BonusEnum.CardBonusName.KanesReturnFortitud, bonusValue:15);
         gameStructureInfo.BonusManager.SetWhoActivateNextPlayedCardBonusEffect(gameStructureInfo.ControllerOpponentPlayer);
     }
 }

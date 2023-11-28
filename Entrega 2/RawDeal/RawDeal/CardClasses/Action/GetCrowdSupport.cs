@@ -24,8 +24,10 @@ public class GetCrowdSupport: Card
     {   new DrawCardEffect(gameStructureInfo.ControllerCurrentPlayer, 
             gameStructureInfo).StealCards();
         
-        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect(BonusEnum.BonusType.GetCrowdSupport, bonusValue:4, "Damage");
-        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect(BonusEnum.BonusType.GetCrowdSupport, bonusValue:12, "Fortitud");
+        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect(BonusEnum.CardBonusName.GetCrowdSupport, bonusValue:4, 
+            BonusEnum.CardBonusType.Damage);
+        gameStructureInfo.BonusManager.ApplyNextPlayedCardBonusEffect(BonusEnum.CardBonusName.GetCrowdSupport, bonusValue:12, 
+            BonusEnum.CardBonusType.Fortitud);
         
         gameStructureInfo.BonusManager.SetWhoActivateNextPlayedCardBonusEffect(playerController);
         
