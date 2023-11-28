@@ -20,9 +20,7 @@ public class AddingChoosingCardFromRingSideToHandEffectUtils: EffectsUtils
     private void Apply()
     {   
         for (int currentNumberOfCard = 0; currentNumberOfCard < numberOfCardToRecover; currentNumberOfCard++)
-        {
             DiscardCard(numberOfCardToRecover-currentNumberOfCard);
-        }
         
     }
 

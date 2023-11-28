@@ -164,9 +164,15 @@ public class BonusManager
     public int GetDamageForSuccessfulManeuver(CardController cardController, int lastDamageComited)
     {   
         int damage = 0;
-        if (cardController.ContainType("Maneuver") && lastDamageComited >= 5 && cardController.GetCardTitle()=="Superkick")
+        if (CheckConditionsForSuperkickBonus(cardController, lastDamageComited))
             damage += bonusStructureInfo.SuperkickBonus;
         return damage;
+    }
+
+    private bool CheckConditionsForSuperkickBonus(CardController cardController, int lastDamageComited)
+    {
+        return cardController.ContainType("Maneuver") && lastDamageComited >= 5 &&
+               cardController.GetCardTitle() == "Superkick";
     }
 
     public int GetFortitudBonus(string lastTypePlayed)
@@ -238,7 +244,7 @@ public class BonusManager
                                                       || bonusStructureInfo.GetCrowdSupportBonusActive 
                                                       || bonusStructureInfo.OpenUpaCanOfWhoopAssBonusActive 
                                                       || bonusStructureInfo.SmackdownHotelBonusActive)
-            return !(type == "Maneuver");
+            return type != "Maneuver";
 
         if (bonusStructureInfo.SnapMareBonusActive)
             return !(type == "Maneuver" && cardController.ContainsSubtype("Strike"));
@@ -327,21 +333,31 @@ public class BonusManager
 
     public void DeactivateTurnBonus(PlayerController controllerCurrentPlayer)
     {   
+        DeactiveNormalTurnBonus();
+        try
+        {
+            if (controllerCurrentPlayer == bonusStructureInfo.WhoActivateNextPlayedCardBonusEffect)
+                DeactivateReversalBonus();
+        } catch (NullReferenceException e) {}
+    }
+    
+    private void DeactiveNormalTurnBonus()
+    {
         bonusStructureInfo.IAmTheGameBonus = 0;
         bonusStructureInfo.HaymakerBonus = 0;
         bonusStructureInfo.SuperkickBonus = 0;
         bonusStructureInfo.PowerofDarknessDamageBonus = 0;
         bonusStructureInfo.PowerofDarknessFortitudBonus = 0;
         DeactivateBonus(BonusEnum.CardBonusName.Ayatollah);
-        if (bonusStructureInfo.WhoActivateNextPlayedCardBonusEffect != null)
-            if (controllerCurrentPlayer == bonusStructureInfo.WhoActivateNextPlayedCardBonusEffect)
-            {   
-                bonusStructureInfo.UndertakerSitsUpDamageBonus = 0;
-                bonusStructureInfo.UndertakerSitsUpFortitudBonus = 0;
-                bonusStructureInfo.KanesReturnDamageBonus = 0;
-                bonusStructureInfo.KanesReturnFortitudBonus = 0;
-                bonusStructureInfo.DontYouNeverEVERBonus = 0;
-            }
+    }
+    
+    private void DeactivateReversalBonus()
+    {
+        bonusStructureInfo.UndertakerSitsUpDamageBonus = 0;
+        bonusStructureInfo.UndertakerSitsUpFortitudBonus = 0;
+        bonusStructureInfo.KanesReturnDamageBonus = 0;
+        bonusStructureInfo.KanesReturnFortitudBonus = 0;
+        bonusStructureInfo.DontYouNeverEVERBonus = 0;
     }
     
 }

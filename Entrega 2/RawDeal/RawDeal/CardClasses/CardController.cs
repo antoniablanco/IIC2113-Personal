@@ -116,9 +116,9 @@ public class CardController
         return _card.CheckIfCardCanBePlayed(gameStructureInfo, type);
     }
 
-    public bool GetIfCardCanReversalPlayedCard(string reverseBy, int totaldamage)
+    public bool GetIfCardCanReversalPlayedCard(string reverseBy, int totalDamage)
     {   
-        return _card.CanReversalThisCard(gameStructureInfo.CardBeingPlayed, gameStructureInfo, reverseBy, totaldamage) &&
+        return _card.CanReversalThisCard(gameStructureInfo.CardBeingPlayed, gameStructureInfo, reverseBy, totalDamage) &&
                gameStructureInfo.CardBeingPlayed.CanThisCardBeReversal();
     }
 

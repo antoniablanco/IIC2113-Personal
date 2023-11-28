@@ -18,9 +18,7 @@ public class PlayerController
     public void DrawInitialHandCards()
     {
         for (var i = 0; i < player.Superestar.HandSize; i++)
-        {
             DrawCard();
-        }
     }
 
     public void DrawCard()
@@ -144,7 +142,7 @@ public class PlayerController
             "Hand" => player.CardsHand.Count(),
             "RingSide" => player.CardsRingSide.Count(),
             "Arsenal" => player.CardsArsenal.Count(),
-            _ => player.CardsHand.Count()
+            _ => throw new CardNotFoundException("Deck Not Implemented")
         };
     }
 
@@ -156,7 +154,7 @@ public class PlayerController
             "RingSide" => player.CardsRingSide[index],
             "Arsenal" => player.CardsArsenal[index],
             "RingArea" => player.CardsRingArea[index],
-            _ => player.CardsHand[index]
+            _ => throw new CardNotFoundException("Deck Not Implemented")
         };
     }
     
@@ -185,7 +183,7 @@ public class PlayerController
             "RingSide" => gameStructureInfo.CardsVisualizor.CreateStringCardList(player.CardsRingSide),
             "RingArea" => gameStructureInfo.CardsVisualizor.CreateStringCardList(player.CardsRingArea),
             "Arsenal" => gameStructureInfo.CardsVisualizor.CreateStringCardList(player.CardsArsenal),
-            _ => gameStructureInfo.CardsVisualizor.CreateStringCardList(player.CardsHand)
+            _ => throw new CardNotFoundException("Deck Not Implemented")
         };
     }
 

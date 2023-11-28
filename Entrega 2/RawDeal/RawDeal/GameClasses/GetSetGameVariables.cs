@@ -22,6 +22,7 @@ public class GetSetGameVariables
             gameStructureInfo.ControllerPlayerTwo.GetSuperStarValue()
                 ? gameStructureInfo.ControllerPlayerTwo
                 : gameStructureInfo.ControllerPlayerOne;
+        
         gameStructureInfo.ControllerOpponentPlayer =
             gameStructureInfo.ControllerPlayerOne.GetSuperStarValue() <
             gameStructureInfo.ControllerPlayerTwo.GetSuperStarValue()
