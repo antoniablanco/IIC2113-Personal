@@ -14,15 +14,15 @@ public class CardMovement
     }
     
     public CardController TransferOfUnselectedCard(List<CardController> sourceList,
-        List<CardController> destinationList, bool moveToStart)
+        List<CardController> destinationList)
     {
         if (sourceList.Count > 0)
         {
-            var index = moveToStart ? 0 : sourceList.Count - 1;
+            var index = sourceList.Count - 1;
             var cardControllerMoved = sourceList[index];
 
             sourceList.RemoveAt(index);
-            destinationList.Insert(moveToStart ? 0 : destinationList.Count, cardControllerMoved);
+            destinationList.Insert(destinationList.Count, cardControllerMoved);
 
             return cardControllerMoved;
         }
@@ -41,14 +41,14 @@ public class CardMovement
         }
     }
 
-    public CardController? TranferUnselectedCardFromArsenalToHand(Player player, bool moveToStart = false)
+    public CardController? TranferUnselectedCardFromArsenalToHand(Player player)
     {
-        return TransferOfUnselectedCard(player.CardsArsenal, player.CardsHand, moveToStart);
+        return TransferOfUnselectedCard(player.CardsArsenal, player.CardsHand);
     }
 
-    public CardController? TranferUnselectedCardFromArsenalToRingSide(Player player, bool moveToStart = false)
+    public CardController? TranferUnselectedCardFromArsenalToRingSide(Player player)
     {
-        return TransferOfUnselectedCard(player.CardsArsenal, player.CardsRingSide, moveToStart);
+        return TransferOfUnselectedCard(player.CardsArsenal, player.CardsRingSide);
     }
 
     public void TransferChoosinCardFromHandToRingArea(Player player, CardController cardController,

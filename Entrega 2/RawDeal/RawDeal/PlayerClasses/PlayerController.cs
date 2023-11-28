@@ -25,7 +25,7 @@ public class PlayerController
 
     public void DrawCard()
     {   
-        gameStructureInfo.CardMovement.TransferOfUnselectedCard(player.CardsArsenal, player.CardsHand, false);
+        gameStructureInfo.CardMovement.TransferOfUnselectedCard(player.CardsArsenal, player.CardsHand);
     }
 
     public string NameOfSuperStar()
